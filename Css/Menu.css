@@ -1,0 +1,299 @@
+/* ========================================
+   MENU CATÁLOGO DE PRODUCTOS
+======================================= */
+.catalogo {
+    margin: 0;
+    padding: 15px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f25c2a;
+    padding: 10px 20px;
+}
+
+.navbar nav {
+    display: none;
+    width: 100%;
+    text-align: center;
+}
+
+.navbar nav.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar nav a {
+    margin: 5px 0;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.container {
+    padding: 15px;
+    text-align: center;
+}
+
+.container h1 {
+    font-size: 22px;
+}
+
+.container p {
+    margin-bottom: 15px;
+    color: #ccc;
+    font-size: 14px;
+}
+
+/* Barra de Búsqueda */
+#search {
+    width: 50%;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Filtros */
+.filters {
+    margin-bottom: 15px;
+}
+
+.filter {
+    padding: 6px 12px;
+    border: none;
+    margin: 3px;
+    background: #333;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.filter.active {
+    background: #f25c2a;
+}
+
+/* Cuadrícula de Productos */
+.products {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.products::-webkit-scrollbar {
+    height: 8px;
+}
+
+.products::-webkit-scrollbar-thumb {
+    background: #f25c2a;
+    border-radius: 10px;
+}
+
+/* Tarjeta de Producto */
+.card {
+    background: #111;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    min-width: 180px;
+    flex: 0 0 auto;
+}
+
+.card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.card h3 {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+.card p {
+    color: #ccc;
+    font-size: 12px;
+}
+
+.card span {
+    display: block;
+    margin: 8px 0;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.card button {
+    background: #397739;
+    border: none;
+    color: #fff;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.card button:hover {
+    background: #d94a1f;
+}
+
+/* ========================================
+   RESPONSIVIDAD MENÚ CATÁLOGO
+======================================= */
+
+/* ======== DISPOSITIVOS MÓVILES (≤ 480px) ======== */
+@media (max-width: 480px) {
+
+    .navbar {
+        padding: 8px 15px;
+    }
+
+    .navbar nav a {
+        font-size: 11px;
+        margin: 4px 0;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .container h1 {
+        font-size: 20px;
+    }
+
+    .container p {
+        font-size: 13px;
+    }
+
+    #search {
+        width: 80%;
+        font-size: 13px;
+    }
+
+    .filters {
+        margin-bottom: 12px;
+    }
+
+    .filter {
+        padding: 6px 10px;
+        margin: 2px;
+        font-size: 11px;
+    }
+
+    .products {
+        gap: 10px;
+    }
+
+    .card {
+        min-width: 150px;
+        padding: 10px;
+    }
+
+    .card img {
+        height: 110px;
+    }
+
+    .card h3 {
+        font-size: 14px;
+    }
+
+    .card p {
+        font-size: 11px;
+    }
+
+    .card span {
+        font-size: 13px;
+    }
+
+    .card button {
+        padding: 7px;
+        font-size: 11px;
+    }
+}
+
+/* ======== TABLETS (≥ 768px) ======== */
+@media (min-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .navbar nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .navbar nav a {
+        margin: 0 10px;
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .container h1 {
+        font-size: 2.5em;
+    }
+
+    .container p {
+        font-size: 16px;
+    }
+
+    #search {
+        width: 60%;
+    }
+
+    .filters {
+        margin-bottom: 20px;
+    }
+
+    .filter {
+        padding: 8px 15px;
+        font-size: 14px;
+        margin: 5px;
+    }
+
+    .card {
+        min-width: 220px;
+    }
+
+    .card img {
+        height: 160px;
+    }
+
+    .card h3 {
+        font-size: 18px;
+    }
+
+    .card p {
+        font-size: 14px;
+    }
+
+    .card span {
+        font-size: 16px;
+    }
+
+    .card button {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+/* ======== DESKTOPS (≥ 1024px) ======== */
+@media (min-width: 1024px) {
+    .container h1 {
+        font-size: 3em;
+    }
+}

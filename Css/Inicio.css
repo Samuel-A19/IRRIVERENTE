@@ -1,0 +1,165 @@
+/* ========================================
+   ESTILOS PARA "COMIENZA TU ORDEN"
+======================================== */
+
+.orden {
+    background-color: #000;
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.orden-texto {
+    margin-bottom: 20px;
+}
+
+.orden h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+/* ========================================
+   RESPONSIVIDAD DEL TEXTO
+======================================== */
+
+@media (min-width: 768px) {
+    .orden {
+        padding: 30px 20px;
+    }
+
+    .orden-texto h1 {
+        font-size: 40px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .orden-texto h1 {
+        font-size: 55px;
+    }
+}
+
+/* ========================================
+   BOTONES DE ORDEN (DOMICILIO / TIENDA)
+======================================== */
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.btn-domicilio,
+.btn-tienda {
+    width: 100%;
+    max-width: 250px;
+    padding: 10px 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-domicilio {
+    background-color: #228b22;
+}
+
+.btn-tienda {
+    background-color: #f16529;
+}
+
+.btn-domicilio:hover,
+.btn-tienda:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Tablets y escritorio – botones en fila */
+@media (min-width: 768px) {
+    .botones {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .btn-domicilio,
+    .btn-tienda {
+        width: 200px;
+        margin-bottom: 0;
+    }
+}
+
+/* ========================================
+   CARRUSEL (SWIPER)
+======================================== */
+
+.carousel-section,
+.swiper-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 15px 20px;
+    background-color: #000;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.swiper-slide {
+    text-align: center;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+@media (min-width: 768px) {
+    .swiper-container {
+        margin: 50px auto;
+        padding-bottom: 40px;
+    }
+
+    .swiper-slide img {
+        aspect-ratio: 4/3;
+    }
+}
+
+/* ========================================
+   AJUSTES 100% RESPONSIVE (MÓVILES Y TABLETS PEQUEÑAS)
+   → Sin tocar nada de tu diseño original
+======================================== */
+
+/* Móviles muy pequeños (320-479px) */
+@media (max-width: 479px) {
+
+    .btn-domicilio,
+    .btn-tienda {
+        max-width: 100%;
+        width: 100%;
+        padding: 15px 20px;
+    }
+}
+
+/* Móviles grandes y tablets pequeñas (480-767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+    .botones {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .btn-domicilio,
+    .btn-tienda {
+        width: 45%;
+        max-width: none;
+    }
+}

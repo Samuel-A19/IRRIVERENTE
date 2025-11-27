@@ -1,0 +1,461 @@
+/* ========================================
+   HEADER
+======================================= */
+.main-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 10px 20px;
+    background-color: #f16529;
+    position: relative;
+}
+
+.header-center.logo {
+    max-height: 100px;
+    width: 100%;
+    max-width: 150px;
+}
+
+.header-center.logo img {
+    max-height: 100px;
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+/* ========================================
+   MENU DE NAVEGACIÓN
+======================================= */
+.nav-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    background: #f16529;
+}
+
+.nav-menu.active {
+    display: flex;
+}
+
+.nav-menu a {
+    padding: 15px 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.nav-menu a.active {
+    text-decoration: underline;
+}
+
+.hamburger {
+    display: block;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: white;
+}
+
+/* ========================================
+   CARRITO DE COMPRAS (DENTRO DEL HEADER)
+======================================= */
+#btnCarrito {
+    position: relative;
+    display: inline-block;
+}
+
+#contadorCarrito {
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 4px 8px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    display: none;
+}
+
+/* DROPDOWN CARRITO */
+.carrito-dropdown {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    width: 95%;
+    max-width: 380px;
+    max-height: 65vh;
+    background: #222;
+    color: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    overflow-y: auto;
+}
+
+.carrito-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 25px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent #222 transparent;
+}
+
+.carrito-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.carrito-info {
+    flex-grow: 1;
+    margin-left: 10px;
+    text-align: left;
+    max-width: 60%;
+    margin-right: 10px;
+}
+
+.carrito-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.carrito-info p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.carrito-info span {
+    margin: 5px 0 0;
+    font-size: 11px;
+    color: #ccc;
+    line-height: 1.4;
+}
+
+.acciones {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.eliminar {
+    background: none;
+    font-size: 13px;
+    padding: 6px 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f16529;
+    color: white;
+    cursor: pointer;
+}
+
+.eliminar:hover {
+    background-color: #e9541f;
+}
+
+.cantidad {
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.menos,
+.mas {
+    background: none;
+    background-color: #397739;
+    color: white;
+    padding: 6px 8px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.menos:hover {
+    background-color: #ff5f5f;
+}
+
+.mas:hover {
+    background-color: #3cff00;
+}
+
+.carrito-acciones {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.carrito-acciones button {
+    width: 45%;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.carrito-acciones .seguir {
+    background: #ff5722;
+    color: white;
+}
+
+.carrito-acciones .checkout {
+    background: #4caf50;
+    color: white;
+}
+
+.carrito-lista {
+    max-height: 50vh;
+    overflow-y: auto;
+    padding: 10px 0;
+    box-sizing: border-box;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.carrito-lista::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.carrito-total {
+    position: relative;
+    padding: 10px 0;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: right;
+}
+
+/* ========================================
+   MENU USUARIO (PARA CATÁLOGO, ETC.)
+======================================= */
+.user-menu {
+    margin-top: 10px;
+}
+
+.user-menu button {
+    margin-left: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* ========================================
+   RESPONSIVIDAD DEL HEADER
+======================================= */
+
+/* MEDIA QUERIES PARA TABLETS */
+@media (min-width: 768px) {
+
+    /* HEADER */
+    .main-header {
+        flex-direction: row;
+        justify-content: space-between;
+        height: 85px;
+        padding: 0 40px;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        height: 100%;
+    }
+
+    .nav-menu a {
+        padding: 34px 20px;
+        font-size: 14px;
+    }
+
+    .header-center.logo {
+        max-height: 150px;
+        max-width: 200px;
+    }
+
+    .header-center.logo img {
+        max-height: 180px;
+        top: -15px;
+        left: 10px;
+    }
+
+    /* CARRITO */
+    .carrito-dropdown {
+        top: 90px;
+        right: 20px;
+        width: 380px;
+        max-height: 80vh;
+    }
+
+    .carrito-dropdown::before {
+        right: 30px;
+        border-width: 10px;
+    }
+
+    .carrito-item img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .carrito-info {
+        max-width: 65%;
+        margin-right: 15px;
+    }
+
+    .carrito-info p {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .carrito-info span {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .acciones {
+        gap: 6px;
+    }
+
+    .carrito-total {
+        font-size: 16px;
+    }
+
+    .carrito-acciones button {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .eliminar {
+        font-size: 14px;
+        padding: 7px 9px;
+    }
+
+    .menos,
+    .mas {
+        font-size: 14px;
+        padding: 7px 9px;
+    }
+
+    .cantidad {
+        font-size: 14px;
+    }
+
+    /* USER MENU */
+    .user-menu {
+        margin-top: 0;
+    }
+
+    .user-menu button {
+        margin-left: 10px;
+        font-size: 14px;
+    }
+}
+
+/* MEDIA QUERIES PARA DESKTOPS */
+@media (min-width: 1024px) {
+
+    /* HEADER */
+    .header-center.logo {
+        max-width: 300px;
+    }
+
+    .header-center.logo img {
+        max-height: 220px;
+        top: -28px;
+        left: 40px;
+    }
+
+    /* CARRITO */
+    .carrito-dropdown {
+        top: 90px;
+        right: 4px;
+        width: 450px;
+        max-height: 80vh;
+    }
+
+    .carrito-dropdown::before {
+        right: 35px;
+        border-width: 12px;
+    }
+
+    .carrito-item img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .carrito-info {
+        max-width: 70%;
+        margin-right: 20px;
+    }
+
+    .carrito-info p {
+        font-size: 15px;
+        line-height: 1.4;
+    }
+
+    .carrito-info span {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    .acciones {
+        gap: 7px;
+    }
+
+    .carrito-total {
+        font-size: 20px;
+    }
+
+    .carrito-acciones button {
+        font-size: 16px;
+        padding: 10px 10px;
+    }
+
+    .menos,
+    .mas,
+    .eliminar {
+        font-size: 15px;
+        padding: 6px 8px;
+    }
+
+    .cantidad {
+        font-size: 15px;
+    }
+}

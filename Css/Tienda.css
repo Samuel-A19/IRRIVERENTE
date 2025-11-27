@@ -1,0 +1,192 @@
+/* ========================================
+   2. FORMULARIO DE PEDIDO PARA TIENDA (TIENDA.HTML)
+======================================= */
+
+/* --- Estilos Base del Layout (Compartidos con Domicilio) --- */
+.contenedor-tienda {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 160px);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.columna {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.pedido-formulario {
+    background: #222;
+    padding: 40px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 420px;
+    color: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+.pedido-formulario h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #f16529;
+}
+
+.sub-texto {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #bbb;
+}
+
+.pedido-formulario label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.pedido-formulario input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 6px;
+    background: #444;
+    color: white;
+    font-size: 14px;
+}
+
+.pedido-formulario input::placeholder {
+    color: #ccc;
+}
+
+.resumen-pedido {
+    background: #333;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 380px;
+    color: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+.resumen-pedido h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #f16529;
+}
+
+.resumen-linea {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.total {
+    font-weight: bold;
+    font-size: 18px;
+    border-top: 1px solid #888;
+    padding-top: 10px;
+}
+
+.btn-confirmar {
+    width: 100%;
+    padding: 14px;
+    background: #218838;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+    margin-top: 15px;
+}
+
+.btn-confirmar:hover {
+    background: #e9541f;
+}
+
+/* --- Estilos Específicos para Tienda (Modifican el base) --- */
+.tienda-body {
+    background: #000;
+    color: white;
+}
+
+.contenedor-tienda .columna {
+    background: transparent;
+}
+
+.contenedor-tienda .pedido-formulario {
+    background: #222;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.contenedor-tienda .pedido-formulario h2 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.contenedor-tienda .pedido-formulario input,
+.contenedor-tienda .pedido-formulario select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 6px;
+}
+
+.contenedor-tienda .btn-submit {
+    width: 100%;
+    background: #f16529;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.contenedor-tienda .resumen-pedido {
+    background: #333;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    color: #fff;
+}
+
+.contenedor-tienda .btn-pagar {
+    width: 100%;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* --- Responsividad Pedido en Tienda --- */
+@media (max-width: 900px) {
+    .contenedor-tienda {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .columna {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .pedido-formulario,
+    .resumen-pedido {
+        max-width: 100%;
+    }
+}

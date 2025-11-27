@@ -1,0 +1,175 @@
+/* 8. PÁGINA DE PERFIL DE USUARIO */
+h1 {
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.user-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #111;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #f16529;
+}
+
+.user-header img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.section-grid {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+@media (max-width: 900px) {
+    .section-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: #111;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #222;
+}
+
+.card h2 {
+    color: #f16529;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 14px;
+}
+
+input,
+select {
+    width: 95%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background: #222;
+    color: #fff;
+}
+
+button {
+    margin-top: 5px;
+    background: #f16529;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.titulo-foto-perfil {
+    text-align: center;
+    width: 100%;
+}
+
+
+/* FOTO DE PERFIL EN PREFERENCIAS */
+.foto-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.foto-container img {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f16529;
+    background: white;
+    margin-bottom: 10px;
+    /* SEPARA LA FOTO DEL BOTÓN */
+    display: block;
+    /* Asegura que la foto esté arriba */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.foto-container button {
+    display: block;
+    /* BOTÓN DEBAJO */
+    margin: 0 auto;
+    /* CENTRADO */
+    background: #f16529;
+    padding: 7px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+/* SECCIÓN DE SEGURIDAD */
+.seguridad-section {
+    margin-bottom: 25px;
+}
+
+.seguridad-section h2 {
+    margin-bottom: 10px;
+    color: #f16529;
+}
+
+.seguridad-section input {
+    width: 100%;
+    padding: 7px;
+    margin-bottom: 7px;
+}
+
+.seguridad-section button {
+    background: #f16529;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#preferencias.card {
+    padding-bottom: 20px;
+}
+
+.botones-accion {
+    display: flex;
+    justify-content: flex-start;
+    /* pegados a la izquierda */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.botones-accion button {
+    width: 150px !important;
+    /* 🔥 MISMO TAMAÑO OBLIGADO */
+    padding: 10px 0;
+    background: #f16529;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+}

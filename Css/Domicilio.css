@@ -1,0 +1,203 @@
+/* ========================================
+   PÁGINA DE PEDIDO A DOMICILIO
+======================================= */
+
+/* --- Formulario simple (puede usarse en otra página) --- */
+.pedido-domicilio {
+    background: #111;
+    padding: 30px;
+    margin: 20px auto;
+    border-radius: 15px;
+    max-width: 600px;
+    color: white;
+    text-align: left;
+}
+
+.pedido-domicilio h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.pedido-domicilio label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.pedido-domicilio input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 6px;
+    background: #f16529;
+    color: white;
+}
+
+.pedido-domicilio input::placeholder {
+    color: #fff;
+}
+
+/* --- Layout principal de la página (Formulario + Resumen) --- */
+.contenedor-domicilio {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 160px);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Mitad izquierda: Formulario */
+.columna.izquierda {
+    width: 50%;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.pedido-formulario {
+    background: #222;
+    padding: 40px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 420px;
+    color: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+.pedido-formulario h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #f16529;
+}
+
+.sub-texto {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #bbb;
+}
+
+.pedido-formulario label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.pedido-formulario input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 6px;
+    background: #444;
+    color: white;
+    font-size: 14px;
+}
+
+.pedido-formulario input::placeholder {
+    color: #ccc;
+}
+
+/* Mitad derecha: Resumen del Pedido */
+.columna.derecha {
+    width: 50%;
+    background: #181818;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.resumen-pedido {
+    background: #333;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 380px;
+    color: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+.resumen-pedido h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #f16529;
+}
+
+.resumen-linea {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.total {
+    font-weight: bold;
+    font-size: 18px;
+    border-top: 1px solid #888;
+    padding-top: 10px;
+}
+
+.btn-confirmar {
+    width: 100%;
+    padding: 14px;
+    background: #218838;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+    margin-top: 15px;
+}
+
+.btn-confirmar:hover {
+    background: #e9541f;
+}
+
+/* --- Estilos Específicos para el Contexto de Domicilio --- */
+.domicilio-body {
+    background: #000;
+}
+
+.domicilio-body .contenedor-domicilio {
+    background: #000;
+}
+
+.domicilio-body .columna.izquierda,
+.domicilio-body .columna.derecha {
+    background: #000;
+}
+
+.domicilio-body .pedido-formulario {
+    background: #222;
+    color: white;
+}
+
+.domicilio-body .resumen-pedido {
+    background: #333;
+    color: white;
+}
+
+/* --- Responsividad de la Página de Domicilio --- */
+
+/* En pantallas más pequeñas (móviles) */
+@media (max-width: 900px) {
+    .contenedor-domicilio {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .columna.izquierda,
+    .columna.derecha {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .pedido-formulario,
+    .resumen-pedido {
+        max-width: 100%;
+    }
+}

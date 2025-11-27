@@ -1,0 +1,328 @@
+/* ========================================
+   SIGUE TU PEDIDO
+======================================= */
+/* 
+   RESETEO BÁSICO Y ESTILOS GLOBALES
+   */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    line-height: 1.6;
+}
+
+/* 
+   CONTENEDOR PRINCIPAL
+   */
+.containere {
+    width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    text-align: center;
+    border-radius: 16px;
+    background-color: #111;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* 
+   TÍTULO PRINCIPAL
+   */
+.container h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 
+   GRUPO DE ENTRADA (INPUT)
+   */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 12px;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.input-group input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+.input-group input:focus {
+    background-color: #444;
+}
+
+/* 
+   BOTÓN DE RASTREO
+   */
+.btn-track {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    margin: 20px 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #ff6b35;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-track:hover {
+    background-color: #e55a2b;
+    transform: translateY(-2px);
+}
+
+.btn-track:active {
+    transform: translateY(0);
+}
+
+/* 
+   RASTREADOR DE PROGRESO
+   */
+.progress-tracker {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 40px 0;
+    padding: 0 10px;
+}
+
+.progress-line {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 4px;
+    background-color: #333;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.step {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    flex: 1;
+}
+
+.step-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 10px;
+    line-height: 50px;
+    font-size: 1.8rem;
+    color: #fff;
+    background-color: #444;
+    border-radius: 50%;
+    border: 3px solid #333;
+    transition: all 0.3s ease;
+}
+
+.step-label {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 8px;
+    transition: color 0.3s ease;
+}
+
+/* 
+   CAJA DE ESTADO ACTUAL
+   */
+.status-box {
+    background-color: #222;
+    padding: 30px;
+    border-radius: 16px;
+    border: 2px solid #ff6b35;
+    margin: 30px 0;
+}
+
+.status-box h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-icon-large {
+    width: 80px;
+    height: 80px;
+    margin: 15px auto;
+    line-height: 80px;
+    font-size: 3rem;
+    color: #fff;
+    background-color: #ff6b35;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #ff6b35;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+/* 
+   BOTÓN DE SOPORTE
+   */
+.btn-support {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-support:hover {
+    background-color: #43a047;
+    transform: translateY(-2px);
+}
+
+.btn-support:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+   ESTADOS DE LOS PASOS (RASTREADOR)
+======================================= */
+
+/*Estado NORMAL (gris original) */
+.step .step-icon {
+    background-color: #444 !important;
+    border-color: #333 !important;
+    color: #888 !important;
+    box-shadow: none !important;
+    transform: translateY(0) !important;
+}
+
+.step .step-label {
+    color: #aaa !important;
+}
+
+/*Estado ACTIVO (verde + elevado) */
+.step.active .step-icon {
+    background-color: #4caf50 !important;
+    border-color: #4caf50 !important;
+    color: #fff !important;
+    box-shadow: 0 0 12px rgba(76, 175, 80, 0.7) !important;
+}
+
+.step.active {
+    transform: translateY(-12px);
+    transition: transform 0.3s ease;
+}
+
+.step.active .step-label {
+    color: #4caf50 !important;
+    font-weight: 700;
+}
+
+/*Estado COMPLETADO = vuelve a ser NORMAL*/
+.step.completed .step-icon {
+    background-color: #444 !important;
+    border-color: #333 !important;
+    color: #888 !important;
+    box-shadow: none !important;
+}
+
+.step.completed .step-label {
+    color: #aaa !important;
+}
+
+.step.completed {
+    transform: translateY(0) !important;
+}
+
+/* ========================================
+   RESPONSIVIDAD SIGUE TU PEDIDO
+======================================= */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+
+    .container h1 {
+        font-size: 2rem;
+    }
+
+    .step-icon {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 1.5rem;
+    }
+
+    .step-label {
+        font-size: 0.8rem;
+    }
+
+    .status-icon-large {
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+        font-size: 2.5rem;
+    }
+
+    .status-text {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .progress-tracker {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .progress-line {
+        display: none;
+    }
+
+    .step {
+        flex: 1 1 45%;
+    }
+}

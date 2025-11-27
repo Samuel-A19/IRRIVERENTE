@@ -1,0 +1,121 @@
+/* FORMULARIO */
+.container {
+    max-width: 1100px;
+    margin: 28px auto;
+    padding: 24px;
+    background: #0b0b0b;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .5)
+}
+
+h1 {
+    font-size: 28px;
+    margin-top: 0
+}
+
+p.note {
+    color: #ddd
+}
+
+form {
+    display: grid;
+    gap: 12px
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 6px
+}
+
+.row {
+    display: flex;
+    gap: 12px
+}
+
+.col {
+    flex: 1
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #222;
+    background: #111;
+    color: #eee
+}
+
+input::placeholder {
+    color: #888
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #EF6A2B;
+    box-shadow: 0 0 0 4px rgba(239, 106, 43, .06)
+}
+
+textarea {
+    min-height: 80px
+}
+
+/* RADIO */
+.radios {
+    display: flex;
+    gap: 18px
+}
+
+/* TRANSFERENCIA */
+.payment-details {
+    border-left: 3px solid rgba(255, 255, 255, .06);
+    padding: 12px;
+    border-radius: 6px;
+    background: #070707
+}
+
+.hidden {
+    display: none
+}
+
+/* BOTONES */
+.btn {
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: none;
+    background: #2ecc71;
+    font-weight: 700;
+    cursor: pointer
+}
+
+.btn:hover {
+    background: #EF6A2B
+}
+
+.btn.secondary {
+    background: #444
+}
+
+/* RESULTADO */
+.summary {
+    background: #122;
+    border: 1px solid rgba(46, 125, 50, .12);
+    color: #9fffbd;
+    padding: 12px;
+    border-radius: 6px
+}
+
+/* RESPONSIVE */
+@media(max-width:800px) {
+    .row {
+        flex-direction: column
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        gap: 14px;
+        padding: 8px 0
+    }
+}

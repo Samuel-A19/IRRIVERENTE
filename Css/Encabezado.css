@@ -1,0 +1,121 @@
+/* ========================================
+   HEADER
+======================================= */
+:root {
+    --logo-size: 80px;
+    /* AJUSTA ESTE VALOR A TU GUSTO */
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f16529;
+    position: relative;
+}
+
+/* LOGO */
+.header-center.logo img {
+    width: 110px;
+    /* ← AQUI CAMBIAS EL TAMAÑO (FUNCIONA) */
+    height: 142px;
+    object-fit: contain;
+    display: block;
+    position: relative;
+    /* antes lo tenías absolute → causaba el error */
+}
+
+
+
+/* ========================================
+   BOTÓN MENU LATERAL
+======================================= */
+#btnMenuLateral {
+    background-color: #f16529;
+    color: white;
+    font-size: 22px;
+    border: none;
+    padding: 8px 22px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: .3s;
+}
+
+#btnMenuLateral:hover {
+    background-color: #d45622;
+}
+
+
+/* ========================================
+   MENÚ LATERAL DESPLEGABLE
+======================================= */
+#sideMenu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background: #000;
+    color: #fff;
+    padding: 30px;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, .4);
+    transform: translateX(100%);
+    transition: transform .4s ease;
+    z-index: 1000;
+}
+
+#sideMenu.active {
+    right: 0;
+    transform: translateX(0);
+}
+
+#sideMenu a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 14px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#sideMenu a:hover {
+    opacity: .6;
+}
+
+
+/* ========================================
+   OSCURECIMIENTO DE FONDO
+======================================= */
+#menuOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    display: none;
+    z-index: 900;
+}
+
+#menuOverlay.active {
+    display: block;
+}
+
+
+/* ========================================
+   RESPONSIVE GLOBAL
+   (NO modifica el tamaño del logo)
+======================================= */
+
+.main-header {
+    flex-wrap: wrap;
+}
+
+/* Si el espacio es pequeño, los elementos no se rompen */
+@media (max-width: 480px) {
+    #btnMenuLateral {
+        font-size: 18px;
+        padding: 6px 14px;
+    }
+}

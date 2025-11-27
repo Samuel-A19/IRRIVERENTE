@@ -1,0 +1,21 @@
+/* ========================================
+   ESTILOS GLOBALES Y BASE
+======================================= */
+body {
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body>* {
+    flex: 1 0 auto;
+}
+
+.main-footer {
+    flex-shrink: 0;
+}
