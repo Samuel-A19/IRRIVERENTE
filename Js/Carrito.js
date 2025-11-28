@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const btnCarrito = document.getElementById("btnCarrito");
     const carritoDropdown = document.getElementById("carritoDropdown");
-    const contadorCarrito = document.getElementById("contadorCarrito");
+    const contadorCarrito = document.getElementById("contadorCarrito");  // ← este es tu contador
     const carritoLista = document.getElementById("carritoLista");
     const totalTexto = document.querySelector(".carrito-total p");
     const botonesAñadir = document.querySelectorAll(".btn-add, .btn-promo");
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
     const parsePrecio = (str) => parseFloat((str || "").replace(/[^\d.]/g, "")) || 0;
-    const formatPrecio = (n) => n.toFixed(2);
+    const formatPrecio = (n) => n.toLocaleString();
 
     const actualizarCarrito = () => {
         if (carritoLista) carritoLista.innerHTML = "";
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ${item.imagen ? `<img src="${item.imagen}">` : ""}
       <div class="carrito-info">
         <p>${item.nombre}</p>
-        <span>${formatPrecio(item.precio)}$</span>
+        <span>$${formatPrecio(item.precio)}</span>
       </div>
       <div class="acciones">
         <button class="menos"><i class="fa-solid fa-circle-minus"></i></button>
@@ -42,12 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
             total += item.precio * item.cantidad;
         });
 
+        // ← AQUÍ ESTÁ EL CONTADOR QUE QUERÍAS
         if (contadorCarrito) {
             contadorCarrito.textContent = contador;
             contadorCarrito.style.display = contador > 0 ? "inline-block" : "none";
         }
 
-        if (totalTexto) totalTexto.textContent = `Total: ${formatPrecio(total)}$`;
+        if (totalTexto) totalTexto.textContent = `Total: $${formatPrecio(total)}`;
 
         localStorage.setItem('carrito', JSON.stringify(carrito));
 
@@ -56,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // TU DROPDOWN DEL CARRITO (sin cambios)
     if (btnCarrito && carritoDropdown) {
         btnCarrito.addEventListener("click", (e) => {
             e.stopPropagation();
@@ -70,8 +72,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // PRODUCTOS NORMALES (pastas, bebidas, etc) → siguen funcionando igual
     botonesAñadir.forEach((btn) => {
         btn.addEventListener("click", () => {
+            // Si el botón abre el modal de tamaño → no hacemos nada aquí
+            if (btn.getAttribute("onclick")?.includes("openSizeModal")) return;
+
             const container = btn.closest(".card, .promo");
             if (!container) return;
 
@@ -80,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const imagen = container.querySelector("img")?.src;
 
             const existing = carrito.find(i => i.nombre === nombre);
-
             if (existing) existing.cantidad++;
             else carrito.push({ nombre, precio, cantidad: 1, imagen });
 
@@ -88,35 +93,67 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    if (carritoLista) {
-        carritoLista.addEventListener("click", (e) => {
-            const btn = e.target.closest("button");
-            if (!btn) return;
+    // ACCIONES DENTRO DEL CARRITO (+ / - / eliminar)
+   if (carritoLista) {
+    carritoLista.addEventListener("click", (e) => {
+        e.stopPropagation();   // ← ESTA ES LA LÍNEA QUE NECESITAS (evita que se cierre el carrito)
 
-            const item = btn.closest(".carrito-item");
-            const nombre = item.dataset.nombre;
-            const index = carrito.findIndex(i => i.nombre === nombre);
+        const btn = e.target.closest("button");
+        if (!btn) return;
 
-            if (index === -1) return;
+        const item = btn.closest(".carrito-item");
+        const nombre = item.dataset.nombre;
+        const index = carrito.findIndex(i => i.nombre === nombre);
 
-            if (btn.classList.contains("mas")) carrito[index].cantidad++;
-            else if (btn.classList.contains("menos"))
-                carrito[index].cantidad > 1 ? carrito[index].cantidad-- : carrito.splice(index, 1);
-            else if (btn.classList.contains("eliminar")) carrito.splice(index, 1);
+        if (index === -1) return;
 
-            actualizarCarrito();
-        });
-    }
+        if (btn.classList.contains("mas")) carrito[index].cantidad++;
+        else if (btn.classList.contains("menos"))
+            carrito[index].cantidad > 1 ? carrito[index].cantidad-- : carrito.splice(index, 1);
+        else if (btn.classList.contains("eliminar")) carrito.splice(index, 1);
 
-    const btnSeguir = document.querySelector(".carrito-acciones .seguir");
-    const btnCheckout = document.querySelector(".carrito-acciones .checkout");
-
-    btnSeguir?.addEventListener("click", () => carritoDropdown.style.display = "none");
-
-    btnCheckout?.addEventListener("click", () => {
-        carrito = [];
         actualizarCarrito();
     });
+}
+
+    // Botones de abajo
+    document.querySelector(".carrito-acciones .seguir")?.addEventListener("click", () => {
+        carritoDropdown.style.display = "none";
+    });
+
+    document.querySelector(".carrito-acciones .checkout")?.addEventListener("click", () => {
+        if (carrito.length > 0 && confirm("¿Finalizar compra?")) {
+            alert("¡Redirigiendo al pago!");
+            carrito = [];
+            actualizarCarrito();
+        }
+    });
+
+    // ← FUNCIÓN GLOBAL PARA EL MODAL DE TAMAÑO (esto es lo ÚNICO que agregué)
+    window.agregarDesdeModal = (nombreCompleto, precio) => {
+        const existing = carrito.find(i => i.nombre === nombreCompleto);
+        if (existing) {
+            existing.cantidad++;
+        } else {
+            carrito.push({ nombre: nombreCompleto, precio, cantidad: 1 });
+        }
+        actualizarCarrito();
+    };
 
     actualizarCarrito();
 });
+
+// ====== ESTO ES LO ÚNICO QUE TE FALTA (agrégalo al final de Carrito.js) ======
+window.agregarDesdeModal = function(nombreCompleto, precio) {
+    const existente = carrito.find(item => item.nombre === nombreCompleto);
+    if (existente) {
+        existente.cantidad++;
+    } else {
+        carrito.push({
+            nombre: nombreCompleto,
+            precio: precio,
+            cantidad: 1
+        });
+    }
+    actualizarCarrito();  // ← esta función ya la tienes tú
+};

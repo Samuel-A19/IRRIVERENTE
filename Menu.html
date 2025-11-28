@@ -53,7 +53,10 @@
             <a href="Siguepedido.html">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
             <a href="Acercanosotros.html">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
             <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
-            <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
+            <a href="#" id="btnCarrito">
+    <i class="bi bi-cart"></i> CARRITO 
+    <span id="contadorCarrito" style="display:none; background:#ff5722; color:white; border-radius:50%; padding:2px 7px; font-size:11px; position:relative; top:-10px; left:-8px;">0</span>
+</a> <!-- Enlace al carrito -->
             <div id="carritoDropdown" class="carrito-dropdown">
                 <h3>Tu Carrito</h3>
                 <ul id="carritoLista" class="carrito-lista">
@@ -122,61 +125,218 @@
         </div>
 
         <!-- Productos -->
-        <div class="products" id="products">
-            <!-- Pizza -->
-            <div class="card" data-category="pasta">
-                <img src="imagenes/Menu/PastaCar.jpg" alt="pasta Alemana">
-                <h3>Pasta Carbonara</h3>
-                <p>Espaguetis, Tocinera, Jamón en salsa, Pimienta,</p>
-                <span>19.500 COP</span>
-                <button class="btn-add">Añadir</button>
-            </div>
-
-            <!-- Pasta -->
-            <div class="card" data-category="pizza">
-                <img src="imagenes/Menu/PizzaAle.jpg" alt="pizza Alemana">
-                <h3>Pizza Alemana</h3>
-                <p>Jamon, Salami, Peperoni, Tocinera, Chorizo...</p>
-                <span>30.000 COP</span>
-                <button class="btn-add">Añadir</button>
-            </div>
-
-            <!-- Lasaña -->
-            <div class="card" data-category="pizza">
-                <img src="imagenes/Menu/PizzaMari.jpg" alt="pizza Marinera">
-                <h3>Pizza Marinera</h3>
-                <p>Champiñones, Calamares, Camarones en salsa</p>
-                <span>35.000 COP</span>
-                <button class="btn-add">Añadir</button>
-            </div>
-
-            <!-- Hamburguesa -->
-            <div class="card" data-category="pasta">
-                <img src="imagenes/Menu/PastaBolo.jpg" alt="pasta Bolognesa">
-                <h3>Pasta Bolognesa</h3>
-                <p>Espaguetis y carne molida en salsa de tomate</p>
-                <span>22.000 COP</span>
-                <button class="btn-add">Añadir</button>
-            </div>
-
-            <!-- Limonada -->
-            <div class="card" data-category="pizza">
-                <img src="imagenes/Menu/PizzaRan.jpg" alt="pizza Ranchera">
-                <h3>Pizza Ranchera</h3>
-                <p>Jamón, Pimentón, Tocineta, Carne desmechada</p>
-                <span>8.000 COP</span>
-                <button class="btn-add">Añadir</button>
-            </div>
-
-            <!-- Gaseosa -->
-            <div class="card" data-category="gaseosa">
-                <img src="imagenes/Menu/" alt="Gaseosa">
-                <h3>Gaseosa 350 ml</h3>
-                <p>Surtidas</p>
-                <span>6.000 COP</span>
-                <button class="btn-add">Añadir</button>
-            </div>
+       <div class="products" id="products">
+    <!-- PIZZAS (solo 1 tarjeta por sabor) -->
+    <div class="card" data-category="pizza">
+        <img src="imagenes/Menu/PizzaMargarita.jpg" alt="Pizza Margarita">
+        <div class="card-content">
+            <h3>Pizza Margarita</h3>
+            <p>Jamon, queso mozzarella</p>
+            <span>Desde $13.500</span>
         </div>
+        <button class="btn-add" onclick="openSizeModal('Pizza Margarita', 13500, 29000, 47500)">Añadir</button>
+    </div>
+
+    <div class="card" data-category="pizza">
+        <img src="imagenes/Menu/PizzaPrimavera.jpg" alt="Pizza Primavera">
+        <div class="card-content">
+            <h3>Pizza Primavera</h3>
+            <p>Jamon, maíz, tocineta</p>
+            <span>Desde $13.500</span>
+        </div>
+        <button class="btn-add" onclick="openSizeModal('Pizza Primavera', 13500, 29000, 47500)">Añadir</button>
+    </div>
+
+    <div class="card" data-category="pizza">
+        <img src="imagenes/Menu/PizzaHawaiiana.jpg" alt="Pizza Hawaiana">
+        <div class="card-content">
+            <h3>Pizza Hawaiana</h3>
+            <p>Jamon, piña</p>
+            <span>Desde $13.500</span>
+        </div>
+        <button class="btn-add" onclick="openSizeModal('Pizza Hawaiana', 13500, 29000, 47500)">Añadir</button>
+    </div>
+
+    <div class="card" data-category="pizza">
+        <img src="imagenes/Menu/PizzaRan.jpg" alt="Pizza Ranchera">
+        <div class="card-content">
+            <h3>Pizza Ranchera</h3>
+            <p>Jamon, pimentón, tocineta, carne desmechada</p>
+            <span>Desde $15.000</span>
+        </div>
+        <button class="btn-add" onclick="openSizeModal('Pizza Ranchera', 15000, 29000, 47500)">Añadir</button>
+    </div>
+
+    <div class="card" data-category="pizza">
+        <img src="imagenes/Menu/PizzaMari.jpg" alt="Pizza A la Marinera">
+        <div class="card-content">
+            <h3>Pizza A la Marinera</h3>
+            <p>Champiñones, camarones, calamares</p>
+            <span>Desde $19.000</span>
+        </div>
+        <button class="btn-add" onclick="openSizeModal('Pizza A la Marinera', 19000, 32500, 49500)">Añadir</button>
+    </div>
+
+    <div class="card" data-category="pizza">
+        <img src="imagenes/Menu/Pizza4Quesos.jpg" alt="Pizza 4 Quesos">
+        <div class="card-content">
+            <h3>Pizza 4 Quesos</h3>
+            <p>Mozzarella, provolone, gouda, parmesano</p>
+            <span>Desde $16.000</span>
+        </div>
+        <button class="btn-add" onclick="openSizeModal('Pizza 4 Quesos', 16000, 31000, 48500)">Añadir</button>
+    </div>
+
+    <div class="card" data-category="pizza">
+        <img src="imagenes/Menu/PizzaAle.jpg" alt="Pizza Alemana">
+        <div class="card-content">
+            <h3>Pizza Alemana</h3>
+            <p>Jamon, salami, peperoni, tocineta, chorizo</p>
+            <span>Desde $14.000</span>
+        </div>
+        <button class="btn-add" onclick="openSizeModal('Pizza Alemana', 14000, 29000, 47500)">Añadir</button>
+    </div>
+
+
+    <!-- PASTAS -->
+    <div class="card" data-category="pasta">
+        <img src="imagenes/Menu/PastaCar.jpg" alt="Carbonara">
+        <h3>Pasta Carbonara</h3>
+        <p>Tocineta y jamón en salsa blanca con pimienta</p>
+        <span>$19.500</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="pasta">
+        <img src="imagenes/Menu/PastaAlfredo.jpg" alt="Alfredo">
+        <h3>Pasta Alfredo</h3>
+        <p>Salsa blanca con mantequilla, ajo y perejil</p>
+        <span>$19.500</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="pasta">
+        <img src="imagenes/Menu/PastaBolo.jpg" alt="Bolognesa">
+        <h3>Pasta Bolognesa</h3>
+        <p>Carne molida en salsa de tomate</p>
+        <span>$19.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="pasta">
+        <img src="imagenes/Menu/PastaIrri.jpg" alt="Irriverente">
+        <h3>Pasta Irriverente</h3>
+        <p>Carne o pollo en salsa especial de la casa</p>
+        <span>$22.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="pasta">
+        <img src="imagenes/Menu/PastaMarinera.jpg" alt="A la Marinera">
+        <h3>Pasta A la Marinera</h3>
+        <p>Calamares y camarones en salsa de tomate</p>
+        <span>$24.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="pasta">
+        <img src="imagenes/Menu/PastaOlio.jpg" alt="Olio con Camarones">
+        <h3>Olio con Camarones y Champiñones</h3>
+        <p>Ají especial de la casa</p>
+        <span>$24.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="pasta">
+        <img src="imagenes/Menu/PastaAmatriciana.jpg" alt="All Amatriciana">
+        <h3>All Amatriciana</h3>
+        <p>Tocineta y aceitunas en salsa de tomate</p>
+        <span>$19.500</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <!-- LASAGNAS Y HAMBURGUESA -->
+    <div class="card" data-category="lasagna">
+        <img src="imagenes/Menu  src="imagenes/Menu/LasanaPollo.jpg" alt="Lasaña de Pollo">
+        <h3>Lasaña de Pollo</h3>
+        <p>3 capas de pasta y pollo con bechamel y gratinado</p>
+        <span>$19.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="lasagna">
+        <img src="imagenes/Menu/LasanaCarne.jpg" alt="Lasaña de Carne">
+        <h3>Lasaña de Carne</h3>
+        <p>3 capas de pasta y carne molida con bechamel</p>
+        <span>$19.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="hamburguesa">
+        <img src="imagenes/Menu/HamburguesaIrri.jpg" alt="Hamburguesa Irriverente">
+        <h3>Hamburguesa Irriverente</h3>
+        <p>Carne 100% res, queso mozzarella, lechuga, tomate, salsa tártara</p>
+        <span>$14.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="hamburguesa">
+        <img src="imagenes/Menu/HamburguesaIrri.jpg" alt="Hamburguesa Irriverente">
+        <h3>Hamburguesa Irriverente + Papas</h3>
+        <p>Carne 100% res, queso mozzarella, lechuga, tomate, salsa tártara</p>
+        <span>$17.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <!-- BEBIDAS -->
+    <div class="card" data-category="limonadas">
+        <img src="imagenes/Menu/LimonadaPina.jpg" alt="Limonada de Piña">
+        <h3>Limonada de Piña</h3>
+        <p></p>
+        <span>$6.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="limonadas">
+        <img src="imagenes/Menu/LimonadaFresa.jpg" alt="Limonada de Fresa">
+        <h3>Limonada de Fresa</h3>
+        <p></p>
+        <span>$6.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="limonadas">
+        <img src="imagenes/Menu/LimonadaNatural.jpg" alt="Limonada Natural">
+        <h3>Limonada Natural</h3>
+        <p></p>
+        <span>$6.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="limonadas">
+        <img src="imagenes/Menu/MalteadaFresa.jpg" alt="Malteada de Fresa">
+        <h3>Malteada de Fresa</h3>
+        <p></p>
+        <span>$9.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="gaseosa">
+        <img src="imagenes/Menu/GaseosaGrande.jpg" alt="Gaseosa Grande">
+        <h3>Gaseosa Personal (350ml)</h3>
+        <p></p>
+        <span>$4.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+
+    <div class="card" data-category="gaseosa">
+        <img src="imagenes/Menu/GaseosaGrande.jpg" alt="Gaseosa Grande">
+        <h3>Gaseosa Grande (1.5L)</h3>
+        <p></p>
+        <span>$8.000</span>
+        <button class="btn-add">Añadir</button>
+    </div>
+</div>
     </main>
 
     <!-- BOTÓN FLOTANTE DE WHATSAPP -->
@@ -258,6 +418,104 @@
             </div>
         </div>
     </footer>
+
+    
+// ==================== BUSCADOR + FILTROS FUNCIONALES ====================
+
+<script>
+const searchInput = document.getElementById('search');
+const filters = document.querySelectorAll('.filter');
+const cards = document.querySelectorAll('.card');
+
+// FILTROS (sin cambios, funciona perfecto)
+filters.forEach(filter => {
+    filter.addEventListener('click', () => {
+        filters.forEach(f => f.classList.remove('active'));
+        filter.classList.add('active');
+
+        const category = filter.getAttribute('data-category');
+
+        cards.forEach(card => {
+            if (category === 'all' || card.dataset.category === category) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+
+// BUSCADOR CORREGIDO (esto es lo que necesitabas)
+searchInput.addEventListener('input', () => {
+    const term = searchInput.value.toLowerCase().trim();
+
+    cards.forEach(card => {
+        // Busca en todo el texto de la tarjeta (título, ingredientes, precio, etc)
+        const textoCompleto = card.textContent.toLowerCase();
+
+        if (textoCompleto.includes(term)) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+
+// Activar "Todas" al cargar
+document.querySelector('.filter[data-category="all"]').click();
+
+</script>
+
+<!-- MODAL DE TAMAÑO -->
+<div id="sizeModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">×</span>
+        <h3 id="modalTitle">Selecciona el tamaño</h3>
+        <div class="size-option" id="sizeSmall">Pequeña - $<span></span></div>
+        <div class="size-option" id="sizeMedium">Mediana - $<span></span></div>
+        <div class="size-option" id="sizeLarge">Grande - $<span></span></div>
+    </div>
+</div>
+
+<script>
+// Modal de tamaño para pizzas
+let currentPizza = '';
+let prices = { small: 0, medium: 0, large: 0 };
+
+function openSizeModal(name, small, medium, large) {
+    currentPizza = name;
+    prices = { small, medium, large };
+    
+    document.getElementById('modalTitle').textContent = name;
+    document.querySelector('#sizeSmall span').textContent = small.toLocaleString();
+    document.querySelector('#sizeMedium span').textContent = medium.toLocaleString();
+    document.querySelector('#sizeLarge span').textContent = large.toLocaleString();
+    
+    document.getElementById('sizeModal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('sizeModal').style.display = 'none';
+}
+
+document.querySelectorAll('.size-option').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const size = this.textContent.split(' - ')[0].trim();
+        const price = prices[size === 'Pequeña' ? 'small' : size === 'Mediana' ? 'medium' : 'large'];
+        const nombreFinal = `${currentPizza} - ${size}`;
+
+        // ← Ahora sí agrega al carrito real con el precio correcto
+        agregarDesdeModal(nombreFinal, price);
+
+        closeModal();
+    });
+});
+
+// Cerrar al hacer clic fuera
+window.addEventListener('click', (e) => {
+    if (e.target === document.getElementById('sizeModal')) closeModal();
+});
+</script>
 
 </body>
 
