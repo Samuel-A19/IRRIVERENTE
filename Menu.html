@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="Css/Menu.css" />
     <link rel="stylesheet" href="Css/Carrito.css" />
     <link rel="stylesheet" href="Css/Modales.css" />
+    
 
 
     <!-- Librería de íconos Bootstrap Icons (permite usar iconos con la clase "bi") -->
@@ -53,45 +54,41 @@
             <a href="Siguepedido.html">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
             <a href="Acercanosotros.html">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
             <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
-            <a href="#" id="btnCarrito">
-    <i class="bi bi-cart"></i> CARRITO 
-    <span id="contadorCarrito" style="display:none; background:#ff5722; color:white; border-radius:50%; padding:2px 7px; font-size:11px; position:relative; top:-10px; left:-8px;">0</span>
-</a> <!-- Enlace al carrito -->
-            <div id="carritoDropdown" class="carrito-dropdown">
-                <h3>Tu Carrito</h3>
-                <ul id="carritoLista" class="carrito-lista">
-                    <li class="carrito-item">
-                        <img src="Imagenes/Pizza 2.jpg" alt="">
-                        <div class="carrito-info">
-                            <p></p>
-                            <span></span>
-                        </div>
-                        <div class="acciones">
-                            <button class="menos"><i class="fa-solid fa-circle-minus"></i></button>
-                            <span class="cantidad">1</span>
-                            <button class="mas"><i class="fa-solid fa-circle-plus"></i></button>
-                            <button class="eliminar">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-                <div class="carrito-total">
-                    <p>Total: 0$</p>
-                </div>
-                <div class="carrito-acciones">
-                    <button class="seguir">Seguir comprando</button>
-                    <button class="checkout">Finalizar compra</button>
-                </div>
+            <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
+      <div id="carritoDropdown" class="carrito-dropdown">
+        <h3>Tu Carrito</h3>
+        <ul id="carritoLista" class="carrito-lista">
+          <li class="carrito-item">
+            <img src="Imagenes/Pizza 2.jpg " alt="">
+            <div class="carrito-info">
+              <p></p>
+              <span></span>
             </div>
-
+            <div class="acciones">
+              <button class="menos"><i class="fa-solid fa-circle-minus"></i></button>
+              <span class="cantidad">1</span>
+              <button class="mas"><i class="fa-solid fa-circle-plus"></i></button>
+              <button class="eliminar">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </li>
+        </ul>
+        <div class="carrito-total">
+          <p>Total: 0$</p>
+        </div>
+        <div class="carrito-acciones">
+          <button class="seguir">Seguir comprando</button>
+          <button class="checkout">Finalizar compra</button>
+        </div>
+      </div>
             <!-- Botón menú solo icono -->
-            <button id="btnMenuLateral" onclick="abrirMenu()">
-                <i class="bi bi-justify"></i>
-            </button>
+      <button id="btnMenuLateral" onclick="abrirMenu()">
+        <i class="bi bi-justify"></i>
+      </button>
 
-            <!-- Overlay -->
-            <div id="menuOverlay"></div>
+      <!-- Overlay -->
+      <div id="menuOverlay"></div>
 
             <!-- MENU LATERAL -->
             <div id="sideMenu">
@@ -148,7 +145,7 @@
     </div>
 
     <div class="card" data-category="pizza">
-        <img src="imagenes/Menu/PizzaHawaiiana.jpg" alt="Pizza Hawaiana">
+        <img src="imagenes/Menu/PizzaHawi.jpg" alt="Pizza Hawaiana">
         <div class="card-content">
             <h3>Pizza Hawaiana</h3>
             <p>Jamon, piña</p>
@@ -197,6 +194,16 @@
         <button class="btn-add" onclick="openSizeModal('Pizza Alemana', 14000, 29000, 47500)">Añadir</button>
     </div>
 
+    <div class="card" data-category="pizza">
+        <img src="imagenes/Menu/PizzaMex.jpg" alt="Pizza Mexicana">
+        <div class="card-content">
+            <h3>Pizza Mexicana</h3>
+            <p>Jamon, tomate, chorizo, maiz, carne molida</p>
+            <span>Desde $15.000</span>
+        </div>
+        <button class="btn-add" onclick="openSizeModal('Pizza Mexicana', 15000, 29000, 47500)">Añadir</button>
+    </div>
+
 
     <!-- PASTAS -->
     <div class="card" data-category="pasta">
@@ -240,7 +247,7 @@
     </div>
 
     <div class="card" data-category="pasta">
-        <img src="imagenes/Menu/PastaOlio.jpg" alt="Olio con Camarones">
+        <img src="imagenes/Menu/PastaOlio.jpeg" alt="Olio con Camarones">
         <h3>Olio con Camarones y Champiñones</h3>
         <p>Ají especial de la casa</p>
         <span>$24.000</span>
@@ -257,7 +264,7 @@
 
     <!-- LASAGNAS Y HAMBURGUESA -->
     <div class="card" data-category="lasagna">
-        <img src="imagenes/Menu  src="imagenes/Menu/LasanaPollo.jpg" alt="Lasaña de Pollo">
+        <img src="imagenes/Menu/LasanaPollo.jpg alt="Lasaña de Pollo">
         <h3>Lasaña de Pollo</h3>
         <p>3 capas de pasta y pollo con bechamel y gratinado</p>
         <span>$19.000</span>
@@ -374,7 +381,7 @@
         </div>
     </div>
 
-    <!-- MODAL: REGISTRO -->
+   <!-- MODAL: REGISTRO -->
     <div id="registerModal" class="modal"> <!-- Contenedor del modal de registro -->
         <div class="modal-content">
             <span class="close" onclick="closeModal('registerModal')">&times;</span> <!-- Botón para cerrar -->
@@ -427,7 +434,7 @@ const searchInput = document.getElementById('search');
 const filters = document.querySelectorAll('.filter');
 const cards = document.querySelectorAll('.card');
 
-// FILTROS (sin cambios, funciona perfecto)
+// FILTROS
 filters.forEach(filter => {
     filter.addEventListener('click', () => {
         filters.forEach(f => f.classList.remove('active'));
@@ -445,7 +452,7 @@ filters.forEach(filter => {
     });
 });
 
-// BUSCADOR CORREGIDO (esto es lo que necesitabas)
+// BUSCADOR 
 searchInput.addEventListener('input', () => {
     const term = searchInput.value.toLowerCase().trim();
 
@@ -461,7 +468,7 @@ searchInput.addEventListener('input', () => {
     });
 });
 
-// Activar "Todas" al cargar
+// Activar Todas al cargar
 document.querySelector('.filter[data-category="all"]').click();
 
 </script>
@@ -504,7 +511,7 @@ document.querySelectorAll('.size-option').forEach(btn => {
         const price = prices[size === 'Pequeña' ? 'small' : size === 'Mediana' ? 'medium' : 'large'];
         const nombreFinal = `${currentPizza} - ${size}`;
 
-        // ← Ahora sí agrega al carrito real con el precio correcto
+        
         agregarDesdeModal(nombreFinal, price);
 
         closeModal();

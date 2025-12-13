@@ -10,6 +10,7 @@ function switchModal(current, target) {
     openModal(target);
 }
 
+
 window.onclick = function (event) {
     const modals = ['loginModal', 'registerModal', 'recoverModal'];
     modals.forEach(id => {

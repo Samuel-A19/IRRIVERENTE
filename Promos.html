@@ -9,10 +9,10 @@
     <title>Irriverente Pizza & Pasta</title> <!-- Título de la pestaña del navegador -->
 
     <!-- Enlace a la hoja de estilos CSS personalizada -->
-    <link rel="stylesheet" href="Css/Promos.css" />
-    <link rel="stylesheet" href="Css/PiePagina.css" />
     <link rel="stylesheet" href="Css/Encabezado.css" />
     <link rel="stylesheet" href="Css/Fondos.css" />
+    <link rel="stylesheet" href="Css/PiePagina.css" />
+    <link rel="stylesheet" href="Css/Promos.css" />
     <link rel="stylesheet" href="Css/Carrito.css" />
     <link rel="stylesheet" href="Css/Modales.css" />
 
@@ -52,34 +52,34 @@
             <a href="Siguepedido.html">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
             <a href="Acercanosotros.html">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
             <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
-            <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
-            <div id="carritoDropdown" class="carrito-dropdown">
-                <h3>Tu Carrito</h3>
-                <ul id="carritoLista" class="carrito-lista">
-                    <li class="carrito-item">
-                        <img src="Imagenes/Pizza 2.jpg" alt="">
-                        <div class="carrito-info">
-                            <p></p>
-                            <span></span>
-                        </div>
-                        <div class="acciones">
-                            <button class="menos"><i class="fa-solid fa-circle-minus"></i></button>
-                            <span class="cantidad">1</span>
-                            <button class="mas"><i class="fa-solid fa-circle-plus"></i></button>
-                            <button class="eliminar">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-                <div class="carrito-total">
-                    <p>Total: 0$</p>
-                </div>
-                <div class="carrito-acciones">
-                    <button class="seguir">Seguir comprando</button>
-                    <button class="checkout">Finalizar compra</button>
-                </div>
+           <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
+      <div id="carritoDropdown" class="carrito-dropdown">
+        <h3>Tu Carrito</h3>
+        <ul id="carritoLista" class="carrito-lista">
+          <li class="carrito-item">
+            <img src="Imagenes/Pizza 2.jpg " alt="">
+            <div class="carrito-info">
+              <p></p>
+              <span></span>
             </div>
+            <div class="acciones">
+              <button class="menos"><i class="fa-solid fa-circle-minus"></i></button>
+              <span class="cantidad">1</span>
+              <button class="mas"><i class="fa-solid fa-circle-plus"></i></button>
+              <button class="eliminar">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </li>
+        </ul>
+        <div class="carrito-total">
+          <p>Total: 0$</p>
+        </div>
+        <div class="carrito-acciones">
+          <button class="seguir">Seguir comprando</button>
+          <button class="checkout">Finalizar compra</button>
+        </div>
+      </div>
 
             <!-- Botón menú solo icono -->
             <button id="btnMenuLateral" onclick="abrirMenu()">

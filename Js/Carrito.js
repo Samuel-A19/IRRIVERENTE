@@ -143,17 +143,3 @@ document.addEventListener("DOMContentLoaded", () => {
     actualizarCarrito();
 });
 
-// ====== ESTO ES LO ÚNICO QUE TE FALTA (agrégalo al final de Carrito.js) ======
-window.agregarDesdeModal = function(nombreCompleto, precio) {
-    const existente = carrito.find(item => item.nombre === nombreCompleto);
-    if (existente) {
-        existente.cantidad++;
-    } else {
-        carrito.push({
-            nombre: nombreCompleto,
-            precio: precio,
-            cantidad: 1
-        });
-    }
-    actualizarCarrito();  // ← esta función ya la tienes tú
-};
