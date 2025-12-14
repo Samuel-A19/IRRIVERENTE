@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const btnCarrito = document.getElementById("btnCarrito");
     const carritoDropdown = document.getElementById("carritoDropdown");
-    const contadorCarrito = document.getElementById("contadorCarrito");  // ← este es tu contador
+    const contadorCarrito = document.getElementById("contadorCarrito");  // ← este es el contador
     const carritoLista = document.getElementById("carritoLista");
     const totalTexto = document.querySelector(".carrito-total p");
     const botonesAñadir = document.querySelectorAll(".btn-add, .btn-promo");
@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
             total += item.precio * item.cantidad;
         });
 
-        // ← AQUÍ ESTÁ EL CONTADOR QUE QUERÍAS
         if (contadorCarrito) {
             contadorCarrito.textContent = contador;
             contadorCarrito.style.display = contador > 0 ? "inline-block" : "none";
@@ -57,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // TU DROPDOWN DEL CARRITO (sin cambios)
+    // TU DROPDOWN DEL CARRITO 
     if (btnCarrito && carritoDropdown) {
         btnCarrito.addEventListener("click", (e) => {
             e.stopPropagation();
@@ -72,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // PRODUCTOS NORMALES (pastas, bebidas, etc) → siguen funcionando igual
+    // PRODUCTOS NORMALES (pastas, bebidas, etc) 
     botonesAñadir.forEach((btn) => {
         btn.addEventListener("click", () => {
             // Si el botón abre el modal de tamaño → no hacemos nada aquí
@@ -81,7 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const container = btn.closest(".card, .promo");
             if (!container) return;
 
-            const nombre = container.querySelector("h3")?.textContent.trim();
+            const nombre = container.querySelector("h2, h3")?.textContent.trim();
+            
             const precio = parsePrecio(container.querySelector("span")?.textContent);
             const imagen = container.querySelector("img")?.src;
 
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ACCIONES DENTRO DEL CARRITO (+ / - / eliminar)
    if (carritoLista) {
     carritoLista.addEventListener("click", (e) => {
-        e.stopPropagation();   // ← ESTA ES LA LÍNEA QUE NECESITAS (evita que se cierre el carrito)
+        e.stopPropagation();   // ← (evita que se cierre el carrito)
 
         const btn = e.target.closest("button");
         if (!btn) return;
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ← FUNCIÓN GLOBAL PARA EL MODAL DE TAMAÑO (esto es lo ÚNICO que agregué)
+    // ← FUNCIÓN GLOBAL PARA EL MODAL DE TAMAÑO 
     window.agregarDesdeModal = (nombreCompleto, precio) => {
         const existing = carrito.find(i => i.nombre === nombreCompleto);
         if (existing) {

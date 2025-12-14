@@ -1,6 +1,7 @@
 /* ========================================
    PROMOS
-======================================= */
+======================================== */
+
 .promo-contenedor {
     display: flex;
     flex-wrap: wrap;
@@ -9,53 +10,101 @@
     padding: 1rem;
 }
 
+/* TARJETA PROMO */
 .promo {
-    border: 1px solid #ccc;
+    position: relative;
+    border: 1px solid #fff; /* 👈 BORDE BLANCO */
     border-radius: 10px;
     padding: 1rem;
     max-width: 280px;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #000;
+    color: #fff;
+
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
+/* ELEVACIÓN */
+.promo:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.7);
+}
+
+/* BORDE NARANJA EN HOVER (SIN QUITAR EL BLANCO) */
+.promo::after {
+    content: "";
+    position: absolute;
+    inset: -2px; /* sobresale sobre el borde blanco */
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: border 0.3s ease;
+    pointer-events: none;
+}
+
+.promo:hover::after {
+    border-color: #ff6a00;
+}
+
+/* IMAGEN */
 .promo img {
     width: 100%;
+    height: 230px;
+    object-fit: cover;
     border-radius: 10px;
+    transition: transform 0.3s ease;
 }
 
+/* ZOOM IMAGEN */
+.promo:hover img {
+    transform: scale(1.04);
+}
+
+/* TITULO SECCIÓN */
 .promos h1 {
     font-size: 24px;
     margin-bottom: 15px;
     margin-top: 20px;
     text-align: center;
+    color: #fff;
 }
 
+/* BOTÓN */
 .btn-promo {
     margin-top: 10px;
     padding: 8px 15px;
     background-color: #228b22;
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.3s ease;
 }
 
 .btn-promo:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* ========================================
    RESPONSIVIDAD PROMOS
-======================================= */
+======================================== */
 
-/* MEDIA QUERIES PARA TABLETS */
+/* TABLETS */
 @media (min-width: 768px) {
     .promo-contenedor {
         gap: 2rem;
         padding: 2rem;
+    }
+
+    .promo img {
+        height: 260px;
     }
 
     .promos h1 {
@@ -69,8 +118,12 @@
     }
 }
 
-/* MEDIA QUERIES PARA DESKTOPS */
+/* DESKTOP */
 @media (min-width: 1024px) {
+    .promo img {
+        height: 280px;
+    }
+
     .promos h1 {
         font-size: 55px;
         margin-top: 105px;
