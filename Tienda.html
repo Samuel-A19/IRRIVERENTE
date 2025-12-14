@@ -100,45 +100,32 @@
 
         </nav>
     </header>
-
-    <!-- Contenido principal -->
-    <main>
-        <div class="contenedor-tienda">
-
-            <!-- Columna izquierda: formulario -->
-            <div class="columna izquierda">
-                <div class="pedido-formulario">
-                    <h2>¡Ordena y recoge en tienda!</h2>
-                    <form>
-                        <label for="nombre">Nombre completo</label>
-                        <input type="text" id="nombre" placeholder="Escribe tu nombre" required>
-
-                        <label for="telefono">Teléfono</label>
-                        <input type="tel" id="telefono" placeholder="Ej: 3228651543" required>
-
-
-
-                        <button type="submit" class="btn-submit">Confirmar pedido</button>
-                    </form>
-                </div>
+    
+    <body>
+    <div class="contenedor-tienda">
+    <div class="pedido-formulario">
+        <h2>¡Ordena y recoge en tienda!</h2>
+        <p class="sub-texto">Haz tu pedido desde la web y recoge en la comodidad de nuestra tienda.</p>
+        <form id="form-pedido-tienda" novalidate>
+            <div class="campo">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre completo" required>
+                <div class="error-msg" id="err-nombre">Por favor ingresa tu nombre completo.</div>
             </div>
 
-            <!-- Columna derecha: resumen -->
-            <div class="columna derecha">
-                <div class="resumen-pedido">
-                    <h2>Resumen del pedido</h2>
-                    <ul>
-                        <li>Pizza Hawaiana - $35.000</li>
-                        <li>Lasaña - $25.000</li>
-                    </ul>
-                    <p><strong>Subtotal:</strong> $60.000</p>
-                    <p><strong>Total:</strong> $60.000</p>
-                    <button class="btn-pagar">Pagar en tienda</button>
-                </div>
+            <div class="campo">
+                <label for="telefono">Teléfono de contacto</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono" required pattern="^\d{7,15}$">
+                <div class="error-msg" id="err-telefono">Por favor ingresa un número válido (7-15 dígitos).</div>
             </div>
 
-        </div>
-    </main>
+            <button type="submit" id="btnContinuar" class="btn-confirmar">CONTINUAR</button>
+        </form>
+    </div>
+</div>
+</body>
+
+<script src="Js/Tienda.js"></script>
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->

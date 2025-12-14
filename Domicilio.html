@@ -31,7 +31,6 @@
 
     <!-- Fuente "Roboto" desde Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body> <!-- Comienza el contenido visible en el navegador -->
@@ -105,39 +104,52 @@
 
         <!-- Columna izquierda: Formulario -->
         <div class="columna izquierda">
-            <div class="pedido-formulario">
-                <h2>¡Ordena en línea y recibe en tu domicilio!</h2>
-                <p class="sub-texto">Haz tu pedido desde la web y disfruta en la comodidad de tu casa.</p>
-                <form id="form-pedido-domicilio">
-                    <label for="nombre">Nombre completo</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre completo" required>
-                    <div class="error-msg" id="err-nombre"> Campo obligatorio</div>
-                    <label for="telefono">Teléfono de contacto</label>
-                    <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono" required>
-                    <div class="error-msg" id="err-telefono">Campo obligatorio</div>
-                    <label for="email">Correo Electrónico</label>
-                    <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required>
-                    <div class="error-msg" id="err-email"> Campo obligatorio</div>
-                    <label for="direccion">Dirección completa</label>
-                    <input type="text" id="direccion" name="direccion" placeholder="Escribe tu dirección completa"
-                        required>
-                    <div class="error-msg" id="err-direccion"> Campo obligatorio</div>
-                    <label for="referencias">Referencias de ubicación</label>
-                    <input type="text" id="referencias" name="referencias"
-                        placeholder="Opcional, indica puntos cercanos">
-
-                    <!-- botón: tiene id para que el script lo encuentre -->
-                    <a href="menu.html" id="btnContinuar" class="btn-continuar">CONTINUAR</a>
-                </form>
-
+    <div class="pedido-formulario">
+        <h2>¡Ordena en línea y recibe en tu domicilio!</h2>
+        <p class="sub-texto">Haz tu pedido desde la web y disfruta en la comodidad de tu casa.</p>
+        <form id="form-pedido-domicilio">
+            
+            <div class="campo">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre completo" required>
+                <div class="error-msg" id="err-nombre"></div>
             </div>
-        </div>
 
+            <div class="campo">
+                <label for="telefono">Teléfono de contacto</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono" required>
+                <div class="error-msg" id="err-telefono"></div>
+            </div>
+
+            <div class="campo">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required>
+                <div class="error-msg" id="err-email"></div>
+            </div>
+
+            <div class="campo">
+                <label for="direccion">Dirección completa</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Escribe tu dirección completa" required>
+                <div class="error-msg" id="err-direccion"></div>
+            </div>
+
+            <div class="campo">
+                <label for="referencias">Referencias de ubicación</label>
+                <input type="text" id="referencias" name="referencias" placeholder="Opcional, indica puntos cercanos">
+                <div class="error-msg" id="err-referencias"></div>
+            </div>
+
+            <button type="submit" id="btnContinuar" class="btn-continuar">CONTINUAR</button>
+        </form>
+    </div>
+</div>
 
 
     </div>
     </div>
     </div>
+
+    <script src="Js/domicilio.js"></script>
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->
@@ -163,86 +175,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const btn = document.getElementById("btnContinuar");
-
-            // campos a validar
-            const campos = [
-                { id: "nombre", err: "err-nombre", type: "text" },
-                { id: "telefono", err: "err-telefono", type: "text" },
-                { id: "email", err: "err-email", type: "email" },
-                { id: "direccion", err: "err-direccion", type: "text" }
-            ];
-
-            // Ocultar mensajes al teclear y quitar clase de error
-            campos.forEach(c => {
-                const input = document.getElementById(c.id);
-                const msg = document.getElementById(c.err);
-                if (!input || !msg) return;
-                input.addEventListener("input", () => {
-                    msg.style.display = "none";
-                    input.classList.remove("input-error");
-                });
-            });
-
-            if (!btn) return;
-
-            btn.addEventListener("click", function (e) {
-                // preventDefault para evitar navegación instantánea
-                e.preventDefault();
-
-                let valido = true;
-
-                campos.forEach(c => {
-                    const input = document.getElementById(c.id);
-                    const msg = document.getElementById(c.err);
-                    if (!input || !msg) return;
-
-                    const val = input.value.trim();
-
-                    // validación simple por tipo
-                    if (c.type === "email") {
-                        // verificar formato básico de email
-                        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                        if (val === "" || !re.test(val)) {
-                            msg.textContent = val === "" ? " Campo obligatorio" : "Ingresa un correo válido";
-                            msg.style.display = "block";
-                            input.classList.add("input-error");
-                            valido = false;
-                            return;
-                        } else {
-                            msg.style.display = "none";
-                            input.classList.remove("input-error");
-                        }
-                    } else {
-                        if (val === "") {
-                            msg.style.display = "block";
-                            input.classList.add("input-error");
-                            valido = false;
-                        } else {
-                            msg.style.display = "none";
-                            input.classList.remove("input-error");
-                        }
-                    }
-                });
-
-                // si todo OK redirige (simula click en el <a>)
-                if (valido) {
-                    window.location.href = btn.getAttribute("href");
-                } else {
-                    // opcional: desplazar un poco para que el usuario vea el primer error
-                    const primerError = document.querySelector(".error-msg[style*='display: block']");
-                    if (primerError) {
-                        primerError.scrollIntoView({ behavior: "smooth", block: "center" });
-                    }
-                }
-            });
-        });
-    </script>
-
-
 </body>
 
 </html>

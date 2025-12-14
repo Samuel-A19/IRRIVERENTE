@@ -218,7 +218,7 @@ body {
 }
 
 /* ========================================
-   BOTÓN AÑADIR MÁS PEQUEÑO Y ELEGANTE
+   BOTÓN AÑADIR 
 ======================================== */
 .card button {
     margin: 0 18px 18px !important;
@@ -297,4 +297,5 @@ body {
     background: #f25c2a;
     transform: translateY(-3px);
 }
+
 

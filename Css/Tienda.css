@@ -1,31 +1,30 @@
-/* ========================================
-   2. FORMULARIO DE PEDIDO PARA TIENDA (TIENDA.HTML)
-======================================= */
+/* Asegurar que el body ocupe toda la altura */
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #000;
+    font-family: 'Roboto', sans-serif;
+}
 
-/* --- Estilos Base del Layout (Compartidos con Domicilio) --- */
+/* Contenedor centrado */
 .contenedor-tienda {
     display: flex;
-    width: 100%;
-    min-height: calc(100vh - 160px);
-    margin-top: 10px;
-    margin-bottom: 10px;
+    justify-content: center; /* centra horizontal */
+    align-items: center;     /* centra vertical */
+    height: 100%;            /* ocupa toda la pantalla */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.columna {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-}
-
+/* Formulario estilo domicilio */
 .pedido-formulario {
     background: #222;
     padding: 40px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 420px;
+    border-radius: 15px;
     color: white;
+    max-width: 500px;
+    width: 100%;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
 }
 
@@ -63,35 +62,7 @@
     color: #ccc;
 }
 
-.resumen-pedido {
-    background: #333;
-    padding: 30px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 380px;
-    color: white;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-}
-
-.resumen-pedido h3 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #f16529;
-}
-
-.resumen-linea {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-}
-
-.total {
-    font-weight: bold;
-    font-size: 18px;
-    border-top: 1px solid #888;
-    padding-top: 10px;
-}
-
+/* Botón igual que domicilio */
 .btn-confirmar {
     width: 100%;
     padding: 14px;
@@ -103,90 +74,29 @@
     cursor: pointer;
     font-size: 16px;
     transition: background 0.3s;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .btn-confirmar:hover {
     background: #e9541f;
 }
 
-/* --- Estilos Específicos para Tienda (Modifican el base) --- */
-.tienda-body {
-    background: #000;
-    color: white;
+/* Mensajes de error */
+.error-msg {
+    color: #f16529;
+    font-size: 13px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: none;
 }
 
-.contenedor-tienda .columna {
-    background: transparent;
+.error-msg {
+    color: #f16529;
+    font-size: 13px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: none; /* Oculto por defecto */
 }
-
-.contenedor-tienda .pedido-formulario {
-    background: #222;
-    padding: 30px;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 400px;
-}
-
-.contenedor-tienda .pedido-formulario h2 {
-    margin-bottom: 20px;
-    color: #fff;
-}
-
-.contenedor-tienda .pedido-formulario input,
-.contenedor-tienda .pedido-formulario select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 6px;
-}
-
-.contenedor-tienda .btn-submit {
-    width: 100%;
-    background: #f16529;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.contenedor-tienda .resumen-pedido {
-    background: #333;
-    padding: 30px;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 400px;
-    color: #fff;
-}
-
-.contenedor-tienda .btn-pagar {
-    width: 100%;
-    background: #28a745;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-/* --- Responsividad Pedido en Tienda --- */
-@media (max-width: 900px) {
-    .contenedor-tienda {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .columna {
-        width: 100%;
-        padding: 20px;
-    }
-
-    .pedido-formulario,
-    .resumen-pedido {
-        max-width: 100%;
-    }
+input.error {
+    border: 1px solid #f16529;
 }

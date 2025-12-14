@@ -2,68 +2,38 @@
    PÁGINA DE PEDIDO A DOMICILIO
 ======================================= */
 
-/* --- Formulario simple (puede usarse en otra página) --- */
-.pedido-domicilio {
-    background: #111;
-    padding: 30px;
-    margin: 20px auto;
-    border-radius: 15px;
-    max-width: 600px;
-    color: white;
-    text-align: left;
+/* --- Layout principal de la página (Formulario) --- */
+.domicilio-body {
+    background: #000;
 }
 
-.pedido-domicilio h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.pedido-domicilio label {
-    display: block;
-    margin: 10px 0 5px;
-}
-
-.pedido-domicilio input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 6px;
-    background: #f16529;
-    color: white;
-}
-
-.pedido-domicilio input::placeholder {
-    color: #fff;
-}
-
-/* --- Layout principal de la página (Formulario + Resumen) --- */
 .contenedor-domicilio {
-    display: flex;
-    width: 100%;
-    min-height: calc(100vh - 160px);
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-/* Mitad izquierda: Formulario */
-.columna.izquierda {
-    width: 50%;
-    background: #111;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Formulario */
+.columna.izquierda {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pedido-formulario {
     background: #222;
     padding: 40px;
-    border-radius: 10px;
+    border-radius: 15px;
     width: 100%;
-    max-width: 420px;
+    box-sizing: border-box;
     color: white;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.6);
 }
 
 .pedido-formulario h2 {
@@ -79,67 +49,43 @@
     color: #bbb;
 }
 
-.pedido-formulario label {
-    display: block;
-    margin: 10px 0 5px;
-    font-weight: bold;
+.campo {
+    margin-bottom: 20px;
 }
 
-.pedido-formulario input {
+.campo label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.campo input {
     width: 100%;
     padding: 12px;
-    margin-bottom: 15px;
-    border: none;
     border-radius: 6px;
+    border: none;
     background: #444;
-    color: white;
+    color: #fff;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
-.pedido-formulario input::placeholder {
+.campo input::placeholder {
     color: #ccc;
 }
 
-/* Mitad derecha: Resumen del Pedido */
-.columna.derecha {
-    width: 50%;
-    background: #181818;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
+.error-msg {
+    color: #e9541f;
+    font-size: 13px;
+    margin-top: 5px;
+    display: none; /* oculto por defecto */
 }
 
-.resumen-pedido {
-    background: #333;
-    padding: 30px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 380px;
-    color: white;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+.input-error {
+    border: 2px solid #e9541f;
 }
 
-.resumen-pedido h3 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #f16529;
-}
-
-.resumen-linea {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-}
-
-.total {
-    font-weight: bold;
-    font-size: 18px;
-    border-top: 1px solid #888;
-    padding-top: 10px;
-}
-
-.btn-confirmar {
+.btn-continuar {
     width: 100%;
     padding: 14px;
     background: #218838;
@@ -150,54 +96,15 @@
     cursor: pointer;
     font-size: 16px;
     transition: background 0.3s;
-    margin-top: 15px;
 }
 
-.btn-confirmar:hover {
+.btn-continuar:hover {
     background: #e9541f;
 }
 
-/* --- Estilos Específicos para el Contexto de Domicilio --- */
-.domicilio-body {
-    background: #000;
-}
-
-.domicilio-body .contenedor-domicilio {
-    background: #000;
-}
-
-.domicilio-body .columna.izquierda,
-.domicilio-body .columna.derecha {
-    background: #000;
-}
-
-.domicilio-body .pedido-formulario {
-    background: #222;
-    color: white;
-}
-
-.domicilio-body .resumen-pedido {
-    background: #333;
-    color: white;
-}
-
-/* --- Responsividad de la Página de Domicilio --- */
-
-/* En pantallas más pequeñas (móviles) */
+/* --- Responsividad --- */
 @media (max-width: 900px) {
-    .contenedor-domicilio {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .columna.izquierda,
-    .columna.derecha {
-        width: 100%;
-        padding: 20px;
-    }
-
-    .pedido-formulario,
-    .resumen-pedido {
-        max-width: 100%;
+    .pedido-formulario {
+        padding: 30px;
     }
 }

@@ -264,7 +264,7 @@
 
     <!-- LASAGNAS Y HAMBURGUESA -->
     <div class="card" data-category="lasagna">
-        <img src="imagenes/Menu/LasanaPollo.jpg alt="Lasaña de Pollo">
+        <img src="imagenes/Menu/LasanaPollo.jpg" alt="Lasaña de Pollo">
         <h3>Lasaña de Pollo</h3>
         <p>3 capas de pasta y pollo con bechamel y gratinado</p>
         <span>$19.000</span>
@@ -396,10 +396,13 @@
     </div>
 
     <!-- ENLACE AL SCRIPT EXTERNO CON FUNCIONES Y ANIMACIONES -->
+    
     <script src="Js/Auth.js"></script>
     <script src="Js/Carrito.js"></script>
+    <script src="Js/Menu.js"></script>
     <script src="Js/Modales.js"></script>
     <script src="Js/Menulateral.js"></script>
+    
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->
@@ -426,54 +429,8 @@
         </div>
     </footer>
 
-    
-// ==================== BUSCADOR + FILTROS FUNCIONALES ====================
+    // MODAL DE TAMAÑO 
 
-<script>
-const searchInput = document.getElementById('search');
-const filters = document.querySelectorAll('.filter');
-const cards = document.querySelectorAll('.card');
-
-// FILTROS
-filters.forEach(filter => {
-    filter.addEventListener('click', () => {
-        filters.forEach(f => f.classList.remove('active'));
-        filter.classList.add('active');
-
-        const category = filter.getAttribute('data-category');
-
-        cards.forEach(card => {
-            if (category === 'all' || card.dataset.category === category) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    });
-});
-
-// BUSCADOR 
-searchInput.addEventListener('input', () => {
-    const term = searchInput.value.toLowerCase().trim();
-
-    cards.forEach(card => {
-        // Busca en todo el texto de la tarjeta (título, ingredientes, precio, etc)
-        const textoCompleto = card.textContent.toLowerCase();
-
-        if (textoCompleto.includes(term)) {
-            card.style.display = 'flex';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-});
-
-// Activar Todas al cargar
-document.querySelector('.filter[data-category="all"]').click();
-
-</script>
-
-<!-- MODAL DE TAMAÑO -->
 <div id="sizeModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal()">×</span>
@@ -484,46 +441,5 @@ document.querySelector('.filter[data-category="all"]').click();
     </div>
 </div>
 
-<script>
-// Modal de tamaño para pizzas
-let currentPizza = '';
-let prices = { small: 0, medium: 0, large: 0 };
-
-function openSizeModal(name, small, medium, large) {
-    currentPizza = name;
-    prices = { small, medium, large };
-    
-    document.getElementById('modalTitle').textContent = name;
-    document.querySelector('#sizeSmall span').textContent = small.toLocaleString();
-    document.querySelector('#sizeMedium span').textContent = medium.toLocaleString();
-    document.querySelector('#sizeLarge span').textContent = large.toLocaleString();
-    
-    document.getElementById('sizeModal').style.display = 'block';
-}
-
-function closeModal() {
-    document.getElementById('sizeModal').style.display = 'none';
-}
-
-document.querySelectorAll('.size-option').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const size = this.textContent.split(' - ')[0].trim();
-        const price = prices[size === 'Pequeña' ? 'small' : size === 'Mediana' ? 'medium' : 'large'];
-        const nombreFinal = `${currentPizza} - ${size}`;
-
-        
-        agregarDesdeModal(nombreFinal, price);
-
-        closeModal();
-    });
-});
-
-// Cerrar al hacer clic fuera
-window.addEventListener('click', (e) => {
-    if (e.target === document.getElementById('sizeModal')) closeModal();
-});
-</script>
-
-</body>
-
+  </body>
 </html>
