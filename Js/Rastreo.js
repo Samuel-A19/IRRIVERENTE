@@ -1,8 +1,21 @@
 function iniciarRastreo() {
     const codigo = document.getElementById("codigoRastreo").value.trim();
-    if (codigo === "") return alert("Ingresa tu código de pedido.");
+
+    if (codigo === "") {
+        alert("Ingresa tu código de pedido.");
+        return;
+    }
+
+    const tracker = document.getElementById("tracker");
+    const statusBox = document.getElementById("statusBox");
+
+    if (tracker) tracker.style.display = "flex";
+    if (statusBox) statusBox.style.display = "block";
+
+
     trackOrder();
 }
+
 
 function trackOrder() {
     const steps = document.querySelectorAll(".progress-tracker .step");
@@ -17,7 +30,10 @@ function trackOrder() {
     ];
 
     let index = 0;
-    steps.forEach(s => s.classList.remove("completed", "active"));
+
+    steps.forEach(step => {
+        step.classList.remove("active", "completed");
+    });
 
     function avanzarEstado() {
         steps[index].classList.add("active");
@@ -28,7 +44,10 @@ function trackOrder() {
             steps[index].classList.remove("active");
             steps[index].classList.add("completed");
             index++;
-            if (index < steps.length) avanzarEstado();
+
+            if (index < steps.length) {
+                avanzarEstado();
+            }
         }, 3000);
     }
 
