@@ -4,6 +4,9 @@ function openModal(id) {
 }
 function closeModal(id) {
     document.getElementById(id).style.display = 'none';
+    if (id === "recoverModal") {
+        resetRecover();
+    }
 }
 function switchModal(current, target) {
     closeModal(current);

@@ -59,3 +59,159 @@
     font-size: 24px;
     cursor: pointer;
 }
+
+/* ========================================
+   MODAL RECUPERAR CONTRASEÑA 
+======================================= */
+
+#recoverModal .modal-content {
+    background-color: #1b1b1b;
+    /* un poco más oscuro */
+}
+
+#recoverModal h2 {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+#recoverModal p {
+    font-size: 14px;
+    color: #ccc;
+}
+
+#recoverModal p:last-child {
+    margin-top: -20px;
+    /* reduce la distancia del link de volver a iniciar sesion*/
+}
+
+/* ========================================
+   FIX ANCHO INPUT CORREO RECOVER
+======================================= */
+
+#recoverModal #stepEmail,
+#recoverModal #stepPassword {
+    width: 95%;
+}
+
+#recoverModal #stepEmail input,
+#recoverModal #stepPassword input {
+    width: 100%;
+}
+
+/* ========================================
+   CÓDIGO DE RECUPERACIÓN - 6 CUADROS
+======================================= */
+
+#recoverModal .code-inputs {
+    display: flex;
+    /* fuerza horizontal */
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#recoverModal .code-box {
+    width: 38px;
+    /* tamaño más pequeño */
+    height: 42px;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: 1px solid #444;
+    border-radius: 6px;
+}
+
+#recoverModal .code-box:focus {
+    outline: none;
+    border-color: #f16529;
+}
+
+/* ========================================
+   BOTONES PASO CÓDIGO
+======================================= */
+
+#recoverModal #stepCode button {
+    width: 95%;
+    margin: 8px auto 0;
+}
+
+/* Botón reenviar (más discreto) */
+#recoverModal .btn-resend {
+    background-color: transparent;
+    color: #f16529;
+    border: 1px solid #f16529;
+}
+
+#recoverModal .btn-resend:hover {
+    background-color: #f16529;
+    color: white;
+}
+
+/* ========================================
+   FIX DEFINITIVO BOTÓN ENVIAR CÓDIGO
+======================================= */
+
+#recoverModal #stepEmail {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#recoverModal #stepEmail .btn-modal {
+    width: 105%;
+    box-sizing: border-box;
+}
+
+/* ========================================
+   ESPACIO ENTRE BOTONES VERIFICAR / REENVIAR
+======================================= */
+
+#recoverModal #stepCode button+button {
+    margin-top: 12px;
+}
+
+/* ========================================
+   ESPACIO ENTRE CUADROS Y BOTONES
+======================================= */
+
+#recoverModal .code-inputs {
+    margin-bottom: 17px;
+}
+
+/* ========================================
+   IGUALAR BOTÓN REENVIAR A VERIFICAR
+======================================= */
+
+#recoverModal .btn-resend {
+    background-color: #f16529;
+    color: white;
+    border: none;
+}
+
+/* ========================================
+   AJUSTE LIBRE BOTÓN CAMBIAR CONTRASEÑA
+======================================= */
+
+#recoverModal #stepPassword {
+    width: 95%;
+    /* controla el ancho general */
+    margin-top: 10px;
+    /* espacio desde arriba */
+}
+
+#recoverModal #stepPassword input {
+    width: 100%;
+    margin-bottom: 12px;
+    /* espacio entre input y botón */
+}
+
+#recoverModal #stepPassword .btn-modal {
+    width: 105%;
+    margin-top: 0;
+    /* tú decides el espacio */
+    box-sizing: border-box;
+}
