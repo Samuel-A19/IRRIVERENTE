@@ -32,7 +32,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body> <!-- Comienza el contenido visible en el navegador -->
+<body class="pagina-pago">
+<!-- Comienza el contenido visible en el navegador -->
 
     <!-- ENCABEZADO PRINCIPAL -->
     <header class="main-header"> <!-- Contenedor del encabezado -->
@@ -100,7 +101,7 @@
     </header>
 
     <!-- Formulario -->
-    <div class="container">
+    <div class="container formulario-pago" id="bloqueFormulario">
         <h1>Método de pago</h1>
 
         <form id="paymentForm">
@@ -124,8 +125,7 @@
                 <label>Método de pago</label>
                 <div class="radios">
                     <label><input type="radio" name="paymentMethod" value="efectivo" checked> Efectivo</label>
-                    <label><input type="radio" name="paymentMethod" value="transferencia"> Transferencia
-                        bancaria</label>
+                    <label><input type="radio" name="paymentMethod" value="transferencia"> Transferencia</label>
                 </div>
             </div>
 
@@ -144,11 +144,25 @@
 
             <div class="row">
                 <div style="flex:1">
-                    <button id="submitBtn" class="btn" type="submit">Enviar pago</button>
-                    <button id="clearBtn" class="btn secondary" type="button">Limpiar</button>
+                    <button id="submitBtn" class="btn" type="submit">ENVIAR PAGO</button>
+                    <button id="clearBtn" class="btn secondary" type="button">LIMPIAR</button>
                 </div>
             </div>
         </form>
+        </div>
+
+       <div class="container resumen-entrega" id="bloqueEntrega">
+    <h3>Datos de entrega</h3>
+    <p><strong>Nombre:</strong> <span id="res-nombre"></span></p>
+    <p><strong>Teléfono:</strong> <span id="res-telefono"></span></p>
+    <p><strong>Correo:</strong> <span id="res-email"></span></p>
+    <p><strong>Dirección:</strong> <span id="res-direccion"></span></p>
+    <p><strong>Referencias:</strong> <span id="res-referencias"></span></p>
+</div>
+
+
+
+
 
     </div>
     <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank">
@@ -195,6 +209,7 @@
     </div>
 
     <script src="Animaciones.js"></script>
+    <script src="Js/Pago.js"></script>
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->

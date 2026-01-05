@@ -117,17 +117,17 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 
     // Botones de abajo
-    document.querySelector(".carrito-acciones .seguir")?.addEventListener("click", () => {
-        carritoDropdown.style.display = "none";
-    });
+document.querySelector(".carrito-acciones .checkout")?.addEventListener("click", () => {
+    if (carrito.length === 0) {
+        alert("Tu carrito está vacío");
+        return;
+    }
 
-    document.querySelector(".carrito-acciones .checkout")?.addEventListener("click", () => {
-        if (carrito.length > 0 && confirm("¿Finalizar compra?")) {
-            alert("¡Redirigiendo al pago!");
-            carrito = [];
-            actualizarCarrito();
-        }
-    });
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    window.location.href = "pago.html";
+});
+
+
 
     // ← FUNCIÓN GLOBAL PARA EL MODAL DE TAMAÑO 
     window.agregarDesdeModal = (nombreCompleto, precio) => {

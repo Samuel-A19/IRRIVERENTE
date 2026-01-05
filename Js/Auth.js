@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else alert(result.error);
 
         } catch (err) {
-            alert("Error de conexión");
+            
         }
     });
 

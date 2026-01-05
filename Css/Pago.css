@@ -1,12 +1,24 @@
 /* FORMULARIO */
+
 .container {
     max-width: 1100px;
     margin: 28px auto;
-    padding: 24px;
-    background: #0b0b0b;
-    border-radius: 8px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, .5)
+    padding: 40px;
+    background: #222; 
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, .6);
 }
+
+.container,
+form,
+label,
+input,
+select,
+textarea,
+button {
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
 
 h1 {
     font-size: 28px;
@@ -29,7 +41,7 @@ label {
 
 .row {
     display: flex;
-    gap: 12px
+    gap: 25px
 }
 
 .col {
@@ -40,23 +52,28 @@ input,
 select,
 textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border-radius: 6px;
-    border: 1px solid #222;
-    background: #111;
-    color: #eee
+    border: none;
+    background: #444; /* 🔥 igual que Domicilio */
+    color: #fff;
+    font-size: 14px;
+    box-sizing: border-box;
 }
 
+
 input::placeholder {
-    color: #888
+    color: #ccc;
 }
+
 
 input:focus,
 select:focus,
 textarea:focus {
-    border-color: #EF6A2B;
-    box-shadow: 0 0 0 4px rgba(239, 106, 43, .06)
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(241, 101, 41, 0.4);
 }
+
 
 textarea {
     min-height: 80px
@@ -85,18 +102,23 @@ textarea {
     padding: 10px 16px;
     border-radius: 6px;
     border: none;
-    background: #2ecc71;
+    background: #218838;
+    color: #ffffff; /* 👈 TEXTO BLANCO */
     font-weight: 700;
-    cursor: pointer
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .btn:hover {
-    background: #EF6A2B
+    background: #e9541f;
+    color: #ffffff; /* 👈 SE MANTIENE BLANCO */
 }
 
 .btn.secondary {
-    background: #444
+    background: #444;
+    color: #ffffff; /* 👈 TEXTO BLANCO */
 }
+
 
 /* RESULTADO */
 .summary {
@@ -106,6 +128,14 @@ textarea {
     padding: 12px;
     border-radius: 6px
 }
+
+.resumen-entrega h3 {
+    font-size: 28px;          /* más grande */
+    color: #f16529;           /* naranja de tu marca */
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
 
 /* RESPONSIVE */
 @media(max-width:800px) {
@@ -119,3 +149,40 @@ textarea {
         padding: 8px 0
     }
 }
+
+/* QUITAR RECUADRO / OUTLINE EN RADIOS */
+input[type="radio"]:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Al cargar la página */
+#bloqueEntrega {
+    display: none;
+}
+
+/* Espacio correcto debajo del header */
+.pagina-pago #bloqueEntrega {
+    margin-top: 175px; /* ajusta si tu header es más alto */
+}
+
+/* CONTENEDOR CENTRAL PARA DATOS DE ENTREGA */
+#bloqueEntrega {
+    display: none;              /* oculto hasta enviar pago */
+    position: relative;
+    max-width: 420px;
+    
+}
+
+.pagina-pago #bloqueEntrega {
+    position: relative;
+    top: -70px;   
+}
+
+
+
+
+
+
+
+

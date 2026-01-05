@@ -73,7 +73,8 @@
 
 /* BOTÓN */
 .btn-promo {
-    margin-top: 10px;
+    position: fixed;
+    margin-top: 12px;
     padding: 8px 15px;
     background-color: #228b22;
     color: #fff;

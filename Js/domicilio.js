@@ -52,10 +52,22 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (valido) {
-            // Redirige o envía el formulario
-            // window.location.href = btn.getAttribute("href"); // opcional
-            alert("Formulario válido, listo para enviar.");
-        } else {
+    // Guardar datos del cliente
+    const datosCliente = {
+    nombre: document.getElementById("nombre").value.trim(),
+    telefono: document.getElementById("telefono").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    direccion: document.getElementById("direccion").value.trim(),
+    referencias: document.getElementById("referencias").value.trim()
+};
+
+localStorage.setItem("datosCliente", JSON.stringify(datosCliente));
+
+// Redirige al menú o pago
+window.location.href = "Menu.html"; // o Pago.html según tu flujo
+
+}
+ else {
             // desplazar al primer error visible
             const primerError = document.querySelector(".error-msg[style*='display: block']");
             if (primerError) {
