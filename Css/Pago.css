@@ -179,6 +179,64 @@ input[type="radio"]:focus {
     top: -70px;   
 }
 
+.acciones-pago {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.acciones-pago .btn {
+    width: 100%;
+}
+
+#bloquePagoDigital {
+    text-align: center;
+}
+
+#qrPago {
+    border-radius: 12px;
+    background: #fff;
+    padding: 10px;
+}
+
+.resumen-pedido {
+    background: #1b1b1b;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 20px;
+    color: #fff;
+    box-shadow: 0 6px 15px rgba(0,0,0,.5);
+}
+
+.resumen-pedido h3 {
+    margin-top: 0;
+    color: #f16529;
+    text-align: center;
+}
+
+.resumen-seccion {
+    margin-bottom: 15px;
+}
+
+.resumen-pedido ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.resumen-pedido li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed #444;
+    padding: 6px 0;
+}
+
+.resumen-pedido hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 15px 0;
+}
 
 
 

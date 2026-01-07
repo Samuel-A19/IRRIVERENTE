@@ -2,8 +2,8 @@ const form = document.getElementById('form-pedido-tienda');
 const nombre = document.getElementById('nombre');
 const telefono = document.getElementById('telefono');
 
-form.addEventListener('submit', function(e) {
-    e.preventDefault(); // Evita enviar el formulario automáticamente
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
     let valid = true;
 
     // Validar nombre
@@ -23,10 +23,19 @@ form.addEventListener('submit', function(e) {
         hideError(telefono, 'err-telefono');
     }
 
-    // Si todo es válido, se puede enviar el formulario o hacer otra acción
+    // 👉 SI TODO ES VÁLIDO
     if (valid) {
-        alert('Formulario válido. Continuar con el pedido.');
-        form.reset(); // Opcional: limpia el formulario
+        // Guardar datos del cliente (modo tienda)
+        const datosCliente = {
+            nombre: nombre.value.trim(),
+            telefono: telefono.value.trim(),
+            tipoPedido: "tienda"
+        };
+
+        localStorage.setItem("datosCliente", JSON.stringify(datosCliente));
+
+        // Ir directamente al menú
+        window.location.href = "Menu.html";
     }
 });
 

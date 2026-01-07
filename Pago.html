@@ -158,9 +158,51 @@
     <p><strong>Correo:</strong> <span id="res-email"></span></p>
     <p><strong>Dirección:</strong> <span id="res-direccion"></span></p>
     <p><strong>Referencias:</strong> <span id="res-referencias"></span></p>
+    <p><strong>Medio de pago:</strong> <span id="res-metodo"></span></p>
+
+    <div id="bloquePagoDigital" class="container hidden">
+    <h3>Realiza tu pago</h3>
+
+    <p id="textoPago"></p>
+
+    <img id="qrPago" src="" alt="QR de pago" style="max-width:220px; margin:20px auto; display:block;">
+
+    <button id="btnYaPague" class="btn">YA PAGUÉ</button>
+</div>
+
+<div class="resumen-pedido" id="resumenPedido">
+    <h3>🧾 Resumen de tu pedido</h3>
+
+    <div class="resumen-seccion">
+        <strong>Productos:</strong>
+        <ul id="resumenProductos"></ul>
+    </div>
+
+    <div class="resumen-seccion">
+        <p><strong>Total:</strong> $<span id="resumenTotal">0</span></p>
+    </div>
+
+    <hr>
+
+    <div class="resumen-seccion">
+       <p><strong>Cliente:</strong> <span id="res2-nombre"></span></p>
+<p><strong>Teléfono:</strong> <span id="res2-telefono"></span></p>
+<p><strong>Dirección:</strong> <span id="res2-direccion"></span></p>
+<p><strong>Método de pago:</strong> <span id="res2-metodo"></span></p>
+
+    </div>
 </div>
 
 
+<div class="acciones-pago">
+    <button id="btnPagar" class="btn">
+        PAGAR AHORA
+    </button>
+
+    <button id="btnEditar" class="btn secondary">
+        EDITAR DATOS
+    </button>
+</div>
 
 
 

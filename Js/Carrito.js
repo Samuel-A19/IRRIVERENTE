@@ -1,17 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    /**************************************************
+     * FORMATO COP
+     **************************************************/
+    function formatoCOP(valor) {
+        return Number(valor).toLocaleString("es-CO", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 0
+        });
+    }
+
     const btnCarrito = document.getElementById("btnCarrito");
     const carritoDropdown = document.getElementById("carritoDropdown");
-    const contadorCarrito = document.getElementById("contadorCarrito");  // ← este es el contador
+    const contadorCarrito = document.getElementById("contadorCarrito");
     const carritoLista = document.getElementById("carritoLista");
     const totalTexto = document.querySelector(".carrito-total p");
     const botonesAñadir = document.querySelectorAll(".btn-add, .btn-promo");
 
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    const parsePrecio = (str) => parseFloat((str || "").replace(/[^\d.]/g, "")) || 0;
-    const formatPrecio = (n) => n.toLocaleString();
+    const parsePrecio = (str) =>
+        Number((str || "").replace(/[^\d]/g, "")) || 0;
 
+    /**************************************************
+     * ACTUALIZAR CARRITO
+     **************************************************/
     const actualizarCarrito = () => {
         if (carritoLista) carritoLista.innerHTML = "";
 
@@ -24,17 +38,18 @@ document.addEventListener("DOMContentLoaded", () => {
             li.dataset.nombre = item.nombre;
 
             li.innerHTML = `
-      ${item.imagen ? `<img src="${item.imagen}">` : ""}
-      <div class="carrito-info">
-        <p>${item.nombre}</p>
-        <span>$${formatPrecio(item.precio)}</span>
-      </div>
-      <div class="acciones">
-        <button class="menos"><i class="fa-solid fa-circle-minus"></i></button>
-        <span class="cantidad">${item.cantidad}</span>
-        <button class="mas"><i class="fa-solid fa-circle-plus"></i></button>
-        <button class="eliminar"><i class="fa-solid fa-trash"></i></button>
-      </div>`;
+                ${item.imagen ? `<img src="${item.imagen}">` : ""}
+                <div class="carrito-info">
+                    <p>${item.nombre}</p>
+                    <span>${formatoCOP(item.precio)}</span>
+                </div>
+                <div class="acciones">
+                    <button class="menos"><i class="fa-solid fa-circle-minus"></i></button>
+                    <span class="cantidad">${item.cantidad}</span>
+                    <button class="mas"><i class="fa-solid fa-circle-plus"></i></button>
+                    <button class="eliminar"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `;
 
             carritoLista.appendChild(li);
 
@@ -47,16 +62,21 @@ document.addEventListener("DOMContentLoaded", () => {
             contadorCarrito.style.display = contador > 0 ? "inline-block" : "none";
         }
 
-        if (totalTexto) totalTexto.textContent = `Total: $${formatPrecio(total)}`;
+        if (totalTexto) {
+            totalTexto.textContent = `Total: ${formatoCOP(total)}`;
+        }
 
-        localStorage.setItem('carrito', JSON.stringify(carrito));
+        localStorage.setItem("carrito", JSON.stringify(carrito));
 
         if (carrito.length === 0 && carritoLista) {
-            carritoLista.innerHTML = '<p style="text-align:center;padding:20px;">El carrito está vacío</p>';
+            carritoLista.innerHTML =
+                '<p style="text-align:center;padding:20px;">El carrito está vacío</p>';
         }
     };
 
-    // TU DROPDOWN DEL CARRITO 
+    /**************************************************
+     * DROPDOWN CARRITO
+     **************************************************/
     if (btnCarrito && carritoDropdown) {
         btnCarrito.addEventListener("click", (e) => {
             e.stopPropagation();
@@ -71,17 +91,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // PRODUCTOS NORMALES (pastas, bebidas, etc) 
+    /**************************************************
+     * AÑADIR PRODUCTOS NORMALES
+     **************************************************/
     botonesAñadir.forEach((btn) => {
         btn.addEventListener("click", () => {
-            // Si el botón abre el modal de tamaño → no hacemos nada aquí
             if (btn.getAttribute("onclick")?.includes("openSizeModal")) return;
 
             const container = btn.closest(".card, .promo");
             if (!container) return;
 
             const nombre = container.querySelector("h2, h3")?.textContent.trim();
-            
             const precio = parsePrecio(container.querySelector("span")?.textContent);
             const imagen = container.querySelector("img")?.src;
 
@@ -93,53 +113,57 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // ACCIONES DENTRO DEL CARRITO (+ / - / eliminar)
-   if (carritoLista) {
-    carritoLista.addEventListener("click", (e) => {
-        e.stopPropagation();   // ← (evita que se cierre el carrito)
+    /**************************************************
+     * ACCIONES DEL CARRITO
+     **************************************************/
+    if (carritoLista) {
+        carritoLista.addEventListener("click", (e) => {
+            e.stopPropagation();
 
-        const btn = e.target.closest("button");
-        if (!btn) return;
+            const btn = e.target.closest("button");
+            if (!btn) return;
 
-        const item = btn.closest(".carrito-item");
-        const nombre = item.dataset.nombre;
-        const index = carrito.findIndex(i => i.nombre === nombre);
+            const item = btn.closest(".carrito-item");
+            const nombre = item.dataset.nombre;
+            const index = carrito.findIndex(i => i.nombre === nombre);
 
-        if (index === -1) return;
+            if (index === -1) return;
 
-        if (btn.classList.contains("mas")) carrito[index].cantidad++;
-        else if (btn.classList.contains("menos"))
-            carrito[index].cantidad > 1 ? carrito[index].cantidad-- : carrito.splice(index, 1);
-        else if (btn.classList.contains("eliminar")) carrito.splice(index, 1);
+            if (btn.classList.contains("mas")) carrito[index].cantidad++;
+            else if (btn.classList.contains("menos")) {
+                carrito[index].cantidad > 1
+                    ? carrito[index].cantidad--
+                    : carrito.splice(index, 1);
+            }
+            else if (btn.classList.contains("eliminar")) carrito.splice(index, 1);
 
-        actualizarCarrito();
-    });
-}
-
-    // Botones de abajo
-document.querySelector(".carrito-acciones .checkout")?.addEventListener("click", () => {
-    if (carrito.length === 0) {
-        alert("Tu carrito está vacío");
-        return;
+            actualizarCarrito();
+        });
     }
 
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-    window.location.href = "pago.html";
-});
+    /**************************************************
+     * CHECKOUT
+     **************************************************/
+    document.querySelector(".carrito-acciones .checkout")?.addEventListener("click", () => {
+        if (carrito.length === 0) {
+            alert("Tu carrito está vacío");
+            return;
+        }
 
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        window.location.href = "Pago.html";
+    });
 
-
-    // ← FUNCIÓN GLOBAL PARA EL MODAL DE TAMAÑO 
+    /**************************************************
+     * FUNCIÓN GLOBAL PARA MODAL DE TAMAÑOS
+     **************************************************/
     window.agregarDesdeModal = (nombreCompleto, precio) => {
         const existing = carrito.find(i => i.nombre === nombreCompleto);
-        if (existing) {
-            existing.cantidad++;
-        } else {
-            carrito.push({ nombre: nombreCompleto, precio, cantidad: 1 });
-        }
+        if (existing) existing.cantidad++;
+        else carrito.push({ nombre: nombreCompleto, precio, cantidad: 1 });
+
         actualizarCarrito();
     };
 
     actualizarCarrito();
 });
-

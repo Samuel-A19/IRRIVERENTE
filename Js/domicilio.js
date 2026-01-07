@@ -1,78 +1,78 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const btn = document.getElementById("btnContinuar");
+document.addEventListener("DOMContentLoaded", () => {
 
-    // Campos a validar
-    const campos = [
-        { id: "nombre", err: "err-nombre", type: "text" },
-        { id: "telefono", err: "err-telefono", type: "text" },
-        { id: "email", err: "err-email", type: "email" },
-        { id: "direccion", err: "err-direccion", type: "text" }
-    ];
+    const form = document.getElementById("form-pedido-domicilio");
 
-    // Ocultar mensajes al teclear y quitar clase de error
-    campos.forEach(c => {
-        const input = document.getElementById(c.id);
-        const msg = document.getElementById(c.err);
-        if (!input || !msg) return;
-        input.addEventListener("input", () => {
-            msg.style.display = "none";
-            input.classList.remove("input-error");
-        });
-    });
-
-    btn.addEventListener("click", function (e) {
+    form.addEventListener("submit", (e) => {
         e.preventDefault();
+
+        const nombre = document.getElementById("nombre");
+        const telefono = document.getElementById("telefono");
+        const email = document.getElementById("email");
+        const direccion = document.getElementById("direccion");
+        const referencias = document.getElementById("referencias");
 
         let valido = true;
 
-        campos.forEach(c => {
-            const input = document.getElementById(c.id);
-            const msg = document.getElementById(c.err);
-            if (!input || !msg) return;
-
-            const val = input.value.trim();
-
-            if (c.type === "email") {
-                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (val === "" || !re.test(val)) {
-                    msg.textContent = val === "" ? "Campo obligatorio" : "Ingresa un correo válido";
-                    msg.style.display = "block";
-                    input.classList.add("input-error");
-                    valido = false;
-                    return;
-                }
+        const validar = (input, errId) => {
+            const msg = document.getElementById(errId);
+            if (input.value.trim() === "") {
+                msg.textContent = "Campo obligatorio";
+                msg.style.display = "block";
+                input.classList.add("input-error");
+                valido = false;
             } else {
-                if (val === "") {
-                    msg.textContent = "Campo obligatorio";
-                    msg.style.display = "block";
-                    input.classList.add("input-error");
-                    valido = false;
-                }
+                msg.style.display = "none";
+                input.classList.remove("input-error");
             }
-        });
+        };
 
-        if (valido) {
-    // Guardar datos del cliente
-    const datosCliente = {
-    nombre: document.getElementById("nombre").value.trim(),
-    telefono: document.getElementById("telefono").value.trim(),
-    email: document.getElementById("email").value.trim(),
-    direccion: document.getElementById("direccion").value.trim(),
-    referencias: document.getElementById("referencias").value.trim()
-};
+        validar(nombre, "err-nombre");
+        validar(telefono, "err-telefono");
+        validar(direccion, "err-direccion");
 
-localStorage.setItem("datosCliente", JSON.stringify(datosCliente));
-
-// Redirige al menú o pago
-window.location.href = "Menu.html"; // o Pago.html según tu flujo
-
-}
- else {
-            // desplazar al primer error visible
-            const primerError = document.querySelector(".error-msg[style*='display: block']");
-            if (primerError) {
-                primerError.scrollIntoView({ behavior: "smooth", block: "center" });
-            }
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!re.test(email.value.trim())) {
+            document.getElementById("err-email").textContent = "Correo inválido";
+            document.getElementById("err-email").style.display = "block";
+            email.classList.add("input-error");
+            valido = false;
+        } else {
+            document.getElementById("err-email").style.display = "none";
+            email.classList.remove("input-error");
         }
+
+        if (!valido) return;
+
+        // ✅ GUARDAR DATOS
+        const datosCliente = {
+            nombre: nombre.value.trim(),
+            telefono: telefono.value.trim(),
+            email: email.value.trim(),
+            direccion: direccion.value.trim(),
+            referencias: referencias.value.trim()
+        };
+
+        localStorage.setItem("datosCliente", JSON.stringify(datosCliente));
+
+        // ✅ SI VIENE DESDE PAGO, REGRESA A PAGO
+        if (localStorage.getItem("volverAPago") === "true") {
+    // 🔁 Viene desde Pago → regresa a Pago
+    localStorage.removeItem("volverAPago");
+    window.location.href = "Pago.html";
+} else {
+    // 🆕 Viene normal → ir al menú
+    window.location.href = "Menu.html";
+}
+
     });
+
+    // 🔁 RELLENAR SI EXISTE
+    const datos = JSON.parse(localStorage.getItem("datosCliente"));
+    if (datos) {
+        nombre.value = datos.nombre || "";
+        telefono.value = datos.telefono || "";
+        email.value = datos.email || "";
+        direccion.value = datos.direccion || "";
+        referencias.value = datos.referencias || "";
+    }
 });
