@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else alert(result.error);
 
         } catch (err) {
-            
+
         }
     });
 
@@ -93,5 +93,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("storage", (e) => {
         if (e.key === "userName") updateSessionState();
+    });
+});
+// ===============================
+// CERRAR SESIÓN DESDE MENÚ LATERAL
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+
+    const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+
+    if (!btnCerrarSesion) return;
+
+    btnCerrarSesion.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        // Limpiar sesión
+        localStorage.removeItem("userId");
+        localStorage.removeItem("userName");
+
+        // Redirigir
+        window.location.href = "Inicio.html";
     });
 });

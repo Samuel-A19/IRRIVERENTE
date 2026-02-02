@@ -167,7 +167,10 @@
                 <h2>Seguridad</h2>
                 <div class="seguridad-section">
                     <label for="claveActual">Contraseña actual:</label>
-                    <input type="password" id="claveActual">
+                    <input type="password" id="claveActual" placeholder="••••••••">
+                    <small style="color: #777;">
+                        Por seguridad, la contraseña no se muestra.
+                    </small>
 
                     <label for="nuevaClave">Nueva contraseña:</label>
                     <input type="password" id="nuevaClave">
@@ -175,7 +178,9 @@
                     <label for="confirmarClave">Confirmar contraseña:</label>
                     <input type="password" id="confirmarClave">
                     <div class="botones-accion">
-                        <button>Actualizar Contraseña</button>
+                        <button id="btnCambiarClave" type="button">
+                            Actualizar Contraseña
+                        </button>
                     </div>
 
 
@@ -189,7 +194,7 @@
     <script src="Js/Auth.js"></script>
     <script src="Js/Menulateral.js"></script>
     <script src="Js/Modales.js"></script>
-
+    <script src="Js/Ajustes.js"></script>
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->

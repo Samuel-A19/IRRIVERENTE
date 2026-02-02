@@ -116,22 +116,6 @@
    RESPONSIVIDAD FOOTER
 ======================================= */
 
-/* 📱 Móviles */
-@media (max-width: 600px) {
-    .footer-links a {
-        display: block;
-        margin: 6px 0;
-        font-size: 16px;
-    }
-
-    .footer-social {
-        gap: 10px;
-    }
-
-    .footer-social a {
-        font-size: 18px;
-    }
-}
 
 /* 📲 Tablets */
 @media (min-width: 601px) and (max-width: 991px) {

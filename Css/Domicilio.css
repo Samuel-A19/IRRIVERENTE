@@ -33,7 +33,7 @@
     width: 100%;
     box-sizing: border-box;
     color: white;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
 }
 
 .pedido-formulario h2 {
@@ -78,7 +78,8 @@
     color: #e9541f;
     font-size: 13px;
     margin-top: 5px;
-    display: none; /* oculto por defecto */
+    display: none;
+    /* oculto por defecto */
 }
 
 .input-error {

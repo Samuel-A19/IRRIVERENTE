@@ -1,74 +1,100 @@
 // ----------------------------------
-// MENÚ LATERAL
+// MENÚ LATERAL (ABRIR / CERRAR)
 // ----------------------------------
 function abrirMenu() {
-    document.getElementById("sideMenu").classList.add("active");
-    document.getElementById("menuOverlay").classList.add("active");
+    document.getElementById("sideMenu")?.classList.add("active");
+    document.getElementById("menuOverlay")?.classList.add("active");
 }
 
 function cerrarMenu() {
-    document.getElementById("sideMenu").classList.remove("active");
-    document.getElementById("menuOverlay").classList.remove("active");
+    document.getElementById("sideMenu")?.classList.remove("active");
+    document.getElementById("menuOverlay")?.classList.remove("active");
 }
 
 document.getElementById("menuOverlay")?.addEventListener("click", cerrarMenu);
 
 
 // ----------------------------------
-// ACTUALIZAR SESIÓN (ya existente)
+// ACTUALIZAR HEADER (LOGIN LINK)
 // ----------------------------------
 function updateSessionState() {
     const loginLink = document.getElementById("loginLink");
-    const logoutLink = document.getElementById("logoutLink");
     const userName = localStorage.getItem("userName");
+
+    if (!loginLink) return;
 
     if (userName) {
         loginLink.innerHTML = `<i class="bi bi-person"></i> ${userName}`;
         loginLink.onclick = null;
-        if (logoutLink) logoutLink.style.display = "inline";
     } else {
         loginLink.innerHTML = `<i class="bi bi-person"></i> INICIAR SESIÓN`;
         loginLink.onclick = () => openModal("loginModal");
-        if (logoutLink) logoutLink.style.display = "none";
     }
 }
 
 
 // ----------------------------------
-// MENÚ LATERAL CON CERRAR SESIÓN
+// ACTUALIZAR MENÚ LATERAL (NOMBRE + FOTO)
 // ----------------------------------
 function actualizarMenuLateral() {
-    const sideMenu = document.getElementById("sideMenu");
+    const userId = localStorage.getItem("userId");
     const userName = localStorage.getItem("userName");
 
-    sideMenu.innerHTML = `
-        <h2>Mi Menú</h2>
-        <a href="Historial.html">Historial de Pedidos</a><br>
-        <a href="Ajustes.html">Ajustes</a><br>
-        <a href="#" onclick="cerrarMenu()">Cerrar</a><br>
-        ${userName ? `<a href="#" id="logoutSide">Cerrar sesión</a>` : ""}
-    `;
+    const sideNombre = document.getElementById("sideNombre");
+    const sideFoto = document.getElementById("sideFoto");
 
-    // Evento del botón "Cerrar sesión"
-    document.getElementById("logoutSide")?.addEventListener("click", () => {
-        localStorage.removeItem("userId");
-        localStorage.removeItem("userName");
+    // Si no hay sesión
+    if (!userId) {
+        if (sideNombre) sideNombre.textContent = "Invitado";
+        if (sideFoto) {
+            sideFoto.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+        }
+        return;
+    }
 
-        updateSessionState();      // Actualiza header
-        actualizarMenuLateral();   // Actualiza menú lateral
-        cerrarMenu();              // Cierra menú lateral
-    });
+    // Nombre (localStorage)
+    if (sideNombre && userName) {
+        sideNombre.textContent = userName;
+    }
+
+    // Foto (BD)
+    fetch(`api/obtener_info_cliente.php?id_usuario=${userId}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data && data.foto && sideFoto) {
+                sideFoto.src = data.foto;
+            }
+        });
+
+    // Botón cerrar sesión
+    const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+    if (btnCerrarSesion) {
+        btnCerrarSesion.onclick = (e) => {
+            e.preventDefault();
+
+            localStorage.removeItem("userId");
+            localStorage.removeItem("userName");
+
+            updateSessionState();
+            actualizarMenuLateral();
+
+            window.location.href = "Inicio.html";
+        };
+    }
 }
 
 
 // ----------------------------------
-// REACCIONES A CAMBIOS DE SESIÓN
+// INICIALIZACIÓN
 // ----------------------------------
-updateSessionState();
-actualizarMenuLateral();
+document.addEventListener("DOMContentLoaded", () => {
+    updateSessionState();
+    actualizarMenuLateral();
+});
 
+// Escuchar cambios entre pestañas
 window.addEventListener("storage", (e) => {
-    if (e.key === "userName") {
+    if (e.key === "userName" || e.key === "userId") {
         updateSessionState();
         actualizarMenuLateral();
     }

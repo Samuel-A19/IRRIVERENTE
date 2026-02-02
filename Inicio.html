@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Permite que la página sea adaptable en dispositivos móviles -->
   <title>Irriverente Pizza & Pasta</title> <!-- Título de la pestaña del navegador -->
-  <link rel="icon" type="image/png" sizes="x56"  href="Imagenes/Logo.png">
+  <link rel="icon" type="image/png" sizes="x56" href="Imagenes/Logo.png">
 
   <!-- Enlace a la hoja de estilos CSS personalizada -->
   <link rel="stylesheet" href="Css/Inicio.css" />
@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="Css/Modales.css" />
   <link rel="stylesheet" href="Css/PiePagina.css" />
   <link rel="stylesheet" href="Css/Fondos.css" />
+  <link rel="stylesheet" href="Css/Menulateral.css" />
 
   <!-- Librería de íconos Bootstrap Icons (permite usar iconos con la clase "bi") -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -90,12 +91,27 @@
       <div id="menuOverlay"></div>
 
       <!-- MENU LATERAL -->
-      <div id="sideMenu">
-        <h2>Mi Menú</h2>
-        <a href="Historial.html">Historial de Pedidos</a><br>
-        <a href="Ajustes.html">Ajustes</a><br>
-        <a href="#" onclick="cerrarMenu()">Cerrar</a>
-      </div>
+      <aside id="sideMenu">
+
+        <!-- PERFIL USUARIO -->
+        <div class="side-user">
+          <img id="sideFoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
+          <span id="sideNombre">Usuario</span>
+        </div>
+
+        <hr>
+
+        <a href="Historial.html">Historial de Pedidos</a>
+        <a href="Ajustes.html">Ajustes</a>
+
+        <!-- CERRAR SESIÓN -->
+        <a href="#" id="btnCerrarSesion" class="logout">
+          Cerrar sesión
+        </a>
+
+      </aside>
+
+
 
     </nav>
   </header>
@@ -206,6 +222,7 @@
   <script src="Js/Modales.js"></script>
   <script src="Js/Carrito.js"></script>
   <script src="Js/Recover.js"></script>
+  <script src="Js/Encabezado.js"></script>
 
   <!-- PIE DE PÁGINA -->
   <footer class="main-footer"> <!-- Contenedor principal del footer -->
