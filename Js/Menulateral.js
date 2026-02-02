@@ -99,3 +99,40 @@ window.addEventListener("storage", (e) => {
         actualizarMenuLateral();
     }
 });
+// ----------------------------------
+// MOSTRAR / OCULTAR MENÚ SEGÚN SESIÓN
+// ----------------------------------
+function controlarMenuPorSesion() {
+    const userId = localStorage.getItem("userId");
+
+    const btnMenu = document.getElementById("btnMenuLateral");
+    const sideMenu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("menuOverlay");
+
+    if (!btnMenu || !sideMenu || !overlay) return;
+
+    if (!userId) {
+        // ❌ SIN SESIÓN → OCULTAR
+        btnMenu.style.display = "none";
+        sideMenu.classList.remove("active");
+        sideMenu.style.display = "none";
+        overlay.style.display = "none";
+    } else {
+        // ✅ CON SESIÓN → MOSTRAR
+        btnMenu.style.display = "";   // vuelve al CSS original
+        sideMenu.style.display = "";  // NO cambia posición
+        overlay.style.display = "";   // NO cambia posición
+    }
+}
+
+// ----------------------------------
+// EJECUCIÓN AUTOMÁTICA
+// ----------------------------------
+document.addEventListener("DOMContentLoaded", controlarMenuPorSesion);
+
+// Detectar login / logout EN TIEMPO REAL
+window.addEventListener("storage", (e) => {
+    if (e.key === "userId") {
+        controlarMenuPorSesion();
+    }
+});
