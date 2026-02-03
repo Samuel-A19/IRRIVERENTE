@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // PERFIL
+    /* ===============================
+       PERFIL
+    =============================== */
     document.querySelector("#btnPerfil")?.addEventListener("click", () => {
         const nombre = document.querySelector("#nombre").value;
         const correo = document.querySelector("#correo").value;
@@ -8,39 +10,56 @@ document.addEventListener("DOMContentLoaded", () => {
         const ciudad = document.querySelector("#ciudad").value;
         const direccion = document.querySelector("#direccion").value;
 
-        if (!/^[0-9]{10}$/.test(telefono))
-            return alert("El teléfono debe tener 10 dígitos.");
+        if (!/^[0-9]{10}$/.test(telefono)) {
+            mostrarAlerta("El teléfono debe tener 10 dígitos", "Atención");
+            return;
+        }
 
-        alert(`Datos actualizados:\n\n${nombre}\n${correo}\n${telefono}`);
+        mostrarAlerta("Datos actualizados correctamente", "Éxito");
 
         document.querySelector("#headerNombre").textContent = nombre;
         document.querySelector("#headerInfo").textContent = `${correo} | ${telefono}`;
     });
 
-    // Bloquear letras en teléfono
+    /* ===============================
+       BLOQUEAR LETRAS EN TELÉFONO
+    =============================== */
     const phoneInput = document.getElementById("phone");
     phoneInput?.addEventListener("input", () => {
         phoneInput.value = phoneInput.value.replace(/[^0-9]/g, "");
     });
 
-    // Idioma
+    /* ===============================
+       IDIOMA
+    =============================== */
     document.querySelector("#btnIdioma")?.addEventListener("click", () => {
         const idioma = document.querySelector("#idioma").value;
-        alert(`Idioma actualizado a: ${idioma}`);
+        mostrarAlerta(`Idioma actualizado a: ${idioma}`, "Información");
     });
 
-    // Cambio de contraseña
+    /* ===============================
+       CAMBIO DE CONTRASEÑA
+    =============================== */
     document.querySelector("#btnPassword")?.addEventListener("click", () => {
         const actual = document.querySelector("#passActual").value;
         const nueva = document.querySelector("#passNueva").value;
 
-        if (!actual || !nueva) return alert("Llena ambos campos.");
-        if (nueva.length < 6) return alert("Contraseña muy corta.");
+        if (!actual || !nueva) {
+            mostrarAlerta("Llena ambos campos", "Atención");
+            return;
+        }
 
-        alert("Contraseña cambiada correctamente.");
+        if (nueva.length < 6) {
+            mostrarAlerta("La contraseña debe tener al menos 6 caracteres", "Atención");
+            return;
+        }
+
+        mostrarAlerta("Contraseña cambiada correctamente", "Éxito");
     });
 
-    // FOTO PERFIL
+    /* ===============================
+       FOTO DE PERFIL
+    =============================== */
     function abrirSelector() {
         document.getElementById("inputFoto").click();
     }
@@ -56,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         reader.onload = (e) => {
             document.getElementById("fotoPerfil").src = e.target.result;
             document.getElementById("headerFoto").src = e.target.result;
+            mostrarAlerta("Foto de perfil actualizada", "Éxito");
         };
         reader.readAsDataURL(file);
     });

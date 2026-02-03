@@ -213,13 +213,16 @@
     </div>
   </div>
 
-  <script src="Js/Auth.js"></script>
-  <script src="Js/Carrusel.js"></script>
-  <script src="Js/Menulateral.js"></script>
-  <script src="Js/Modales.js"></script>
-  <script src="Js/Carrito.js"></script>
-  <script src="Js/Recover.js"></script>
-  <script src="Js/Encabezado.js"></script>
+  <script src="Js/Alertas.js"></script>
+
+<script src="Js/Auth.js"></script>
+<script src="Js/Carrusel.js"></script>
+<script src="Js/Menulateral.js"></script>
+<script src="Js/Modales.js"></script>
+<script src="Js/Carrito.js"></script>
+<script src="Js/Recover.js"></script>
+<script src="Js/Encabezado.js"></script>
+
 
   <!-- PIE DE PÁGINA -->
   <footer class="main-footer"> <!-- Contenedor principal del footer -->
@@ -246,6 +249,16 @@
     </div>
   </footer>
 
+  <!-- ALERTA PERSONALIZADA -->
+<div id="alertOverlay" class="alert-overlay">
+  <div class="alert-box">
+    <h3 id="alertTitle">Atención</h3>
+    <p id="alertMessage"></p>
+    <button onclick="cerrarAlerta()">Aceptar</button>
+  </div>
+</div>
+
+  
 </body>
 
 </html>

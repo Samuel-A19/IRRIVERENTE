@@ -2,7 +2,7 @@
  * FORMATO COP Y LIMPIEZA DE PRECIOS
  **************************************************/
 function formatoCOP(valor) {
-    return valor.toLocaleString("es-CO", {
+    return Number(valor).toLocaleString("es-CO", {
         style: "currency",
         currency: "COP",
         minimumFractionDigits: 0
@@ -16,7 +16,6 @@ function limpiarPrecio(valor) {
     return Number(valor) || 0;
 }
 
-
 /**************************************************
  * CARGA INICIAL
  **************************************************/
@@ -25,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const metodoPago = JSON.parse(localStorage.getItem("metodoPago"));
     const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    // ===== DATOS CLIENTE =====
+    /* ===== DATOS CLIENTE ===== */
     if (datosCliente) {
         const set = (id, val) => {
             const el = document.getElementById(id);
@@ -38,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
         set("res-direccion", datosCliente.direccion);
         set("res-referencias", datosCliente.referencias);
 
-        // Autocompletar formulario
         if (document.getElementById("customerName")) {
             document.getElementById("customerName").value = datosCliente.nombre || "";
             document.getElementById("phone").value = datosCliente.telefono || "";
@@ -46,13 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // ===== MÉTODO DE PAGO =====
+    /* ===== MÉTODO DE PAGO ===== */
     if (metodoPago) {
         document.getElementById("res-metodo").textContent =
             metodoPago.banco || metodoPago.metodo;
     }
 
-    // ===== RESUMEN DEL PEDIDO =====
+    /* ===== RESUMEN DEL PEDIDO ===== */
     const ul = document.getElementById("resumenProductos");
     const totalEl = document.getElementById("resumenTotal");
 
@@ -75,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
         totalEl.textContent = formatoCOP(total);
     }
 });
-
 
 /**************************************************
  * FORMULARIO DE PAGO
@@ -105,22 +102,17 @@ if (form) {
             : "Efectivo";
 
         if (metodo === "transferencia" && !banco) {
-            alert("Selecciona Nequi o Bancolombia");
+            mostrarAlerta("Selecciona Nequi o Bancolombia", "Atención");
             return;
         }
 
-        localStorage.setItem("metodoPago", JSON.stringify({
-            metodo,
-            banco
-        }));
+        localStorage.setItem("metodoPago", JSON.stringify({ metodo, banco }));
 
         document.getElementById("res-metodo").textContent = banco;
-
         document.getElementById("bloqueFormulario").style.display = "none";
         document.getElementById("bloqueEntrega").style.display = "block";
     });
 }
-
 
 /**************************************************
  * BOTÓN PAGAR
@@ -129,23 +121,22 @@ document.getElementById("btnPagar")?.addEventListener("click", () => {
     const metodoPago = JSON.parse(localStorage.getItem("metodoPago"));
 
     if (!metodoPago) {
-        alert("Selecciona un método de pago");
+        mostrarAlerta("Selecciona un método de pago", "Atención");
         return;
     }
 
     if (metodoPago.banco === "Nequi") {
-        alert("Realiza el pago por Nequi y presiona 'Ya pagué'");
+        mostrarAlerta("Realiza el pago por Nequi y presiona 'Ya pagué'", "Información");
         window.open("https://nequi.com.co/", "_blank");
-    } 
+    }
     else if (metodoPago.banco === "Bancolombia") {
-        alert("Realiza el pago por Bancolombia y presiona 'Ya pagué'");
+        mostrarAlerta("Realiza el pago por Bancolombia y presiona 'Ya pagué'", "Información");
         window.open("https://www.bancolombia.com/personas", "_blank");
-    } 
+    }
     else {
-        alert("Pedido confirmado. Pago en efectivo.");
+        mostrarAlerta("Pedido confirmado. Pago en efectivo.", "Éxito");
     }
 });
-
 
 /**************************************************
  * BOTÓN EDITAR DATOS

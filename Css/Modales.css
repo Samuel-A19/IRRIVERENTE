@@ -215,3 +215,64 @@
     /* tú decides el espacio */
     box-sizing: border-box;
 }
+
+/* ========================================
+   ALERTA PERSONALIZADA (SOBRE TODO)
+======================================= */
+
+.alert-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* MÁS ALTO QUE LOS MODALES */
+}
+
+.alert-box {
+    background-color: #1b1b1b;
+    color: white;
+    padding: 25px 30px;
+    border-radius: 14px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
+    animation: alertFade 0.25s ease;
+}
+
+.alert-box h3 {
+    color: #f16529;
+    margin-bottom: 10px;
+}
+
+.alert-box p {
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.alert-box button {
+    background-color: #f16529;
+    color: white;
+    border: none;
+    padding: 10px 26px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.alert-box button:hover {
+    background-color: #e9541f;
+}
+
+@keyframes alertFade {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

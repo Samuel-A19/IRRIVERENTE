@@ -209,12 +209,22 @@
         </div>
     </div>
     <!-- Scripts siempre antes de cerrar el body -->
+<<<<<<< HEAD
     <script src="Js/Auth.js"></script>
     <script src="Js/Menulateral.js"></script>
     <script src="Js/Modales.js"></script>
     <script src="Js/Ajustes.js"></script>
     <script src="Js/Carrito.js"></script>
     <script src="Js/Encabezado.js"></script>
+=======
+    <script src="Js/Alertas.js"></script>
+
+<script src="Js/Animaciones.js"></script>
+<script src="Js/Auth.js"></script>
+<script src="Js/Menulateral.js"></script>
+<script src="Js/Modales.js"></script>
+<script src="Js/Ajustes.js"></script>
+>>>>>>> 645f6576ac8d35446a53d3d27c70a99e64494c3b
 
 
     <!-- PIE DE PÁGINA -->
@@ -241,6 +251,17 @@
             </div>
         </div>
     </footer>
+
+    <!-- ALERTA PERSONALIZADA -->
+<div id="alertOverlay" class="alert-overlay">
+  <div class="alert-box">
+    <h3 id="alertTitle">Atención</h3>
+    <p id="alertMessage"></p>
+    <button onclick="cerrarAlerta()">Aceptar</button>
+  </div>
+</div>
+
+
 </body>
 
 </html>

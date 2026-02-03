@@ -4,60 +4,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const userId = localStorage.getItem("userId");
 
-    // ===============================
-    // PROTECCIÓN DE SESIÓN
-    // ===============================
+    /* ===============================
+       PROTECCIÓN DE SESIÓN
+    =============================== */
     if (!userId) {
-        alert("Debes iniciar sesión");
-        window.location.href = "Inicio.html";
+        mostrarAlerta("Debes iniciar sesión", "Atención");
+        setTimeout(() => {
+            window.location.href = "Inicio.html";
+        }, 1200);
         return;
     }
 
-    // ===============================
-    // CARGAR USUARIO (NOMBRE / CORREO)
-    // ===============================
+    /* ===============================
+       CARGAR USUARIO
+    =============================== */
     fetch(`api/obtener_usuario.php?id_usuario=${userId}`)
         .then(res => res.json())
         .then(data => {
             if (!data) return;
 
-            // Inputs
             document.getElementById("nombre").value = data.nombre_completo ?? "";
             document.getElementById("correo").value = data.correo ?? "";
 
-            // Header superior
             document.getElementById("headerNombre").textContent = data.nombre_completo;
             document.getElementById("headerInfo").textContent = data.correo;
         });
 
-    // ===============================
-    // CARGAR INFO DEL CLIENTE
-    // ===============================
+    /* ===============================
+       CARGAR INFO CLIENTE
+    =============================== */
     fetch(`api/obtener_info_cliente.php?id_usuario=${userId}`)
         .then(res => res.json())
         .then(data => {
             if (!data) return;
 
-            // Inputs
             document.getElementById("phone").value = data.telefono ?? "";
             document.getElementById("ciudad").value = data.ciudad ?? "";
             document.getElementById("direccion").value = data.direccion ?? "";
 
-            // Header (correo + teléfono)
             const correo = document.getElementById("headerInfo").textContent;
             const telefono = data.telefono ? ` | ${data.telefono}` : "";
             document.getElementById("headerInfo").textContent = correo + telefono;
 
-            // Foto
             if (data.foto) {
                 document.getElementById("fotoPerfil").src = data.foto;
                 document.getElementById("headerFoto").src = data.foto;
             }
         });
 
-    // ===============================
-    // GUARDAR PERFIL
-    // ===============================
+    /* ===============================
+       GUARDAR PERFIL
+    =============================== */
     document.getElementById("btnPerfil").addEventListener("click", (e) => {
         e.preventDefault();
 
@@ -67,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const ciudad = document.getElementById("ciudad").value;
         const direccion = document.getElementById("direccion").value;
 
-        // ---- USUARIO ----
         const dataUsuario = new FormData();
         dataUsuario.append("id_usuario", userId);
         dataUsuario.append("nombre", nombre);
@@ -82,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("headerInfo").textContent = correo;
         });
 
-        // ---- INFO CLIENTE ----
         const dataCliente = new FormData();
         dataCliente.append("id_usuario", userId);
         dataCliente.append("telefono", telefono);
@@ -98,16 +93,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (res.trim() === "ok") {
                     document.getElementById("headerInfo").textContent =
                         correo + (telefono ? ` | ${telefono}` : "");
-                    alert("Datos guardados correctamente");
+                    mostrarAlerta("Datos guardados correctamente", "Éxito");
                 } else {
-                    alert("Error al guardar datos");
+                    mostrarAlerta("Error al guardar datos", "Error");
                 }
             });
     });
 
-    // ===============================
-    // CAMBIAR CONTRASEÑA
-    // ===============================
+    /* ===============================
+       CAMBIAR CONTRASEÑA
+    =============================== */
     const btnCambiarClave = document.getElementById("btnCambiarClave");
 
     if (btnCambiarClave) {
@@ -119,12 +114,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const confirmarClave = document.getElementById("confirmarClave").value;
 
             if (!claveActual || !nuevaClave || !confirmarClave) {
-                alert("Completa todos los campos");
+                mostrarAlerta("Completa todos los campos", "Atención");
                 return;
             }
 
             if (nuevaClave !== confirmarClave) {
-                alert("Las contraseñas no coinciden");
+                mostrarAlerta("Las contraseñas no coinciden", "Error");
                 return;
             }
 
@@ -140,24 +135,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(res => res.text())
                 .then(res => {
                     if (res === "ok") {
-                        alert("Contraseña actualizada correctamente");
+                        mostrarAlerta("Contraseña actualizada correctamente", "Éxito");
                         document.getElementById("claveActual").value = "";
                         document.getElementById("nuevaClave").value = "";
                         document.getElementById("confirmarClave").value = "";
                     } else if (res === "clave_incorrecta") {
-                        alert("La contraseña actual no es correcta");
+                        mostrarAlerta("La contraseña actual no es correcta", "Error");
                     } else {
-                        alert("Error al cambiar la contraseña");
+                        mostrarAlerta("Error al cambiar la contraseña", "Error");
                     }
                 });
         });
     }
-
 });
 
-// ===============================
-// FOTO DE PERFIL
-// ===============================
+/* ===============================
+   FOTO DE PERFIL
+=============================== */
 function abrirSelector() {
     document.getElementById("inputFoto").click();
 }
@@ -183,9 +177,9 @@ document.getElementById("inputFoto").addEventListener("change", () => {
                 const url = URL.createObjectURL(file);
                 document.getElementById("fotoPerfil").src = url;
                 document.getElementById("headerFoto").src = url;
-                alert("Foto de perfil actualizada");
+                mostrarAlerta("Foto de perfil actualizada", "Éxito");
             } else {
-                alert("Error al subir la foto");
+                mostrarAlerta("Error al subir la foto", "Error");
             }
         });
 });
