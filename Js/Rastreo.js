@@ -2,7 +2,7 @@ function iniciarRastreo() {
     const codigo = document.getElementById("codigoRastreo").value.trim();
 
     if (codigo === "") {
-        alert("Ingresa tu código de pedido.");
+        mostrarAlerta("Ingresa tu código de pedido", "Atención");
         return;
     }
 
@@ -12,10 +12,8 @@ function iniciarRastreo() {
     if (tracker) tracker.style.display = "flex";
     if (statusBox) statusBox.style.display = "block";
 
-
     trackOrder();
 }
-
 
 function trackOrder() {
     const steps = document.querySelectorAll(".progress-tracker .step");

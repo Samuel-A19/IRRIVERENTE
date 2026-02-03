@@ -6,12 +6,13 @@ function cargarHistorial() {
     const listaPedidos = document.getElementById('listaPedidos');
 
     if (!userId) {
-        noLogueado.style.display = 'block';
-        tablaPedidos.style.display = 'none';
+        if (noLogueado) noLogueado.style.display = 'block';
+        if (tablaPedidos) tablaPedidos.style.display = 'none';
+        if (sinPedidos) sinPedidos.style.display = 'none';
         return;
     }
 
-    noLogueado.style.display = 'none';
+    if (noLogueado) noLogueado.style.display = 'none';
 
     fetch("api/obtener_pedidos.php", {
         method: "POST",
@@ -20,18 +21,20 @@ function cargarHistorial() {
     })
         .then(res => res.json())
         .then(data => {
-            if (!data.pedidos?.length) {
-                sinPedidos.style.display = "block";
-                tablaPedidos.style.display = "none";
+
+            if (!data.pedidos || data.pedidos.length === 0) {
+                if (sinPedidos) sinPedidos.style.display = "block";
+                if (tablaPedidos) tablaPedidos.style.display = "none";
                 return;
             }
 
-            tablaPedidos.style.display = "block";
-            sinPedidos.style.display = "none";
+            if (tablaPedidos) tablaPedidos.style.display = "block";
+            if (sinPedidos) sinPedidos.style.display = "none";
             listaPedidos.innerHTML = "";
 
             data.pedidos.forEach(p => {
                 const fila = document.createElement('tr');
+
                 let clase =
                     p.estado === "Entregado"
                         ? "estado-entregado"
@@ -40,26 +43,38 @@ function cargarHistorial() {
                             : "estado-preparacion";
 
                 fila.innerHTML = `
-          <td>${p.numero_pedido}</td>
-          <td>${p.fecha}</td>
-          <td class="${clase}">${p.estado}</td>
-          <td>$${parseFloat(p.total).toFixed(2)}</td>
-          <td><button onclick="verDetallesPedido('${p.id_pedido}')">Ver Detalles</button></td>
-        `;
+                    <td>${p.numero_pedido}</td>
+                    <td>${p.fecha}</td>
+                    <td class="${clase}">${p.estado}</td>
+                    <td>$${parseFloat(p.total).toFixed(2)}</td>
+                    <td>
+                        <button onclick="verDetallesPedido('${p.id_pedido}')">
+                            Ver Detalles
+                        </button>
+                    </td>
+                `;
 
                 listaPedidos.appendChild(fila);
             });
+        })
+        .catch(() => {
+            if (sinPedidos) sinPedidos.style.display = "block";
+            if (tablaPedidos) tablaPedidos.style.display = "none";
         });
 }
 
 function verDetallesPedido(id) {
-    alert("Detalles del pedido: " + id);
+    mostrarAlerta(`Mostrando detalles del pedido ${id}`, "Información");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    if (document.querySelector(".historial-pedidos")) cargarHistorial();
+    if (document.querySelector(".historial-pedidos")) {
+        cargarHistorial();
+    }
 
     window.addEventListener("storage", e => {
-        if (e.key === "userId") cargarHistorial();
+        if (e.key === "userId") {
+            cargarHistorial();
+        }
     });
 });

@@ -21,3 +21,20 @@ window.onclick = function (event) {
         if (event.target === modal) modal.style.display = "none";
     });
 };
+
+function mostrarAlerta(mensaje, titulo = "Atención") {
+  document.getElementById("alertTitle").textContent = titulo;
+  document.getElementById("alertMessage").textContent = mensaje;
+  document.getElementById("alertOverlay").style.display = "flex";
+}
+
+function cerrarAlerta() {
+  document.getElementById("alertOverlay").style.display = "none";
+}
+
+document.getElementById("alertOverlay").addEventListener("click", e => {
+  if (e.target.id === "alertOverlay") cerrarAlerta();
+});
+
+mostrarAlerta("Código enviado al correo", "Información");
+mostrarAlerta("Contraseña cambiada con éxito", "Éxito");
