@@ -141,24 +141,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.6rem;
+    gap: 1.5rem;
     padding: 1.2rem 0;
 }
 
 /* FOTO PERFIL */
 .side-user img {
-    width: 100px;
+    width: 170px;
     /* 🔧 tamaño controlado */
-    height: 100px;
+    height: 170px;
     border-radius: 50%;
     object-fit: cover;
     /* evita deformación */
-    border: 2px solid #444;
+    border: 3px solid #ffffff;
 }
 
 /* NOMBRE USUARIO */
 .side-user span {
-    font-size: 0.95rem;
+    font-size: 1.0rem;
     font-weight: 600;
     color: #fff;
     text-align: center;
@@ -171,4 +171,86 @@
     height: 1px;
     background: #333;
     margin: 1rem 0;
+}
+
+/* ===============================
+   REDES SOCIALES - MENU LATERAL
+================================ */
+.side-social {
+    margin-top: auto;
+    /* 🔑 empuja al fondo */
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+    /* centrado horizontal */
+    gap: 1.2rem;
+    /* espacio simétrico */
+    border-top: 1px solid #222;
+}
+
+.side-social a {
+    color: #fff;
+    font-size: 1.4rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.side-social a:hover {
+    color: #ff4d4d;
+    /* mismo tono del sitio */
+    transform: scale(1.15);
+}
+
+/* ===============================
+   DIVISOR MENU LATERAL
+================================ */
+.side-divider {
+    width: 100%;
+    height: 1px;
+    background: #222;
+    margin: 1rem 0;
+    flex-shrink: 0;
+}
+
+/* ===============================
+   FOTO PERFIL MENU LATERAL
+================================ */
+#sideMenu .side-user img {
+    width: 170px !important;
+    height: 170px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+#sideMenu .side-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+/* ===============================
+   BLINDAJE MENU LATERAL
+================================ */
+#sideMenu {
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    width: 300px;
+    /* ancho fijo */
+    max-width: 85vw;
+    /* responsive */
+    min-width: 280px;
+    /* 🔑 evita encogerse */
+
+    height: 100vh;
+
+    box-sizing: border-box;
+    flex-shrink: 0 !important;
+    /* 🔑 clave */
+}
+
+aside#sideMenu {
+    width: 300px !important;
 }

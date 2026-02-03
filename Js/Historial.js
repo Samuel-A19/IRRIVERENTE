@@ -1,80 +1,37 @@
-function cargarHistorial() {
-    const userId = localStorage.getItem('userId');
-    const noLogueado = document.getElementById('noLogueado');
-    const tablaPedidos = document.getElementById('tablaPedidos');
-    const sinPedidos = document.getElementById('sinPedidos');
-    const listaPedidos = document.getElementById('listaPedidos');
+document.addEventListener("DOMContentLoaded", () => {
 
+    const userId = localStorage.getItem("userId");
+
+    // 🔒 Protección de sesión
     if (!userId) {
-        if (noLogueado) noLogueado.style.display = 'block';
-        if (tablaPedidos) tablaPedidos.style.display = 'none';
-        if (sinPedidos) sinPedidos.style.display = 'none';
+        alert("Debes iniciar sesión");
+        window.location.href = "Inicio.html";
         return;
     }
 
-    if (noLogueado) noLogueado.style.display = 'none';
+    const nombreEl = document.getElementById("historialNombre");
+    const fotoEl = document.getElementById("historialFoto");
 
-    fetch("api/obtener_pedidos.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId })
-    })
+    // ===============================
+    // CARGAR NOMBRE DEL USUARIO
+    // ===============================
+    fetch(`api/obtener_usuario.php?id_usuario=${userId}`)
         .then(res => res.json())
         .then(data => {
-
-            if (!data.pedidos || data.pedidos.length === 0) {
-                if (sinPedidos) sinPedidos.style.display = "block";
-                if (tablaPedidos) tablaPedidos.style.display = "none";
-                return;
+            if (data && nombreEl) {
+                nombreEl.textContent = data.nombre_completo;
             }
-
-            if (tablaPedidos) tablaPedidos.style.display = "block";
-            if (sinPedidos) sinPedidos.style.display = "none";
-            listaPedidos.innerHTML = "";
-
-            data.pedidos.forEach(p => {
-                const fila = document.createElement('tr');
-
-                let clase =
-                    p.estado === "Entregado"
-                        ? "estado-entregado"
-                        : p.estado === "Cancelado"
-                            ? "estado-cancelado"
-                            : "estado-preparacion";
-
-                fila.innerHTML = `
-                    <td>${p.numero_pedido}</td>
-                    <td>${p.fecha}</td>
-                    <td class="${clase}">${p.estado}</td>
-                    <td>$${parseFloat(p.total).toFixed(2)}</td>
-                    <td>
-                        <button onclick="verDetallesPedido('${p.id_pedido}')">
-                            Ver Detalles
-                        </button>
-                    </td>
-                `;
-
-                listaPedidos.appendChild(fila);
-            });
-        })
-        .catch(() => {
-            if (sinPedidos) sinPedidos.style.display = "block";
-            if (tablaPedidos) tablaPedidos.style.display = "none";
         });
-}
 
-function verDetallesPedido(id) {
-    mostrarAlerta(`Mostrando detalles del pedido ${id}`, "Información");
-}
+    // ===============================
+    // CARGAR FOTO DE PERFIL
+    // ===============================
+    fetch(`api/obtener_info_cliente.php?id_usuario=${userId}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data && data.foto && fotoEl) {
+                fotoEl.src = data.foto;
+            }
+        });
 
-document.addEventListener("DOMContentLoaded", () => {
-    if (document.querySelector(".historial-pedidos")) {
-        cargarHistorial();
-    }
-
-    window.addEventListener("storage", e => {
-        if (e.key === "userId") {
-            cargarHistorial();
-        }
-    });
 });
