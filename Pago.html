@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="Css/Modales.css" />
     <link rel="stylesheet" href="Css/PiePagina.css" />
     <link rel="stylesheet" href="Css/Fondos.css" />
+    <link rel="stylesheet" href="Css/Menulateral.css">
 
     <!-- Librería de íconos Bootstrap Icons (permite usar iconos con la clase "bi") -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -33,7 +34,7 @@
 </head>
 
 <body class="pagina-pago">
-<!-- Comienza el contenido visible en el navegador -->
+    <!-- Comienza el contenido visible en el navegador -->
 
     <!-- ENCABEZADO PRINCIPAL -->
     <header class="main-header"> <!-- Contenedor del encabezado -->
@@ -80,7 +81,6 @@
                     <button class="checkout">Finalizar compra</button>
                 </div>
             </div>
-
             <!-- Botón menú solo icono -->
             <button id="btnMenuLateral" onclick="abrirMenu()">
                 <i class="bi bi-justify"></i>
@@ -90,13 +90,25 @@
             <div id="menuOverlay"></div>
 
             <!-- MENU LATERAL -->
-            <div id="sideMenu">
-                <h2>Mi Menú</h2>
-                <a href="Historial.html">Historial de Pedidos</a><br>
-                <a href="Ajustes.html">Ajustes</a><br>
-                <a href="#" onclick="cerrarMenu()">Cerrar</a>
-            </div>
+            <aside id="sideMenu">
 
+                <!-- PERFIL USUARIO -->
+                <div class="side-user">
+                    <img id="sideFoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
+                    <span id="sideNombre">Usuario</span>
+                </div>
+
+                <hr>
+
+                <a href="Historial.html">Historial de Pedidos</a>
+                <a href="Ajustes.html">Ajustes</a>
+
+                <!-- CERRAR SESIÓN -->
+                <a href="#" id="btnCerrarSesion" class="logout">
+                    Cerrar sesión
+                </a>
+
+            </aside>
         </nav>
     </header>
 
@@ -149,60 +161,60 @@
                 </div>
             </div>
         </form>
+    </div>
+
+    <div class="container resumen-entrega" id="bloqueEntrega">
+        <h3>Datos de entrega</h3>
+        <p><strong>Nombre:</strong> <span id="res-nombre"></span></p>
+        <p><strong>Teléfono:</strong> <span id="res-telefono"></span></p>
+        <p><strong>Correo:</strong> <span id="res-email"></span></p>
+        <p><strong>Dirección:</strong> <span id="res-direccion"></span></p>
+        <p><strong>Referencias:</strong> <span id="res-referencias"></span></p>
+        <p><strong>Medio de pago:</strong> <span id="res-metodo"></span></p>
+
+        <div id="bloquePagoDigital" class="container hidden">
+            <h3>Realiza tu pago</h3>
+
+            <p id="textoPago"></p>
+
+            <img id="qrPago" src="" alt="QR de pago" style="max-width:220px; margin:20px auto; display:block;">
+
+            <button id="btnYaPague" class="btn">YA PAGUÉ</button>
         </div>
 
-       <div class="container resumen-entrega" id="bloqueEntrega">
-    <h3>Datos de entrega</h3>
-    <p><strong>Nombre:</strong> <span id="res-nombre"></span></p>
-    <p><strong>Teléfono:</strong> <span id="res-telefono"></span></p>
-    <p><strong>Correo:</strong> <span id="res-email"></span></p>
-    <p><strong>Dirección:</strong> <span id="res-direccion"></span></p>
-    <p><strong>Referencias:</strong> <span id="res-referencias"></span></p>
-    <p><strong>Medio de pago:</strong> <span id="res-metodo"></span></p>
+        <div class="resumen-pedido" id="resumenPedido">
+            <h3>🧾 Resumen de tu pedido</h3>
 
-    <div id="bloquePagoDigital" class="container hidden">
-    <h3>Realiza tu pago</h3>
+            <div class="resumen-seccion">
+                <strong>Productos:</strong>
+                <ul id="resumenProductos"></ul>
+            </div>
 
-    <p id="textoPago"></p>
+            <div class="resumen-seccion">
+                <p><strong>Total:</strong> $<span id="resumenTotal">0</span></p>
+            </div>
 
-    <img id="qrPago" src="" alt="QR de pago" style="max-width:220px; margin:20px auto; display:block;">
+            <hr>
 
-    <button id="btnYaPague" class="btn">YA PAGUÉ</button>
-</div>
+            <div class="resumen-seccion">
+                <p><strong>Cliente:</strong> <span id="res2-nombre"></span></p>
+                <p><strong>Teléfono:</strong> <span id="res2-telefono"></span></p>
+                <p><strong>Dirección:</strong> <span id="res2-direccion"></span></p>
+                <p><strong>Método de pago:</strong> <span id="res2-metodo"></span></p>
 
-<div class="resumen-pedido" id="resumenPedido">
-    <h3>🧾 Resumen de tu pedido</h3>
-
-    <div class="resumen-seccion">
-        <strong>Productos:</strong>
-        <ul id="resumenProductos"></ul>
-    </div>
-
-    <div class="resumen-seccion">
-        <p><strong>Total:</strong> $<span id="resumenTotal">0</span></p>
-    </div>
-
-    <hr>
-
-    <div class="resumen-seccion">
-       <p><strong>Cliente:</strong> <span id="res2-nombre"></span></p>
-<p><strong>Teléfono:</strong> <span id="res2-telefono"></span></p>
-<p><strong>Dirección:</strong> <span id="res2-direccion"></span></p>
-<p><strong>Método de pago:</strong> <span id="res2-metodo"></span></p>
-
-    </div>
-</div>
+            </div>
+        </div>
 
 
-<div class="acciones-pago">
-    <button id="btnPagar" class="btn">
-        PAGAR AHORA
-    </button>
+        <div class="acciones-pago">
+            <button id="btnPagar" class="btn">
+                PAGAR AHORA
+            </button>
 
-    <button id="btnEditar" class="btn secondary">
-        EDITAR DATOS
-    </button>
-</div>
+            <button id="btnEditar" class="btn secondary">
+                EDITAR DATOS
+            </button>
+        </div>
 
 
 
@@ -250,8 +262,13 @@
         </div>
     </div>
 
-    <script src="Animaciones.js"></script>
     <script src="Js/Pago.js"></script>
+    <script src="Js/Encabezado.js"></script>
+    <script src="Js/Carrito.js"></script>
+    <script src="Js/Menulateral.js"></script>
+    <script src="Js/Modales.js"></script>
+
+    <!-- Fin del contenido visible en el navegador -->
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->

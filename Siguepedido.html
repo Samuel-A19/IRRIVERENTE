@@ -15,17 +15,19 @@
     <link rel="stylesheet" href="Css/Siguepedido.css" />
     <link rel="stylesheet" href="Css/Carrito.css" />
     <link rel="stylesheet" href="Css/Modales.css" />
+    <link rel="stylesheet" href="Css/Menulateral.css" />
 
-    <script src="Animaciones.js"></script>
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
 
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- Librería de íconos Bootstrap Icons (permite usar iconos con la clase "bi") -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
     <!-- Librería CSS de Swiper (estilos del carrusel) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 
     <!-- Librería JS de Swiper (funcionalidad del carrusel) -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -92,60 +94,73 @@
             <div id="menuOverlay"></div>
 
             <!-- MENU LATERAL -->
-            <div id="sideMenu">
-                <h2>Mi Menú</h2>
-                <a href="Historial.html">Historial de Pedidos</a><br>
-                <a href="Ajustes.html">Ajustes</a><br>
-                <a href="#" onclick="cerrarMenu()">Cerrar</a>
-            </div>
+            <aside id="sideMenu">
+
+                <!-- PERFIL USUARIO -->
+                <div class="side-user">
+                    <img id="sideFoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
+                    <span id="sideNombre">Usuario</span>
+                </div>
+
+                <hr>
+
+                <a href="Historial.html">Historial de Pedidos</a>
+                <a href="Ajustes.html">Ajustes</a>
+
+                <!-- CERRAR SESIÓN -->
+                <a href="#" id="btnCerrarSesion" class="logout">
+                    Cerrar sesión
+                </a>
+
+            </aside>
 
         </nav>
     </header>
-    
+
     <div class="containere">
         <h1>SIGUE TU PEDIDO</h1>
 
-    <div class="input-group">
-        <input type="text" id="codigoRastreo" placeholder="Ingresa tu número de pedido">
+        <div class="input-group">
+            <input type="text" id="codigoRastreo" placeholder="Ingresa tu número de pedido">
+        </div>
+
+        <button class="btn-track" onclick="iniciarRastreo()">RASTREAR PEDIDO</button>
+
+        <div class="progress-tracker" id="tracker">
+            <div class="progress-line"></div>
+
+            <div class="step">
+                <div class="step-icon">✓</div>
+                <div class="step-label">Recibido</div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">📦</div>
+                <div class="step-label">En preparación</div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">🚚</div>
+                <div class="step-label">En camino</div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">🎯</div>
+                <div class="step-label">Entregado</div>
+            </div>
+        </div>
+
+        <div class="status-box" id="statusBox">
+            <h2>Estado:</h2>
+            <div class="status-icon-large">⏳</div>
+            <div class="status-text">Esperando código…</div>
+        </div>
+
+        <a href="https://wa.me/573228651543" class="btn-support" target="_blank">
+            CONTACTAR SOPORTE
+        </a>
+
     </div>
-
-    <button class="btn-track" onclick="iniciarRastreo()">RASTREAR PEDIDO</button>
-
-    <div class="progress-tracker" id="tracker">
-    <div class="progress-line"></div>
-
-    <div class="step">
-        <div class="step-icon">✓</div>
-        <div class="step-label">Recibido</div>
-    </div>
-
-    <div class="step">
-        <div class="step-icon">📦</div>
-        <div class="step-label">En preparación</div>
-    </div>
-
-    <div class="step">
-        <div class="step-icon">🚚</div>
-        <div class="step-label">En camino</div>
-    </div>
-
-    <div class="step">
-        <div class="step-icon">🎯</div>
-        <div class="step-label">Entregado</div>
-    </div>
-</div>
-
-<div class="status-box" id="statusBox">
-    <h2>Estado:</h2>
-    <div class="status-icon-large">⏳</div>
-    <div class="status-text">Esperando código…</div>
-</div>
-
-    <a href="https://wa.me/573228651543" class="btn-support" target="_blank">
-    CONTACTAR SOPORTE
-</a>
-
-</div>
 
     <!-- BOTÓN FLOTANTE DE WHATSAPP -->
     <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank"> <!-- Enlace a WhatsApp -->
@@ -202,6 +217,7 @@
     <script src="Js/Menulateral.js"></script>
     <script src="Js/Carrito.js"></script>
     <script src="Js/Rastreo.js"></script>
+    <script src="Js/Encabezado.js"></script>
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->
