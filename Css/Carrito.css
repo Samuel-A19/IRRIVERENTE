@@ -459,3 +459,35 @@
         font-size: 15px;
     }
 }
+/* =========================
+   CONTADOR CARRITO
+========================= */
+.btn-carrito {
+    position: relative;
+}
+
+.contador-carrito {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: #e53935;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 3px 7px;
+    min-width: 18px;
+    text-align: center;
+    display: none;
+}
+
+/* Animación al agregar */
+@keyframes pop {
+    0% { transform: scale(0.5); }
+    70% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+.contador-carrito.pop {
+    animation: pop 0.3s ease;
+}

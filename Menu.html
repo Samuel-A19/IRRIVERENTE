@@ -58,7 +58,12 @@
             <a href="Siguepedido.html">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
             <a href="Acercanosotros.html">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
             <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
-            <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
+            <a href="#" id="btnCarrito" class="btn-carrito">
+    <i class="bi bi-cart"></i>
+    CARRITO
+    <span id="contadorCarrito" class="contador-carrito">0</span>
+</a>
+
             <div id="carritoDropdown" class="carrito-dropdown">
                 <h3>Tu Carrito</h3>
                 <ul id="carritoLista" class="carrito-lista">

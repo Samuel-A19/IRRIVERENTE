@@ -29,23 +29,32 @@
 }
 
 /* ===============================
-   MENÚ LATERAL
+   MENÚ LATERAL (BASE)
 ================================ */
 #sideMenu {
     position: fixed;
     top: 0;
     right: 0;
+
     width: 300px;
     max-width: 85vw;
+    min-width: 280px;
+
     height: 100vh;
     background: #111;
     color: #fff;
+
     transform: translateX(100%);
     transition: transform 0.3s ease;
+
     z-index: 1002;
+
     display: flex;
     flex-direction: column;
     padding: 1.5rem 1.2rem;
+
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 #sideMenu.active {
@@ -53,155 +62,34 @@
 }
 
 /* ===============================
-   HEADER
-================================ */
-.menu-header h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-/* ===============================
-   AVATAR
-================================ */
-.menu-avatar {
-    display: flex;
-    justify-content: center;
-    margin: 1.5rem 0 2rem;
-}
-
-.avatar-circle {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: #333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.6rem;
-    font-weight: bold;
-    user-select: none;
-}
-
-/* ===============================
-   LINKS
-================================ */
-.menu-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-.menu-links a {
-    color: #fff;
-    text-decoration: none;
-    padding: 0.9rem 1rem;
-    border-radius: 8px;
-    transition: background 0.2s ease;
-}
-
-.menu-links a:hover {
-    background: #222;
-}
-
-/* ===============================
-   FOOTER (ARRIBA)
-================================ */
-.menu-footer {
-    margin-top: 1rem;
-    /* 👈 queda arriba, sin empujar */
-}
-
-.menu-footer a {
-    color: #ff4d4d;
-    text-decoration: none;
-    padding: 0.9rem 1rem;
-    display: block;
-    border-radius: 8px;
-    transition: background 0.2s ease;
-}
-
-.menu-footer a:hover {
-    background: rgba(255, 77, 77, 0.15);
-}
-
-/* ===============================
-   DESKTOP AJUSTES
-================================ */
-@media (min-width: 1024px) {
-    #sideMenu {
-        width: 320px;
-    }
-}
-
-/* ===============================
-   PERFIL USUARIO - MENÚ LATERAL
+   PERFIL USUARIO
 ================================ */
 .side-user {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 0.8rem;
     padding: 1.2rem 0;
 }
 
-/* FOTO PERFIL */
 .side-user img {
     width: 170px;
-    /* 🔧 tamaño controlado */
     height: 170px;
     border-radius: 50%;
     object-fit: cover;
-    /* evita deformación */
-    border: 3px solid #ffffff;
+    border: 3px solid #fff;
+    flex-shrink: 0;
 }
 
-/* NOMBRE USUARIO */
 .side-user span {
-    font-size: 1.0rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #fff;
     text-align: center;
 }
 
-/* SEPARADOR */
-#sideMenu hr {
-    width: 100%;
-    border: none;
-    height: 1px;
-    background: #333;
-    margin: 1rem 0;
-}
-
 /* ===============================
-   REDES SOCIALES - MENU LATERAL
-================================ */
-.side-social {
-    margin-top: auto;
-    /* 🔑 empuja al fondo */
-    padding-top: 1rem;
-    display: flex;
-    justify-content: center;
-    /* centrado horizontal */
-    gap: 1.2rem;
-    /* espacio simétrico */
-    border-top: 1px solid #222;
-}
-
-.side-social a {
-    color: #fff;
-    font-size: 1.4rem;
-    transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.side-social a:hover {
-    color: #ff4d4d;
-    /* mismo tono del sitio */
-    transform: scale(1.15);
-}
-
-/* ===============================
-   DIVISOR MENU LATERAL
+   DIVISOR
 ================================ */
 .side-divider {
     width: 100%;
@@ -212,45 +100,103 @@
 }
 
 /* ===============================
-   FOTO PERFIL MENU LATERAL
+   LINKS
 ================================ */
-#sideMenu .side-user img {
-    width: 170px !important;
-    height: 170px !important;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
+#sideMenu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.9rem 1rem;
+    border-radius: 8px;
+    transition: background 0.2s ease;
 }
 
-#sideMenu .side-user {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
+#sideMenu a:hover {
+    background: #222;
 }
 
 /* ===============================
-   BLINDAJE MENU LATERAL
+   REDES SOCIALES
 ================================ */
-#sideMenu {
-    position: fixed;
-    top: 0;
-    right: 0;
-
-    width: 300px;
-    /* ancho fijo */
-    max-width: 85vw;
-    /* responsive */
-    min-width: 280px;
-    /* 🔑 evita encogerse */
-
-    height: 100vh;
-
-    box-sizing: border-box;
-    flex-shrink: 0 !important;
-    /* 🔑 clave */
+.side-social {
+    margin-top: auto;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    border-top: 1px solid #222;
 }
 
+.side-social a {
+    font-size: 1.4rem;
+    transition: transform 0.2s ease;
+}
+
+.side-social a:hover {
+    transform: scale(1.15);
+}
+
+/* Colores originales */
+.side-social a .bi-instagram { color: #E1306C; }
+.side-social a .bi-facebook  { color: #1877F2; }
+.side-social a .bi-tiktok {
+    color: #fff;
+    text-shadow:
+        1px 1px 0 #25F4EE,
+        -1px -1px 0 #FE2C55;
+}
+
+/* ===============================
+   RESPONSIVE - MÓVIL
+================================ */
+@media (max-width: 480px) {
+    #sideMenu {
+        width: 100vw;
+        max-width: 100vw;
+        min-width: 100vw;
+        padding: 1.2rem 1rem;
+    }
+
+    .side-user img {
+        width: 130px;
+        height: 130px;
+    }
+
+    #sideMenu a {
+        font-size: 1rem;
+        text-align: center;
+    }
+}
+
+/* ===============================
+   RESPONSIVE - TABLET
+================================ */
+@media (min-width: 481px) and (max-width: 768px) {
+    #sideMenu {
+        width: 85vw;
+        max-width: 85vw;
+        min-width: unset;
+    }
+
+    .side-user img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* ===============================
+   RESPONSIVE - DESKTOP
+================================ */
+@media (min-width: 769px) {
+    #sideMenu {
+        width: 300px;
+        max-width: 85vw;
+        min-width: 280px;
+    }
+}
+
+/* ===============================
+   BLINDAJE FINAL
+================================ */
 aside#sideMenu {
-    width: 300px !important;
+    width: auto;
 }

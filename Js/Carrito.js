@@ -57,9 +57,18 @@ document.addEventListener("DOMContentLoaded", () => {
             total += item.precio * item.cantidad;
         });
 
+        /* ===== CONTADOR SUPERIOR ===== */
         if (contadorCarrito) {
             contadorCarrito.textContent = contador;
-            contadorCarrito.style.display = contador > 0 ? "inline-block" : "none";
+
+            if (contador > 0) {
+                contadorCarrito.style.display = "inline-block";
+                contadorCarrito.classList.remove("pop");
+                void contadorCarrito.offsetWidth;
+                contadorCarrito.classList.add("pop");
+            } else {
+                contadorCarrito.style.display = "none";
+            }
         }
 
         if (totalTexto) {
@@ -146,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
      **************************************************/
     document.querySelector(".carrito-acciones .checkout")?.addEventListener("click", () => {
         if (carrito.length === 0) {
-            mostrarAlerta("Tu carrito está vacío", "Información");
+            alert("Tu carrito está vacío");
             return;
         }
 
@@ -165,5 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
         actualizarCarrito();
     };
 
+    /* ===== CARGA INICIAL ===== */
     actualizarCarrito();
 });

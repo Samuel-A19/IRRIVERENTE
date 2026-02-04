@@ -1,1 +1,5 @@
-{"config":{"secure-http":false}} 
+{"config":{"secure-http":false},
+    "require": {
+        "phpmailer/phpmailer": "^7.0"
+    }
+}
