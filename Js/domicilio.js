@@ -56,13 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // ✅ SI VIENE DESDE PAGO, REGRESA A PAGO
         if (localStorage.getItem("volverAPago") === "true") {
-    // 🔁 Viene desde Pago → regresa a Pago
-    localStorage.removeItem("volverAPago");
-    window.location.href = "Pago.html";
-} else {
-    // 🆕 Viene normal → ir al menú
-    window.location.href = "Menu.html";
-}
+            localStorage.removeItem("volverAPago");
+            window.location.href = "Pago.html";
+        } else {
+            window.location.href = "Menu.html";
+        }
+
 
     });
 

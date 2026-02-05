@@ -1,10 +1,9 @@
 /* FORMULARIO */
-
 .container {
     max-width: 1100px;
     margin: 28px auto;
     padding: 40px;
-    background: #222; 
+    background: #222;
     border-radius: 15px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, .6);
 }
@@ -55,7 +54,8 @@ textarea {
     padding: 12px;
     border-radius: 6px;
     border: none;
-    background: #444; /* 🔥 igual que Domicilio */
+    background: #444;
+    /* 🔥 igual que Domicilio */
     color: #fff;
     font-size: 14px;
     box-sizing: border-box;
@@ -103,7 +103,8 @@ textarea {
     border-radius: 6px;
     border: none;
     background: #218838;
-    color: #ffffff; /* 👈 TEXTO BLANCO */
+    color: #ffffff;
+    /* 👈 TEXTO BLANCO */
     font-weight: 700;
     cursor: pointer;
     font-size: 16px;
@@ -111,12 +112,14 @@ textarea {
 
 .btn:hover {
     background: #e9541f;
-    color: #ffffff; /* 👈 SE MANTIENE BLANCO */
+    color: #ffffff;
+    /* 👈 SE MANTIENE BLANCO */
 }
 
 .btn.secondary {
     background: #444;
-    color: #ffffff; /* 👈 TEXTO BLANCO */
+    color: #ffffff;
+    /* 👈 TEXTO BLANCO */
 }
 
 
@@ -130,8 +133,9 @@ textarea {
 }
 
 .resumen-entrega h3 {
-    font-size: 28px;          /* más grande */
-    color: #f16529;           /* naranja de tu marca */
+    font-size: 28px;
+    text-align: center;
+    color: #f16529;
     font-weight: 700;
     margin-bottom: 20px;
 }
@@ -163,20 +167,22 @@ input[type="radio"]:focus {
 
 /* Espacio correcto debajo del header */
 .pagina-pago #bloqueEntrega {
-    margin-top: 175px; /* ajusta si tu header es más alto */
+    margin-top: 175px;
+
 }
 
 /* CONTENEDOR CENTRAL PARA DATOS DE ENTREGA */
 #bloqueEntrega {
-    display: none;              /* oculto hasta enviar pago */
+    display: none;
+    /* oculto hasta enviar pago */
     position: relative;
     max-width: 420px;
-    
+
 }
 
 .pagina-pago #bloqueEntrega {
     position: relative;
-    top: -70px;   
+    top: -70px;
 }
 
 .acciones-pago {
@@ -200,14 +206,14 @@ input[type="radio"]:focus {
     padding: 10px;
 }
 
+/* Quitar fondo SOLO del resumen de pedido */
 .resumen-pedido {
-    background: #1b1b1b;
-    border-radius: 12px;
-    padding: 25px;
-    margin-top: 20px;
-    color: #fff;
-    box-shadow: 0 6px 15px rgba(0,0,0,.5);
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
 }
+
 
 .resumen-pedido h3 {
     margin-top: 0;
@@ -234,13 +240,26 @@ input[type="radio"]:focus {
 
 .resumen-pedido hr {
     border: none;
-    border-top: 1px solid #333;
+    border-top: 1px solid #f16529;
     margin: 15px 0;
 }
 
+/* ===============================
+   CONTENEDOR GENERAL CHECKOUT
+================================ */
 
+.checkout-wrapper {
+    max-width: 420px;
+    margin: 180px auto 40px;
+    /* debajo del header */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+}
 
-
-
-
-
+/* quitar hacks viejos */
+#bloqueEntrega {
+    position: static;
+    top: auto;
+}
