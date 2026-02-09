@@ -2,72 +2,73 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-header("Content-Type: application/json");
+header('Content-Type: application/json; charset=utf-8');
 
-$ACCESS_TOKEN = "TEST-";
+$ACCESS_TOKEN = 'TEST-8697586186314967-020907-840968211a6dfe78f624a4dc05b0f4c3-3181533452';
 
-$data = json_decode(file_get_contents("php://input"), true);
-$carrito = $data["carrito"] ?? [];
+// LEER JSON
+$raw = file_get_contents("php://input");
+$data = json_decode($raw, true);
 
-if (empty($carrito)) {
-    echo json_encode(["error" => "Carrito vacío"]);
+if (!$data || empty($data['carrito'])) {
+    echo json_encode(["error" => "Carrito inválido"]);
     exit;
 }
 
+// ARMAR ITEMS
 $items = [];
 
-foreach ($carrito as $p) {
-    $precioLimpio = preg_replace('/[^0-9]/', '', $p["precio"]);
+foreach ($data['carrito'] as $p) {
+    $precio = (int) preg_replace('/[^0-9]/', '', $p['precio']);
+    $cantidad = (int)($p['cantidad'] ?? 1);
+
+    if ($precio <= 0) continue;
 
     $items[] = [
-        "title" => $p["nombre"],
-        "quantity" => (int)$p["cantidad"],
-        "unit_price" => (float)$precioLimpio,
+        "title" => $p['nombre'],
+        "quantity" => $cantidad,
+        "unit_price" => $precio,
         "currency_id" => "COP"
     ];
 }
 
+if (!$items) {
+    echo json_encode(["error" => "Items inválidos"]);
+    exit;
+}
+
+// CREAR PREFERENCIA
 $preference = [
     "items" => $items,
     "back_urls" => [
-        "success" => "http://localhost/IRRIVERENTE/Siguepedido.html",
-        "failure" => "http://localhost/IRRIVERENTE/Pago.html",
-        "pending" => "http://localhost/IRRIVERENTE/Siguepedido.html"
+        "success" => "http://localhost/IRRIVERENTE/pago_exitoso.html",
+        "failure" => "http://localhost/IRRIVERENTE/pago_error.html",
+        "pending" => "http://localhost/IRRIVERENTE/pago_pendiente.html"
     ],
-    "auto_return" => "approved"
 ];
 
 $ch = curl_init("https://api.mercadopago.com/checkout/preferences");
-curl_setopt_array($ch, [
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_POST => true,
-    CURLOPT_HTTPHEADER => [
-        "Authorization: Bearer $ACCESS_TOKEN",
-        "Content-Type: application/json"
-    ],
-    CURLOPT_POSTFIELDS => json_encode($preference)
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer $ACCESS_TOKEN",
+    "Content-Type: application/json"
 ]);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($preference));
 
 $response = curl_exec($ch);
-
-if ($response === false) {
-    echo json_encode(["error" => curl_error($ch)]);
-    curl_close($ch);
-    exit;
-}
-
 curl_close($ch);
 
-$respuesta = json_decode($response, true);
+$result = json_decode($response, true);
 
-if (!isset($respuesta["init_point"])) {
-    echo json_encode([
-        "error" => "Mercado Pago no devolvió init_point",
-        "respuesta" => $respuesta
-    ]);
-    exit;
-}
+echo json_encode($result);
+exit;
 
+
+
+// ✅ RESPUESTA CORRECTA
 echo json_encode([
-    "init_point" => $respuesta["init_point"]
+    "sandbox_init_point" => $result['sandbox_init_point']
 ]);
+exit;
+

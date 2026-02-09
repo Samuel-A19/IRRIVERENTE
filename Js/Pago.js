@@ -17,11 +17,11 @@ function limpiarPrecio(valor) {
 }
 
 /**************************************************
- * CARGA INICIAL
+ * CARGA INICIAL (RESUMEN)
  **************************************************/
 document.addEventListener("DOMContentLoaded", () => {
+
     const datosCliente = JSON.parse(localStorage.getItem("datosCliente"));
-    const metodoPago = JSON.parse(localStorage.getItem("metodoPago"));
     const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
     /* ===== DATOS CLIENTE ===== */
@@ -36,112 +36,135 @@ document.addEventListener("DOMContentLoaded", () => {
         set("res-email", datosCliente.email);
         set("res-direccion", datosCliente.direccion);
         set("res-referencias", datosCliente.referencias);
-
-        if (document.getElementById("customerName")) {
-            document.getElementById("customerName").value = datosCliente.nombre || "";
-            document.getElementById("phone").value = datosCliente.telefono || "";
-            document.getElementById("email").value = datosCliente.email || "";
-        }
-    }
-
-    /* ===== MÉTODO DE PAGO ===== */
-    if (metodoPago) {
-        document.getElementById("res-metodo").textContent =
-            metodoPago.banco || metodoPago.metodo;
     }
 
     /* ===== RESUMEN DEL PEDIDO ===== */
     const ul = document.getElementById("resumenProductos");
     const totalEl = document.getElementById("resumenTotal");
 
-    if (ul && totalEl) {
-        ul.innerHTML = "";
-        let total = 0;
+    if (!ul || !totalEl) return;
 
-        carrito.forEach(p => {
-            const precio = limpiarPrecio(p.precio);
-            const cantidad = Number(p.cantidad) || 1;
-            const subtotal = precio * cantidad;
+    ul.innerHTML = "";
+    let total = 0;
 
-            const li = document.createElement("li");
-            li.textContent = `${p.nombre} x${cantidad} — ${formatoCOP(subtotal)}`;
-            ul.appendChild(li);
-
-            total += subtotal;
-        });
-
-        totalEl.textContent = formatoCOP(total);
+    if (carrito.length === 0) {
+        ul.innerHTML = "<li>Carrito vacío</li>";
+        totalEl.textContent = formatoCOP(0);
+        return;
     }
+
+    carrito.forEach(p => {
+        const precio = limpiarPrecio(p.precio);
+        const cantidad = Number(p.cantidad) || 1;
+        const subtotal = precio * cantidad;
+
+        const li = document.createElement("li");
+        li.textContent = `${p.nombre} x${cantidad} — ${formatoCOP(subtotal)}`;
+        ul.appendChild(li);
+
+        total += subtotal;
+    });
+
+    totalEl.textContent = formatoCOP(total);
 });
 
 /**************************************************
- * FORMULARIO DE PAGO
+ * FORMULARIO + PAGAR
  **************************************************/
-const form = document.getElementById("paymentForm");
-const transferFields = document.getElementById("transferFields");
+document.addEventListener("DOMContentLoaded", () => {
 
-if (form) {
-    const radios = document.querySelectorAll('input[name="paymentMethod"]');
+    const form = document.getElementById("paymentForm");
+    const btnPagar = document.getElementById("btnPagar");
 
-    radios.forEach(radio => {
-        radio.addEventListener("change", () => {
-            if (radio.value === "efectivo") {
-                transferFields.classList.add("hidden");
-            } else {
-                transferFields.classList.remove("hidden");
-            }
-        });
-    });
+    if (!form || !btnPagar) return;
+
+    btnPagar.disabled = true;
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
         const metodo = form.paymentMethod.value;
-        const banco = metodo === "transferencia"
-            ? form.bankName.value
-            : "Efectivo";
+        localStorage.setItem("metodoPago", JSON.stringify({ metodo }));
 
-        if (metodo === "transferencia" && !banco) {
-            mostrarAlerta("Selecciona Nequi o Bancolombia", "Atención");
+        document.getElementById("res-metodo").textContent =
+            metodo === "efectivo" ? "Efectivo" : "Mercado Pago";
+
+        document.getElementById("bloqueFormulario").style.display = "none";
+        document.getElementById("bloqueEntrega").style.display = "block";
+        document.getElementById("resumenPedido").style.display = "block";
+        document.querySelector(".acciones-pago").style.display = "flex";
+
+        btnPagar.disabled = false;
+    });
+
+    btnPagar.addEventListener("click", () => {
+
+        const metodoPago = JSON.parse(localStorage.getItem("metodoPago"));
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        if (!metodoPago) {
+            alert("Envía el formulario primero");
             return;
         }
 
-        localStorage.setItem("metodoPago", JSON.stringify({ metodo, banco }));
+        if (carrito.length === 0) {
+            alert("El carrito está vacío");
+            return;
+        }
 
-        document.getElementById("res-metodo").textContent = banco;
-        document.getElementById("bloqueFormulario").style.display = "none";
-        document.getElementById("bloqueEntrega").style.display = "block";
+        if (metodoPago.metodo === "efectivo") {
+            alert("Pedido confirmado. Pago en efectivo.");
+            window.location.href = "Siguepedido.html";
+            return;
+        }
+        console.log("Carrito enviado:", carrito);
+
+
+        fetch("api/crear_pago.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ carrito })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Respuesta MP:", data);
+
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                if (!data.sandbox_init_point) {
+                    alert("No se pudo generar el pago");
+                    console.error(data);
+                    return;
+                }
+
+                window.location.href = data.sandbox_init_point;
+            })
     });
-}
-
+});
 /**************************************************
- * BOTÓN PAGAR
+ * EDITAR DATOS
  **************************************************/
-document.getElementById("btnPagar")?.addEventListener("click", () => {
-    const metodoPago = JSON.parse(localStorage.getItem("metodoPago"));
+document.addEventListener("DOMContentLoaded", () => {
 
-    if (!metodoPago) {
-        mostrarAlerta("Selecciona un método de pago", "Atención");
-        return;
-    }
+    const btnEditar = document.getElementById("btnEditar");
+    const btnPagar = document.getElementById("btnPagar");
+    const bloqueFormulario = document.getElementById("bloqueFormulario");
+    const bloqueEntrega = document.getElementById("bloqueEntrega");
 
-    if (metodoPago.banco === "Nequi") {
-        mostrarAlerta("Realiza el pago por Nequi y presiona 'Ya pagué'", "Información");
-        window.open("https://nequi.com.co/", "_blank");
-    }
-    else if (metodoPago.banco === "Bancolombia") {
-        mostrarAlerta("Realiza el pago por Bancolombia y presiona 'Ya pagué'", "Información");
-        window.open("https://www.bancolombia.com/personas", "_blank");
-    }
-    else {
-        mostrarAlerta("Pedido confirmado. Pago en efectivo.", "Éxito");
-    }
+    if (!btnEditar) return;
+
+    btnEditar.addEventListener("click", () => {
+        // Mostrar formulario nuevamente
+        bloqueFormulario.style.display = "block";
+
+        // Ocultar resumen / entrega
+        bloqueEntrega.style.display = "none";
+
+        // Desactivar pagar hasta volver a enviar formulario
+        if (btnPagar) btnPagar.disabled = true;
+    });
 });
 
-/**************************************************
- * BOTÓN EDITAR DATOS
- **************************************************/
-document.getElementById("btnEditar")?.addEventListener("click", () => {
-    localStorage.setItem("volverAPago", "true");
-    window.location.href = "Domicilio.html";
-});
