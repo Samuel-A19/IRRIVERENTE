@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        /* 👉 GUARDAR CORREO DEL USUARIO (CLAVE PARA ADMIN) */
+        localStorage.setItem("usuarioCorreo", correo);
+
         mostrarAlerta("Datos actualizados correctamente", "Éxito");
 
         document.querySelector("#headerNombre").textContent = nombre;

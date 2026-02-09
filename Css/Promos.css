@@ -132,23 +132,3 @@
         margin-top: 105px;
     }
 }
-.btn-agregar-promo {
-    margin: 30px auto 30px;
-    display: block;
-    padding: 15px 25px;
-    background-color: #f16529;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.btn-agregar-promo:hover {
-    background-color: #ff7438;
-}
-.promo-contenedor {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-}

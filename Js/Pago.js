@@ -77,91 +77,71 @@ document.addEventListener("DOMContentLoaded", () => {
 /**************************************************
  * FORMULARIO DE PAGO
  **************************************************/
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("Pago.js cargado");
+const form = document.getElementById("paymentForm");
+const transferFields = document.getElementById("transferFields");
 
-    const form = document.getElementById("paymentForm");
-    const btnPagar = document.getElementById("btnPagar");
+if (form) {
+    const radios = document.querySelectorAll('input[name="paymentMethod"]');
 
-    if (!form || !btnPagar) {
-        console.error("Formulario o botón no encontrados");
-        return;
-    }
+    radios.forEach(radio => {
+        radio.addEventListener("change", () => {
+            if (radio.value === "efectivo") {
+                transferFields.classList.add("hidden");
+            } else {
+                transferFields.classList.remove("hidden");
+            }
+        });
+    });
 
-    // ENVIAR PAGO
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
         const metodo = form.paymentMethod.value;
+        const banco = metodo === "transferencia"
+            ? form.bankName.value
+            : "Efectivo";
 
-        localStorage.setItem("metodoPago", JSON.stringify({ metodo }));
+        if (metodo === "transferencia" && !banco) {
+            mostrarAlerta("Selecciona Nequi o Bancolombia", "Atención");
+            return;
+        }
 
-        document.getElementById("res-metodo").textContent =
-            metodo === "efectivo" ? "Efectivo" : "Mercado Pago";
+        localStorage.setItem("metodoPago", JSON.stringify({ metodo, banco }));
 
+        document.getElementById("res-metodo").textContent = banco;
         document.getElementById("bloqueFormulario").style.display = "none";
         document.getElementById("bloqueEntrega").style.display = "block";
-        document.getElementById("resumenPedido").style.display = "block";
-        document.querySelector(".acciones-pago").style.display = "flex";
-
-        console.log("Formulario enviado");
     });
+}
 
-    // PAGAR AHORA
-    btnPagar.addEventListener("click", () => {
-        console.log("Click en PAGAR AHORA");
+/**************************************************
+ * BOTÓN PAGAR
+ **************************************************/
+document.getElementById("btnPagar")?.addEventListener("click", () => {
+    const metodoPago = JSON.parse(localStorage.getItem("metodoPago"));
 
-        const metodoPago = JSON.parse(localStorage.getItem("metodoPago"));
+    if (!metodoPago) {
+        mostrarAlerta("Selecciona un método de pago", "Atención");
+        return;
+    }
 
-        if (!metodoPago) {
-            alert("No hay método de pago");
-            return;
-        }
-
-        // EFECTIVO
-        if (metodoPago.metodo === "efectivo") {
-            alert("Pedido confirmado. Pago en efectivo.");
-            window.location.href = "Siguepedido.html";
-            return;
-        }
-
-        // MERCADO PAGO
-        fetch("api/crear_pago.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                carrito: JSON.parse(localStorage.getItem("carrito")) || [],
-                cliente: JSON.parse(localStorage.getItem("datosCliente"))
-            })
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log("Respuesta Mercado Pago:", data);
-                if (data.init_point) {
-                    window.location.href = data.init_point;
-                } else {
-                    alert("Mercado Pago no respondió correctamente");
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                alert("Error de conexión con el servidor");
-            });
-    });
+    if (metodoPago.banco === "Nequi") {
+        mostrarAlerta("Realiza el pago por Nequi y presiona 'Ya pagué'", "Información");
+        window.open("https://nequi.com.co/", "_blank");
+    }
+    else if (metodoPago.banco === "Bancolombia") {
+        mostrarAlerta("Realiza el pago por Bancolombia y presiona 'Ya pagué'", "Información");
+        window.open("https://www.bancolombia.com/personas", "_blank");
+    }
+    else {
+        mostrarAlerta("Pedido confirmado. Pago en efectivo.", "Éxito");
+    }
 });
 
 /**************************************************
- * BOTÓN EDITAR DATOS (VOLVER A DOMICILIO)
+ * BOTÓN EDITAR DATOS
  **************************************************/
 document.getElementById("btnEditar")?.addEventListener("click", () => {
-    console.log("Click en EDITAR DATOS");
-
-    // Bandera correcta
     localStorage.setItem("volverAPago", "true");
-
     window.location.href = "Domicilio.html";
 });
-
-
-
-
