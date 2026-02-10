@@ -1,8 +1,9 @@
 /* 8. PÁGINA DE PERFIL DE USUARIO */
 h1 {
     color: #ffffff;
-    padding: 20px;
+    padding: 51px;
     text-align: center;
+    font-size: 55px;
 }
 
 .container {
@@ -17,7 +18,6 @@ h1 {
     background: #111;
     padding: 20px;
     border-radius: 10px;
-    border: 1px solid #f16529;
 }
 
 .user-header img {
