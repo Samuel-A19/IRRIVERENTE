@@ -19,10 +19,11 @@ body {
 }
 
 .container h1 {
-    font-size: 3rem;
+    font-size: 55px;
+    padding: 59px;
     margin-bottom: 10px;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
 }
 
 .container > p {
