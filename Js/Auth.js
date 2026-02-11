@@ -94,15 +94,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateSessionState() {
         const userName = localStorage.getItem("userName");
+        const imageUpload = document.getElementById("promoImageUpload");
+        const btnAgregarPromoMenu = document.getElementById("btnAgregarPromoMenu");
 
         if (userName) {
             loginLink.innerHTML = `<i class="bi bi-person"></i> ${userName}`;
             loginLink.onclick = null;
             logoutLink.style.display = "inline";
+            if (imageUpload) imageUpload.style.display = "none";
+            if (btnAgregarPromoMenu) btnAgregarPromoMenu.style.display = "none";
         } else {
             loginLink.innerHTML = `<i class="bi bi-person"></i> INICIAR SESIÓN`;
             loginLink.onclick = () => openModal("loginModal");
             logoutLink.style.display = "none";
+            if (imageUpload) imageUpload.style.display = "block";
+            if (btnAgregarPromoMenu) btnAgregarPromoMenu.style.display = "block";
         }
     }
 

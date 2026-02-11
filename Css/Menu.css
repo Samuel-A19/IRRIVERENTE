@@ -296,4 +296,33 @@ body {
 .auth-modal button:hover {
     background: #388e3c;
 }
+/* BOTÓN AGREGAR PRODUCTO */
+.btn-agregar-promo {
+    display: block;
+    margin: 0 auto 35px auto;   /* CENTRADO */
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #f25c2a, #ff784e);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(242, 92, 42, 0.5);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
 
+/* HOVER */
+.btn-agregar-promo:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 35px rgba(242, 92, 42, 0.7);
+    background: linear-gradient(135deg, #ff784e, #f25c2a);
+}
+
+/* ACTIVO (CLICK) */
+.btn-agregar-promo:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 5px 15px rgba(242, 92, 42, 0.4);
+}

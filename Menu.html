@@ -156,6 +156,9 @@
             <button class="filter" data-category="gaseosa">Gaseosas</button>
         </div>
 
+        <button id="btnAgregarPromoMenu" class="btn-agregar-promo" onclick="openModal('crearPromoModal')">AGREGAR PRODUCTO</button>
+        
+
         <!-- Productos -->
         <div class="products" id="products">
             <!-- PIZZAS (solo 1 tarjeta por sabor) -->
@@ -432,13 +435,40 @@
         </div>
     </div>
 
+    <!-- MODAL: CREAR PROMO -->
+    <div id="crearPromoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('crearPromoModal')">&times;</span>
 
+            <h2>Crear Producto</h2>
+
+            <!-- SUBIR IMAGEN ESTÉTICO -->
+            <label id="promoImageUpload" for="promoImagen" class="upload-box">
+                <i class="bi bi-image"></i>
+                <span>Agregar imagen</span>
+                <img id="previewPromo" style="display:none;">
+            </label>
+
+            <input type="file" id="ImagenProducto" accept="image/*" hidden onchange="previewImagen(event)">
+
+            <input type="text" id="TituloProducto" placeholder="Título del producto">
+
+            <textarea id="Descripcionproducto" placeholder="Descripción"></textarea>
+
+            <input type="number" id="PrecioProducto" placeholder="Precio">
+
+            <button class="btn-modal" onclick="crearProducto()">
+                Crear producto
+            </button>
+        </div>
+    </div>
 
     <!-- ENLACE AL SCRIPT EXTERNO CON FUNCIONES Y ANIMACIONES -->
 
     <script src="Js/Auth.js"></script>
     <script src="Js/Carrito.js"></script>
     <script src="Js/Menu.js"></script>
+    <script src="Js/Promos.js"></script>
     <script src="Js/Modales.js"></script>
     <script src="Js/Menulateral.js"></script>
 
