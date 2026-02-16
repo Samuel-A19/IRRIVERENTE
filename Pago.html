@@ -137,7 +137,9 @@
             <div class="row">
                 <div class="col">
                     <label for="phone">Teléfono</label>
-                    <input id="phone" name="phone" type="tel" placeholder="Ej. 300 123 4567" required>
+                    <input id="phone" name="phone" type="tel" placeholder="Ej. 3001234567" maxlength="10"
+                        inputmode="numeric" pattern="[0-9]{10}" required>
+
                 </div>
                 <div class="col">
                     <label for="email">Correo electrónico</label>
@@ -203,7 +205,7 @@
             </div>
 
             <div class="resumen-seccion">
-                <p><strong>Total:</strong> $<span id="resumenTotal">0</span></p>
+                <p><strong>Total:</strong> <span id="resumenTotal">0</span></p>
             </div>
         </div>
 

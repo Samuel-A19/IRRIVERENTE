@@ -146,7 +146,9 @@
 
                     <div class="campo">
                         <label for="telefono">Teléfono de contacto</label>
-                        <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono" required>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono"
+                            maxlength="10" inputmode="numeric" pattern="[0-9]{10}" required>
+
                         <div class="error-msg" id="err-telefono"></div>
                     </div>
 

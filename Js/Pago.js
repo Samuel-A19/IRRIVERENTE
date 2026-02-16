@@ -1,5 +1,5 @@
 /**************************************************
- * FORMATO COP Y LIMPIEZA DE PRECIOS
+ * UTILIDADES
  **************************************************/
 function formatoCOP(valor) {
     return Number(valor).toLocaleString("es-CO", {
@@ -17,18 +17,57 @@ function limpiarPrecio(valor) {
 }
 
 /**************************************************
- * CARGA INICIAL (RESUMEN)
+ * INICIO
  **************************************************/
 document.addEventListener("DOMContentLoaded", () => {
 
+    // =============================
+    // CARGAR DATOS DESDE STORAGE
+    // =============================
     const datosCliente = JSON.parse(localStorage.getItem("datosCliente"));
+    let metodoPago = JSON.parse(localStorage.getItem("metodoPago"));
     const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    /* ===== DATOS CLIENTE ===== */
+    // =============================
+    // ELEMENTOS DEL DOM
+    // =============================
+    const form = document.getElementById("paymentForm");
+    const btnPagar = document.getElementById("btnPagar");
+    const btnEditar = document.getElementById("btnEditar");
+    const clearBtn = document.getElementById("clearBtn");
+
+    const phone = document.getElementById("phone");
+    const inputNombre = document.getElementById("customerName");
+    const inputEmail = document.getElementById("email");
+
+    const bloqueFormulario = document.getElementById("bloqueFormulario");
+    const bloqueEntrega = document.getElementById("bloqueEntrega");
+    const resumenPedido = document.getElementById("resumenPedido");
+    const accionesPago = document.querySelector(".acciones-pago");
+
+    const ul = document.getElementById("resumenProductos");
+    const totalEl = document.getElementById("resumenTotal");
+
+    if (!form || !btnPagar) return;
+
+    btnPagar.disabled = true;
+
+    // =============================
+    // AUTORELLENAR FORMULARIO PAGO
+    // =============================
     if (datosCliente) {
-        const set = (id, val) => {
+        if (inputNombre) inputNombre.value = datosCliente.nombre || "";
+        if (phone) phone.value = datosCliente.telefono || "";
+        if (inputEmail) inputEmail.value = datosCliente.email || "";
+    }
+
+    // =============================
+    // RELLENAR DATOS DE ENTREGA
+    // =============================
+    if (datosCliente) {
+        const set = (id, valor) => {
             const el = document.getElementById(id);
-            if (el) el.textContent = val || "—";
+            if (el) el.textContent = valor || "—";
         };
 
         set("res-nombre", datosCliente.nombre);
@@ -38,88 +77,92 @@ document.addEventListener("DOMContentLoaded", () => {
         set("res-referencias", datosCliente.referencias);
     }
 
-    /* ===== RESUMEN DEL PEDIDO ===== */
-    const ul = document.getElementById("resumenProductos");
-    const totalEl = document.getElementById("resumenTotal");
-
-    if (!ul || !totalEl) return;
-
-    ul.innerHTML = "";
-    let total = 0;
-
-    if (carrito.length === 0) {
-        ul.innerHTML = "<li>Carrito vacío</li>";
-        totalEl.textContent = formatoCOP(0);
-        return;
+    // =============================
+    // TELÉFONO: SOLO NÚMEROS + 10
+    // =============================
+    if (phone) {
+        phone.addEventListener("input", () => {
+            phone.value = phone.value.replace(/\D/g, "").slice(0, 10);
+        });
     }
 
-    carrito.forEach(p => {
-        const precio = limpiarPrecio(p.precio);
-        const cantidad = Number(p.cantidad) || 1;
-        const subtotal = precio * cantidad;
+    // =============================
+    // MÉTODO DE PAGO (AUTO + CAMBIO)
+    // =============================
+    document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
 
-        const li = document.createElement("li");
-        li.textContent = `${p.nombre} x${cantidad} — ${formatoCOP(subtotal)}`;
-        ul.appendChild(li);
+        // Autoseleccionar si ya existe
+        if (metodoPago && metodoPago.metodo === radio.value) {
+            radio.checked = true;
+            document.getElementById("res-metodo").textContent =
+                radio.value === "efectivo" ? "Efectivo" : "Pago en Línea";
+        }
 
-        total += subtotal;
+        // Guardar al cambiar
+        radio.addEventListener("change", () => {
+            metodoPago = { metodo: radio.value };
+            localStorage.setItem("metodoPago", JSON.stringify(metodoPago));
+
+            document.getElementById("res-metodo").textContent =
+                radio.value === "efectivo" ? "Efectivo" : "Pago en Línea";
+        });
     });
 
-    totalEl.textContent = formatoCOP(total);
-});
+    // =============================
+    // RESUMEN DEL PEDIDO
+    // =============================
+    if (ul && totalEl) {
+        ul.innerHTML = "";
+        let total = 0;
 
-/**************************************************
- * FORMULARIO + PAGAR
- **************************************************/
-document.addEventListener("DOMContentLoaded", () => {
+        carrito.forEach(p => {
+            const subtotal = limpiarPrecio(p.precio) * (Number(p.cantidad) || 1);
+            const li = document.createElement("li");
+            li.textContent = `${p.nombre} x${p.cantidad} — ${formatoCOP(subtotal)}`;
+            ul.appendChild(li);
+            total += subtotal;
+        });
 
-    const form = document.getElementById("paymentForm");
-    const btnPagar = document.getElementById("btnPagar");
+        totalEl.textContent = formatoCOP(total);
+    }
 
-    if (!form || !btnPagar) return;
-
-    btnPagar.disabled = true;
-
-    form.addEventListener("submit", (e) => {
+    // =============================
+    // ENVIAR FORMULARIO
+    // =============================
+    form.addEventListener("submit", e => {
         e.preventDefault();
 
-        const metodo = form.paymentMethod.value;
-        localStorage.setItem("metodoPago", JSON.stringify({ metodo }));
+        if (!phone || phone.value.length !== 10) {
+            alert("El teléfono debe tener 10 números");
+            return;
+        }
 
-        document.getElementById("res-metodo").textContent =
-            metodo === "efectivo" ? "Efectivo" : "Mercado Pago";
-
-        document.getElementById("bloqueFormulario").style.display = "none";
-        document.getElementById("bloqueEntrega").style.display = "block";
-        document.getElementById("resumenPedido").style.display = "block";
-        document.querySelector(".acciones-pago").style.display = "flex";
+        bloqueFormulario.style.display = "none";
+        bloqueEntrega.style.display = "block";
+        resumenPedido.style.display = "block";
+        accionesPago.style.display = "flex";
 
         btnPagar.disabled = false;
     });
 
+    // =============================
+    // PAGAR
+    // =============================
     btnPagar.addEventListener("click", () => {
 
-        const metodoPago = JSON.parse(localStorage.getItem("metodoPago"));
-        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-        if (!metodoPago) {
-            alert("Envía el formulario primero");
+        if (!metodoPago || carrito.length === 0) {
+            alert("Información de pago incompleta");
             return;
         }
 
-        if (carrito.length === 0) {
-            alert("El carrito está vacío");
-            return;
-        }
-
+        // 💵 EFECTIVO
         if (metodoPago.metodo === "efectivo") {
-            alert("Pedido confirmado. Pago en efectivo.");
+            alert("Pedido confirmado. Pagarás en efectivo al recibir.");
             window.location.href = "Siguepedido.html";
             return;
         }
-        console.log("Carrito enviado:", carrito);
 
-
+        // 💳 MERCADO PAGO
         fetch("api/crear_pago.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -127,44 +170,39 @@ document.addEventListener("DOMContentLoaded", () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log("Respuesta MP:", data);
-
-                if (data.error) {
-                    alert(data.error);
-                    return;
-                }
-
                 if (!data.sandbox_init_point) {
                     alert("No se pudo generar el pago");
                     console.error(data);
                     return;
                 }
-
                 window.location.href = data.sandbox_init_point;
-            })
+            });
     });
+
+    // =============================
+    // LIMPIAR
+    // =============================
+    if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+            form.reset();
+            btnPagar.disabled = true;
+
+            accionesPago.style.display = "none";
+            resumenPedido.style.display = "none";
+            bloqueEntrega.style.display = "none";
+            bloqueFormulario.style.display = "block";
+
+            localStorage.removeItem("metodoPago");
+        });
+    }
+
+    // =============================
+    // EDITAR DATOS
+    // =============================
+    if (btnEditar) {
+        btnEditar.addEventListener("click", () => {
+            localStorage.setItem("volverAPago", "true");
+            window.location.href = "Domicilio.html";
+        });
+    }
 });
-/**************************************************
- * EDITAR DATOS
- **************************************************/
-document.addEventListener("DOMContentLoaded", () => {
-
-    const btnEditar = document.getElementById("btnEditar");
-    const btnPagar = document.getElementById("btnPagar");
-    const bloqueFormulario = document.getElementById("bloqueFormulario");
-    const bloqueEntrega = document.getElementById("bloqueEntrega");
-
-    if (!btnEditar) return;
-
-    btnEditar.addEventListener("click", () => {
-        // Mostrar formulario nuevamente
-        bloqueFormulario.style.display = "block";
-
-        // Ocultar resumen / entrega
-        bloqueEntrega.style.display = "none";
-
-        // Desactivar pagar hasta volver a enviar formulario
-        if (btnPagar) btnPagar.disabled = true;
-    });
-});
-
