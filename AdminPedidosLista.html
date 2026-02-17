@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="Css/Encabezado.css" />
     <link rel="stylesheet" href="Css/Fondos.css" />
     <link rel="stylesheet" href="Css/PiePagina.css" />
-    <link rel="stylesheet" href="Css/AdminPedido.css" />
+    <link rel="stylesheet" href="Css/AdminPedidosLista.css" />
     <link rel="stylesheet" href="Css/Carrito.css" />
     <link rel="stylesheet" href="Css/Modales.css" />
     <link rel="stylesheet" href="Css/Menulateral.css" />
@@ -128,37 +128,25 @@
         </nav>
     </header>
 
+    <section class="admin-lista">
+        <div class="admin-box">
+            <h1><strong>PEDIDOS REGISTRADOS</strong></h1>
 
-    <section id="admin-pedidos">
-        <div class="admin-container">
-
-            <h1><strong>GESTIÓN DE PEDIDOS</strong></h1>
-
-            <label>Número de pedido</label>
-            <input type="text" id="adminCodigo" placeholder="Ej: 1025">
-
-            <label>Estado actual del pedido</label>
-
-            <div class="estado-fila">
-                <select id="estadoPedido" class="estado-select">
-                    <option value="0">Recibido</option>
+            <div class="filtro">
+                <select id="filtroEstado" onchange="filtrarPedidos()">
+                    <option value="todos">Todos</option>
+                    <option value="0">Recibidos</option>
                     <option value="1">En preparación</option>
                     <option value="2">En camino</option>
-                    <option value="3">Entregado</option>
+                    <option value="3">Entregados</option>
                 </select>
-
-                <button class="btn-cambiar" onclick="cambiarEstado()">
-                    Cambiar estado
-                </button>
             </div>
 
-            <p class="info">
-                Este cambio se reflejará en la vista del cliente
-            </p>
-
+            <div id="listaPedidos"></div>
         </div>
     </section>
 
+    <script src="Js/AdminPedidosLista.js"></script>
 
 
     <!-- BOTÓN FLOTANTE DE WHATSAPP -->
@@ -217,7 +205,7 @@
     <script src="Js/Modales.js"></script>
     <script src="Js/Menulateral.js"></script>
     <script src="Js/Carrito.js"></script>
-    <script src="Js/AdminRastreo.js"></script>
+    <script src="Js/AdminPedidosLista.js"></script>
     <script src="Js/Encabezado.js"></script>
 
     <!-- PIE DE PÁGINA -->
