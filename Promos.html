@@ -132,39 +132,9 @@
     <!-- SECCIÓN DE PROMOCIONES -->
     <section class="promos">
         <h1><u>PROMOCIONES ACTUALES</u></h1>
-        
-        <button class="btn-agregar-promo" onclick="openModal('crearPromoModal')">
+     <button class="btn-agregar" data-modal="modalGeneral">
     AGREGAR PROMO
 </button>
-<!-- MODAL: CREAR PROMO -->
-<div id="crearPromoModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('crearPromoModal')">&times;</span>
-
-        <h2>Crear Promoción</h2>
-
-        <!-- SUBIR IMAGEN ESTÉTICO -->
-<label id="promoImageUpload" for="promoImagen" class="upload-box">
-    <i class="bi bi-image"></i>
-    <span>Agregar imagen</span>
-    <img id="previewPromo" style="display:none;">
-</label>
-
-<input type="file" id="promoImagen" accept="image/*" hidden onchange="previewImagen(event)">
-
-
-        <input type="text" id="promoTitulo" placeholder="Título de la promoción">
-
-        <textarea id="promoDescripcion" placeholder="Descripción"></textarea>
-
-        <input type="number" id="promoPrecio" placeholder="Precio">
-
-        <button class="btn-modal" onclick="crearPromo()">
-            Crear promoción
-        </button>
-    </div>
-</div>
-
 
         <div class="promo-contenedor">
 
@@ -245,6 +215,32 @@
             <!-- Enlace para ir al login -->
         </div>
     </div>
+    <!-- MODAL GENERAL -->
+    <div id="modalGeneral" class="modal-general">
+        <div class="modal-box">
+
+        <span class="cerrar-modal">&times;</span>
+
+        <h2>Crear Promoción</h2>
+
+        <label class="upload-box">
+            <i class="bi bi-image"></i>
+            <span>Agregar imagen</span>
+            <img class="preview-img">
+            <input type="file" hidden>
+        </label>
+
+        <input type="text" placeholder="Título de la promoción">
+        <textarea placeholder="Descripción"></textarea>
+        <input type="number" placeholder="Precio">
+
+        <button class="btn-modal-crear">
+            Guardar Promoción
+        </button>
+
+    </div>
+</div>
+
 
     <!-- ENLACE AL SCRIPT EXTERNO CON FUNCIONES Y ANIMACIONES -->
     <script src="Js/Auth.js"></script>

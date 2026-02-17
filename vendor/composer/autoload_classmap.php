@@ -7,4 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'MP' => $vendorDir . '/mercadopago/sdk/lib/mercadopago.php',
+    'MPRestClient' => $vendorDir . '/mercadopago/sdk/lib/mercadopago.php',
+    'MercadoPagoException' => $vendorDir . '/mercadopago/sdk/lib/mercadopago.php',
 );

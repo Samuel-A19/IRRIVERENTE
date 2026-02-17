@@ -38,3 +38,36 @@ document.getElementById("alertOverlay").addEventListener("click", e => {
 
 mostrarAlerta("Código enviado al correo", "Información");
 mostrarAlerta("Contraseña cambiada con éxito", "Éxito");
+/* ===========================
+   MODAL GENERAL (AGREGAR)
+=========================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const modalGeneral = document.getElementById("modalGeneral");
+
+    if (!modalGeneral) return;
+
+    // Abrir modal
+    document.querySelectorAll(".btn-agregar").forEach(btn => {
+        btn.addEventListener("click", function () {
+            modalGeneral.style.display = "flex";
+        });
+    });
+
+    // Cerrar con X
+    const cerrar = modalGeneral.querySelector(".cerrar-modal");
+    if (cerrar) {
+        cerrar.addEventListener("click", function () {
+            modalGeneral.style.display = "none";
+        });
+    }
+
+    // Cerrar haciendo click fuera
+    modalGeneral.addEventListener("click", function (e) {
+        if (e.target === modalGeneral) {
+            modalGeneral.style.display = "none";
+        }
+    });
+
+});

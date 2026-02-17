@@ -156,8 +156,10 @@
             <button class="filter" data-category="gaseosa">Gaseosas</button>
         </div>
 
-        <button id="btnAgregarPromoMenu" class="btn-agregar-promo" onclick="openModal('crearPromoModal')">AGREGAR PRODUCTO</button>
-        
+        <button class="btn-agregar" data-modal="modalCrear">
+    AGREGAR PRODUCTO
+</button>
+
 
         <!-- Productos -->
         <div class="products" id="products">
@@ -434,34 +436,32 @@
             </p>
         </div>
     </div>
+     <!-- MODAL GENERAL -->
+<div id="modalGeneral" class="modal-general">
+    <div class="modal-box">
 
-    <!-- MODAL: CREAR PROMO -->
-    <div id="crearPromoModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('crearPromoModal')">&times;</span>
+        <span class="cerrar-modal">&times;</span>
 
-            <h2>Crear Producto</h2>
+        <h2>Crear Producto</h2>
 
-            <!-- SUBIR IMAGEN ESTÉTICO -->
-            <label id="promoImageUpload" for="promoImagen" class="upload-box">
-                <i class="bi bi-image"></i>
-                <span>Agregar imagen</span>
-                <img id="previewPromo" style="display:none;">
-            </label>
+        <label class="upload-box">
+            <i class="bi bi-image"></i>
+            <span>Agregar imagen</span>
+            <img class="preview-img">
+            <input type="file" hidden>
+        </label>
 
-            <input type="file" id="ImagenProducto" accept="image/*" hidden onchange="previewImagen(event)">
+        <input type="text" placeholder="Título del producto">
+        <textarea placeholder="Descripción"></textarea>
+        <input type="number" placeholder="Precio">
 
-            <input type="text" id="TituloProducto" placeholder="Título del producto">
+        <button class="btn-modal-crear">
+            Guardar Producto
+        </button>
 
-            <textarea id="Descripcionproducto" placeholder="Descripción"></textarea>
-
-            <input type="number" id="PrecioProducto" placeholder="Precio">
-
-            <button class="btn-modal" onclick="crearProducto()">
-                Crear producto
-            </button>
-        </div>
     </div>
+</div>
+
 
     <!-- ENLACE AL SCRIPT EXTERNO CON FUNCIONES Y ANIMACIONES -->
 
