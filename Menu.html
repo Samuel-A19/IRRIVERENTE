@@ -156,9 +156,10 @@
             <button class="filter" data-category="gaseosa">Gaseosas</button>
         </div>
 
-        <button class="btn-agregar" data-modal="modalCrear">
+    <button class="btn-agregar" onclick="abrirModalCrear()">
     AGREGAR PRODUCTO
 </button>
+
 
 
         <!-- Productos -->
@@ -436,30 +437,46 @@
             </p>
         </div>
     </div>
-     <!-- MODAL GENERAL -->
-<div id="modalGeneral" class="modal-general">
+<!-- MODAL CREAR PRODUCTO -->
+<div id="modalCrearProducto" class="modal-general">
     <div class="modal-box">
 
-        <span class="cerrar-modal">&times;</span>
+        <span class="cerrar-modal" onclick="cerrarModalCrear()">&times;</span>
 
-        <h2>Crear Producto</h2>
+        <h2 class="titulo-modal">Crear Producto</h2>
 
-        <label class="upload-box">
-            <i class="bi bi-image"></i>
-            <span>Agregar imagen</span>
-            <img class="preview-img">
-            <input type="file" hidden>
-        </label>
+        <!-- IMAGEN -->
+<label class="upload-box">
+    <input type="file" id="imagenProducto" hidden>
 
-        <input type="text" placeholder="Título del producto">
-        <textarea placeholder="Descripción"></textarea>
-        <input type="number" placeholder="Precio">
+    <div class="upload-area">
+        <span>Haz clic para agregar imagen</span>
+        <img id="previewImagen">
+    </div>
+</label>
 
-        <button class="btn-modal-crear">
-            Guardar Producto
+
+
+        <!-- TITULO -->
+        <label>Título</label>
+        <input type="text" id="tituloProducto" placeholder="Ej: Pizza BBQ">
+
+        <!-- DESCRIPCIÓN -->
+        <label>Descripción</label>
+        <textarea id="descripcionProducto" placeholder="Describe el producto"></textarea>
+
+        <!-- PRECIO -->
+        <label>Precio</label>
+        <input type="number" id="precioProducto" placeholder="Ej: 15000" min="0" step="100">
+
+        <!-- BOTÓN CREAR -->
+        <button class="btn-crear-producto" onclick="crearProducto()">
+            Crear Producto
         </button>
 
     </div>
+</div>
+
 </div>
 
 
