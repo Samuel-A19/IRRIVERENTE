@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     cerrarAlerta();
                     closeModal("loginModal");
                     updateSessionState();
+                    aplicarPermisos(); // 🔥 importante
                 }, 1000);
 
             } else {
@@ -100,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const imageUpload = document.getElementById("promoImageUpload");
         const btnAgregarPromoMenu = document.getElementById("btnAgregarPromoMenu");
 
-        if (!loginLink) return; // 🔥 evita que el script se rompa
+        if (!loginLink) return;
 
         if (userName) {
             loginLink.innerHTML = `<i class="bi bi-person"></i> ${userName}`;
@@ -127,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("userName");
         localStorage.removeItem("rango");
         updateSessionState();
+        aplicarPermisos(); // 🔥 importante
     });
 
     window.addEventListener("storage", (e) => {
@@ -153,6 +155,22 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
+    /* ===============================
+       PERMISOS POR RANGO
+    =============================== */
+
+    function aplicarPermisos() {
+
+        const rango = localStorage.getItem("rango");
+
+        const elementosAdmin = document.querySelectorAll(".solo-admin");
+
+        elementosAdmin.forEach(el => {
+            el.style.display = (rango === "admin") ? "block" : "none";
+        });
+    }
+
+    aplicarPermisos(); // 🔥 ejecuta al cargar
 });
 
 
