@@ -160,7 +160,7 @@
                         <th class="td-action"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tablaHistorial">
                     <tr>
                         <td class="pedido-id">#120982</td>
                         <td>15/11/2025</td>
@@ -229,6 +229,26 @@
             </div>
         </div>
     </footer>
+
+    <!-- MODAL DETALLE PEDIDO -->
+    <div id="modalDetalle" class="modal-detalle">
+        <div class="modal-contenido">
+
+            <span class="cerrar-modal" onclick="cerrarDetalle()">&times;</span>
+
+            <h2>Detalle del Pedido</h2>
+
+            <div id="detalleContenido">
+                <!-- Aquí se cargan los productos -->
+            </div>
+
+            <div class="detalle-total">
+                <strong>Total:</strong>
+                <span id="detalleTotal">$0</span>
+            </div>
+
+        </div>
+    </div>
 
 
 </body>

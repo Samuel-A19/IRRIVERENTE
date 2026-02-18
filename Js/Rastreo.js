@@ -1,4 +1,5 @@
 function iniciarRastreo() {
+
     const codigo = document.getElementById("codigoRastreo").value.trim();
 
     if (codigo === "") {
@@ -6,16 +7,32 @@ function iniciarRastreo() {
         return;
     }
 
-    const tracker = document.getElementById("tracker");
-    const statusBox = document.getElementById("statusBox");
+    fetch(`api/buscar_pedido.php?codigo=${codigo}`)
+        .then(res => res.json())
+        .then(pedido => {
 
-    if (tracker) tracker.style.display = "flex";
-    if (statusBox) statusBox.style.display = "block";
+            if (!pedido) {
+                mostrarAlerta("Pedido no encontrado", "Error");
+                return;
+            }
 
-    trackOrder();
+            const tracker = document.getElementById("tracker");
+            const statusBox = document.getElementById("statusBox");
+
+            if (tracker) tracker.style.display = "flex";
+            if (statusBox) statusBox.style.display = "block";
+
+            actualizarProgreso(parseInt(pedido.estado));
+
+        })
+        .catch(error => {
+            console.error("Error buscando pedido:", error);
+        });
 }
 
-function trackOrder() {
+
+function actualizarProgreso(estadoActual) {
+
     const steps = document.querySelectorAll(".progress-tracker .step");
     const statusText = document.querySelector(".status-text");
     const statusIcon = document.querySelector(".status-icon-large");
@@ -27,27 +44,21 @@ function trackOrder() {
         { texto: "Entregado", icono: "🎯" }
     ];
 
-    let index = 0;
+    steps.forEach((step, index) => {
 
-    steps.forEach(step => {
         step.classList.remove("active", "completed");
+
+        if (index < estadoActual) {
+            step.classList.add("completed");
+        }
+
+        if (index === estadoActual) {
+            step.classList.add("active");
+        }
     });
 
-    function avanzarEstado() {
-        steps[index].classList.add("active");
-        statusText.textContent = estados[index].texto;
-        statusIcon.textContent = estados[index].icono;
-
-        setTimeout(() => {
-            steps[index].classList.remove("active");
-            steps[index].classList.add("completed");
-            index++;
-
-            if (index < steps.length) {
-                avanzarEstado();
-            }
-        }, 3000);
+    if (estados[estadoActual]) {
+        statusText.textContent = estados[estadoActual].texto;
+        statusIcon.textContent = estados[estadoActual].icono;
     }
-
-    avanzarEstado();
 }

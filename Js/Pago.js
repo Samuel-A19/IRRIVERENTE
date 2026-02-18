@@ -21,16 +21,18 @@ function limpiarPrecio(valor) {
  **************************************************/
 document.addEventListener("DOMContentLoaded", () => {
 
-    // =============================
-    // CARGAR DATOS DESDE STORAGE
-    // =============================
+    // 🔒 VALIDAR SESIÓN
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+        alert("Debes iniciar sesión");
+        window.location.href = "Inicio.html";
+        return;
+    }
+
     const datosCliente = JSON.parse(localStorage.getItem("datosCliente"));
     let metodoPago = JSON.parse(localStorage.getItem("metodoPago"));
     const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    // =============================
-    // ELEMENTOS DEL DOM
-    // =============================
     const form = document.getElementById("paymentForm");
     const btnPagar = document.getElementById("btnPagar");
     const btnEditar = document.getElementById("btnEditar");
@@ -52,18 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     btnPagar.disabled = true;
 
-    // =============================
-    // AUTORELLENAR FORMULARIO PAGO
-    // =============================
+    /**************************************************
+     * AUTORELLENAR
+     **************************************************/
     if (datosCliente) {
         if (inputNombre) inputNombre.value = datosCliente.nombre || "";
         if (phone) phone.value = datosCliente.telefono || "";
         if (inputEmail) inputEmail.value = datosCliente.email || "";
     }
 
-    // =============================
-    // RELLENAR DATOS DE ENTREGA
-    // =============================
     if (datosCliente) {
         const set = (id, valor) => {
             const el = document.getElementById(id);
@@ -77,28 +76,23 @@ document.addEventListener("DOMContentLoaded", () => {
         set("res-referencias", datosCliente.referencias);
     }
 
-    // =============================
-    // TELÉFONO: SOLO NÚMEROS + 10
-    // =============================
     if (phone) {
         phone.addEventListener("input", () => {
             phone.value = phone.value.replace(/\D/g, "").slice(0, 10);
         });
     }
 
-    // =============================
-    // MÉTODO DE PAGO (AUTO + CAMBIO)
-    // =============================
+    /**************************************************
+     * MÉTODO DE PAGO
+     **************************************************/
     document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
 
-        // Autoseleccionar si ya existe
         if (metodoPago && metodoPago.metodo === radio.value) {
             radio.checked = true;
             document.getElementById("res-metodo").textContent =
                 radio.value === "efectivo" ? "Efectivo" : "Pago en Línea";
         }
 
-        // Guardar al cambiar
         radio.addEventListener("change", () => {
             metodoPago = { metodo: radio.value };
             localStorage.setItem("metodoPago", JSON.stringify(metodoPago));
@@ -108,9 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // =============================
-    // RESUMEN DEL PEDIDO
-    // =============================
+    /**************************************************
+     * RESUMEN
+     **************************************************/
     if (ul && totalEl) {
         ul.innerHTML = "";
         let total = 0;
@@ -126,9 +120,9 @@ document.addEventListener("DOMContentLoaded", () => {
         totalEl.textContent = formatoCOP(total);
     }
 
-    // =============================
-    // ENVIAR FORMULARIO
-    // =============================
+    /**************************************************
+     * FORMULARIO
+     **************************************************/
     form.addEventListener("submit", e => {
         e.preventDefault();
 
@@ -145,9 +139,9 @@ document.addEventListener("DOMContentLoaded", () => {
         btnPagar.disabled = false;
     });
 
-    // =============================
-    // PAGAR
-    // =============================
+    /**************************************************
+     * PAGAR
+     **************************************************/
     btnPagar.addEventListener("click", () => {
 
         if (!metodoPago || carrito.length === 0) {
@@ -155,33 +149,39 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // 💵 EFECTIVO
-        if (metodoPago.metodo === "efectivo") {
-            alert("Pedido confirmado. Pagarás en efectivo al recibir.");
-            window.location.href = "Siguepedido.html";
-            return;
-        }
-
-        // 💳 MERCADO PAGO
         fetch("api/crear_pago.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ carrito })
+            body: JSON.stringify({
+                id_usuario: userId,
+                carrito: carrito
+            })
         })
             .then(res => res.json())
             .then(data => {
+
+                // 💵 EFECTIVO
+                if (metodoPago.metodo === "efectivo") {
+                    alert("Pedido confirmado. Pagarás en efectivo al recibir.");
+                    localStorage.removeItem("carrito");
+                    window.location.href = "Siguepedido.html";
+                    return;
+                }
+
+                // 💳 MERCADO PAGO
                 if (!data.sandbox_init_point) {
                     alert("No se pudo generar el pago");
                     console.error(data);
                     return;
                 }
+
                 window.location.href = data.sandbox_init_point;
             });
     });
 
-    // =============================
-    // LIMPIAR
-    // =============================
+    /**************************************************
+     * LIMPIAR
+     **************************************************/
     if (clearBtn) {
         clearBtn.addEventListener("click", () => {
             form.reset();
@@ -196,13 +196,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // =============================
-    // EDITAR DATOS
-    // =============================
+    /**************************************************
+     * EDITAR
+     **************************************************/
     if (btnEditar) {
         btnEditar.addEventListener("click", () => {
             localStorage.setItem("volverAPago", "true");
             window.location.href = "Domicilio.html";
         });
     }
+
 });

@@ -137,3 +137,41 @@ td {
     border-radius: 50%;
     /* refuerzo */
 }
+
+.modal-detalle {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-contenido {
+    background: #1c1c1c;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    color: white;
+}
+
+.cerrar-modal {
+    float: right;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.detalle-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #333;
+}
+
+.detalle-total {
+    margin-top: 15px;
+    font-size: 18px;
+}
