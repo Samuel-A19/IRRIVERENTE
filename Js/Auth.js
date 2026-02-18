@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (result.mensaje) {
                 localStorage.setItem("userId", result.id_usuario);
                 localStorage.setItem("userName", result.nombre);
+                localStorage.setItem("rango", result.rango);
 
                 mostrarAlerta(result.mensaje, "Éxito");
 
@@ -89,24 +90,31 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ===============================
        SESIÓN / UI
     =============================== */
+
     const loginLink = document.getElementById("loginLink");
     const logoutLink = document.getElementById("logoutLink");
 
     function updateSessionState() {
+
         const userName = localStorage.getItem("userName");
         const imageUpload = document.getElementById("promoImageUpload");
         const btnAgregarPromoMenu = document.getElementById("btnAgregarPromoMenu");
 
+        if (!loginLink) return; // 🔥 evita que el script se rompa
+
         if (userName) {
             loginLink.innerHTML = `<i class="bi bi-person"></i> ${userName}`;
             loginLink.onclick = null;
-            logoutLink.style.display = "inline";
+
+            if (logoutLink) logoutLink.style.display = "inline";
             if (imageUpload) imageUpload.style.display = "none";
             if (btnAgregarPromoMenu) btnAgregarPromoMenu.style.display = "none";
+
         } else {
             loginLink.innerHTML = `<i class="bi bi-person"></i> INICIAR SESIÓN`;
             loginLink.onclick = () => openModal("loginModal");
-            logoutLink.style.display = "none";
+
+            if (logoutLink) logoutLink.style.display = "none";
             if (imageUpload) imageUpload.style.display = "block";
             if (btnAgregarPromoMenu) btnAgregarPromoMenu.style.display = "block";
         }
@@ -117,13 +125,36 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutLink?.addEventListener("click", () => {
         localStorage.removeItem("userId");
         localStorage.removeItem("userName");
+        localStorage.removeItem("rango");
         updateSessionState();
     });
 
     window.addEventListener("storage", (e) => {
         if (e.key === "userName") updateSessionState();
     });
+
+    /* ===============================
+       REDIRECCIÓN SIGUE TU PEDIDO
+    =============================== */
+
+    const linkSiguePedido = document.getElementById("linkSiguePedido");
+
+    if (linkSiguePedido) {
+        linkSiguePedido.onclick = function (e) {
+            e.preventDefault();
+
+            const rango = localStorage.getItem("rango");
+
+            if (rango === "admin") {
+                window.location.href = "AdminPedidosLista.html";
+            } else {
+                window.location.href = "Siguepedido.html";
+            }
+        };
+    }
+
 });
+
 
 /* ===============================
    CERRAR SESIÓN DESDE MENÚ LATERAL
@@ -138,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         localStorage.removeItem("userId");
         localStorage.removeItem("userName");
+        localStorage.removeItem("rango");
 
         window.location.href = "Inicio.html";
     });
