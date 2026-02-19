@@ -241,8 +241,10 @@
       </div>
 
       <div class="footer-links"> <!-- Enlaces legales -->
-        <a href="#">Política de Privacidad</a> -
-        <a href="#"> Términos y Condiciones</a>
+        <a href="#" onclick="openModal('modalPrivacidad')">Política de Privacidad</a>
+        <a href="#" onclick="openModal('modalTerminos')">Términos y Condiciones</a>
+
+
       </div>
 
       <!-- REDES SOCIALES -->
@@ -263,6 +265,47 @@
       <h3 id="alertTitle">Atención</h3>
       <p id="alertMessage"></p>
       <button onclick="cerrarAlerta()">Aceptar</button>
+    </div>
+  </div>
+
+  <div id="modalPrivacidad" class="modal">
+    <div class="modal-content" style="max-width:700px; text-align:left; overflow-y:auto; max-height:80vh;">
+      <span class="close" onclick="closeModal('modalPrivacidad')">&times;</span>
+      <h2 style="color:#f16529;">Política de Privacidad</h2>
+
+      <p><strong>Última actualización: 2025</strong></p>
+
+      <p>En Irriverente Pizza & Pasta respetamos tu privacidad y protegemos tus datos personales.</p>
+
+      <h3>1. Información que recopilamos</h3>
+      <p>Nombre, teléfono, dirección, correo electrónico e información relacionada con pedidos.</p>
+
+      <h3>2. Uso de la información</h3>
+      <p>Utilizamos tus datos para procesar pedidos y coordinar entregas.</p>
+
+      <h3>3. Derechos del usuario</h3>
+      <p>Puedes solicitar actualización o eliminación de tus datos según la Ley 1581 de 2012.</p>
+    </div>
+  </div>
+
+  <div id="modalTerminos" class="modal">
+    <div class="modal-content" style="max-width:700px; text-align:left; overflow-y:auto; max-height:80vh;">
+      <span class="close" onclick="closeModal('modalTerminos')">&times;</span>
+      <h2 style="color:#f16529;">Términos y Condiciones</h2>
+
+      <p><strong>Última actualización: 2025</strong></p>
+
+      <h3>1. Uso del sitio</h3>
+      <p>El usuario se compromete a utilizar el sitio web de forma legal y adecuada.</p>
+
+      <h3>2. Pedidos</h3>
+      <p>Los pedidos están sujetos a disponibilidad y confirmación.</p>
+
+      <h3>3. Pagos</h3>
+      <p>Aceptamos pago en efectivo y pago en línea mediante plataformas externas seguras.</p>
+
+      <h3>4. Entregas</h3>
+      <p>Los tiempos de entrega pueden variar según condiciones externas.</p>
     </div>
   </div>
 

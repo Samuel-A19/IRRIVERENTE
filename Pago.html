@@ -211,11 +211,13 @@
 
 
         <div class="acciones-pago">
-            <button id="btnPagar" class="btn">
+            <button id="btnPagar" class="btn" type="button">
+
                 PAGAR AHORA
             </button>
 
-            <button id="btnEditar" class="btn secondary">
+            <button id="btnEditar" class="btn secondary" type="button">
+
                 EDITAR DATOS
             </button>
         </div>
@@ -266,11 +268,12 @@
         </div>
     </div>
 
+    <script src="Js/Modales.js"></script>
     <script src="Js/Pago.js"></script>
-    <script src="Js/Encabezado.js"></script>
     <script src="Js/Carrito.js"></script>
     <script src="Js/Menulateral.js"></script>
-    <script src="Js/Modales.js"></script>
+
+
 
     <!-- Fin del contenido visible en el navegador -->
 
@@ -298,6 +301,15 @@
             </div>
         </div>
     </footer>
+
+    <!-- ALERTA PERSONALIZADA -->
+    <div id="alertOverlay" class="alert-overlay" style="display:none;">
+        <div class="alert-box">
+            <h3 id="alertTitle">Atención</h3>
+            <p id="alertMessage"></p>
+            <button onclick="cerrarAlerta()">Aceptar</button>
+        </div>
+    </div>
 
 </body>
 

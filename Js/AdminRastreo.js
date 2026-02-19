@@ -5,7 +5,7 @@ function cambiarEstado() {
     const estado = document.getElementById("estadoPedido").value;
 
     if (codigo.trim() === "") {
-        alert("Ingrese el número de pedido");
+        mostrarAlerta("Ingrese el número de pedido");
         return;
     }
 
@@ -23,7 +23,7 @@ function cambiarEstado() {
         const emailIngresado = document.getElementById("emailAdmin").value.trim();
 
         if (emailIngresado === "") {
-            alert("Ingrese el correo de administrador");
+            mostrarAlerta("Ingrese el correo de administrador");
             return;
         }
 
@@ -33,10 +33,10 @@ function cambiarEstado() {
 
             localStorage.setItem("adminActivo", "true");
 
-            alert("Acceso administrador concedido");
+            mostrarAlerta("Acceso administrador concedido");
 
         } else {
-            alert("Correo no autorizado");
+            mostrarAlerta("Correo no autorizado");
         }
     }
 
@@ -102,7 +102,7 @@ function cambiarEstado() {
         const estado = document.getElementById("estadoPedido").value;
 
         if (codigo === "") {
-            alert("Ingrese el número de pedido");
+            mostrarAlerta("Ingrese el número de pedido");
             return;
         }
 
@@ -112,7 +112,7 @@ function cambiarEstado() {
 
         localStorage.setItem("pedidos", JSON.stringify(pedidos));
 
-        alert("Estado del pedido actualizado correctamente");
+        mostrarAlerta("Estado del pedido actualizado correctamente");
     }
 
     // Guardar estado del pedido
@@ -120,7 +120,7 @@ function cambiarEstado() {
 
     localStorage.setItem("pedidos", JSON.stringify(pedidos));
 
-    alert("Estado del pedido actualizado correctamente");
+    mostrarAlerta("Estado del pedido actualizado correctamente");
 }
 
 

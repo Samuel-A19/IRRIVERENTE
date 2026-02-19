@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const userId = localStorage.getItem("userId");
 
     if (!userId) {
-        alert("Debes iniciar sesión");
+        mostrarAlerta("Debes iniciar sesión", "Sesión requerida");
         window.location.href = "Inicio.html";
         return;
     }

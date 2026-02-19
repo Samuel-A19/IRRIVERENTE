@@ -47,16 +47,22 @@ window.onclick = function (event) {
 =============================== */
 
 function mostrarAlerta(mensaje, titulo = "Atención") {
+
     const overlay = document.getElementById("alertOverlay");
     const title = document.getElementById("alertTitle");
     const message = document.getElementById("alertMessage");
 
-    if (overlay && title && message) {
-        title.textContent = titulo;
-        message.textContent = mensaje;
-        overlay.style.display = "flex";
+    if (!overlay || !title || !message) {
+        console.error("AlertOverlay no existe en esta página");
+        return;
     }
+
+    title.textContent = titulo;
+    message.textContent = mensaje;
+
+    overlay.style.display = "flex";
 }
+
 
 function cerrarAlerta() {
     const overlay = document.getElementById("alertOverlay");
@@ -107,3 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+// 🔒 BLOQUEAR ALERTAS NATIVAS DEL NAVEGADOR
+window.alert = function (mensaje) {
+    mostrarAlerta(mensaje, "Atención");
+};

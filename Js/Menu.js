@@ -37,15 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ================= MODALES AUTENTICACIÓN ================= */
 
-    window.openAuthModal = function(id) {
+    window.openAuthModal = function (id) {
         document.getElementById(id).style.display = 'flex';
     };
 
-    window.closeAuthModal = function(id) {
+    window.closeAuthModal = function (id) {
         document.getElementById(id).style.display = 'none';
     };
 
-    window.switchModal = function(currentId, targetId) {
+    window.switchModal = function (currentId, targetId) {
         closeAuthModal(currentId);
         openAuthModal(targetId);
     };
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPizza = '';
     let prices = { small: 0, medium: 0, large: 0 };
 
-    window.openSizeModal = function(name, small, medium, large) {
+    window.openSizeModal = function (name, small, medium, large) {
         currentPizza = name;
         prices = { small, medium, large };
 
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('sizeModal').style.display = 'flex';
     };
 
-    window.closeSizeModal = function() {
+    window.closeSizeModal = function () {
         document.getElementById('sizeModal').style.display = 'none';
     };
 
@@ -86,13 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const size = option.id === 'sizeSmall'
                 ? 'Pequeña'
                 : option.id === 'sizeMedium'
-                ? 'Mediana'
-                : 'Grande';
+                    ? 'Mediana'
+                    : 'Grande';
 
             const price =
                 size === 'Pequeña' ? prices.small :
-                size === 'Mediana' ? prices.medium :
-                prices.large;
+                    size === 'Mediana' ? prices.medium :
+                        prices.large;
 
             const nombreFinal = `${currentPizza} - ${size}`;
 
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-}); 
+});
 /* ========================================
    MODAL CREAR PRODUCTO - FUNCIONALIDAD
 ======================================== */
@@ -180,7 +180,7 @@ function crearProducto() {
     const preview = document.getElementById("previewImagen");
 
     if (!titulo || !descripcion || !precio) {
-        alert("Por favor completa todos los campos");
+        mostrarAlerta("Por favor completa todos los campos");
         return;
     }
 

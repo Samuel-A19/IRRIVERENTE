@@ -1,6 +1,9 @@
 /**************************************************
  * UTILIDADES
  **************************************************/
+console.log("DOM cargado correctamente");
+
+
 function formatoCOP(valor) {
     return Number(valor).toLocaleString("es-CO", {
         style: "currency",
@@ -23,11 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 🔒 VALIDAR SESIÓN
     const userId = localStorage.getItem("userId");
+
     if (!userId) {
-        alert("Debes iniciar sesión");
-        window.location.href = "Inicio.html";
-        return;
+        mostrarAlerta("Debes iniciar sesión", "Atención");
     }
+
 
     const datosCliente = JSON.parse(localStorage.getItem("datosCliente"));
     let metodoPago = JSON.parse(localStorage.getItem("metodoPago"));
@@ -55,6 +58,30 @@ document.addEventListener("DOMContentLoaded", () => {
     btnPagar.disabled = true;
 
     /**************************************************
+     * MÉTODO DE PAGO (CORRECCIÓN DEFINITIVA)
+     **************************************************/
+    document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+
+        // Autoseleccionar si ya estaba guardado
+        if (metodoPago && metodoPago.metodo === radio.value) {
+            radio.checked = true;
+        }
+
+        radio.addEventListener("change", () => {
+            metodoPago = { metodo: radio.value };
+            localStorage.setItem("metodoPago", JSON.stringify(metodoPago));
+        });
+    });
+
+    // 🔥 Si no existe método guardado, tomar el seleccionado por defecto
+    if (!metodoPago) {
+        const seleccionado = document.querySelector('input[name="paymentMethod"]:checked');
+        if (seleccionado) {
+            metodoPago = { metodo: seleccionado.value };
+        }
+    }
+
+    /**************************************************
      * AUTORELLENAR
      **************************************************/
     if (datosCliente) {
@@ -74,6 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         set("res-email", datosCliente.email);
         set("res-direccion", datosCliente.direccion);
         set("res-referencias", datosCliente.referencias);
+        set("res-metodo", metodoPago.metodo === "efectivo" ? "Efectivo" : "Pago en Línea");
     }
 
     if (phone) {
@@ -81,26 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
             phone.value = phone.value.replace(/\D/g, "").slice(0, 10);
         });
     }
-
-    /**************************************************
-     * MÉTODO DE PAGO
-     **************************************************/
-    document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
-
-        if (metodoPago && metodoPago.metodo === radio.value) {
-            radio.checked = true;
-            document.getElementById("res-metodo").textContent =
-                radio.value === "efectivo" ? "Efectivo" : "Pago en Línea";
-        }
-
-        radio.addEventListener("change", () => {
-            metodoPago = { metodo: radio.value };
-            localStorage.setItem("metodoPago", JSON.stringify(metodoPago));
-
-            document.getElementById("res-metodo").textContent =
-                radio.value === "efectivo" ? "Efectivo" : "Pago en Línea";
-        });
-    });
 
     /**************************************************
      * RESUMEN
@@ -127,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
 
         if (!phone || phone.value.length !== 10) {
-            alert("El teléfono debe tener 10 números");
+            mostrarAlerta("El teléfono debe tener 10 números", "Error");
             return;
         }
 
@@ -144,11 +152,25 @@ document.addEventListener("DOMContentLoaded", () => {
      **************************************************/
     btnPagar.addEventListener("click", () => {
 
+        console.log("CLICK EN PAGAR");
+
         if (!metodoPago || carrito.length === 0) {
-            alert("Información de pago incompleta");
+            console.log("Falla validación");
+            mostrarAlerta("Información de pago incompleta", "Atención");
             return;
         }
 
+        console.log("Método:", metodoPago);
+
+        if (metodoPago.metodo === "efectivo") {
+            console.log("Entró en efectivo");
+            mostrarAlerta("Pedido confirmado. Pagarás en efectivo al recibir.", "Pedido Confirmado");
+            return;
+        }
+
+
+
+        // 💳 MERCADO PAGO
         fetch("api/crear_pago.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -160,23 +182,15 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(res => res.json())
             .then(data => {
 
-                // 💵 EFECTIVO
-                if (metodoPago.metodo === "efectivo") {
-                    alert("Pedido confirmado. Pagarás en efectivo al recibir.");
-                    localStorage.removeItem("carrito");
-                    window.location.href = "Siguepedido.html";
-                    return;
-                }
-
-                // 💳 MERCADO PAGO
                 if (!data.sandbox_init_point) {
-                    alert("No se pudo generar el pago");
+                    mostrarAlerta("No se pudo generar el pago", "Error");
                     console.error(data);
                     return;
                 }
 
                 window.location.href = data.sandbox_init_point;
             });
+
     });
 
     /**************************************************

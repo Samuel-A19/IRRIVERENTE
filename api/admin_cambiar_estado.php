@@ -21,3 +21,16 @@ if ($stmt->execute()) {
 } else {
     echo json_encode(["success" => false]);
 }
+
+if ($stmt->execute()) {
+    echo json_encode([
+        "success" => true,
+        "id" => $id,
+        "estado" => $estado
+    ]);
+} else {
+    echo json_encode([
+        "success" => false,
+        "error" => $stmt->error
+    ]);
+}

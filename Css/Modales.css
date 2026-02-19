@@ -227,7 +227,8 @@
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 10000; /* MÁS ALTO QUE LOS MODALES */
+    z-index: 10000;
+    /* MÁS ALTO QUE LOS MODALES */
 }
 
 .alert-box {
@@ -271,11 +272,13 @@
         opacity: 0;
         transform: scale(0.95);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
     }
 }
+
 /* ===============================
    BOTÓN AGREGAR
 =============================== */
@@ -292,14 +295,14 @@
     font-weight: 700;
     letter-spacing: 1px;
     cursor: pointer;
-    box-shadow: 0 8px 25px rgba(242,92,42,0.5);
+    box-shadow: 0 8px 25px rgba(242, 92, 42, 0.5);
     transition: all 0.3s ease;
     text-transform: uppercase;
 }
 
 .btn-agregar:hover {
     transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 12px 35px rgba(242,92,42,0.7);
+    box-shadow: 0 12px 35px rgba(242, 92, 42, 0.7);
 }
 
 /* ===============================
@@ -310,7 +313,7 @@
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.85);
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(8px);
     justify-content: center;
     align-items: center;
@@ -324,7 +327,7 @@
     width: 90%;
     max-width: 420px;
     text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
     animation: slideUp 0.3s ease;
     position: relative;
 }
@@ -402,19 +405,32 @@
 =============================== */
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes slideUp {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
+
 .modal-general {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     justify-content: center;
     align-items: center;
     z-index: 9999;
@@ -449,4 +465,13 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #f16529;
+    border-radius: 6px;
 }
