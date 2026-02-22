@@ -1,4 +1,7 @@
-/* MODALES (open, close, switch) */
+/* =====================================================
+   MODALES (open, close, switch)
+===================================================== */
+
 function openModal(id) {
     const modal = document.getElementById(id);
     if (modal) modal.style.display = 'flex';
@@ -19,17 +22,19 @@ function switchModal(current, target) {
 }
 
 
-/* ===============================
-   Cerrar modales al hacer click fuera
-=============================== */
+/* =====================================================
+   CERRAR MODALES AL HACER CLICK FUERA
+===================================================== */
 
 window.onclick = function (event) {
+
     const modals = [
         'loginModal',
         'registerModal',
         'recoverModal',
         'modalGeneral',
         'modalCrearProducto',
+        'modalAdmin',
         'sizeModal'
     ];
 
@@ -42,9 +47,9 @@ window.onclick = function (event) {
 };
 
 
-/* ===============================
+/* =====================================================
    ALERTAS PERSONALIZADAS
-=============================== */
+===================================================== */
 
 function mostrarAlerta(mensaje, titulo = "Atención") {
 
@@ -63,25 +68,15 @@ function mostrarAlerta(mensaje, titulo = "Atención") {
     overlay.style.display = "flex";
 }
 
-
 function cerrarAlerta() {
     const overlay = document.getElementById("alertOverlay");
     if (overlay) overlay.style.display = "none";
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const alertOverlay = document.getElementById("alertOverlay");
 
-    if (alertOverlay) {
-        alertOverlay.addEventListener("click", function (e) {
-            if (e.target.id === "alertOverlay") cerrarAlerta();
-        });
-    }
-});
-
-/* ===============================
-   MODAL GENERAL (AGREGAR)
-=============================== */
+/* =====================================================
+   MODAL GENERAL (AGREGAR NORMAL)
+===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -89,14 +84,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (modalGeneral) {
 
-        // Abrir modal
-        document.querySelectorAll(".btn-agregar").forEach(btn => {
+        // 🔥 IMPORTANTE: excluye botones admin
+        document.querySelectorAll(".btn-agregar:not(.solo-admin)").forEach(btn => {
             btn.addEventListener("click", function () {
                 modalGeneral.style.display = "flex";
             });
         });
 
-        // Cerrar con X
         const cerrar = modalGeneral.querySelector(".cerrar-modal");
         if (cerrar) {
             cerrar.addEventListener("click", function () {
@@ -104,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        // Cerrar haciendo click fuera
         modalGeneral.addEventListener("click", function (e) {
             if (e.target === modalGeneral) {
                 modalGeneral.style.display = "none";
@@ -114,7 +107,131 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-// 🔒 BLOQUEAR ALERTAS NATIVAS DEL NAVEGADOR
+
+/* =====================================================
+   MODAL ADMIN (PRODUCTO / PROMO)
+===================================================== */
+
+function abrirModalAdmin(tipo) {
+
+    const modal = document.getElementById("modalAdmin");
+    const titulo = document.getElementById("tituloAdmin");
+    const tipoInput = document.getElementById("tipoAdmin");
+
+    if (!modal) return;
+
+    modal.style.display = "flex";
+
+    if (tipoInput) tipoInput.value = tipo;
+
+    if (titulo) {
+        if (tipo === "pizza") {
+            titulo.textContent = "Crear Pizza";
+        } else if (tipo === "promo") {
+            titulo.textContent = "Crear Promoción";
+        } else {
+            titulo.textContent = "Crear Producto";
+        }
+    }
+}
+
+function cerrarModalAdmin() {
+    const modal = document.getElementById("modalAdmin");
+    if (modal) modal.style.display = "none";
+}
+
+
+/* =====================================================
+   GUARDAR PRODUCTO / PROMO CON IMAGEN
+===================================================== */
+
+function guardarAdmin() {
+
+    const tipo = document.getElementById("tipoAdmin")?.value;
+    const titulo = document.getElementById("tituloInput")?.value;
+    const descripcion = document.getElementById("descripcionInput")?.value;
+    const precio = document.getElementById("precioInput")?.value;
+    const imagen = document.getElementById("imagenAdmin")?.files[0];
+
+    if (!tipo || !titulo || !descripcion || !precio) {
+        mostrarAlerta("Todos los campos son obligatorios");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("tipo", tipo);
+    formData.append("titulo", titulo);
+    formData.append("descripcion", descripcion);
+    formData.append("precio", precio);
+
+    if (imagen) {
+        formData.append("imagen", imagen);
+    }
+
+    fetch("api/guardar_producto.php", {
+        method: "POST",
+        body: formData
+    })
+        .then(res => res.text())
+        .then(data => {
+
+            console.log("RESPUESTA SERVIDOR:", data);
+
+            if (data.trim() === "ok") {
+                mostrarAlerta("Guardado correctamente 🔥", "Administrador");
+                cerrarModalAdmin();
+
+                document.getElementById("tituloInput").value = "";
+                document.getElementById("descripcionInput").value = "";
+                document.getElementById("precioInput").value = "";
+                document.getElementById("imagenAdmin").value = "";
+            } else {
+                mostrarAlerta("Error al guardar");
+            }
+
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            mostrarAlerta("Error del servidor");
+        });
+}
+
+
+/* =====================================================
+   PREVISUALIZACIÓN DE IMAGEN
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const fileInput = document.getElementById("imagenAdmin");
+    const preview = document.getElementById("previewAdmin");
+
+    if (fileInput) {
+
+        fileInput.addEventListener("change", function () {
+
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+});
+
+
+/* =====================================================
+   BLOQUEAR ALERTAS NATIVAS
+===================================================== */
+
 window.alert = function (mensaje) {
     mostrarAlerta(mensaje, "Atención");
 };

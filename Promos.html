@@ -55,7 +55,7 @@
             <a href="Inicio.html">INICIO</a> <!-- Enlace a la página de inicio -->
             <a href="Menu.html">MENÚ</a> <!-- Enlace a la sección de menú -->
             <a href="Promos.html">PROMOS</a> <!-- Enlace a la página de promociones -->
-            <a href="Siguepedido.html">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
+            <a href="#" id="linkSiguePedido">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
             <a href="Acercanosotros.html">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
             <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
             <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
@@ -132,9 +132,9 @@
     <!-- SECCIÓN DE PROMOCIONES -->
     <section class="promos">
         <h1><u>PROMOCIONES ACTUALES</u></h1>
-<button class="btn-agregar solo-admin" data-modal="modalGeneral">
-    AGREGAR PROMO
-</button>
+        <button class="btn-agregar solo-admin" onclick="abrirModalAdmin('promo')">
+            AGREGAR PROMO
+        </button>
 
 
         <div class="promo-contenedor">
@@ -216,32 +216,40 @@
             <!-- Enlace para ir al login -->
         </div>
     </div>
-    <!-- MODAL GENERAL -->
-    <div id="modalGeneral" class="modal-general">
+    <!-- MODAL ADMIN (PRODUCTO / PROMO) -->
+    <div id="modalAdmin" class="modal-general">
         <div class="modal-box">
 
-        <span class="cerrar-modal">&times;</span>
+            <span class="cerrar-modal" onclick="cerrarModalAdmin()">&times;</span>
 
-        <h2>Crear Promoción</h2>
+            <h2 id="tituloAdmin">Crear</h2>
 
-        <label class="upload-box">
-            <i class="bi bi-image"></i>
-            <span>Agregar imagen</span>
-            <img class="preview-img">
-            <input type="file" hidden>
-        </label>
+            <input type="hidden" id="tipoAdmin">
 
-        <input type="text" placeholder="Título de la promoción">
-        <textarea placeholder="Descripción"></textarea>
-        <input type="number" placeholder="Precio">
+            <!-- IMAGEN -->
+            <label class="upload-box">
+                <input type="file" id="imagenAdmin" hidden>
+                <div class="upload-area">
+                    <span>Haz clic para agregar imagen</span>
+                    <img id="previewAdmin">
+                </div>
+            </label>
 
-        <button class="btn-modal-crear">
-            Guardar Promoción
-        </button>
+            <label>Título</label>
+            <input type="text" id="tituloInput">
 
+            <label>Descripción</label>
+            <textarea id="descripcionInput"></textarea>
+
+            <label>Precio</label>
+            <input type="number" id="precioInput" min="0">
+
+            <button class="btn-modal-crear" onclick="guardarAdmin()">
+                Guardar
+            </button>
+
+        </div>
     </div>
-</div>
-
 
     <!-- ENLACE AL SCRIPT EXTERNO CON FUNCIONES Y ANIMACIONES -->
     <script src="Js/Auth.js"></script>
