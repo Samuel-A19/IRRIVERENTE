@@ -1,21 +1,45 @@
 /* ========================================
    ESTILOS GLOBALES Y BASE
 ======================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
 body {
     background-color: black;
     color: white;
-    margin: 0;
-    padding: 0;
     font-family: 'Roboto', sans-serif;
     min-height: 100vh;
+
+    /* layout vertical limpio */
     display: flex;
     flex-direction: column;
 }
 
-body>* {
-    flex: 1 0 auto;
+/* CONTENIDO PRINCIPAL */
+main {
+    flex: 1;
+    width: 100%;
 }
 
+/* FOOTER SIEMPRE ABAJO */
 .main-footer {
     flex-shrink: 0;
+}
+
+/* IMÁGENES RESPONSIVE */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }

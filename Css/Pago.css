@@ -173,8 +173,7 @@ input[type="radio"]:focus {
 }
 
 .pagina-pago #bloqueEntrega {
-    position: relative;
-    top: -70px;
+    margin-top: 40px;
 }
 
 .acciones-pago {

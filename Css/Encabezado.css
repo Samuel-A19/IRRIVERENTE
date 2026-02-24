@@ -119,3 +119,27 @@
         padding: 6px 14px;
     }
 }
+
+/* ==============================
+   FIX RESPONSIVE HEADER
+============================== */
+
+@media (max-width: 768px) {
+
+    .main-header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 15px;
+    }
+
+    .header-center.logo img {
+        width: 90px;
+        height: auto;
+    }
+
+    #btnMenuLateral {
+        font-size: 1.8rem;
+        padding: 6px 14px;
+    }
+
+}
