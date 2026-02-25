@@ -475,3 +475,132 @@
     background: #f16529;
     border-radius: 6px;
 }
+
+/* ========================================
+   MODALES LEGALES PROFESIONALES
+======================================== */
+
+.legal-modal {
+    max-width: 750px !important;
+    max-height: 85vh;
+    overflow-y: auto;
+    text-align: left !important;
+    padding: 45px !important;
+    border-radius: 20px;
+    background: #1a1a1a;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+}
+
+/* Título principal */
+.legal-modal h2 {
+    font-size: 30px;
+    color: #f16529;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* Fecha */
+.legal-modal strong {
+    display: block;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+/* Subtítulos */
+/* Subtítulos más compactos */
+.legal-modal h3 {
+    margin-top: 18px;
+    margin-bottom: 6px;
+    font-size: 17px;
+    color: #ffffff;
+    border-left: 4px solid #f16529;
+    padding-left: 10px;
+}
+
+/* Párrafos más pegados */
+.legal-modal p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #d0d0d0;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+/* ===================================
+   BANNER TÉRMINOS PROFESIONAL
+=================================== */
+
+#termsBanner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111;
+    color: #fff;
+    padding: 18px 40px;
+    border-top: 2px solid #f16529;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: none;
+}
+
+#termsBanner .terms-content {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+#termsBanner p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#termsBanner a {
+    color: #f16529;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#termsBanner a:hover {
+    text-decoration: underline;
+}
+
+.terms-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+/* BOTÓN ACEPTAR */
+.btn-aceptar {
+    background: #f16529;
+    color: white;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-aceptar:hover {
+    background: #e9541f;
+}
+
+/* BOTÓN RECHAZAR */
+.btn-rechazar {
+    background: transparent;
+    color: #ccc;
+    border: 1px solid #444;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-rechazar:hover {
+    background: #333;
+    color: white;
+}

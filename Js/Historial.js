@@ -1,6 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const userId = localStorage.getItem("userId");
+    const userName = localStorage.getItem("userName");
+
+    if (!userId) {
+        window.location.href = "Inicio.html";
+        return;
+    }
+
+    // Nombre
+    const nombreEl = document.getElementById("historialNombre");
+    if (nombreEl && userName) {
+        nombreEl.textContent = userName;
+    }
+
+    // 🔥 Copiar foto del menú lateral
+    fetch(`api/obtener_info_cliente.php?id_usuario=${userId}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data && data.foto) {
+                document.getElementById("historialFoto").src = data.foto;
+            }
+        });
+
+    cargarHistorial(userId);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
+
+    const userId = localStorage.getItem("userId");
 
     if (!userId) {
         mostrarAlerta("Debes iniciar sesión", "Sesión requerida");
@@ -111,9 +140,13 @@ function verDetalle(idPedido) {
                 div.classList.add("detalle-item");
 
                 div.innerHTML = `
-                    <span>${p.nombre_producto} x${p.cantidad}</span>
-                    <span>$${subtotal.toLocaleString("es-CO")}</span>
-                `;
+    ${p.imagen ? `<img src="${p.imagen}" class="detalle-img">` : ""}
+    <div class="detalle-info">
+        <span class="detalle-nombre">${p.nombre_producto}</span>
+        <span class="detalle-cantidad">Cantidad: ${p.cantidad}</span>
+        <span class="detalle-precio">Subtotal: $${subtotal.toLocaleString("es-CO")}</span>
+    </div>
+`;
 
                 contenedor.appendChild(div);
             });

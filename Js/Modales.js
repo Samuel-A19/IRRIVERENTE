@@ -235,3 +235,31 @@ document.addEventListener("DOMContentLoaded", function () {
 window.alert = function (mensaje) {
     mostrarAlerta(mensaje, "Atención");
 };
+
+/* ===============================
+   TÉRMINOS OBLIGATORIOS SIMPLE
+=============================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const decision = localStorage.getItem("termsDecision");
+
+    if (!decision) {
+        document.getElementById("termsBanner").style.display = "block";
+    }
+
+});
+
+function aceptarTerminos() {
+    localStorage.setItem("termsDecision", "accepted");
+    document.getElementById("termsBanner").style.display = "none";
+}
+
+function rechazarTerminos() {
+
+    mostrarAlerta(
+        "Para continuar debes aceptar los Términos y Condiciones.",
+        "Acción requerida"
+    );
+
+}

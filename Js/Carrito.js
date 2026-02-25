@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
      **************************************************/
     document.querySelector(".carrito-acciones .checkout")?.addEventListener("click", () => {
         if (carrito.length === 0) {
-            alert("Tu carrito está vacío");
+            mostrarAlerta("Tu carrito está vacío");
             return;
         }
 
