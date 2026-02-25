@@ -137,7 +137,36 @@ function abrirModalAdmin(tipo) {
 
 function cerrarModalAdmin() {
     const modal = document.getElementById("modalAdmin");
-    if (modal) modal.style.display = "none";
+    
+    if (modal) {
+        modal.style.display = "none";
+        
+        // Obtener elementos dentro del modal
+        const preview = modal.querySelector("#previewAdmin");
+        const uploadBox = modal.querySelector(".upload-box");
+        
+        // Limpiar la imagen cuando se cierre el modal
+        if (preview) {
+            preview.src = "";
+            preview.classList.remove("show");
+        }
+        
+        if (uploadBox) {
+            uploadBox.classList.remove("has-image");
+            uploadBox.style.height = "auto"; // Restaurar altura inicial
+        }
+        
+        // Limpiar el formulario
+        const tituloInput = modal.querySelector("#tituloInput");
+        const descripcionInput = modal.querySelector("#descripcionInput");
+        const precioInput = modal.querySelector("#precioInput");
+        const categoriaInput = modal.querySelector("#categoriaInput");
+        
+        if (tituloInput) tituloInput.value = "";
+        if (descripcionInput) descripcionInput.value = "";
+        if (precioInput) precioInput.value = "";
+        if (categoriaInput) categoriaInput.value = "";
+    }
 }
 
 
@@ -148,18 +177,19 @@ function cerrarModalAdmin() {
 function guardarAdmin() {
 
     const tipo = document.getElementById("tipoAdmin")?.value;
+    const categoria = document.getElementById("categoriaInput")?.value;
     const titulo = document.getElementById("tituloInput")?.value;
     const descripcion = document.getElementById("descripcionInput")?.value;
     const precio = document.getElementById("precioInput")?.value;
     const imagen = document.getElementById("imagenAdmin")?.files[0];
 
-    if (!tipo || !titulo || !descripcion || !precio) {
+    if (!tipo || !categoria || !titulo || !descripcion || !precio) {
         mostrarAlerta("Todos los campos son obligatorios");
         return;
     }
 
     const formData = new FormData();
-    formData.append("tipo", tipo);
+    formData.append("tipo", categoria);
     formData.append("titulo", titulo);
     formData.append("descripcion", descripcion);
     formData.append("precio", precio);
@@ -179,12 +209,33 @@ function guardarAdmin() {
 
             if (data.trim() === "ok") {
                 mostrarAlerta("Guardado correctamente 🔥", "Administrador");
+                
+                // Obtener referencias al modal
+                const modal = document.getElementById("modalAdmin");
+                
                 cerrarModalAdmin();
 
+                // Limpiar formulario
                 document.getElementById("tituloInput").value = "";
                 document.getElementById("descripcionInput").value = "";
                 document.getElementById("precioInput").value = "";
+                document.getElementById("categoriaInput").value = "";
                 document.getElementById("imagenAdmin").value = "";
+                
+                // Limpiar imagen si es necesario
+                if (modal) {
+                    const preview = modal.querySelector("#previewAdmin");
+                    const uploadBox = modal.querySelector(".upload-box");
+                    
+                    if (preview) {
+                        preview.src = "";
+                        preview.classList.remove("show");
+                    }
+                    if (uploadBox) {
+                        uploadBox.classList.remove("has-image");
+                        uploadBox.style.height = "auto"; // Restaurar altura inicial
+                    }
+                }
             } else {
                 mostrarAlerta("Error al guardar");
             }
@@ -205,8 +256,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const fileInput = document.getElementById("imagenAdmin");
     const preview = document.getElementById("previewAdmin");
+    const modalAdmin = document.getElementById("modalAdmin");
+    const uploadBox = modalAdmin ? modalAdmin.querySelector(".upload-box") : null;
 
-    if (fileInput) {
+    if (fileInput && uploadBox) {
 
         fileInput.addEventListener("change", function () {
 
@@ -216,13 +269,46 @@ document.addEventListener("DOMContentLoaded", function () {
                 const reader = new FileReader();
 
                 reader.onload = function (e) {
+                    // Crear imagen temporal para obtener dimensiones
+                    const tempImg = new Image();
+                    
+                    tempImg.onload = function () {
+                        try {
+                            // Calcular aspect ratio
+                            const aspectRatio = this.width / this.height;
+                            const containerWidth = uploadBox.offsetWidth || 400; // Valor por defecto si no se puede obtener
+                            
+                            // Calcular altura basada en el ancho del contenedor y aspect ratio
+                            const newHeight = Math.round(containerWidth / aspectRatio);
+                            
+                            // Establecer altura mínima de 160px
+                            const finalHeight = Math.max(newHeight, 160);
+                            
+                            // Aplicar altura al contenedor
+                            uploadBox.style.height = finalHeight + "px";
+                            
+                            console.log("Imagen cargada - Dimensiones:", this.width + "x" + this.height, "Altura calculada:", finalHeight + "px");
+                        } catch (err) {
+                            console.error("Error al procesar imagen:", err);
+                        }
+                    };
+                    
+                    tempImg.src = e.target.result;
+                    
+                    // Mostrar la preview
                     preview.src = e.target.result;
-                    preview.style.display = "block";
+                    preview.classList.add("show");
+                    
+                    if (uploadBox) {
+                        uploadBox.classList.add("has-image");
+                    }
                 };
 
                 reader.readAsDataURL(file);
             }
         });
+    } else {
+        console.warn("No se encontraron elementos: fileInput=" + !!fileInput + ", uploadBox=" + !!uploadBox);
     }
 
 });

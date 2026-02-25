@@ -318,50 +318,139 @@
     justify-content: center;
     align-items: center;
     animation: fadeIn 0.3s ease;
+    z-index: 9999;
+    padding: 20px;
+    overflow-y: auto;
 }
 
 .modal-box {
     background: #111;
     padding: 30px;
     border-radius: 20px;
-    width: 90%;
-    max-width: 420px;
+    width: 100%;
+    max-width: 480px;
     text-align: center;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
     animation: slideUp 0.3s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .cerrar-modal {
     position: absolute;
     top: 15px;
     right: 20px;
-    font-size: 26px;
+    font-size: 28px;
     cursor: pointer;
     color: #fff;
+    background: none;
+    border: none;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.cerrar-modal:hover {
+    color: #f25c2a;
+    transform: rotate(90deg);
+}
+
+.modal-box h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.modal-box label {
+    color: #ccc;
+    font-size: 0.9rem;
+    text-align: left;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
 .modal-box input,
-.modal-box textarea {
+.modal-box textarea,
+.modal-box select {
     width: 100%;
-    padding: 12px;
-    margin: 10px 0;
+    padding: 12px 15px;
+    margin: 0;
     border-radius: 10px;
-    border: none;
+    border: 1px solid #333;
     background: #222;
     color: #fff;
+    font-size: 0.95rem;
+    font-family: inherit;
+    font-weight: 500;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.modal-box input:focus,
+.modal-box textarea:focus,
+.modal-box select:focus {
+    outline: none;
+    border-color: #f25c2a;
+    background: #2a2a2a;
+    box-shadow: 0 0 10px rgba(242, 92, 42, 0.3);
+}
+
+.modal-box textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.modal-box select option {
+    background: #222;
+    color: #fff;
+    padding: 10px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    font-weight: 500;
+}
+
+.modal-box select option:hover {
+    background: #f25c2a;
+    color: #fff;
+}
+
+.modal-box select option:checked {
+    background: linear-gradient(#f25c2a, #f25c2a);
 }
 
 .btn-modal-crear {
     width: 100%;
-    padding: 12px;
-    margin-top: 15px;
+    padding: 14px 20px;
+    margin-top: 10px;
     border: none;
     border-radius: 12px;
     background: linear-gradient(135deg, #f25c2a, #ff784e);
     color: #fff;
     font-weight: bold;
+    font-size: 1rem;
     cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-modal-crear:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(242, 92, 42, 0.5);
+}
+
+.btn-modal-crear:active {
+    transform: translateY(0);
 }
 
 /* ===============================
@@ -370,8 +459,9 @@
 
 .upload-box {
     width: 100%;
-    height: 180px;
-    border: 2px dashed #fff;
+    min-height: 160px;
+    height: auto;
+    border: 2px dashed #f25c2a;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
@@ -379,25 +469,121 @@
     align-items: center;
     cursor: pointer;
     position: relative;
-    margin-bottom: 10px;
+    margin: 10px 0;
+    background: rgba(242, 92, 42, 0.05);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.upload-box:hover {
+    border-color: #ff784e;
+    background: rgba(242, 92, 42, 0.15);
+    transform: scale(1.01);
+}
+
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+}
+
+.upload-box.has-image .upload-area {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.upload-box:hover .upload-area {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .upload-box i {
-    font-size: 40px;
+    font-size: 48px;
+    color: #f25c2a;
+    transition: all 0.3s ease;
+    display: block;
+    line-height: 1;
+}
+
+.upload-box:hover i {
+    transform: scale(1.3);
+    color: #ff784e;
 }
 
 .upload-box span {
-    font-size: 14px;
+    font-size: 0.95rem;
+    color: #ccc;
+    text-align: center;
+    padding: 0 15px;
+    line-height: 1.3;
+    font-weight: 500;
 }
 
-.preview-img {
+.upload-box img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 14px;
     display: none;
+    z-index: 1;
+    animation: imageLoad 0.4s ease;
+}
+
+.upload-box img.show {
+    display: block;
+}
+
+.upload-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 14px;
+    z-index: 3;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.upload-box:hover::after {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.upload-box.has-image::after {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.upload-box.has-image:hover::after {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.preview-img {
+    display: none;
+}
+
+/* ===============================
+   ANIMACIONES IMAGEN
+=============================== */
+
+@keyframes imageLoad {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* ===============================
@@ -416,7 +602,7 @@
 
 @keyframes slideUp {
     from {
-        transform: translateY(20px);
+        transform: translateY(30px);
         opacity: 0;
     }
 
@@ -426,51 +612,151 @@
     }
 }
 
-.modal-general {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+/* ===============================
+   SCROLLBAR PERSONALIZADO
+=============================== */
+
+.modal-box::-webkit-scrollbar {
+    width: 8px;
 }
 
-.modal-box {
+.modal-box::-webkit-scrollbar-track {
     background: #222;
-    padding: 30px;
-    width: 400px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    border-radius: 10px;
 }
 
-.titulo-modal {
-    text-align: center;
-    color: #fff;
+.modal-box::-webkit-scrollbar-thumb {
+    background: #f25c2a;
+    border-radius: 10px;
 }
 
-.modal-box input,
-.modal-box textarea {
-    padding: 8px;
-    border-radius: 6px;
-    border: none;
+.modal-box::-webkit-scrollbar-thumb:hover {
+    background: #ff784e;
 }
 
-.btn-crear-producto {
-    background: #e63946;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+/* ===============================
+   RESPONSIVE DESIGN
+=============================== */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 768px) {
+    .modal-general {
+        padding: 15px;
+    }
+
+    .modal-box {
+        padding: 25px 20px;
+        max-width: 90%;
+        border-radius: 16px;
+    }
+
+    .modal-box h2 {
+        font-size: 1.3rem;
+    }
+
+    .cerrar-modal {
+        font-size: 24px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .upload-box {
+        min-height: 140px;
+        height: auto;
+    }
+
+    .upload-box i {
+        font-size: 40px;
+    }
+
+    .upload-box span {
+        font-size: 0.9rem;
+    }
+
+    .modal-box input,
+    .modal-box textarea {
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+
+    .btn-modal-crear {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
 }
 
-.modal-content::-webkit-scrollbar {
-    width: 6px;
+/* Teléfonos pequeños */
+@media (max-width: 480px) {
+    .modal-general {
+        padding: 10px;
+        align-items: flex-start;
+        padding-top: 40px;
+    }
+
+    .modal-box {
+        padding: 20px 15px;
+        max-width: 100%;
+        border-radius: 14px;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+
+    .modal-box h2 {
+        font-size: 1.1rem;
+        margin-top: 5px;
+    }
+
+    .modal-box label {
+        font-size: 0.85rem;
+    }
+
+    .cerrar-modal {
+        top: 12px;
+        right: 15px;
+        font-size: 20px;
+        width: 28px;
+        height: 28px;
+    }
+
+    .upload-box {
+        min-height: 120px;
+        height: auto;
+        margin: 8px 0;
+    }
+
+    .upload-box i {
+        font-size: 32px;
+    }
+
+    .upload-box span {
+        font-size: 0.8rem;
+        padding: 0 12px;
+    }
+
+    .modal-box input,
+    .modal-box textarea {
+        padding: 10px;
+        font-size: 16px;
+        margin: 8px 0;
+        border-radius: 8px;
+    }
+
+    .modal-box textarea {
+        min-height: 70px;
+    }
+
+    .btn-modal-crear {
+        padding: 11px 12px;
+        font-size: 0.9rem;
+        margin-top: 8px;
+    }
+
+    .modal-box input[type="number"] {
+        margin-bottom: 15px;
+    }
 }
 
+<<<<<<< HEAD
 .modal-content::-webkit-scrollbar-thumb {
     background: #f16529;
     border-radius: 6px;
@@ -603,4 +889,35 @@
 .btn-rechazar:hover {
     background: #333;
     color: white;
+=======
+/* Pantallas muy pequeñas */
+@media (max-width: 360px) {
+    .modal-box {
+        padding: 18px 12px;
+    }
+
+    .modal-box h2 {
+        font-size: 1rem;
+    }
+
+    .upload-box {
+        min-height: 100px;
+        height: auto;
+    }
+
+    .upload-box i {
+        font-size: 28px;
+    }
+
+    .upload-box span {
+        font-size: 0.75rem;
+        padding: 0 10px;
+    }
+
+    .modal-box input,
+    .modal-box textarea {
+        padding: 8px;
+        font-size: 14px;
+    }
+>>>>>>> bbb9661 (mejora de la opcion agregar promo y productos)
 }

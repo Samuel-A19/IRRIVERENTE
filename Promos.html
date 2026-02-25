@@ -220,32 +220,44 @@
     <div id="modalAdmin" class="modal-general">
         <div class="modal-box">
 
-            <span class="cerrar-modal" onclick="cerrarModalAdmin()">&times;</span>
+            <button class="cerrar-modal" onclick="cerrarModalAdmin()">&times;</button>
 
-            <h2 id="tituloAdmin">Crear</h2>
+            <h2 id="tituloAdmin">Crear Promoción</h2>
 
             <input type="hidden" id="tipoAdmin">
 
             <!-- IMAGEN -->
             <label class="upload-box">
-                <input type="file" id="imagenAdmin" hidden>
+                <input type="file" id="imagenAdmin" accept="image/*" hidden>
                 <div class="upload-area">
+                    <i class="bi bi-cloud-upload"></i>
                     <span>Haz clic para agregar imagen</span>
-                    <img id="previewAdmin">
                 </div>
+                <img id="previewAdmin">
             </label>
 
             <label>Título</label>
-            <input type="text" id="tituloInput">
+            <input type="text" id="tituloInput" placeholder="Nombre de la promoción" required>
 
             <label>Descripción</label>
-            <textarea id="descripcionInput"></textarea>
+            <textarea id="descripcionInput" placeholder="Descripción y detalles de la promoción" required></textarea>
+
+            <label>Categoría</label>
+            <select id="categoriaInput" required>
+                <option value="">Selecciona una categoría</option>
+                <option value="pizza">Pizza</option>
+                <option value="pasta">Pasta</option>
+                <option value="lasagna">Lasaña</option>
+                <option value="hamburguesa">Hamburguesa</option>
+                <option value="limonadas">Limonadas</option>
+                <option value="gaseosas">Gaseosas</option>
+            </select>
 
             <label>Precio</label>
-            <input type="number" id="precioInput" min="0">
+            <input type="number" id="precioInput" min="0" placeholder="0.00" required>
 
-            <button class="btn-modal-crear" onclick="guardarAdmin()">
-                Guardar
+            <button type="button" class="btn-modal-crear" onclick="guardarAdmin()">
+                Guardar Promoción
             </button>
 
         </div>
