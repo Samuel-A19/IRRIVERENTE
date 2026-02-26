@@ -176,6 +176,8 @@ function cerrarModalAdmin() {
 
 function guardarAdmin() {
 
+    console.log("FUNCION EJECUTADA 🔥");
+
     const tipo = document.getElementById("tipoAdmin")?.value;
     const categoria = document.getElementById("categoriaInput")?.value;
     const titulo = document.getElementById("tituloInput")?.value;
