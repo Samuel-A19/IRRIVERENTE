@@ -10,12 +10,12 @@
 
     <!-- Enlace a la hoja de estilos CSS personalizada -->
     <link rel="stylesheet" href="Css/Encabezado.css" />
+    <link rel="stylesheet" href="Css/Fondos.css" />
+    <link rel="stylesheet" href="Css/PiePagina.css" />
+    <link rel="stylesheet" href="Css/Menu.css" />
     <link rel="stylesheet" href="Css/Carrito.css" />
     <link rel="stylesheet" href="Css/Modales.css" />
-    <link rel="stylesheet" href="Css/PiePagina.css" />
-    <link rel="stylesheet" href="Css/Fondos.css" />
-    <link rel="stylesheet" href="Css/Historial.css" />
-    <link rel="stylesheet" href="Css/Menulateral.css">
+    <link rel="stylesheet" href="Css/Menulateral.css" />
 
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 
     <!-- Librería JS de Swiper (funcionalidad del carrusel) -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -45,24 +46,24 @@
 
         <!-- Contenedor del logo -->
         <div class="header-center logo">
-            <a href="Inicio.html"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
+            <a href="Inicio.php"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
             <!-- Logo con enlace a la página de inicio -->
         </div>
 
         <!-- MENÚ DE NAVEGACIÓN -->
         <nav class="header-center nav-menu"> <!-- Contenedor del menú -->
-            <a href="Inicio.html">INICIO</a> <!-- Enlace a la página de inicio -->
-            <a href="Menu.html">MENÚ</a> <!-- Enlace a la sección de menú -->
-            <a href="Promos.html">PROMOS</a> <!-- Enlace a la página de promociones -->
+            <a href="Inicio.php">INICIO</a> <!-- Enlace a la página de inicio -->
+            <a href="Menu.php">MENÚ</a> <!-- Enlace a la sección de menú -->
+            <a href="Promos.php">PROMOS</a> <!-- Enlace a la página de promociones -->
             <a href="#" id="linkSiguePedido">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
-            <a href="Acercanosotros.html">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
+            <a href="Acercanosotros.php">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
             <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
             <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
             <div id="carritoDropdown" class="carrito-dropdown">
                 <h3>Tu Carrito</h3>
                 <ul id="carritoLista" class="carrito-lista">
                     <li class="carrito-item">
-                        <img src="Imagenes/Pizza 2.jpg" alt="">
+                        <img src="Imagenes/Pizza 2.jpg " alt="">
                         <div class="carrito-info">
                             <p></p>
                             <span></span>
@@ -107,8 +108,8 @@
                 <div class="side-divider"></div>
 
 
-                <a href="Historial.html">Historial de Pedidos</a>
-                <a href="Ajustes.html">Ajustes</a>
+                <a href="Historial.php">Historial de Pedidos</a>
+                <a href="Ajustes.php">Ajustes</a>
 
                 <!-- CERRAR SESIÓN -->
                 <a href="#" id="btnCerrarSesion" class="logout">
@@ -130,80 +131,146 @@
         </nav>
     </header>
 
+    <!-- Contenido -->
+    <section class="catalogo"></section>
+    <main class="container">
+        <h1><u>NUESTROS PRODUCTOS</u></h1>
+        <p>Explora nuestra variedad. Pizza, Pasta, Lasaña, Hamburguesa, Limonadas y Gaseosas.</p>
+
+        <!-- Buscador -->
+        <input type="text" id="search" placeholder="Buscar (ej, hawaiana, carne, limón...)">
+
+        <!-- Filtros -->
+        <div class="filters">
+            <button class="filter active" data-category="all">Todas</button>
+            <button class="filter" data-category="pizza">Pizza</button>
+            <button class="filter" data-category="pasta">Pasta</button>
+            <button class="filter" data-category="lasagna">Lasaña</button>
+            <button class="filter" data-category="hamburguesa">Hamburguesa</button>
+            <button class="filter" data-category="limonadas">Limonadas</button>
+            <button class="filter" data-category="gaseosa">Gaseosas</button>
+        </div>
+
+        <button class="btn-agregar solo-admin" onclick="abrirModalAdmin('producto')">
+            AGREGAR PRODUCTO
+        </button>
+
+
+        <!-- Productos -->
+        <div class="products" id="products">
+            <?php include("api/mostrar_productos.php"); ?>
+        </div>
+    </main>
 
     <!-- BOTÓN FLOTANTE DE WHATSAPP -->
     <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank"> <!-- Enlace a WhatsApp -->
         <img src="Imagenes/Whatsaap Logo.png" class="Logo-Whatsaap"> <!-- Icono de WhatsApp -->
     </a>
 
+    <!-- MODALES DE AUTENTICACIÓN -->
 
-    <!-- HISTORIAL CON SCROLL EN MÓVIL -->
-    <div class="container">
-        <div class="profile-header">
-            <div class="avatar">
-                <img id="historialFoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                    alt="Foto de perfil">
-            </div>
-            <h2 id="historialNombre">Usuario</h2>
-            <h1>HISTORIAL</h1>
-        </div>
-
-
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>N° PEDIDO</th>
-                        <th>FECHA</th>
-                        <th>ESTADO</th>
-                        <th>TOTAL</th>
-                        <th class="td-action"></th>
-                    </tr>
-                </thead>
-                <tbody id="tablaHistorial">
-                    <tr>
-                        <td class="pedido-id">#120982</td>
-                        <td>15/11/2025</td>
-                        <td><span class="estado en-preparacion">En preparación</span></td>
-                        <td class="total">$35.500</td>
-                        <td class="td-action"><button class="btn-ver">Ver</button></td>
-                    </tr>
-                    <tr>
-                        <td class="pedido-id">#155220</td>
-                        <td>10/11/2025</td>
-                        <td><span class="estado entregado">Entregado</span></td>
-                        <td class="total">$45.000</td>
-                        <td class="td-action"><button class="btn-ver">Ver</button></td>
-                    </tr>
-                    <tr>
-                        <td class="pedido-id">#158032</td>
-                        <td>05/11/2025</td>
-                        <td><span class="estado entregado">Entregado</span></td>
-                        <td class="total">$65.000</td>
-                        <td class="td-action"><button class="btn-ver">Ver</button></td>
-                    </tr>
-                    <tr>
-                        <td class="pedido-id">#520002</td>
-                        <td>28/10/2025</td>
-                        <td><span class="estado en-preparacion">En preparación</span></td>
-                        <td class="total">$65.000</td>
-                        <td class="td-action"><button class="btn-ver">Ver</button></td>
-                    </tr>
-                </tbody>
-            </table>
+    <!-- MODAL: INICIO DE SESIÓN -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAuthModal('loginModal')">&times;</span>
+            <h2>Iniciar Sesión</h2>
+            <input type="email" id="loginEmail" placeholder="Correo o Usuario" />
+            <input type="password" id="loginPassword" placeholder="Contraseña" />
+            <button class="btn-modal">Ingresar</button>
+            <p>¿No tienes cuenta?
+                <a href="#" onclick="switchAuthModal('loginModal', 'registerModal')">Regístrate</a>
+            </p>
+            <a href="#" onclick="event.preventDefault(); switchAuthModal('loginModal', 'recoverModal')">¿Olvidaste tu
+                contraseña?</a>
         </div>
     </div>
 
+    <!-- MODAL: RECUPERAR CONTRASEÑA -->
+    <div id="recoverModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAuthModal('recoverModal')">&times;</span>
+            <h2>Recuperar Contraseña</h2>
+            <p>Introduce tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
+            <input type="email" placeholder="Correo o Usuario" />
+            <button class="btn-modal">Enviar enlace</button>
+            <p><a href="#" onclick="event.preventDefault(); switchAuthModal('recoverModal', 'loginModal')">Volver a
+                    iniciar sesión</a></p>
+        </div>
+    </div>
 
+    <!-- MODAL: REGISTRO -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAuthModal('registerModal')">&times;</span>
+            <h2>Registro</h2>
+            <input type="text" placeholder="Nombre de usuario" />
+            <input type="email" placeholder="Correo electrónico" />
+            <input type="password" placeholder="Contraseña" />
+            <button class="btn-modal">Registrarse</button>
+            <p>¿Ya tienes cuenta? <a href="#" onclick="switchAuthModal('registerModal', 'loginModal')">Inicia sesión</a>
+            </p>
+        </div>
+    </div>
+    <!-- MODAL ADMIN (PRODUCTO / PROMO) -->
+    <div id="modalAdmin" class="modal-general">
+        <div class="modal-box">
 
+            <form id="adminForm" onsubmit="guardarAdmin(event)">
 
+                <button type="button" class="cerrar-modal" onclick="cerrarModalAdmin()">&times;</button>
+
+                <h2 id="tituloAdmin">Crear Producto</h2>
+
+                <input type="hidden" id="tipoAdmin">
+                <input type="hidden" id="idAdmin">
+
+                <!-- IMAGEN -->
+                <label class="upload-box">
+                    <input type="file" id="imagenAdmin" name="imagen" accept="image/*" hidden>
+                    <div class="upload-area">
+                        <i class="bi bi-cloud-upload"></i>
+                        <span>Haz clic para agregar imagen</span>
+                    </div>
+                    <img id="previewAdmin">
+                </label>
+
+                <label>Título</label>
+                <input type="text" id="tituloInput" placeholder="Nombre del producto" required>
+
+                <label>Descripción</label>
+                <textarea id="descripcionInput" placeholder="Ingredientes o detalles del producto" required></textarea>
+
+                <label>Categoría</label>
+                <select id="categoriaInput" required>
+                    <option value="">Selecciona una categoría</option>
+                    <option value="pizza">Pizza</option>
+                    <option value="pasta">Pasta</option>
+                    <option value="lasagna">Lasaña</option>
+                    <option value="hamburguesa">Hamburguesa</option>
+                    <option value="limonadas">Limonadas</option>
+                    <option value="gaseosas">Gaseosas</option>
+                </select>
+
+                <label>Precio</label>
+                <input type="number" id="precioInput" min="0" placeholder="0.00" required>
+
+                <button type="submit" class="btn-modal-crear">
+                    Guardar Producto
+                </button>
+
+            </form>
+
+        </div>
+    </div>
     <!-- ENLACE AL SCRIPT EXTERNO CON FUNCIONES Y ANIMACIONES -->
-    <script src="Js/Historial.js"></script>
-    <script src="Js/Menulateral.js"></script>
-    <script src="Js/Carrito.js"></script>
-    <script src="Js/Modales.js"></script>
+
     <script src="Js/Auth.js"></script>
-    <script src="Js/Encabezado.js"></script>
+    <script src="Js/Carrito.js"></script>
+    <script src="Js/Menu.js"></script>
+    <script src="Js/Promos.js"></script>
+    <script src="Js/Modales.js"></script>
+    <script src="Js/Menulateral.js"></script>
+
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->
@@ -230,32 +297,14 @@
         </div>
     </footer>
 
-    <!-- MODAL DETALLE PEDIDO -->
-    <div id="modalDetalle" class="modal-detalle">
-        <div class="modal-contenido">
-
-            <span class="cerrar-modal" onclick="cerrarDetalle()">&times;</span>
-
-            <h2>Detalle del Pedido</h2>
-
-            <div id="detalleContenido">
-                <!-- Aquí se cargan los productos -->
-            </div>
-
-            <div class="detalle-total">
-                <strong>Total:</strong>
-                <span id="detalleTotal">$0</span>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- ALERTA PERSONALIZADA -->
-    <div id="alertOverlay" class="alert-overlay" style="display:none;">
-        <div class="alert-box">
-            <h3 id="alertTitle">Atención</h3>
-            <p id="alertMessage"></p>
-            <button onclick="cerrarAlerta()">Aceptar</button>
+    <!-- MODAL PIZZAS -->
+    <div id="sizeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeSizeModal()">×</span>
+            <h3 id="modalTitle">Selecciona el tamaño</h3>
+            <div class="size-option" id="sizeSmall">Pequeña - $<span></span></div>
+            <div class="size-option" id="sizeMedium">Mediana - $<span></span></div>
+            <div class="size-option" id="sizeLarge">Grande - $<span></span></div>
         </div>
     </div>
 
@@ -263,3 +312,4 @@
 </body>
 
 </html>
+

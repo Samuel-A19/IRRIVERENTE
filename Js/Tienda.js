@@ -41,7 +41,7 @@ form.addEventListener("submit", (e) => {
 
     localStorage.setItem("datosCliente", JSON.stringify(datosCliente));
 
-    window.location.href = "Menu.html";
+    window.location.href = "Menu.php";
 });
 
 // 🧩 HELPERS

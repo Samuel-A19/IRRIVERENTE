@@ -176,6 +176,45 @@ body {
     box-shadow: 0 8px 20px rgba(56, 142, 60, 0.5);
 }
 
+/* Contenedor de botones admin */
+.card-admin-btns {
+    display: none;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.card-admin-btns.visible {
+    display: flex !important;
+}
+
+.card-admin-btns button {
+    flex: 1;
+    padding: 6px 10px !important;
+    font-size: 0.8rem !important;
+    margin: 0 !important;
+    width: auto !important;
+}
+
+.card-admin-btns .btn-edit {
+    background: #1976d2 !important;
+    box-shadow: 0 3px 8px rgba(25, 118, 210, 0.3) !important;
+}
+
+.card-admin-btns .btn-edit:hover {
+    background: #1565c0 !important;
+    box-shadow: 0 5px 12px rgba(25, 118, 210, 0.4) !important;
+}
+
+.card-admin-btns .btn-delete {
+    background: #d32f2f !important;
+    box-shadow: 0 3px 8px rgba(211, 47, 47, 0.3) !important;
+}
+
+.card-admin-btns .btn-delete:hover {
+    background: #c62828 !important;
+    box-shadow: 0 5px 12px rgba(211, 47, 47, 0.4) !important;
+}
+
 /* RESPONSIVE */
 @media (min-width: 640px) {
     .products {

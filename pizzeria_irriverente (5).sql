@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2026 a las 17:18:45
+-- Tiempo de generación: 02-03-2026 a las 23:49:44
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -173,39 +173,43 @@ CREATE TABLE `products` (
   `ingredients` text DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   `category` varchar(50) NOT NULL,
-  `is_pizza` tinyint(1) DEFAULT 0
+  `image` varchar(255) DEFAULT NULL,
+  `is_promo` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `ingredients`, `price`, `category`, `is_pizza`) VALUES
-(1, 'Pizza Margarita', 'Jamon, queso mozzarella', NULL, 'pizza', 1),
-(2, 'Pizza Primavera', 'Jamon, maíz, tocineta', NULL, 'pizza', 1),
-(3, 'Pizza Hawaiana', 'Jamon, piña', NULL, 'pizza', 1),
-(4, 'Pizza Ranchera', 'Jamon, pimentón, tocineta, carne desmechada', NULL, 'pizza', 1),
-(5, 'Pizza A la Marinera', 'Champiñones, camarones, calamares', NULL, 'pizza', 1),
-(6, 'Pizza 4 Quesos', 'Mozzarella, provolone, gouda, parmesano', NULL, 'pizza', 1),
-(7, 'Pizza Alemana', 'Jamon, salami, peperoni, tocineta, chorizo', NULL, 'pizza', 1),
-(8, 'Pizza Mexicana', 'Jamon, tomate, chorizo, maiz, carne molida', NULL, 'pizza', 1),
-(9, 'Pasta Carbonara', 'Tocineta y jamón en salsa blanca con pimienta', 19500, 'pasta', 0),
-(10, 'Pasta Alfredo', 'Salsa blanca con mantequilla, ajo y perejil', 19500, 'pasta', 0),
-(11, 'Pasta Bolognesa', 'Carne molida en salsa de tomate', 19000, 'pasta', 0),
-(12, 'Pasta Irriverente', 'Carne o pollo en salsa especial de la casa', 22000, 'pasta', 0),
-(13, 'Pasta A la Marinera', 'Calamares y camarones en salsa de tomate', 24000, 'pasta', 0),
-(14, 'Olio con Camarones y Champiñones', 'Ají especial de la casa', 24000, 'pasta', 0),
-(15, 'All Amatriciana', 'Tocineta y aceitunas en salsa de tomate', 19500, 'pasta', 0),
-(16, 'Lasaña de Pollo', '3 capas de pasta y pollo con bechamel y gratinado', 19000, 'lasagna', 0),
-(17, 'Lasaña de Carne', '3 capas de pasta y carne molida con bechamel', 19000, 'lasagna', 0),
-(18, 'Hamburguesa Irriverente', 'Carne 100% res, queso mozzarella, lechuga, tomate, salsa tártara', 14000, 'hamburguesa', 0),
-(19, 'Hamburguesa Irriverente + Papas', 'Carne 100% res, queso mozzarella, lechuga, tomate, salsa tártara', 17000, 'hamburguesa', 0),
-(20, 'Limonada de Piña', '', 6000, 'limonadas', 0),
-(21, 'Limonada de Fresa', '', 6000, 'limonadas', 0),
-(22, 'Limonada Natural', '', 6000, 'limonadas', 0),
-(23, 'Malteada de Fresa', '', 9000, 'limonadas', 0),
-(24, 'Gaseosa Personal (350ml)', '', 4000, 'gaseosa', 0),
-(25, 'Gaseosa Grande (1.5L)', '', 8000, 'gaseosa', 0);
+INSERT INTO `products` (`id`, `name`, `ingredients`, `price`, `category`, `image`, `is_promo`) VALUES
+(1, 'Pizza Margarita', 'Jamon, queso mozzarella', NULL, 'pizza', NULL, 0),
+(2, 'Pizza Primavera', 'Jamon, maíz, tocineta', NULL, 'pizza', NULL, 0),
+(3, 'Pizza Hawaiana', 'Jamon, piña', NULL, 'pizza', NULL, 0),
+(4, 'Pizza Ranchera', 'Jamon, pimentón, tocineta, carne desmechada', NULL, 'pizza', NULL, 0),
+(5, 'Pizza A la Marinera', 'Champiñones, camarones, calamares', NULL, 'pizza', NULL, 0),
+(6, 'Pizza 4 Quesos', 'Mozzarella, provolone, gouda, parmesano', NULL, 'pizza', NULL, 0),
+(7, 'Pizza Alemana', 'Jamon, salami, peperoni, tocineta, chorizo', NULL, 'pizza', NULL, 0),
+(8, 'Pizza Mexicana', 'Jamon, tomate, chorizo, maiz, carne molida', NULL, 'pizza', NULL, 0),
+(9, 'Pasta Carbonara', 'Tocineta y jamón en salsa blanca con pimienta', 19500, 'pasta', NULL, 0),
+(10, 'Pasta Alfredo', 'Salsa blanca con mantequilla, ajo y perejil', 19500, 'pasta', NULL, 0),
+(11, 'Pasta Bolognesa', 'Carne molida en salsa de tomate', 19000, 'pasta', NULL, 0),
+(12, 'Pasta Irriverente', 'Carne o pollo en salsa especial de la casa', 22000, 'pasta', NULL, 0),
+(13, 'Pasta A la Marinera', 'Calamares y camarones en salsa de tomate', 24000, 'pasta', NULL, 0),
+(14, 'Olio con Camarones y Champiñones', 'Ají especial de la casa', 24000, 'pasta', NULL, 0),
+(15, 'All Amatriciana', 'Tocineta y aceitunas en salsa de tomate', 19500, 'pasta', NULL, 0),
+(16, 'Lasaña de Pollo', '3 capas de pasta y pollo con bechamel y gratinado', 19000, 'lasagna', NULL, 0),
+(17, 'Lasaña de Carne', '3 capas de pasta y carne molida con bechamel', 19000, 'lasagna', NULL, 0),
+(18, 'Hamburguesa Irriverente', 'Carne 100% res, queso mozzarella, lechuga, tomate, salsa tártara', 14000, 'hamburguesa', NULL, 0),
+(19, 'Hamburguesa Irriverente + Papas', 'Carne 100% res, queso mozzarella, lechuga, tomate, salsa tártara', 17000, 'hamburguesa', NULL, 0),
+(20, 'Limonada de Piña', '', 6000, 'limonadas', NULL, 0),
+(21, 'Limonada de Fresa', '', 6000, 'limonadas', NULL, 0),
+(22, 'Limonada Natural', '', 6000, 'limonadas', NULL, 0),
+(23, 'Malteada de Fresa', '', 9000, 'limonadas', NULL, 0),
+(24, 'Gaseosa Personal (350ml)', '', 4000, 'gaseosa', NULL, 0),
+(25, 'Gaseosa Grande (1.5L)', '', 8000, 'gaseosa', NULL, 0),
+(26, 'HAMBURGUESA ', 'hola ', 100000, 'hamburguesa', 'uploads/1772070193_4779.jpg', 0),
+(27, 'Hamburguesa Doble ', 'Doble carne', 10, 'hamburguesa', 'uploads/1772070328_3119.jpg', 0),
+(28, 'pizaa', 'jajaja', 500000, 'pizza', 'uploads/1772490442_7249.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -229,7 +233,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre_completo`, `correo`, `contrasena`, `rango`, `fecha_creacion`, `reset_token`, `reset_expiry`) VALUES
-(1, 'SuzuKa', 'Samuelesssneider@gmail.com', '$2y$10$fyJ6BTt2oyuMshzktfCi9ulh2eCLJBTesLdlzZSxr/hMgefO0BhmC', 'cliente', '2025-10-16', NULL, NULL),
+(1, 'SuzuKa', 'Samuelesssneider@gmail.com', '$2y$10$fyJ6BTt2oyuMshzktfCi9ulh2eCLJBTesLdlzZSxr/hMgefO0BhmC', 'admin', '2025-10-16', NULL, NULL),
 (13, 'Dorita', 'Samuelessneider@gmail.com', '$2y$10$kYqIFJmEjNIGlcBSJzznBOrlHJu/l.t9yCcI1DRxKnKwQSzIIGRWy', 'cliente', '2025-10-16', NULL, NULL),
 (14, 'Steven ', 'Stevendavidmora@gmail.com', '$2y$10$yT9FBrXNc9gjhfig1KlPD.4eCSNCyNkQoz0ptLyh0e6rjBjzJHh0a', 'cliente', '2025-10-16', NULL, NULL),
 (15, 'Erick', 'ericksebastian0103@gmail.com', '$2y$10$tPeLrDY9qpHvfeA8eaKHe.37YhvXCyVXprZZvf31d3Xdd7/x1kKve', 'admin', '2025-11-27', NULL, NULL);
@@ -339,7 +343,7 @@ ALTER TABLE `pedido_detalle`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

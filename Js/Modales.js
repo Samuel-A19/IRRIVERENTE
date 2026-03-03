@@ -7,6 +7,47 @@ function openModal(id) {
     if (modal) modal.style.display = 'flex';
 }
 
+
+// Recarga dinámica de productos (reemplaza el contenido de #products)
+window.reloadProducts = function () {
+    const container = document.getElementById('products');
+    if (!container) return;
+    fetch('/IRRIVERENTE/api/mostrar_productos.php')
+        .then(r => r.text())
+        .then(html => {
+            container.innerHTML = html;
+            setTimeout(() => {
+                if (typeof window.initMenuCards === 'function') {
+                    window.initMenuCards();
+                }
+                if (typeof aplicarPermisos === 'function') {
+                    aplicarPermisos();
+                }
+            }, 50);
+        })
+        .catch(err => console.error('Error recargando productos:', err));
+};
+
+// Recarga dinámica de promociones (reemplaza contenido de #promosContainer)
+window.reloadPromos = function () {
+    const container = document.getElementById('promosContainer');
+    if (!container) return;
+    fetch('/IRRIVERENTE/api/mostrar_promos.php')
+        .then(r => r.text())
+        .then(html => {
+            container.innerHTML = html;
+            setTimeout(() => {
+                if (typeof attachPromoHandlers === 'function') {
+                    attachPromoHandlers();
+                }
+                if (typeof aplicarPermisos === 'function') {
+                    aplicarPermisos();
+                }
+            }, 50);
+        })
+        .catch(err => console.error('Error recargando promociones:', err));
+};
+
 function closeModal(id) {
     const modal = document.getElementById(id);
     if (modal) modal.style.display = 'none';
@@ -117,6 +158,7 @@ function abrirModalAdmin(tipo) {
     const modal = document.getElementById("modalAdmin");
     const titulo = document.getElementById("tituloAdmin");
     const tipoInput = document.getElementById("tipoAdmin");
+    const submitBtn = modal ? modal.querySelector('button[type="submit"]') : null;
 
     if (!modal) return;
 
@@ -124,6 +166,7 @@ function abrirModalAdmin(tipo) {
 
     if (tipoInput) tipoInput.value = tipo;
 
+    // ajustar título del modal
     if (titulo) {
         if (tipo === "pizza") {
             titulo.textContent = "Crear Pizza";
@@ -131,6 +174,15 @@ function abrirModalAdmin(tipo) {
             titulo.textContent = "Crear Promoción";
         } else {
             titulo.textContent = "Crear Producto";
+        }
+    }
+
+    // cambiar texto del botón submit para mayor claridad
+    if (submitBtn) {
+        if (tipo === "promo") {
+            submitBtn.textContent = "Guardar Promoción";
+        } else {
+            submitBtn.textContent = "Guardar Producto";
         }
     }
 }
@@ -174,33 +226,54 @@ function cerrarModalAdmin() {
    GUARDAR PRODUCTO / PROMO CON IMAGEN
 ===================================================== */
 
-function guardarAdmin() {
+function guardarAdmin(event) {
+
+    // evitar envío tradicional del formulario
+    if (event && event.preventDefault) event.preventDefault();
 
     console.log("FUNCION EJECUTADA 🔥");
 
-    const tipo = document.getElementById("tipoAdmin")?.value;
+    const tipo = document.getElementById("tipoAdmin")?.value; // 'producto' o 'promo'
     const categoria = document.getElementById("categoriaInput")?.value;
     const titulo = document.getElementById("tituloInput")?.value;
     const descripcion = document.getElementById("descripcionInput")?.value;
     const precio = document.getElementById("precioInput")?.value;
-    const imagen = document.getElementById("imagenAdmin")?.files[0];
+    const fileInput = document.getElementById("imagenAdmin");
+    const imagen = fileInput?.files[0];
 
     if (!tipo || !categoria || !titulo || !descripcion || !precio) {
         mostrarAlerta("Todos los campos son obligatorios");
         return;
     }
 
+    // la imagen se requiere para evitar que la tarjeta quede en blanco en el catálogo
+    if (!imagen) {
+        mostrarAlerta("Debes seleccionar una imagen para poder guardar");
+        return;
+    }
+
     const formData = new FormData();
+    // la API antigua espera 'tipo' con la categoría, se puede renombrar en el servidor
     formData.append("tipo", categoria);
     formData.append("titulo", titulo);
     formData.append("descripcion", descripcion);
     formData.append("precio", precio);
 
+    // indicar si se trata de una promo para la base de datos
+    formData.append("is_promo", tipo === "promo" ? 1 : 0);
+
+    // si estamos editando, enviar id
+    const idAdmin = document.getElementById("idAdmin")?.value;
+    if (idAdmin) {
+        formData.append('id', idAdmin);
+    }
+
     if (imagen) {
+        console.log("Adjuntando imagen", imagen.name, imagen.size);
         formData.append("imagen", imagen);
     }
 
-    fetch("api/guardar_producto.php", {
+    fetch("/IRRIVERENTE/api/guardar_producto.php", {
         method: "POST",
         body: formData
     })
@@ -209,22 +282,27 @@ function guardarAdmin() {
 
             console.log("RESPUESTA SERVIDOR:", data);
 
-            if (data.trim() === "ok") {
+            const resp = data.trim();
+            if (resp === "ok") {
                 mostrarAlerta("Guardado correctamente 🔥", "Administrador");
                 
-                // Obtener referencias al modal
                 const modal = document.getElementById("modalAdmin");
-                
                 cerrarModalAdmin();
 
-                // Limpiar formulario
+                // recargar la lista correspondiente
+                if (tipo === "promo") {
+                    if (typeof reloadPromos === 'function') reloadPromos();
+                } else {
+                    if (typeof reloadProducts === 'function') reloadProducts();
+                }
+
+                // limpiar campos
                 document.getElementById("tituloInput").value = "";
                 document.getElementById("descripcionInput").value = "";
                 document.getElementById("precioInput").value = "";
                 document.getElementById("categoriaInput").value = "";
                 document.getElementById("imagenAdmin").value = "";
                 
-                // Limpiar imagen si es necesario
                 if (modal) {
                     const preview = modal.querySelector("#previewAdmin");
                     const uploadBox = modal.querySelector(".upload-box");
@@ -235,9 +313,11 @@ function guardarAdmin() {
                     }
                     if (uploadBox) {
                         uploadBox.classList.remove("has-image");
-                        uploadBox.style.height = "auto"; // Restaurar altura inicial
+                        uploadBox.style.height = "auto";
                     }
                 }
+            } else if (resp === "ERROR_IMG") {
+                mostrarAlerta("El producto se guardó pero la imagen no pudo subirse. Comprueba los permisos del directorio uploads.");
             } else {
                 mostrarAlerta("Error al guardar");
             }

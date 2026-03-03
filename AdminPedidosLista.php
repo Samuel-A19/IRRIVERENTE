@@ -44,17 +44,17 @@
 
         <!-- Contenedor del logo -->
         <div class="header-center logo">
-            <a href="Inicio.html"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
+            <a href="Inicio.php"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
             <!-- Logo con enlace a la página de inicio -->
         </div>
 
         <!-- MENÚ DE NAVEGACIÓN -->
         <nav class="header-center nav-menu"> <!-- Contenedor del menú -->
-            <a href="Inicio.html">INICIO</a> <!-- Enlace a la página de inicio -->
-            <a href="Menu.html">MENÚ</a> <!-- Enlace a la sección de menú -->
-            <a href="Promos.html">PROMOS</a> <!-- Enlace a la página de promociones -->
+            <a href="Inicio.php">INICIO</a> <!-- Enlace a la página de inicio -->
+            <a href="Menu.php">MENÚ</a> <!-- Enlace a la sección de menú -->
+            <a href="Promos.php">PROMOS</a> <!-- Enlace a la página de promociones -->
             <a href="#" id="linkSiguePedido">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
-            <a href="Acercanosotros.html">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
+            <a href="Acercanosotros.php">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
             <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
             <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
             <div id="carritoDropdown" class="carrito-dropdown">
@@ -105,8 +105,8 @@
                 <div class="side-divider"></div>
 
 
-                <a href="Historial.html">Historial de Pedidos</a>
-                <a href="Ajustes.html">Ajustes</a>
+                <a href="Historial.php">Historial de Pedidos</a>
+                <a href="Ajustes.php">Ajustes</a>
 
                 <!-- CERRAR SESIÓN -->
                 <a href="#" id="btnCerrarSesion" class="logout">

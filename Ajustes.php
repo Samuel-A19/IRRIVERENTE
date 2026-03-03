@@ -9,24 +9,25 @@
     <title>Irriverente Pizza & Pasta</title> <!-- Título de la pestaña del navegador -->
 
     <!-- Enlace a la hoja de estilos CSS personalizada -->
+    <link rel="stylesheet" href="Css/Ajustes.css" />
+    <link rel="stylesheet" href="Css/PiePagina.css" />
     <link rel="stylesheet" href="Css/Encabezado.css" />
     <link rel="stylesheet" href="Css/Fondos.css" />
-    <link rel="stylesheet" href="Css/PiePagina.css" />
-    <link rel="stylesheet" href="Css/AdminPedido.css" />
     <link rel="stylesheet" href="Css/Carrito.css" />
     <link rel="stylesheet" href="Css/Modales.css" />
-    <link rel="stylesheet" href="Css/Menulateral.css" />
+    <link rel="stylesheet" href="Css/Menulateral.css">
 
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
 
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- Librería de íconos Bootstrap Icons (permite usar iconos con la clase "bi") -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
     <!-- Librería CSS de Swiper (estilos del carrusel) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- Librería JS de Swiper (funcionalidad del carrusel) -->
@@ -37,24 +38,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body> <!-- Comienza el contenido visible en el navegador -->
-
+<body>
     <!-- ENCABEZADO PRINCIPAL -->
     <header class="main-header"> <!-- Contenedor del encabezado -->
 
         <!-- Contenedor del logo -->
         <div class="header-center logo">
-            <a href="Inicio.html"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
+            <a href="Inicio.php"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
             <!-- Logo con enlace a la página de inicio -->
         </div>
 
         <!-- MENÚ DE NAVEGACIÓN -->
         <nav class="header-center nav-menu"> <!-- Contenedor del menú -->
-            <a href="Inicio.html">INICIO</a> <!-- Enlace a la página de inicio -->
-            <a href="Menu.html">MENÚ</a> <!-- Enlace a la sección de menú -->
-            <a href="Promos.html">PROMOS</a> <!-- Enlace a la página de promociones -->
+            <a href="Inicio.php">INICIO</a> <!-- Enlace a la página de inicio -->
+            <a href="Menu.php">MENÚ</a> <!-- Enlace a la sección de menú -->
+            <a href="Promos.php">PROMOS</a> <!-- Enlace a la página de promociones -->
             <a href="#" id="linkSiguePedido">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
-            <a href="Acercanosotros.html">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
+            <a href="Acercanosotros.php">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
             <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
             <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
             <div id="carritoDropdown" class="carrito-dropdown">
@@ -85,6 +85,7 @@
                 </div>
             </div>
 
+
             <!-- Botón menú solo icono -->
             <button id="btnMenuLateral" onclick="abrirMenu()">
                 <i class="bi bi-justify"></i>
@@ -105,8 +106,8 @@
                 <div class="side-divider"></div>
 
 
-                <a href="Historial.html">Historial de Pedidos</a>
-                <a href="Ajustes.html">Ajustes</a>
+                <a href="Historial.php">Historial de Pedidos</a>
+                <a href="Ajustes.php">Ajustes</a>
 
                 <!-- CERRAR SESIÓN -->
                 <a href="#" id="btnCerrarSesion" class="logout">
@@ -124,101 +125,110 @@
                         <i class="bi bi-tiktok"></i>
                     </a>
             </aside>
-
         </nav>
     </header>
-
-
-    <section id="admin-pedidos">
-        <div class="admin-container">
-
-            <h1><strong>GESTIÓN DE PEDIDOS</strong></h1>
-
-            <label>Número de pedido</label>
-            <input type="text" id="adminCodigo" placeholder="Ej: 1025">
-
-            <label>Estado actual del pedido</label>
-
-            <div class="estado-fila">
-                <select id="estadoPedido" class="estado-select">
-                    <option value="0">Recibido</option>
-                    <option value="1">En preparación</option>
-                    <option value="2">En camino</option>
-                    <option value="3">Entregado</option>
-                </select>
-
-                <button class="btn-cambiar" onclick="cambiarEstado()">
-                    Cambiar estado
-                </button>
-            </div>
-
-            <p class="info">
-                Este cambio se reflejará en la vista del cliente
-            </p>
-
-        </div>
-    </section>
-
-
-
     <!-- BOTÓN FLOTANTE DE WHATSAPP -->
     <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank"> <!-- Enlace a WhatsApp -->
         <img src="Imagenes/Whatsaap Logo.png" class="Logo-Whatsaap"> <!-- Icono de WhatsApp -->
     </a>
 
-    <!-- MODAL: INICIO DE SESIÓN -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('loginModal')">&times;</span>
-            <h2>Iniciar Sesión</h2>
-            <input type="email" id="loginEmail" placeholder="Correo o Usuario" />
-            <input type="password" id="loginPassword" placeholder="Contraseña" />
-            <button class="btn-modal">Ingresar</button>
-            <p>¿No tienes cuenta?
-                <a href="#" onclick="switchModal('loginModal', 'registerModal')">Regístrate</a>
-            </p>
-            <a href="#" onclick="event.preventDefault();switchModal('loginModal', 'recoverModal')">¿Olvidaste tu
-                contraseña?</a>
+    <h1><u>AJUSTES DEL USUARIO</u></h1>
+
+    <div class="container">
+
+        <div class="user-header">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="avatar" id="headerFoto"
+                style="cursor:pointer;">
+
+            <div>
+                <strong id="headerNombre">Laura Martínez</strong><br>
+                <span id="headerInfo">laura@example.com | +57 3109876543</span>
+            </div>
+        </div>
+
+        <div class="section-grid">
+
+            <!-- PRIMERA FILA -->
+            <div class="card">
+                <h2>Perfil</h2>
+
+                <label>Nombre</label>
+                <input id="nombre" type="text" value="Laura Martínez">
+
+                <label>Correo electrónico</label>
+                <input id="correo" type="email" value="laura@example.com">
+
+                <div class="form-group">
+                    <label for="phone">Número de teléfono</label>
+                    <input type="tel" id="phone" maxlength="10" inputmode="numeric">
+                </div>
+                <br>
+
+                <h2>Dirección</h2>
+                <label>Ciudad</label>
+                <input id="ciudad" type="text" value="Medellín">
+
+                <label>Dirección principal</label>
+                <input id="direccion" type="text" value="Calle 20 #15-32">
+
+                <div class="botones-accion">
+                    <button id="btnPerfil">Guardar Cambios</button>
+                </div>
+
+
+
+            </div>
+
+            <div id="preferencias" class="card settings-card">
+
+                <!-- FOTO DE PERFIL -->
+                <h2 class="titulo-foto-perfil">Foto de Perfil</h2>
+                <div class="foto-container">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil"
+                        id="fotoPerfil">
+                    <button onclick="abrirSelector()">Cambiar foto</button>
+
+                    <!-- INPUT OCULTO PARA SUBIR FOTO -->
+                    <input type="file" id="inputFoto" accept="image/*" style="display:none;">
+                </div>
+
+
+                <!-- SEGURIDAD -->
+                <h2>Seguridad</h2>
+                <div class="seguridad-section">
+                    <label for="claveActual">Contraseña actual:</label>
+                    <input type="password" id="claveActual" placeholder="••••••••">
+                    <small style="color: #777;">
+                        Por seguridad, la contraseña no se muestra.
+                    </small>
+
+                    <label for="nuevaClave">Nueva contraseña:</label>
+                    <input type="password" id="nuevaClave">
+
+                    <label for="confirmarClave">Confirmar contraseña:</label>
+                    <input type="password" id="confirmarClave">
+                    <div class="botones-accion">
+                        <button id="btnCambiarClave" type="button">
+                            Actualizar Contraseña
+                        </button>
+                    </div>
+
+
+                </div>
+
+            </div>
         </div>
     </div>
 
-    <!-- MODAL: RECUPERAR CONTRASEÑA -->
-    <div id="recoverModal" class="modal"> <!-- Contenedor del modal de recuperación -->
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('recoverModal')">&times;</span> <!-- Botón de cerrar -->
-            <h2>Recuperar Contraseña</h2> <!-- Título -->
-            <p>Introduce tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
-            <!-- Texto explicativo -->
-            <input type="email" placeholder="Correo o Usuario" /> <!-- Campo para ingresar el correo -->
-            <button class="btn-modal">Enviar enlace</button> <!-- Botón para enviar solicitud -->
-            <p><a href="#" onclick="event.preventDefault(); switchModal('recoverModal', 'loginModal')">Volver a
-                    iniciar
-                    sesión</a></p> <!-- Enlace para volver al login -->
-        </div>
-    </div>
-
-    <!-- MODAL: REGISTRO -->
-    <div id="registerModal" class="modal"> <!-- Contenedor del modal de registro -->
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('registerModal')">&times;</span> <!-- Botón para cerrar -->
-            <h2>Registro</h2> <!-- Título -->
-            <input type="text" placeholder="Nombre de usuario" /> <!-- Campo usuario -->
-            <input type="email" placeholder="Correo electrónico" /> <!-- Campo email -->
-            <input type="password" placeholder="Contraseña" /> <!-- Campo contraseña -->
-            <button class="btn-modal">Registrarse</button> <!-- Botón registro -->
-            <p>¿Ya tienes cuenta? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Inicia sesión</a>
-            </p>
-            <!-- Enlace para ir al login -->
-        </div>
-    </div>
-
-    <!-- ENLACE AL SCRIPT EXTERNO CON FUNCIONES Y ANIMACIONES -->
+    <!-- Scripts siempre antes de cerrar el body -->
     <script src="Js/Auth.js"></script>
-    <script src="Js/Modales.js"></script>
     <script src="Js/Menulateral.js"></script>
+    <script src="Js/Modales.js"></script>
+    <script src="Js/Ajustes.js"></script>
     <script src="Js/Carrito.js"></script>
-    <script src="Js/AdminRastreo.js"></script>
     <script src="Js/Encabezado.js"></script>
+    <script src="Js/Alertas.js"></script>
+    <script src="Js/Animaciones.js"></script>
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->
@@ -246,7 +256,7 @@
     </footer>
 
     <!-- ALERTA PERSONALIZADA -->
-    <div id="alertOverlay" class="alert-overlay" style="display:none;">
+    <div id="alertOverlay" class="alert-overlay">
         <div class="alert-box">
             <h3 id="alertTitle">Atención</h3>
             <p id="alertMessage"></p>
@@ -256,3 +266,5 @@
 
 
 </body>
+
+</html>

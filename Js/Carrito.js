@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         localStorage.setItem("carrito", JSON.stringify(carrito));
-        window.location.href = "Pago.html";
+        window.location.href = "Pago.php";
     });
 
     /**************************************************

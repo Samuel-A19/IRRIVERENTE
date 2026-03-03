@@ -58,9 +58,9 @@ $_SESSION['rango'] = $usuario['rango'];
 
 // Redirección
 if ($usuario['rango'] === 'admin') {
-    $redirect = '../AdminPedidosLista.html';
+    $redirect = '../AdminPedidosLista.php';
 } else {
-    $redirect = '../Siguepedido.html';
+    $redirect = '../Siguepedido.php';
 }
 
 echo json_encode([

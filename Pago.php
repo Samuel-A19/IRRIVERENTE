@@ -9,18 +9,13 @@
     <title>Irriverente Pizza & Pasta</title> <!-- Título de la pestaña del navegador -->
 
     <!-- Enlace a la hoja de estilos CSS personalizada -->
-    <link rel="stylesheet" href="Css/Ajustes.css" />
-    <link rel="stylesheet" href="Css/PiePagina.css" />
+    <link rel="stylesheet" href="Css/Pago.css" />
     <link rel="stylesheet" href="Css/Encabezado.css" />
-    <link rel="stylesheet" href="Css/Fondos.css" />
     <link rel="stylesheet" href="Css/Carrito.css" />
     <link rel="stylesheet" href="Css/Modales.css" />
+    <link rel="stylesheet" href="Css/PiePagina.css" />
+    <link rel="stylesheet" href="Css/Fondos.css" />
     <link rel="stylesheet" href="Css/Menulateral.css">
-
-    <link rel="icon" href="favicon.ico" sizes="any">
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="manifest" href="site.webmanifest">
 
     <!-- Librería de íconos Bootstrap Icons (permite usar iconos con la clase "bi") -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -38,23 +33,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body class="pagina-pago">
+    <!-- Comienza el contenido visible en el navegador -->
+
     <!-- ENCABEZADO PRINCIPAL -->
     <header class="main-header"> <!-- Contenedor del encabezado -->
 
         <!-- Contenedor del logo -->
         <div class="header-center logo">
-            <a href="Inicio.html"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
+            <a href="Inicio.php"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
             <!-- Logo con enlace a la página de inicio -->
         </div>
 
         <!-- MENÚ DE NAVEGACIÓN -->
         <nav class="header-center nav-menu"> <!-- Contenedor del menú -->
-            <a href="Inicio.html">INICIO</a> <!-- Enlace a la página de inicio -->
-            <a href="Menu.html">MENÚ</a> <!-- Enlace a la sección de menú -->
-            <a href="Promos.html">PROMOS</a> <!-- Enlace a la página de promociones -->
+            <a href="Inicio.php">INICIO</a> <!-- Enlace a la página de inicio -->
+            <a href="Menu.php">MENÚ</a> <!-- Enlace a la sección de menú -->
+            <a href="Promos.php">PROMOS</a> <!-- Enlace a la página de promociones -->
             <a href="#" id="linkSiguePedido">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
-            <a href="Acercanosotros.html">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
+            <a href="Acercanosotros.php">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
             <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
             <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
             <div id="carritoDropdown" class="carrito-dropdown">
@@ -85,7 +82,6 @@
                 </div>
             </div>
 
-
             <!-- Botón menú solo icono -->
             <button id="btnMenuLateral" onclick="abrirMenu()">
                 <i class="bi bi-justify"></i>
@@ -106,8 +102,8 @@
                 <div class="side-divider"></div>
 
 
-                <a href="Historial.html">Historial de Pedidos</a>
-                <a href="Ajustes.html">Ajustes</a>
+                <a href="Historial.php">Historial de Pedidos</a>
+                <a href="Ajustes.php">Ajustes</a>
 
                 <!-- CERRAR SESIÓN -->
                 <a href="#" id="btnCerrarSesion" class="logout">
@@ -127,108 +123,159 @@
             </aside>
         </nav>
     </header>
-    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
-    <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank"> <!-- Enlace a WhatsApp -->
-        <img src="Imagenes/Whatsaap Logo.png" class="Logo-Whatsaap"> <!-- Icono de WhatsApp -->
-    </a>
 
-    <h1><u>AJUSTES DEL USUARIO</u></h1>
+    <!-- Formulario -->
+    <div class="container formulario-pago" id="bloqueFormulario">
+        <h1>Método de pago</h1>
 
-    <div class="container">
+        <form id="paymentForm">
+            <div>
+                <label for="customerName">Nombre del cliente</label>
+                <input id="customerName" name="customerName" type="text" placeholder="Ej. Juan Pérez" required>
+            </div>
 
-        <div class="user-header">
-            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="avatar" id="headerFoto"
-                style="cursor:pointer;">
+            <div class="row">
+                <div class="col">
+                    <label for="phone">Teléfono</label>
+                    <input id="phone" name="phone" type="tel" placeholder="Ej. 3001234567" maxlength="10"
+                        inputmode="numeric" pattern="[0-9]{10}" required>
+
+                </div>
+                <div class="col">
+                    <label for="email">Correo electrónico</label>
+                    <input id="email" name="email" type="email" placeholder="ejemplo@correo.com" required>
+                </div>
+            </div>
 
             <div>
-                <strong id="headerNombre">Laura Martínez</strong><br>
-                <span id="headerInfo">laura@example.com | +57 3109876543</span>
+                <label>Método de pago</label>
+                <div class="radios">
+                    <label><input type="radio" name="paymentMethod" value="efectivo" checked> Efectivo</label>
+                    <label><input type="radio" name="paymentMethod" value="transferencia"> Pago en Linea</label>
+                </div>
+            </div>
+
+            <div id="transferFields" class="payment-details hidden">
+                <p class="note">Transferencia bancaria: realiza el pago y conserva el comprobante.</p>
+
+                <div>
+                    <label for="bankName">Medio / Banco</label>
+                    <select id="bankName" name="bankName">
+                        <option value="">-- Seleccione --</option>
+                        <option value="Nequi">Nequi</option>
+                        <option value="Bancolombia">Bancolombia</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div style="flex:1">
+                    <button id="submitBtn" class="btn" type="submit">ENVIAR PAGO</button>
+                    <button id="clearBtn" class="btn secondary" type="button">LIMPIAR</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="container resumen-entrega" id="bloqueEntrega">
+        <h3>Datos de entrega</h3>
+        <p><strong>Nombre:</strong> <span id="res-nombre"></span></p>
+        <p><strong>Teléfono:</strong> <span id="res-telefono"></span></p>
+        <p><strong>Correo:</strong> <span id="res-email"></span></p>
+        <p><strong>Dirección:</strong> <span id="res-direccion"></span></p>
+        <p><strong>Referencias:</strong> <span id="res-referencias"></span></p>
+        <p><strong>Medio de pago:</strong> <span id="res-metodo"></span></p>
+
+        <div id="bloquePagoDigital" class="container hidden">
+            <h3>Realiza tu pago</h3>
+
+            <p id="textoPago"></p>
+
+            <img id="qrPago" src="" alt="QR de pago" style="max-width:220px; margin:20px auto; display:block;">
+
+            <button id="btnYaPague" class="btn">YA PAGUÉ</button>
+        </div>
+
+        <div class="resumen-pedido" id="resumenPedido">
+            <h3>Resumen de tu pedido</h3>
+
+            <div class="resumen-seccion">
+                <strong>Productos:</strong>
+                <ul id="resumenProductos"></ul>
+            </div>
+
+            <div class="resumen-seccion">
+                <p><strong>Total:</strong> <span id="resumenTotal">0</span></p>
             </div>
         </div>
 
-        <div class="section-grid">
 
-            <!-- PRIMERA FILA -->
-            <div class="card">
-                <h2>Perfil</h2>
+        <div class="acciones-pago">
+            <button id="btnPagar" class="btn" type="button">
 
-                <label>Nombre</label>
-                <input id="nombre" type="text" value="Laura Martínez">
+                PAGAR AHORA
+            </button>
 
-                <label>Correo electrónico</label>
-                <input id="correo" type="email" value="laura@example.com">
+            <button id="btnEditar" class="btn secondary" type="button">
 
-                <div class="form-group">
-                    <label for="phone">Número de teléfono</label>
-                    <input type="tel" id="phone" maxlength="10" inputmode="numeric">
-                </div>
-                <br>
-
-                <h2>Dirección</h2>
-                <label>Ciudad</label>
-                <input id="ciudad" type="text" value="Medellín">
-
-                <label>Dirección principal</label>
-                <input id="direccion" type="text" value="Calle 20 #15-32">
-
-                <div class="botones-accion">
-                    <button id="btnPerfil">Guardar Cambios</button>
-                </div>
+                EDITAR DATOS
+            </button>
+        </div>
 
 
 
-            </div>
+    </div>
+    <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank">
+        <img src="Imagenes/Whatsaap Logo.png" class="Logo-Whatsaap">
+    </a>
 
-            <div id="preferencias" class="card settings-card">
-
-                <!-- FOTO DE PERFIL -->
-                <h2 class="titulo-foto-perfil">Foto de Perfil</h2>
-                <div class="foto-container">
-                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil"
-                        id="fotoPerfil">
-                    <button onclick="abrirSelector()">Cambiar foto</button>
-
-                    <!-- INPUT OCULTO PARA SUBIR FOTO -->
-                    <input type="file" id="inputFoto" accept="image/*" style="display:none;">
-                </div>
-
-
-                <!-- SEGURIDAD -->
-                <h2>Seguridad</h2>
-                <div class="seguridad-section">
-                    <label for="claveActual">Contraseña actual:</label>
-                    <input type="password" id="claveActual" placeholder="••••••••">
-                    <small style="color: #777;">
-                        Por seguridad, la contraseña no se muestra.
-                    </small>
-
-                    <label for="nuevaClave">Nueva contraseña:</label>
-                    <input type="password" id="nuevaClave">
-
-                    <label for="confirmarClave">Confirmar contraseña:</label>
-                    <input type="password" id="confirmarClave">
-                    <div class="botones-accion">
-                        <button id="btnCambiarClave" type="button">
-                            Actualizar Contraseña
-                        </button>
-                    </div>
-
-
-                </div>
-
-            </div>
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Iniciar Sesión</h2>
+            <input type="email" id="loginEmail" placeholder="Correo o Usuario" />
+            <input type="password" id="loginPassword" placeholder="Contraseña" />
+            <button class="btn-modal">Ingresar</button>
+            <p>¿No tienes cuenta?
+                <a href="#" onclick="switchModal('loginModal', 'registerModal')">Regístrate</a>
+            </p>
+            <a href="#" onclick="event.preventDefault();switchModal('loginModal', 'recoverModal')">¿Olvidaste tu
+                contraseña?</a>
         </div>
     </div>
 
-    <!-- Scripts siempre antes de cerrar el body -->
-    <script src="Js/Auth.js"></script>
-    <script src="Js/Menulateral.js"></script>
+    <div id="recoverModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('recoverModal')">&times;</span>
+            <h2>Recuperar Contraseña</h2>
+            <p>Introduce tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
+            <input type="email" placeholder="Correo o Usuario" />
+            <button class="btn-modal">Enviar enlace</button>
+            <p><a href="#" onclick="event.preventDefault(); switchModal('recoverModal', 'loginModal')">Volver a iniciar
+                    sesión</a></p>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Registro</h2>
+            <input type="text" placeholder="Nombre de usuario" />
+            <input type="email" placeholder="Correo electrónico" />
+            <input type="password" placeholder="Contraseña" />
+            <button class="btn-modal">Registrarse</button>
+            <p>¿Ya tienes cuenta? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Inicia sesión</a></p>
+        </div>
+    </div>
+
     <script src="Js/Modales.js"></script>
-    <script src="Js/Ajustes.js"></script>
+    <script src="Js/Pago.js"></script>
     <script src="Js/Carrito.js"></script>
-    <script src="Js/Encabezado.js"></script>
-    <script src="Js/Alertas.js"></script>
-    <script src="Js/Animaciones.js"></script>
+    <script src="Js/Menulateral.js"></script>
+
+
+
+    <!-- Fin del contenido visible en el navegador -->
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->
@@ -256,14 +303,13 @@
     </footer>
 
     <!-- ALERTA PERSONALIZADA -->
-    <div id="alertOverlay" class="alert-overlay">
+    <div id="alertOverlay" class="alert-overlay" style="display:none;">
         <div class="alert-box">
             <h3 id="alertTitle">Atención</h3>
             <p id="alertMessage"></p>
             <button onclick="cerrarAlerta()">Aceptar</button>
         </div>
     </div>
-
 
 </body>
 

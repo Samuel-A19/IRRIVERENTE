@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnEditar) {
         btnEditar.addEventListener("click", () => {
             localStorage.setItem("volverAPago", "true");
-            window.location.href = "Domicilio.html";
+            window.location.href = "Domicilio.php";
         });
     }
 

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="Css/Encabezado.css" />
     <link rel="stylesheet" href="Css/Fondos.css" />
     <link rel="stylesheet" href="Css/PiePagina.css" />
-    <link rel="stylesheet" href="Css/Promos.css" />
+    <link rel="stylesheet" href="Css/AdminPedido.css" />
     <link rel="stylesheet" href="Css/Carrito.css" />
     <link rel="stylesheet" href="Css/Modales.css" />
     <link rel="stylesheet" href="Css/Menulateral.css" />
@@ -22,14 +22,12 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
 
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- Librería de íconos Bootstrap Icons (permite usar iconos con la clase "bi") -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
     <!-- Librería CSS de Swiper (estilos del carrusel) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 
     <!-- Librería JS de Swiper (funcionalidad del carrusel) -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -46,24 +44,24 @@
 
         <!-- Contenedor del logo -->
         <div class="header-center logo">
-            <a href="Inicio.html"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
+            <a href="Inicio.php"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
             <!-- Logo con enlace a la página de inicio -->
         </div>
 
         <!-- MENÚ DE NAVEGACIÓN -->
         <nav class="header-center nav-menu"> <!-- Contenedor del menú -->
-            <a href="Inicio.html">INICIO</a> <!-- Enlace a la página de inicio -->
-            <a href="Menu.html">MENÚ</a> <!-- Enlace a la sección de menú -->
-            <a href="Promos.html">PROMOS</a> <!-- Enlace a la página de promociones -->
+            <a href="Inicio.php">INICIO</a> <!-- Enlace a la página de inicio -->
+            <a href="Menu.php">MENÚ</a> <!-- Enlace a la sección de menú -->
+            <a href="Promos.php">PROMOS</a> <!-- Enlace a la página de promociones -->
             <a href="#" id="linkSiguePedido">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
-            <a href="Acercanosotros.html">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
+            <a href="Acercanosotros.php">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
             <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
             <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
             <div id="carritoDropdown" class="carrito-dropdown">
                 <h3>Tu Carrito</h3>
                 <ul id="carritoLista" class="carrito-lista">
                     <li class="carrito-item">
-                        <img src="Imagenes/Pizza 2.jpg " alt="">
+                        <img src="Imagenes/Pizza 2.jpg" alt="">
                         <div class="carrito-info">
                             <p></p>
                             <span></span>
@@ -107,8 +105,8 @@
                 <div class="side-divider"></div>
 
 
-                <a href="Historial.html">Historial de Pedidos</a>
-                <a href="Ajustes.html">Ajustes</a>
+                <a href="Historial.php">Historial de Pedidos</a>
+                <a href="Ajustes.php">Ajustes</a>
 
                 <!-- CERRAR SESIÓN -->
                 <a href="#" id="btnCerrarSesion" class="logout">
@@ -126,47 +124,42 @@
                         <i class="bi bi-tiktok"></i>
                     </a>
             </aside>
+
         </nav>
     </header>
 
-    <!-- SECCIÓN DE PROMOCIONES -->
-    <section class="promos">
-        <h1><u>PROMOCIONES ACTUALES</u></h1>
-        <button class="btn-agregar solo-admin" onclick="abrirModalAdmin('promo')">
-            AGREGAR PROMO
-        </button>
 
+    <section id="admin-pedidos">
+        <div class="admin-container">
 
-        <div class="promo-contenedor">
+            <h1><strong>GESTIÓN DE PEDIDOS</strong></h1>
 
-            <!-- Tarjeta 1 -->
-            <div class="promo">
-                <img src="Imagenes/promomartes.jpeg" alt="Promo 1">
-                <h2>Pizza Mediana</h2>
-                <p>Todos los Lunes y Martes de <strong>12:00 p.m. a 4:00 p.m.</strong> por <span>$19,900</span></p>
-                <button class="btn-promo">AÑADIR AL CARRITO</button>
+            <label>Número de pedido</label>
+            <input type="text" id="adminCodigo" placeholder="Ej: 1025">
+
+            <label>Estado actual del pedido</label>
+
+            <div class="estado-fila">
+                <select id="estadoPedido" class="estado-select">
+                    <option value="0">Recibido</option>
+                    <option value="1">En preparación</option>
+                    <option value="2">En camino</option>
+                    <option value="3">Entregado</option>
+                </select>
+
+                <button class="btn-cambiar" onclick="cambiarEstado()">
+                    Cambiar estado
+                </button>
             </div>
 
-            <!-- Tarjeta 2 -->
-            <div class="promo">
-                <img src="Imagenes/promojueves.jpeg" alt="Promo 2">
-                <h2>2x1 en Pizzas Personales</h2>
-                <p>El Jueves el antojo se duplica: <strong>Pide una y te regalamos la segunda.</strong> Por
-                    <span>$15,000</span>
-                </p>
-                <button class="btn-promo">AÑADIR AL CARRITO</button>
-            </div>
-
-            <!-- Tarjeta 3 -->
-            <div class="promo">
-                <img src="Imagenes/promofamiliar.png" alt="Promo 3">
-                <h2>Combo Familiar</h2>
-                <p>1 pizza grande + 1 pasta + 2 gaseosas por <span>$39,900</span></p>
-                <button class="btn-promo">AÑADIR AL CARRITO</button>
-            </div>
+            <p class="info">
+                Este cambio se reflejará en la vista del cliente
+            </p>
 
         </div>
     </section>
+
+
 
     <!-- BOTÓN FLOTANTE DE WHATSAPP -->
     <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank"> <!-- Enlace a WhatsApp -->
@@ -198,7 +191,8 @@
             <!-- Texto explicativo -->
             <input type="email" placeholder="Correo o Usuario" /> <!-- Campo para ingresar el correo -->
             <button class="btn-modal">Enviar enlace</button> <!-- Botón para enviar solicitud -->
-            <p><a href="#" onclick="event.preventDefault(); switchModal('recoverModal', 'loginModal')">Volver a iniciar
+            <p><a href="#" onclick="event.preventDefault(); switchModal('recoverModal', 'loginModal')">Volver a
+                    iniciar
                     sesión</a></p> <!-- Enlace para volver al login -->
         </div>
     </div>
@@ -212,64 +206,19 @@
             <input type="email" placeholder="Correo electrónico" /> <!-- Campo email -->
             <input type="password" placeholder="Contraseña" /> <!-- Campo contraseña -->
             <button class="btn-modal">Registrarse</button> <!-- Botón registro -->
-            <p>¿Ya tienes cuenta? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Inicia sesión</a></p>
+            <p>¿Ya tienes cuenta? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Inicia sesión</a>
+            </p>
             <!-- Enlace para ir al login -->
-        </div>
-    </div>
-    <!-- MODAL ADMIN (PRODUCTO / PROMO) -->
-    <div id="modalAdmin" class="modal-general">
-        <div class="modal-box">
-
-            <button class="cerrar-modal" onclick="cerrarModalAdmin()">&times;</button>
-
-            <h2 id="tituloAdmin">Crear Promoción</h2>
-
-            <input type="hidden" id="tipoAdmin">
-
-            <!-- IMAGEN -->
-            <label class="upload-box">
-                <input type="file" id="imagenAdmin" accept="image/*" hidden>
-                <div class="upload-area">
-                    <i class="bi bi-cloud-upload"></i>
-                    <span>Haz clic para agregar imagen</span>
-                </div>
-                <img id="previewAdmin">
-            </label>
-
-            <label>Título</label>
-            <input type="text" id="tituloInput" placeholder="Nombre de la promoción" required>
-
-            <label>Descripción</label>
-            <textarea id="descripcionInput" placeholder="Descripción y detalles de la promoción" required></textarea>
-
-            <label>Categoría</label>
-            <select id="categoriaInput" required>
-                <option value="">Selecciona una categoría</option>
-                <option value="pizza">Pizza</option>
-                <option value="pasta">Pasta</option>
-                <option value="lasagna">Lasaña</option>
-                <option value="hamburguesa">Hamburguesa</option>
-                <option value="limonadas">Limonadas</option>
-                <option value="gaseosas">Gaseosas</option>
-            </select>
-
-            <label>Precio</label>
-            <input type="number" id="precioInput" min="0" placeholder="0.00" required>
-
-            <button type="button" class="btn-modal-crear" onclick="guardarAdmin()">
-                Guardar Promoción
-            </button>
-
         </div>
     </div>
 
     <!-- ENLACE AL SCRIPT EXTERNO CON FUNCIONES Y ANIMACIONES -->
     <script src="Js/Auth.js"></script>
+    <script src="Js/Modales.js"></script>
     <script src="Js/Menulateral.js"></script>
     <script src="Js/Carrito.js"></script>
-    <script src="Js/Modales.js"></script>
-    <script src="Js/Promos.js"></script>
-
+    <script src="Js/AdminRastreo.js"></script>
+    <script src="Js/Encabezado.js"></script>
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->
@@ -296,7 +245,14 @@
         </div>
     </footer>
 
+    <!-- ALERTA PERSONALIZADA -->
+    <div id="alertOverlay" class="alert-overlay" style="display:none;">
+        <div class="alert-box">
+            <h3 id="alertTitle">Atención</h3>
+            <p id="alertMessage"></p>
+            <button onclick="cerrarAlerta()">Aceptar</button>
+        </div>
+    </div>
+
 
 </body>
-
-</html>

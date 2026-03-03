@@ -78,7 +78,7 @@ function actualizarMenuLateral() {
             updateSessionState();
             actualizarMenuLateral();
 
-            window.location.href = "Inicio.html";
+            window.location.href = "Inicio.php";
         };
     }
 }

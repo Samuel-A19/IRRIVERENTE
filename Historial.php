@@ -9,13 +9,13 @@
     <title>Irriverente Pizza & Pasta</title> <!-- Título de la pestaña del navegador -->
 
     <!-- Enlace a la hoja de estilos CSS personalizada -->
-    <link rel="stylesheet" href="Css/Domicilio.css" />
     <link rel="stylesheet" href="Css/Encabezado.css" />
     <link rel="stylesheet" href="Css/Carrito.css" />
     <link rel="stylesheet" href="Css/Modales.css" />
     <link rel="stylesheet" href="Css/PiePagina.css" />
     <link rel="stylesheet" href="Css/Fondos.css" />
-    <link rel="stylesheet" href="Css/Menulateral.css" />
+    <link rel="stylesheet" href="Css/Historial.css" />
+    <link rel="stylesheet" href="Css/Menulateral.css">
 
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -30,12 +30,12 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-
     <!-- Librería JS de Swiper (funcionalidad del carrusel) -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!-- Fuente "Roboto" desde Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body> <!-- Comienza el contenido visible en el navegador -->
@@ -45,17 +45,17 @@
 
         <!-- Contenedor del logo -->
         <div class="header-center logo">
-            <a href="Inicio.html"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
+            <a href="Inicio.php"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
             <!-- Logo con enlace a la página de inicio -->
         </div>
 
         <!-- MENÚ DE NAVEGACIÓN -->
         <nav class="header-center nav-menu"> <!-- Contenedor del menú -->
-            <a href="Inicio.html">INICIO</a> <!-- Enlace a la página de inicio -->
-            <a href="Menu.html">MENÚ</a> <!-- Enlace a la sección de menú -->
-            <a href="Promos.html">PROMOS</a> <!-- Enlace a la página de promociones -->
+            <a href="Inicio.php">INICIO</a> <!-- Enlace a la página de inicio -->
+            <a href="Menu.php">MENÚ</a> <!-- Enlace a la sección de menú -->
+            <a href="Promos.php">PROMOS</a> <!-- Enlace a la página de promociones -->
             <a href="#" id="linkSiguePedido">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
-            <a href="Acercanosotros.html">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
+            <a href="Acercanosotros.php">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
             <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
             <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
             <div id="carritoDropdown" class="carrito-dropdown">
@@ -86,6 +86,7 @@
                 </div>
             </div>
 
+
             <!-- Botón menú solo icono -->
             <button id="btnMenuLateral" onclick="abrirMenu()">
                 <i class="bi bi-justify"></i>
@@ -106,8 +107,8 @@
                 <div class="side-divider"></div>
 
 
-                <a href="Historial.html">Historial de Pedidos</a>
-                <a href="Ajustes.html">Ajustes</a>
+                <a href="Historial.php">Historial de Pedidos</a>
+                <a href="Ajustes.php">Ajustes</a>
 
                 <!-- CERRAR SESIÓN -->
                 <a href="#" id="btnCerrarSesion" class="logout">
@@ -129,63 +130,80 @@
         </nav>
     </header>
 
-    <div class="contenedor-domicilio">
 
-        <!--  Formulario -->
-        <div class="columna izquierda">
-            <div class="pedido-formulario">
-                <h2>¡Ordena en línea y recibe en tu domicilio!</h2>
-                <p class="sub-texto">Haz tu pedido desde la web y disfruta en la comodidad de tu casa.</p>
-                <form id="form-pedido-domicilio">
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank"> <!-- Enlace a WhatsApp -->
+        <img src="Imagenes/Whatsaap Logo.png" class="Logo-Whatsaap"> <!-- Icono de WhatsApp -->
+    </a>
 
-                    <div class="campo">
-                        <label for="nombre">Nombre completo</label>
-                        <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre completo" required>
-                        <div class="error-msg" id="err-nombre"></div>
-                    </div>
 
-                    <div class="campo">
-                        <label for="telefono">Teléfono de contacto</label>
-                        <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono"
-                            maxlength="10" inputmode="numeric" pattern="[0-9]{10}" required>
-
-                        <div class="error-msg" id="err-telefono"></div>
-                    </div>
-
-                    <div class="campo">
-                        <label for="email">Correo Electrónico</label>
-                        <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required>
-                        <div class="error-msg" id="err-email"></div>
-                    </div>
-
-                    <div class="campo">
-                        <label for="direccion">Dirección completa</label>
-                        <input type="text" id="direccion" name="direccion" placeholder="Escribe tu dirección completa"
-                            required>
-                        <div class="error-msg" id="err-direccion"></div>
-                    </div>
-
-                    <div class="campo">
-                        <label for="referencias">Referencias de ubicación</label>
-                        <input type="text" id="referencias" name="referencias"
-                            placeholder="Opcional, indica puntos cercanos">
-                        <div class="error-msg" id="err-referencias"></div>
-                    </div>
-
-                    <button type="submit" id="btnContinuar" class="btn-continuar">CONTINUAR</button>
-                </form>
+    <!-- HISTORIAL CON SCROLL EN MÓVIL -->
+    <div class="container">
+        <div class="profile-header">
+            <div class="avatar">
+                <img id="historialFoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                    alt="Foto de perfil">
             </div>
+            <h2 id="historialNombre">Usuario</h2>
+            <h1>HISTORIAL</h1>
+        </div>
+
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>N° PEDIDO</th>
+                        <th>FECHA</th>
+                        <th>ESTADO</th>
+                        <th>TOTAL</th>
+                        <th class="td-action"></th>
+                    </tr>
+                </thead>
+                <tbody id="tablaHistorial">
+                    <tr>
+                        <td class="pedido-id">#120982</td>
+                        <td>15/11/2025</td>
+                        <td><span class="estado en-preparacion">En preparación</span></td>
+                        <td class="total">$35.500</td>
+                        <td class="td-action"><button class="btn-ver">Ver</button></td>
+                    </tr>
+                    <tr>
+                        <td class="pedido-id">#155220</td>
+                        <td>10/11/2025</td>
+                        <td><span class="estado entregado">Entregado</span></td>
+                        <td class="total">$45.000</td>
+                        <td class="td-action"><button class="btn-ver">Ver</button></td>
+                    </tr>
+                    <tr>
+                        <td class="pedido-id">#158032</td>
+                        <td>05/11/2025</td>
+                        <td><span class="estado entregado">Entregado</span></td>
+                        <td class="total">$65.000</td>
+                        <td class="td-action"><button class="btn-ver">Ver</button></td>
+                    </tr>
+                    <tr>
+                        <td class="pedido-id">#520002</td>
+                        <td>28/10/2025</td>
+                        <td><span class="estado en-preparacion">En preparación</span></td>
+                        <td class="total">$65.000</td>
+                        <td class="td-action"><button class="btn-ver">Ver</button></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <!-- Imagen decorativa -->
-    <script src="Js/domicilio.js"></script>
-    <script src="Js/Carrito.js"></script>
+
+
+
+    <!-- ENLACE AL SCRIPT EXTERNO CON FUNCIONES Y ANIMACIONES -->
+    <script src="Js/Historial.js"></script>
     <script src="Js/Menulateral.js"></script>
+    <script src="Js/Carrito.js"></script>
     <script src="Js/Modales.js"></script>
-    <script src="Js/Encabezado.js"></script>
     <script src="Js/Auth.js"></script>
-    <!-- FIN CONTENIDO PÁGINA -->
+    <script src="Js/Encabezado.js"></script>
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->
@@ -196,7 +214,7 @@
             </div>
 
             <div class="footer-links"> <!-- Enlaces legales -->
-                <a href="#">Política de Privacidad</a> -
+                <a href="#">Política de Privacidad</a>
                 <a href="#">Términos y Condiciones</a>
             </div>
 
@@ -211,6 +229,37 @@
             </div>
         </div>
     </footer>
+
+    <!-- MODAL DETALLE PEDIDO -->
+    <div id="modalDetalle" class="modal-detalle">
+        <div class="modal-contenido">
+
+            <span class="cerrar-modal" onclick="cerrarDetalle()">&times;</span>
+
+            <h2>Detalle del Pedido</h2>
+
+            <div id="detalleContenido">
+                <!-- Aquí se cargan los productos -->
+            </div>
+
+            <div class="detalle-total">
+                <strong>Total:</strong>
+                <span id="detalleTotal">$0</span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ALERTA PERSONALIZADA -->
+    <div id="alertOverlay" class="alert-overlay" style="display:none;">
+        <div class="alert-box">
+            <h3 id="alertTitle">Atención</h3>
+            <p id="alertMessage"></p>
+            <button onclick="cerrarAlerta()">Aceptar</button>
+        </div>
+    </div>
+
+
 </body>
 
 </html>

@@ -148,9 +148,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const rango = localStorage.getItem("rango");
 
             if (rango === "admin") {
-                window.location.href = "AdminPedidosLista.html";
+                window.location.href = "AdminPedidosLista.php";
             } else {
-                window.location.href = "Siguepedido.html";
+                window.location.href = "Siguepedido.php";
             }
         };
     }
@@ -159,16 +159,29 @@ document.addEventListener("DOMContentLoaded", () => {
        PERMISOS POR RANGO
     =============================== */
 
-    function aplicarPermisos() {
+    window.aplicarPermisos = function() {
 
         const rango = localStorage.getItem("rango");
+        const isAdmin = rango === "admin";
 
-        const elementosAdmin = document.querySelectorAll(".solo-admin");
-
-        elementosAdmin.forEach(el => {
-            el.style.display = (rango === "admin") ? "block" : "none";
+        // Mostrar/Ocultar elementos con clase solo-admin
+        document.querySelectorAll(".solo-admin").forEach(el => {
+            if (isAdmin) {
+                el.classList.add("visible");
+            } else {
+                el.classList.remove("visible");
+            }
         });
-    }
+
+        // Mostrar/Ocultar botones de admin en producto/promo cards
+        document.querySelectorAll(".card-admin-btns, .promo-admin-btns").forEach(el => {
+            if (isAdmin) {
+                el.classList.add("visible");
+            } else {
+                el.classList.remove("visible");
+            }
+        });
+    };
 
     aplicarPermisos(); // 🔥 ejecuta al cargar
 });
@@ -189,6 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("userName");
         localStorage.removeItem("rango");
 
-        window.location.href = "Inicio.html";
+        window.location.href = "Inicio.php";
     });
 });

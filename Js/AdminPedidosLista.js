@@ -82,5 +82,5 @@ function traducirEstado(estado) {
  * IR A DETALLE
  **************************************************/
 function verPedido(codigo) {
-    window.location.href = "AdminPedido.html?codigo=" + codigo;
+    window.location.href = "AdminPedido.php?codigo=" + codigo;
 }

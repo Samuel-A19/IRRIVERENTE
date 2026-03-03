@@ -109,112 +109,100 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
-/* ========================================
-   MODAL CREAR PRODUCTO - FUNCIONALIDAD
-======================================== */
+// Exponer función para (re)inicializar el comportamiento de filtros/búsqueda
+window.initMenuCards = function () {
+    const searchInput = document.getElementById('search');
 
-document.addEventListener("DOMContentLoaded", function () {
+    // Reemplazar filtros para eliminar listeners previos
+    document.querySelectorAll('.filter').forEach(f => {
+        const clone = f.cloneNode(true);
+        f.parentNode.replaceChild(clone, f);
+    });
 
-    const modal = document.getElementById("modalCrearProducto");
-    const btnAbrir = document.querySelectorAll(".btn-agregar");
-    const btnCerrar = document.querySelector(".cerrar-modal");
-    const inputImagen = document.getElementById("imagenProducto");
-    const preview = document.getElementById("previewImagen");
+    const filters = document.querySelectorAll('.filter');
+    const cards = document.querySelectorAll('.card');
 
-    // Abrir modal
-    btnAbrir.forEach(btn => {
-        btn.addEventListener("click", function () {
-            if (modal) modal.style.display = "flex";
+    filters.forEach(filter => {
+        filter.addEventListener('click', () => {
+            filters.forEach(f => f.classList.remove('active'));
+            filter.classList.add('active');
+
+            const category = filter.dataset.category;
+
+            cards.forEach(card => {
+                card.style.display =
+                    category === 'all' || card.dataset.category === category
+                        ? 'flex'
+                        : 'none';
+            });
         });
     });
 
-    // Cerrar con X
-    if (btnCerrar) {
-        btnCerrar.addEventListener("click", function () {
-            if (modal) modal.style.display = "none";
-        });
+    if (searchInput) {
+        searchInput.oninput = () => {
+            const term = searchInput.value.toLowerCase();
+            document.querySelectorAll('.card').forEach(card => {
+                card.style.display = card.textContent.toLowerCase().includes(term) ? 'flex' : 'none';
+            });
+        };
     }
 
-    // Cerrar haciendo click fuera
-    if (modal) {
-        modal.addEventListener("click", function (e) {
-            if (e.target === modal) {
-                modal.style.display = "none";
-            }
-        });
-    }
+    const all = document.querySelector('.filter[data-category="all"]');
+    if (all) all.click();
 
-    /* ===== PREVISUALIZAR IMAGEN ===== */
+    // Attach Edit/Delete handlers
+    attachProductHandlers();
+};
 
-    if (inputImagen && preview) {
+function attachProductHandlers() {
+    document.querySelectorAll('.card .btn-delete').forEach(btn => {
+        btn.onclick = function (e) {
+            e.preventDefault();
+            const card = this.closest('.card');
+            const id = card.dataset.id;
+            if (!id) return;
+            if (!confirm('¿Confirmas eliminar este producto?')) return;
+            
+            fetch('/IRRIVERENTE/api/eliminar_producto.php', {
+                method: 'POST',
+                body: new URLSearchParams({ id })
+            })
+                .then(r => r.text())
+                .then(t => {
+                    if (t.trim() === 'ok') {
+                        if (typeof reloadProducts === 'function') reloadProducts();
+                        if (typeof mostrarAlerta === 'function') mostrarAlerta('Producto eliminado');
+                    } else {
+                        if (typeof mostrarAlerta === 'function') mostrarAlerta('Error al eliminar');
+                    }
+                })
+                .catch(err => console.error(err));
+        };
+    });
 
-        inputImagen.addEventListener("change", function () {
+    document.querySelectorAll('.card .btn-edit').forEach(btn => {
+        btn.onclick = function (e) {
+            e.preventDefault();
+            const card = this.closest('.card');
+            const id = card.dataset.id;
+            const name = card.dataset.name || '';
+            const desc = card.dataset.desc || '';
+            const price = card.dataset.price || '';
+            const category = card.dataset.cat || '';
 
-            const file = this.files[0];
-            if (!file) return;
+            document.getElementById('tipoAdmin').value = 'producto';
+            document.getElementById('idAdmin').value = id;
+            document.getElementById('tituloInput').value = name;
+            document.getElementById('descripcionInput').value = desc;
+            document.getElementById('precioInput').value = price;
+            document.getElementById('categoriaInput').value = category;
 
-            const reader = new FileReader();
+            if (typeof abrirModalAdmin === 'function') abrirModalAdmin('producto');
+        };
+    });
+};
 
-            reader.onload = function (e) {
-                preview.src = e.target.result;
-                preview.style.display = "block";
-            };
-
-            reader.readAsDataURL(file);
-        });
-    }
-
+// Inicializar al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof window.initMenuCards === 'function') window.initMenuCards();
 });
-
-
-/* ========================================
-   CREAR PRODUCTO
-======================================== */
-
-function crearProducto() {
-
-    const titulo = document.getElementById("tituloProducto").value.trim();
-    const descripcion = document.getElementById("descripcionProducto").value.trim();
-    const precio = document.getElementById("precioProducto").value.trim();
-    const imagenInput = document.getElementById("imagenProducto");
-    const preview = document.getElementById("previewImagen");
-
-    if (!titulo || !descripcion || !precio) {
-        mostrarAlerta("Por favor completa todos los campos");
-        return;
-    }
-
-    const imagenURL = imagenInput.files[0]
-        ? URL.createObjectURL(imagenInput.files[0])
-        : "Imagenes/default.jpg";
-
-    const nuevoProducto = `
-        <div class="card" data-category="nuevo">
-            <img src="${imagenURL}" alt="${titulo}">
-            <div class="card-content">
-                <h3>${titulo}</h3>
-                <p>${descripcion}</p>
-                <span>$${Number(precio).toLocaleString()}</span>
-            </div>
-            <button class="btn-add">Añadir</button>
-        </div>
-    `;
-
-    document.getElementById("products").insertAdjacentHTML("beforeend", nuevoProducto);
-
-    // Limpiar campos
-    document.getElementById("tituloProducto").value = "";
-    document.getElementById("descripcionProducto").value = "";
-    document.getElementById("precioProducto").value = "";
-    document.getElementById("imagenProducto").value = "";
-
-    // Limpiar preview
-    if (preview) {
-        preview.src = "";
-        preview.style.display = "none";
-    }
-
-    // Cerrar modal
-    const modal = document.getElementById("modalCrearProducto");
-    if (modal) modal.style.display = "none";
-}

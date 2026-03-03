@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const userName = localStorage.getItem("userName");
 
     if (!userId) {
-        window.location.href = "Inicio.html";
+        window.location.href = "Inicio.php";
         return;
     }
 
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!userId) {
         mostrarAlerta("Debes iniciar sesión", "Sesión requerida");
-        window.location.href = "Inicio.html";
+        window.location.href = "Inicio.php";
         return;
     }
 

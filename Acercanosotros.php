@@ -9,10 +9,10 @@
     <title>Irriverente Pizza & Pasta</title> <!-- Título de la pestaña del navegador -->
 
     <!-- Enlace a la hoja de estilos CSS personalizada -->
+    <link rel="stylesheet" href="Css/Acercanosotros.css" />
+    <link rel="stylesheet" href="Css/PiePagina.css" />
     <link rel="stylesheet" href="Css/Encabezado.css" />
     <link rel="stylesheet" href="Css/Fondos.css" />
-    <link rel="stylesheet" href="Css/PiePagina.css" />
-    <link rel="stylesheet" href="Css/Siguepedido.css" />
     <link rel="stylesheet" href="Css/Carrito.css" />
     <link rel="stylesheet" href="Css/Modales.css" />
     <link rel="stylesheet" href="Css/Menulateral.css" />
@@ -21,13 +21,14 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
-
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- Librería de íconos Bootstrap Icons (permite usar iconos con la clase "bi") -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
     <!-- Librería CSS de Swiper (estilos del carrusel) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 
     <!-- Librería JS de Swiper (funcionalidad del carrusel) -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -44,17 +45,17 @@
 
         <!-- Contenedor del logo -->
         <div class="header-center logo">
-            <a href="Inicio.html"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
+            <a href="Inicio.php"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
             <!-- Logo con enlace a la página de inicio -->
         </div>
 
         <!-- MENÚ DE NAVEGACIÓN -->
         <nav class="header-center nav-menu"> <!-- Contenedor del menú -->
-            <a href="Inicio.html">INICIO</a> <!-- Enlace a la página de inicio -->
-            <a href="Menu.html">MENÚ</a> <!-- Enlace a la sección de menú -->
-            <a href="Promos.html">PROMOS</a> <!-- Enlace a la página de promociones -->
+            <a href="Inicio.php">INICIO</a> <!-- Enlace a la página de inicio -->
+            <a href="Menu.php">MENÚ</a> <!-- Enlace a la sección de menú -->
+            <a href="Promos.php">PROMOS</a> <!-- Enlace a la página de promociones -->
             <a href="#" id="linkSiguePedido">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
-            <a href="Acercanosotros.html">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
+            <a href="Acercanosotros.php">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
             <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
             <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
             <div id="carritoDropdown" class="carrito-dropdown">
@@ -85,6 +86,7 @@
                 </div>
             </div>
 
+
             <!-- Botón menú solo icono -->
             <button id="btnMenuLateral" onclick="abrirMenu()">
                 <i class="bi bi-justify"></i>
@@ -105,8 +107,8 @@
                 <div class="side-divider"></div>
 
 
-                <a href="Historial.html">Historial de Pedidos</a>
-                <a href="Ajustes.html">Ajustes</a>
+                <a href="Historial.php">Historial de Pedidos</a>
+                <a href="Ajustes.php">Ajustes</a>
 
                 <!-- CERRAR SESIÓN -->
                 <a href="#" id="btnCerrarSesion" class="logout">
@@ -128,50 +130,68 @@
         </nav>
     </header>
 
-    <div class="containere">
-        <h1>SIGUE TU PEDIDO</h1>
+    <section class="acerca-de-nosotros">
+        <div class="acerca-contenedor">
 
-        <div class="input-group">
-            <input type="text" id="codigoRastreo" placeholder="Ingresa tu número de pedido">
+            <!-- MISIÓN -->
+            <div class="acerca-fila">
+                <div class="acerca-imagen">
+                    <img src="Imagenes/Local.png" alt="Nuestra misión">
+                </div>
+                <div class="acerca-texto-box">
+                    <h3>Misión</h3>
+                    <p>Nuestra misión consiste en ofrecer pizzas de alta calidad, utilizando ingredientes frescos y
+                        preparando platillos con un toque especial para satisfacer a los clientes y crear experiencias
+                        agradables.</p>
+                </div>
+            </div>
+
+            <!-- VISIÓN -->
+            <div class="acerca-fila invertida">
+                <div class="acerca-imagen">
+                    <img src="Imagenes/Local2.jpg" alt="Nuestra visión">
+                </div>
+                <div class="acerca-texto-box">
+                    <h3>Visión</h3>
+                    <p>Nuestra visión busca ser una pizzería líder y reconocida por su excelencia, calidad e innovación,
+                        buscando la satisfacción de sus clientes y el reconocimiento en el mercado.</p>
+                </div>
+            </div>
+
         </div>
+    </section>
 
-        <button class="btn-track" onclick="iniciarRastreo()">RASTREAR PEDIDO</button>
+    <!-- ========================================
+     STREET VIEW + BOTÓN "CÓMO LLEGAR"
+     ======================================== -->
+    <section class="street-view-con-boton">
+        <div class="street-view-con-boton-contenedor">
 
-        <div class="progress-tracker" id="tracker">
-            <div class="progress-line"></div>
-
-            <div class="step">
-                <div class="step-icon">✓</div>
-                <div class="step-label">Recibido</div>
+            <!-- STREET VIEW (el que ya te funciona perfecto) -->
+            <div class="street-view">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!4v1763412744696!6m8!1m7!1sifLNfVannsNVxnCERA0HUg!2m2!1d4.43991279476964!2d-75.20729375746038!3f22.701040240356374!4f7.024885197390731!5f0.7820865974627469"
+                    width="100%" height="620" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
 
-            <div class="step">
-                <div class="step-icon">📦</div>
-                <div class="step-label">En preparación</div>
+            <!-- BOTÓN CÓMO LLEGAR -->
+            <div class="boton-como-llegar">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=4.43991279476964,-75.20729375746038&travelmode=driving"
+                    target="_blank" class="btn-llegar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    ¿Cómo llegar?
+                </a>
+                <p class="texto-peque"> <a href="https://maps.app.goo.gl/TU_ENLACE_CORTO" target="_blank"
+                        style="color:#f16529; font-weight:bold;"></a></p>
             </div>
 
-            <div class="step">
-                <div class="step-icon">🚚</div>
-                <div class="step-label">En camino</div>
-            </div>
-
-            <div class="step">
-                <div class="step-icon">🎯</div>
-                <div class="step-label">Entregado</div>
-            </div>
         </div>
-
-        <div class="status-box" id="statusBox">
-            <h2>Estado:</h2>
-            <div class="status-icon-large">⏳</div>
-            <div class="status-text">Esperando código…</div>
-        </div>
-
-        <a href="https://wa.me/573228651543" class="btn-support" target="_blank">
-            CONTACTAR SOPORTE
-        </a>
-
-    </div>
+    </section>
 
     <!-- BOTÓN FLOTANTE DE WHATSAPP -->
     <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank"> <!-- Enlace a WhatsApp -->
@@ -225,10 +245,10 @@
     <!-- ENLACE AL SCRIPT EXTERNO CON FUNCIONES Y ANIMACIONES -->
     <script src="Js/Auth.js"></script>
     <script src="Js/Modales.js"></script>
-    <script src="Js/Menulateral.js"></script>
     <script src="Js/Carrito.js"></script>
-    <script src="Js/Rastreo.js"></script>
+    <script src="Js/Menulateral.js"></script>
     <script src="Js/Encabezado.js"></script>
+
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->
@@ -255,14 +275,7 @@
         </div>
     </footer>
 
-    <!-- ALERTA PERSONALIZADA -->
-    <div id="alertOverlay" class="alert-overlay" style="display:none;">
-        <div class="alert-box">
-            <h3 id="alertTitle">Atención</h3>
-            <p id="alertMessage"></p>
-            <button onclick="cerrarAlerta()">Aceptar</button>
-        </div>
-    </div>
-
 
 </body>
+
+</html>

@@ -9,18 +9,19 @@
     <title>Irriverente Pizza & Pasta</title> <!-- Título de la pestaña del navegador -->
 
     <!-- Enlace a la hoja de estilos CSS personalizada -->
-    <link rel="stylesheet" href="Css/Acercanosotros.css" />
-    <link rel="stylesheet" href="Css/PiePagina.css" />
+    <link rel="stylesheet" href="Css/Domicilio.css" />
     <link rel="stylesheet" href="Css/Encabezado.css" />
-    <link rel="stylesheet" href="Css/Fondos.css" />
     <link rel="stylesheet" href="Css/Carrito.css" />
     <link rel="stylesheet" href="Css/Modales.css" />
+    <link rel="stylesheet" href="Css/PiePagina.css" />
+    <link rel="stylesheet" href="Css/Fondos.css" />
     <link rel="stylesheet" href="Css/Menulateral.css" />
 
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
+
     <!-- Librería de íconos Bootstrap Icons (permite usar iconos con la clase "bi") -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
@@ -35,7 +36,6 @@
 
     <!-- Fuente "Roboto" desde Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body> <!-- Comienza el contenido visible en el navegador -->
@@ -45,17 +45,17 @@
 
         <!-- Contenedor del logo -->
         <div class="header-center logo">
-            <a href="Inicio.html"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
+            <a href="Inicio.php"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
             <!-- Logo con enlace a la página de inicio -->
         </div>
 
         <!-- MENÚ DE NAVEGACIÓN -->
         <nav class="header-center nav-menu"> <!-- Contenedor del menú -->
-            <a href="Inicio.html">INICIO</a> <!-- Enlace a la página de inicio -->
-            <a href="Menu.html">MENÚ</a> <!-- Enlace a la sección de menú -->
-            <a href="Promos.html">PROMOS</a> <!-- Enlace a la página de promociones -->
+            <a href="Inicio.php">INICIO</a> <!-- Enlace a la página de inicio -->
+            <a href="Menu.php">MENÚ</a> <!-- Enlace a la sección de menú -->
+            <a href="Promos.php">PROMOS</a> <!-- Enlace a la página de promociones -->
             <a href="#" id="linkSiguePedido">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
-            <a href="Acercanosotros.html">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
+            <a href="Acercanosotros.php">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
             <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
             <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
             <div id="carritoDropdown" class="carrito-dropdown">
@@ -86,7 +86,6 @@
                 </div>
             </div>
 
-
             <!-- Botón menú solo icono -->
             <button id="btnMenuLateral" onclick="abrirMenu()">
                 <i class="bi bi-justify"></i>
@@ -107,8 +106,8 @@
                 <div class="side-divider"></div>
 
 
-                <a href="Historial.html">Historial de Pedidos</a>
-                <a href="Ajustes.html">Ajustes</a>
+                <a href="Historial.php">Historial de Pedidos</a>
+                <a href="Ajustes.php">Ajustes</a>
 
                 <!-- CERRAR SESIÓN -->
                 <a href="#" id="btnCerrarSesion" class="logout">
@@ -130,125 +129,63 @@
         </nav>
     </header>
 
-    <section class="acerca-de-nosotros">
-        <div class="acerca-contenedor">
+    <div class="contenedor-domicilio">
 
-            <!-- MISIÓN -->
-            <div class="acerca-fila">
-                <div class="acerca-imagen">
-                    <img src="Imagenes/Local.png" alt="Nuestra misión">
-                </div>
-                <div class="acerca-texto-box">
-                    <h3>Misión</h3>
-                    <p>Nuestra misión consiste en ofrecer pizzas de alta calidad, utilizando ingredientes frescos y
-                        preparando platillos con un toque especial para satisfacer a los clientes y crear experiencias
-                        agradables.</p>
-                </div>
+        <!--  Formulario -->
+        <div class="columna izquierda">
+            <div class="pedido-formulario">
+                <h2>¡Ordena en línea y recibe en tu domicilio!</h2>
+                <p class="sub-texto">Haz tu pedido desde la web y disfruta en la comodidad de tu casa.</p>
+                <form id="form-pedido-domicilio">
+
+                    <div class="campo">
+                        <label for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre completo" required>
+                        <div class="error-msg" id="err-nombre"></div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="telefono">Teléfono de contacto</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono"
+                            maxlength="10" inputmode="numeric" pattern="[0-9]{10}" required>
+
+                        <div class="error-msg" id="err-telefono"></div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required>
+                        <div class="error-msg" id="err-email"></div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="direccion">Dirección completa</label>
+                        <input type="text" id="direccion" name="direccion" placeholder="Escribe tu dirección completa"
+                            required>
+                        <div class="error-msg" id="err-direccion"></div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="referencias">Referencias de ubicación</label>
+                        <input type="text" id="referencias" name="referencias"
+                            placeholder="Opcional, indica puntos cercanos">
+                        <div class="error-msg" id="err-referencias"></div>
+                    </div>
+
+                    <button type="submit" id="btnContinuar" class="btn-continuar">CONTINUAR</button>
+                </form>
             </div>
-
-            <!-- VISIÓN -->
-            <div class="acerca-fila invertida">
-                <div class="acerca-imagen">
-                    <img src="Imagenes/Local2.jpg" alt="Nuestra visión">
-                </div>
-                <div class="acerca-texto-box">
-                    <h3>Visión</h3>
-                    <p>Nuestra visión busca ser una pizzería líder y reconocida por su excelencia, calidad e innovación,
-                        buscando la satisfacción de sus clientes y el reconocimiento en el mercado.</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ========================================
-     STREET VIEW + BOTÓN "CÓMO LLEGAR"
-     ======================================== -->
-    <section class="street-view-con-boton">
-        <div class="street-view-con-boton-contenedor">
-
-            <!-- STREET VIEW (el que ya te funciona perfecto) -->
-            <div class="street-view">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!4v1763412744696!6m8!1m7!1sifLNfVannsNVxnCERA0HUg!2m2!1d4.43991279476964!2d-75.20729375746038!3f22.701040240356374!4f7.024885197390731!5f0.7820865974627469"
-                    width="100%" height="620" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-
-            <!-- BOTÓN CÓMO LLEGAR -->
-            <div class="boton-como-llegar">
-                <a href="https://www.google.com/maps/dir/?api=1&destination=4.43991279476964,-75.20729375746038&travelmode=driving"
-                    target="_blank" class="btn-llegar">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                    ¿Cómo llegar?
-                </a>
-                <p class="texto-peque"> <a href="https://maps.app.goo.gl/TU_ENLACE_CORTO" target="_blank"
-                        style="color:#f16529; font-weight:bold;"></a></p>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
-    <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank"> <!-- Enlace a WhatsApp -->
-        <img src="Imagenes/Whatsaap Logo.png" class="Logo-Whatsaap"> <!-- Icono de WhatsApp -->
-    </a>
-
-    <!-- MODAL: INICIO DE SESIÓN -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('loginModal')">&times;</span>
-            <h2>Iniciar Sesión</h2>
-            <input type="email" id="loginEmail" placeholder="Correo o Usuario" />
-            <input type="password" id="loginPassword" placeholder="Contraseña" />
-            <button class="btn-modal">Ingresar</button>
-            <p>¿No tienes cuenta?
-                <a href="#" onclick="switchModal('loginModal', 'registerModal')">Regístrate</a>
-            </p>
-            <a href="#" onclick="event.preventDefault();switchModal('loginModal', 'recoverModal')">¿Olvidaste tu
-                contraseña?</a>
         </div>
     </div>
 
-    <!-- MODAL: RECUPERAR CONTRASEÑA -->
-    <div id="recoverModal" class="modal"> <!-- Contenedor del modal de recuperación -->
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('recoverModal')">&times;</span> <!-- Botón de cerrar -->
-            <h2>Recuperar Contraseña</h2> <!-- Título -->
-            <p>Introduce tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
-            <!-- Texto explicativo -->
-            <input type="email" placeholder="Correo o Usuario" /> <!-- Campo para ingresar el correo -->
-            <button class="btn-modal">Enviar enlace</button> <!-- Botón para enviar solicitud -->
-            <p><a href="#" onclick="event.preventDefault(); switchModal('recoverModal', 'loginModal')">Volver a iniciar
-                    sesión</a></p> <!-- Enlace para volver al login -->
-        </div>
-    </div>
-
-    <!-- MODAL: REGISTRO -->
-    <div id="registerModal" class="modal"> <!-- Contenedor del modal de registro -->
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('registerModal')">&times;</span> <!-- Botón para cerrar -->
-            <h2>Registro</h2> <!-- Título -->
-            <input type="text" placeholder="Nombre de usuario" /> <!-- Campo usuario -->
-            <input type="email" placeholder="Correo electrónico" /> <!-- Campo email -->
-            <input type="password" placeholder="Contraseña" /> <!-- Campo contraseña -->
-            <button class="btn-modal">Registrarse</button> <!-- Botón registro -->
-            <p>¿Ya tienes cuenta? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Inicia sesión</a></p>
-            <!-- Enlace para ir al login -->
-        </div>
-    </div>
-
-    <!-- ENLACE AL SCRIPT EXTERNO CON FUNCIONES Y ANIMACIONES -->
-    <script src="Js/Auth.js"></script>
-    <script src="Js/Modales.js"></script>
+    <!-- Imagen decorativa -->
+    <script src="Js/domicilio.js"></script>
     <script src="Js/Carrito.js"></script>
     <script src="Js/Menulateral.js"></script>
+    <script src="Js/Modales.js"></script>
     <script src="Js/Encabezado.js"></script>
-
+    <script src="Js/Auth.js"></script>
+    <!-- FIN CONTENIDO PÁGINA -->
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->
@@ -259,7 +196,7 @@
             </div>
 
             <div class="footer-links"> <!-- Enlaces legales -->
-                <a href="#">Política de Privacidad</a>
+                <a href="#">Política de Privacidad</a> -
                 <a href="#">Términos y Condiciones</a>
             </div>
 
@@ -274,8 +211,6 @@
             </div>
         </div>
     </footer>
-
-
 </body>
 
 </html>

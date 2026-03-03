@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!userId) {
         mostrarAlerta("Debes iniciar sesión", "Atención");
         setTimeout(() => {
-            window.location.href = "Inicio.html";
+            window.location.href = "Inicio.php";
         }, 1200);
         return;
     }

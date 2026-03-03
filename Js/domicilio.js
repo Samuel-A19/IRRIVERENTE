@@ -78,9 +78,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // 🔁 REDIRECCIÓN
         if (localStorage.getItem("volverAPago") === "true") {
             localStorage.removeItem("volverAPago");
-            window.location.href = "Pago.html";
+            window.location.href = "Pago.php";
         } else {
-            window.location.href = "Menu.html";
+            window.location.href = "Menu.php";
         }
     });
 
