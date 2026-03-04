@@ -308,6 +308,28 @@
         </div>
     </div>
 
+    <!-- ALERTA PERSONALIZADA -->
+    <div id="alertOverlay" class="alert-overlay" style="display:none;">
+        <div class="alert-box">
+            <h3 id="alertTitle">Atención</h3>
+            <p id="alertMessage"></p>
+            <button onclick="cerrarAlerta()">Aceptar</button>
+        </div>
+    </div>
+
+    <!-- CONFIRMACIÓN PERSONALIZADA -->
+    <div id="confirmOverlay" class="alert-overlay" style="display:none;">
+        <div class="alert-box">
+            <h3 id="confirmTitle">Confirmación</h3>
+            <p id="confirmMessage"></p>
+            <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:20px;">
+                <!-- azul claro de fondo para contraste con el borde -->
+                <button onclick="cancelarConfirmacion()" style="padding:8px 16px;border:1px solid #2196F3;background:#e3f2fd;cursor:pointer;border-radius:4px;">Cancelar</button>
+                <button onclick="aceptarConfirmacion()" style="padding:8px 16px;border:none;background:#d32f2f;color:white;cursor:pointer;border-radius:4px;">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 

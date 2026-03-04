@@ -161,22 +161,25 @@ function attachProductHandlers() {
             const card = this.closest('.card');
             const id = card.dataset.id;
             if (!id) return;
-            if (!confirm('¿Confirmas eliminar este producto?')) return;
-            
-            fetch('/IRRIVERENTE/api/eliminar_producto.php', {
-                method: 'POST',
-                body: new URLSearchParams({ id })
-            })
-                .then(r => r.text())
-                .then(t => {
-                    if (t.trim() === 'ok') {
-                        if (typeof reloadProducts === 'function') reloadProducts();
-                        if (typeof mostrarAlerta === 'function') mostrarAlerta('Producto eliminado');
-                    } else {
-                        if (typeof mostrarAlerta === 'function') mostrarAlerta('Error al eliminar');
-                    }
+
+            confirmar('¿Confirmas eliminar este producto?', 'Eliminar Producto').then(result => {
+                if (!result) return;
+
+                fetch('/IRRIVERENTE/api/eliminar_producto.php', {
+                    method: 'POST',
+                    body: new URLSearchParams({ id })
                 })
-                .catch(err => console.error(err));
+                    .then(r => r.text())
+                    .then(t => {
+                        if (t.trim() === 'ok') {
+                            if (typeof reloadProducts === 'function') reloadProducts();
+                            if (typeof mostrarAlerta === 'function') mostrarAlerta('Producto eliminado', 'Éxito');
+                        } else {
+                            if (typeof mostrarAlerta === 'function') mostrarAlerta('Error al eliminar', 'Error');
+                        }
+                    })
+                    .catch(err => console.error(err));
+            });
         };
     });
 

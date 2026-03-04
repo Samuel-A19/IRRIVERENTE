@@ -114,6 +114,54 @@ function cerrarAlerta() {
     if (overlay) overlay.style.display = "none";
 }
 
+/* =====================================================
+   CONFIRMACIÓN PERSONALIZADA
+===================================================== */
+
+let confirmCallback = null;
+
+function mostrarConfirmacion(mensaje, titulo = "Confirmación") {
+    const overlay = document.getElementById("confirmOverlay");
+    const title = document.getElementById("confirmTitle");
+    const message = document.getElementById("confirmMessage");
+
+    if (!overlay || !title || !message) {
+        console.error("ConfirmOverlay no existe en esta página");
+        return false;
+    }
+
+    title.textContent = titulo;
+    message.textContent = mensaje;
+    overlay.style.display = "flex";
+
+    return true;
+}
+
+function aceptarConfirmacion() {
+    const overlay = document.getElementById("confirmOverlay");
+    if (overlay) overlay.style.display = "none";
+    if (confirmCallback) {
+        confirmCallback(true);
+        confirmCallback = null;
+    }
+}
+
+function cancelarConfirmacion() {
+    const overlay = document.getElementById("confirmOverlay");
+    if (overlay) overlay.style.display = "none";
+    if (confirmCallback) {
+        confirmCallback(false);
+        confirmCallback = null;
+    }
+}
+
+// Función que retorna una promesa para uso en async/await
+function confirmar(mensaje, titulo = "Confirmación") {
+    return new Promise(resolve => {
+        confirmCallback = resolve;
+        mostrarConfirmacion(mensaje, titulo);
+    });
+}
 
 /* =====================================================
    MODAL GENERAL (AGREGAR NORMAL)
@@ -189,31 +237,31 @@ function abrirModalAdmin(tipo) {
 
 function cerrarModalAdmin() {
     const modal = document.getElementById("modalAdmin");
-    
+
     if (modal) {
         modal.style.display = "none";
-        
+
         // Obtener elementos dentro del modal
         const preview = modal.querySelector("#previewAdmin");
         const uploadBox = modal.querySelector(".upload-box");
-        
+
         // Limpiar la imagen cuando se cierre el modal
         if (preview) {
             preview.src = "";
             preview.classList.remove("show");
         }
-        
+
         if (uploadBox) {
             uploadBox.classList.remove("has-image");
             uploadBox.style.height = "auto"; // Restaurar altura inicial
         }
-        
+
         // Limpiar el formulario
         const tituloInput = modal.querySelector("#tituloInput");
         const descripcionInput = modal.querySelector("#descripcionInput");
         const precioInput = modal.querySelector("#precioInput");
         const categoriaInput = modal.querySelector("#categoriaInput");
-        
+
         if (tituloInput) tituloInput.value = "";
         if (descripcionInput) descripcionInput.value = "";
         if (precioInput) precioInput.value = "";
@@ -285,7 +333,7 @@ function guardarAdmin(event) {
             const resp = data.trim();
             if (resp === "ok") {
                 mostrarAlerta("Guardado correctamente 🔥", "Administrador");
-                
+
                 const modal = document.getElementById("modalAdmin");
                 cerrarModalAdmin();
 
@@ -302,11 +350,11 @@ function guardarAdmin(event) {
                 document.getElementById("precioInput").value = "";
                 document.getElementById("categoriaInput").value = "";
                 document.getElementById("imagenAdmin").value = "";
-                
+
                 if (modal) {
                     const preview = modal.querySelector("#previewAdmin");
                     const uploadBox = modal.querySelector(".upload-box");
-                    
+
                     if (preview) {
                         preview.src = "";
                         preview.classList.remove("show");
@@ -353,34 +401,34 @@ document.addEventListener("DOMContentLoaded", function () {
                 reader.onload = function (e) {
                     // Crear imagen temporal para obtener dimensiones
                     const tempImg = new Image();
-                    
+
                     tempImg.onload = function () {
                         try {
                             // Calcular aspect ratio
                             const aspectRatio = this.width / this.height;
                             const containerWidth = uploadBox.offsetWidth || 400; // Valor por defecto si no se puede obtener
-                            
+
                             // Calcular altura basada en el ancho del contenedor y aspect ratio
                             const newHeight = Math.round(containerWidth / aspectRatio);
-                            
+
                             // Establecer altura mínima de 160px
                             const finalHeight = Math.max(newHeight, 160);
-                            
+
                             // Aplicar altura al contenedor
                             uploadBox.style.height = finalHeight + "px";
-                            
+
                             console.log("Imagen cargada - Dimensiones:", this.width + "x" + this.height, "Altura calculada:", finalHeight + "px");
                         } catch (err) {
                             console.error("Error al procesar imagen:", err);
                         }
                     };
-                    
+
                     tempImg.src = e.target.result;
-                    
+
                     // Mostrar la preview
                     preview.src = e.target.result;
                     preview.classList.add("show");
-                    
+
                     if (uploadBox) {
                         uploadBox.classList.add("has-image");
                     }
