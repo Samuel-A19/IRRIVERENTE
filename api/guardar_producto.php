@@ -1,5 +1,16 @@
 <?php
+session_start();
 require_once "conexion.php";
+
+// ==========================================
+// VERIFICACIÓN DE PERMISOS DE ADMINISTRADOR
+// ==========================================
+// error_log("DEBUG: SESSION = " . json_encode($_SESSION));
+if (!isset($_SESSION['rango']) || $_SESSION['rango'] !== 'admin') {
+    http_response_code(403);
+    echo "ERROR_NO_AUTORIZADO";
+    exit();
+}
 
 $name = $_POST['titulo'];
 $ingredients = $_POST['descripcion'];

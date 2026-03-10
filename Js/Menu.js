@@ -162,16 +162,20 @@ function attachProductHandlers() {
             const id = card.dataset.id;
             if (!id) return;
             if (!confirm('¿Confirmas eliminar este producto?')) return;
-            
+
             fetch('/IRRIVERENTE/api/eliminar_producto.php', {
                 method: 'POST',
-                body: new URLSearchParams({ id })
+                body: new URLSearchParams({ id }),
+                credentials: 'include'
             })
                 .then(r => r.text())
                 .then(t => {
-                    if (t.trim() === 'ok') {
+                    const resp = t.trim();
+                    if (resp === 'ok') {
                         if (typeof reloadProducts === 'function') reloadProducts();
                         if (typeof mostrarAlerta === 'function') mostrarAlerta('Producto eliminado');
+                    } else if (resp === 'ERROR_NO_AUTORIZADO') {
+                        if (typeof mostrarAlerta === 'function') mostrarAlerta('No tienes permisos de administrador', 'Acceso Denegado');
                     } else {
                         if (typeof mostrarAlerta === 'function') mostrarAlerta('Error al eliminar');
                     }

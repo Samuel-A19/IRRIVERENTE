@@ -756,7 +756,6 @@
     }
 }
 
-<<<<<<< HEAD
 .modal-content::-webkit-scrollbar-thumb {
     background: #f16529;
     border-radius: 6px;
@@ -889,35 +888,4 @@
 .btn-rechazar:hover {
     background: #333;
     color: white;
-=======
-/* Pantallas muy pequeñas */
-@media (max-width: 360px) {
-    .modal-box {
-        padding: 18px 12px;
-    }
-
-    .modal-box h2 {
-        font-size: 1rem;
-    }
-
-    .upload-box {
-        min-height: 100px;
-        height: auto;
-    }
-
-    .upload-box i {
-        font-size: 28px;
-    }
-
-    .upload-box span {
-        font-size: 0.75rem;
-        padding: 0 10px;
-    }
-
-    .modal-box input,
-    .modal-box textarea {
-        padding: 8px;
-        font-size: 14px;
-    }
->>>>>>> bbb9661 (mejora de la opcion agregar promo y productos)
 }

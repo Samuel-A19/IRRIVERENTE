@@ -92,23 +92,6 @@ window.onclick = function (event) {
    ALERTAS PERSONALIZADAS
 ===================================================== */
 
-function mostrarAlerta(mensaje, titulo = "Atención") {
-
-    const overlay = document.getElementById("alertOverlay");
-    const title = document.getElementById("alertTitle");
-    const message = document.getElementById("alertMessage");
-
-    if (!overlay || !title || !message) {
-        console.error("AlertOverlay no existe en esta página");
-        return;
-    }
-
-    title.textContent = titulo;
-    message.textContent = mensaje;
-
-    overlay.style.display = "flex";
-}
-
 function cerrarAlerta() {
     const overlay = document.getElementById("alertOverlay");
     if (overlay) overlay.style.display = "none";
@@ -160,6 +143,13 @@ function abrirModalAdmin(tipo) {
     const tipoInput = document.getElementById("tipoAdmin");
     const submitBtn = modal ? modal.querySelector('button[type="submit"]') : null;
 
+    // Verificar que el usuario es admin (desde localStorage que se setea al login)
+    const rango = localStorage.getItem("rango");
+    if (rango !== "admin") {
+        mostrarAlerta("No tienes permisos de administrador para acceder a esta función", "Acceso Denegado");
+        return;
+    }
+
     if (!modal) return;
 
     modal.style.display = "flex";
@@ -189,31 +179,31 @@ function abrirModalAdmin(tipo) {
 
 function cerrarModalAdmin() {
     const modal = document.getElementById("modalAdmin");
-    
+
     if (modal) {
         modal.style.display = "none";
-        
+
         // Obtener elementos dentro del modal
         const preview = modal.querySelector("#previewAdmin");
         const uploadBox = modal.querySelector(".upload-box");
-        
+
         // Limpiar la imagen cuando se cierre el modal
         if (preview) {
             preview.src = "";
             preview.classList.remove("show");
         }
-        
+
         if (uploadBox) {
             uploadBox.classList.remove("has-image");
             uploadBox.style.height = "auto"; // Restaurar altura inicial
         }
-        
+
         // Limpiar el formulario
         const tituloInput = modal.querySelector("#tituloInput");
         const descripcionInput = modal.querySelector("#descripcionInput");
         const precioInput = modal.querySelector("#precioInput");
         const categoriaInput = modal.querySelector("#categoriaInput");
-        
+
         if (tituloInput) tituloInput.value = "";
         if (descripcionInput) descripcionInput.value = "";
         if (precioInput) precioInput.value = "";
@@ -226,12 +216,33 @@ function cerrarModalAdmin() {
    GUARDAR PRODUCTO / PROMO CON IMAGEN
 ===================================================== */
 
-function guardarAdmin(event) {
+async function guardarAdmin(event) {
 
     // evitar envío tradicional del formulario
     if (event && event.preventDefault) event.preventDefault();
 
     console.log("FUNCION EJECUTADA 🔥");
+
+    // ========================================
+    // VERIFICAR QUE EL USUARIO ES ADMIN
+    // ========================================
+    try {
+        const sessionResponse = await fetch("/IRRIVERENTE/api/verificar_sesion.php", {
+            method: "GET",
+            credentials: "include"
+        });
+
+        const sessionData = await sessionResponse.json();
+
+        if (sessionData.error || sessionData.rango !== 'admin') {
+            mostrarAlerta("No tienes permisos de administrador para realizar esta acción", "Acceso Denegado");
+            return;
+        }
+    } catch (error) {
+        console.error("Error verificando sesión:", error);
+        mostrarAlerta("Error al verificar permisos", "Error");
+        return;
+    }
 
     const tipo = document.getElementById("tipoAdmin")?.value; // 'producto' o 'promo'
     const categoria = document.getElementById("categoriaInput")?.value;
@@ -275,7 +286,8 @@ function guardarAdmin(event) {
 
     fetch("/IRRIVERENTE/api/guardar_producto.php", {
         method: "POST",
-        body: formData
+        body: formData,
+        credentials: "include"
     })
         .then(res => res.text())
         .then(data => {
@@ -285,7 +297,7 @@ function guardarAdmin(event) {
             const resp = data.trim();
             if (resp === "ok") {
                 mostrarAlerta("Guardado correctamente 🔥", "Administrador");
-                
+
                 const modal = document.getElementById("modalAdmin");
                 cerrarModalAdmin();
 
@@ -302,11 +314,11 @@ function guardarAdmin(event) {
                 document.getElementById("precioInput").value = "";
                 document.getElementById("categoriaInput").value = "";
                 document.getElementById("imagenAdmin").value = "";
-                
+
                 if (modal) {
                     const preview = modal.querySelector("#previewAdmin");
                     const uploadBox = modal.querySelector(".upload-box");
-                    
+
                     if (preview) {
                         preview.src = "";
                         preview.classList.remove("show");
@@ -316,6 +328,8 @@ function guardarAdmin(event) {
                         uploadBox.style.height = "auto";
                     }
                 }
+            } else if (resp === "ERROR_NO_AUTORIZADO") {
+                mostrarAlerta("No tienes permisos de administrador para realizar esta acción", "Acceso Denegado");
             } else if (resp === "ERROR_IMG") {
                 mostrarAlerta("El producto se guardó pero la imagen no pudo subirse. Comprueba los permisos del directorio uploads.");
             } else {
@@ -353,34 +367,34 @@ document.addEventListener("DOMContentLoaded", function () {
                 reader.onload = function (e) {
                     // Crear imagen temporal para obtener dimensiones
                     const tempImg = new Image();
-                    
+
                     tempImg.onload = function () {
                         try {
                             // Calcular aspect ratio
                             const aspectRatio = this.width / this.height;
                             const containerWidth = uploadBox.offsetWidth || 400; // Valor por defecto si no se puede obtener
-                            
+
                             // Calcular altura basada en el ancho del contenedor y aspect ratio
                             const newHeight = Math.round(containerWidth / aspectRatio);
-                            
+
                             // Establecer altura mínima de 160px
                             const finalHeight = Math.max(newHeight, 160);
-                            
+
                             // Aplicar altura al contenedor
                             uploadBox.style.height = finalHeight + "px";
-                            
+
                             console.log("Imagen cargada - Dimensiones:", this.width + "x" + this.height, "Altura calculada:", finalHeight + "px");
                         } catch (err) {
                             console.error("Error al procesar imagen:", err);
                         }
                     };
-                    
+
                     tempImg.src = e.target.result;
-                    
+
                     // Mostrar la preview
                     preview.src = e.target.result;
                     preview.classList.add("show");
-                    
+
                     if (uploadBox) {
                         uploadBox.classList.add("has-image");
                     }

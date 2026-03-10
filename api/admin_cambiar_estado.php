@@ -1,6 +1,16 @@
 <?php
+session_start();
 header('Content-Type: application/json');
 require "conexion.php";
+
+// ==========================================
+// VERIFICACIÓN DE PERMISOS DE ADMINISTRADOR
+// ==========================================
+if (!isset($_SESSION['rango']) || $_SESSION['rango'] !== 'admin') {
+    http_response_code(403);
+    echo json_encode(['error' => 'No autorizado']);
+    exit();
+}
 
 $data = json_decode(file_get_contents("php://input"), true);
 

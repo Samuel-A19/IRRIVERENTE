@@ -374,8 +374,33 @@ body {
 }
 
 /* ========================================
-   PREVISUALIZACIÓN IMAGEN MODAL CREAR PRODUCTO
+   BOTÓN AGREGAR PRODUCTO - SOLO ADMIN
 ======================================== */
 
+.btn-agregar.solo-admin {
+    display: none;
+    margin: 20px auto;
+    padding: 12px 30px;
+    background: #f16529;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
+.btn-agregar.solo-admin.visible {
+    display: block !important;
+}
 
+.btn-agregar.solo-admin:hover {
+    background: #d45622;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(241, 101, 41, 0.6);
+}
+
+/* ========================================
+   PREVISUALIZACIÓN IMAGEN MODAL CREAR PRODUCTO
+======================================== */

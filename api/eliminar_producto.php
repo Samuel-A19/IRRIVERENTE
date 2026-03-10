@@ -1,5 +1,15 @@
 <?php
+session_start();
 require_once "conexion.php";
+
+// ==========================================
+// VERIFICACIÓN DE PERMISOS DE ADMINISTRADOR
+// ==========================================
+if (!isset($_SESSION['rango']) || $_SESSION['rango'] !== 'admin') {
+    http_response_code(403);
+    echo "ERROR_NO_AUTORIZADO";
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo "ERROR: Método no permitido";

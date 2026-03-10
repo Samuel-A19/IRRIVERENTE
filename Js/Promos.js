@@ -2,7 +2,7 @@
    HANDLERS PARA EDITAR/ELIMINAR PROMOS
 ======================================== */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     attachPromoHandlers();
 });
 
@@ -18,16 +18,20 @@ function attachPromoHandlers() {
             const id = promo.dataset.id;
             if (!id) return;
             if (!confirm('¿Confirmas eliminar esta promoción?')) return;
-            
+
             fetch('/IRRIVERENTE/api/eliminar_producto.php', {
                 method: 'POST',
-                body: new URLSearchParams({ id })
+                body: new URLSearchParams({ id }),
+                credentials: 'include'
             })
                 .then(r => r.text())
                 .then(t => {
-                    if (t.trim() === 'ok') {
+                    const resp = t.trim();
+                    if (resp === 'ok') {
                         if (typeof reloadPromos === 'function') reloadPromos();
                         if (typeof mostrarAlerta === 'function') mostrarAlerta('Promoción eliminada');
+                    } else if (resp === 'ERROR_NO_AUTORIZADO') {
+                        if (typeof mostrarAlerta === 'function') mostrarAlerta('No tienes permisos de administrador', 'Acceso Denegado');
                     } else {
                         if (typeof mostrarAlerta === 'function') mostrarAlerta('Error al eliminar');
                     }
@@ -46,14 +50,14 @@ function attachPromoHandlers() {
             const desc = promo.dataset.desc || '';
             const price = promo.dataset.price || '';
             const category = promo.dataset.cat || '';
-            
+
             document.getElementById('tipoAdmin').value = 'promo';
             document.getElementById('idAdmin').value = id;
             document.getElementById('tituloInput').value = name;
             document.getElementById('descripcionInput').value = desc;
             document.getElementById('precioInput').value = price;
             document.getElementById('categoriaInput').value = category;
-            
+
             if (typeof abrirModalAdmin === 'function') abrirModalAdmin('promo');
         };
     });

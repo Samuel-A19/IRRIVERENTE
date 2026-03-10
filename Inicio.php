@@ -230,6 +230,7 @@
   <script src="Js/Modales.js"></script>
   <script src="Js/Carrito.js"></script>
   <script src="Js/Recover.js"></script>
+  <script src="Js/clickF.js"></script>
 
 
   <!-- PIE DE PÁGINA -->
