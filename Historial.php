@@ -86,48 +86,60 @@
                 </div>
             </div>
 
-
-            <!-- Botón menú solo icono -->
-            <button id="btnMenuLateral" onclick="abrirMenu()">
-                <i class="bi bi-justify"></i>
-            </button>
-
-            <!-- Overlay -->
-            <div id="menuOverlay"></div>
-
-            <!-- MENU LATERAL -->
-            <aside id="sideMenu">
-
-                <!-- PERFIL USUARIO -->
-                <div class="side-user">
-                    <img id="sideFoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
-                    <span id="sideNombre">Usuario</span>
-                </div>
-
-                <div class="side-divider"></div>
-
-
-                <a href="Historial.php">Historial de Pedidos</a>
-                <a href="Ajustes.php">Ajustes</a>
-
-                <!-- CERRAR SESIÓN -->
-                <a href="#" id="btnCerrarSesion" class="logout">
-                    Cerrar sesión
-                </a>
-                <div class="side-social">
-                    <a href="https://www.instagram.com/irriverente_pp" target="_blank" aria-label="Instagram">
-                        <i class="bi bi-instagram"></i>
-                    </a>
-                    <a href="https://www.facebook.com/profile.php?id=100075994186402" target="_blank"
-                        aria-label="Facebook">
-                        <i class="bi bi-facebook"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@irriverente.pizza" target="_blank" aria-label="TikTok">
-                        <i class="bi bi-tiktok"></i>
-                    </a>
-            </aside>
-
         </nav>
+        <!-- Botón menú solo icono -->
+        <button id="btnMenuLateral" onclick="abrirMenu()">
+            <i class="bi bi-justify"></i>
+        </button>
+
+        <!-- Overlay -->
+        <div id="menuOverlay"></div>
+
+        <!-- MENU LATERAL -->
+        <aside id="sideMenu">
+
+            <!-- PERFIL USUARIO -->
+            <div class="side-user">
+                <img id="sideFoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
+                <span id="sideNombre">Usuario</span>
+            </div>
+
+            <div class="side-divider"></div>
+
+            <!-- LINKS SOLO PARA CELULAR -->
+            <div class="mobile-links">
+                <a href="Inicio.php">Inicio</a>
+                <a href="Menu.php">Menú</a>
+                <a href="Promos.php">Promos</a>
+                <a href="Siguepedido.php" id="linkSiguePedido">Sigue tu pedido</a>
+                <a href="Acercanosotros.php">Acerca de nosotros</a>
+            </div>
+
+            <div class="side-divider"></div>
+
+            <!-- OPCIONES DE USUARIO -->
+            <a href="Historial.php">Historial de Pedidos</a>
+            <a href="Ajustes.php">Ajustes</a>
+
+            <!-- CERRAR SESIÓN -->
+            <a href="#" id="btnCerrarSesion" class="logout">
+                Cerrar sesión
+            </a>
+
+            <!-- REDES SOCIALES -->
+            <div class="side-social">
+                <a href="https://www.instagram.com/irriverente_pp" target="_blank" aria-label="Instagram">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100075994186402" target="_blank" aria-label="Facebook">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a href="https://www.tiktok.com/@irriverente.pizza" target="_blank" aria-label="TikTok">
+                    <i class="bi bi-tiktok"></i>
+                </a>
+            </div>
+
+        </aside>
     </header>
 
 
@@ -207,124 +219,134 @@
     <script src="Js/clickF.js"></script>
 
     <!-- PIE DE PÁGINA -->
-  <footer class="main-footer"> <!-- Contenedor principal del footer -->
-    <div class="footer-content"> <!-- Contenedor del contenido del pie de página -->
+    <footer class="main-footer"> <!-- Contenedor principal del footer -->
+        <div class="footer-content"> <!-- Contenedor del contenido del pie de página -->
 
-      <div class="footer-copy">
-        2025 Irriverente Pizza & Pasta - Todos los derechos reservados <!-- Texto de derechos -->
-      </div>
+            <div class="footer-copy">
+                2025 Irriverente Pizza & Pasta - Todos los derechos reservados <!-- Texto de derechos -->
+            </div>
 
-      <div class="footer-links"> <!-- Enlaces legales -->
-        <a href="#" onclick="openModal('modalPrivacidad')">Política de Privacidad</a>
-        <a href="#" onclick="openModal('modalTerminos')">Términos y Condiciones</a>
+            <div class="footer-links"> <!-- Enlaces legales -->
+                <a href="#" onclick="openModal('modalPrivacidad')">Política de Privacidad</a>
+                <a href="#" onclick="openModal('modalTerminos')">Términos y Condiciones</a>
 
 
-      </div>
+            </div>
 
-      <!-- REDES SOCIALES -->
-      <div class="footer-social">
-        <a href="https://www.instagram.com/irriverente_pp?utm_source=ig_web_button_share_sheet&igsh=MXd4N2hnM20zb2RnYg=="
-          target="_blank"><i class="bi bi-instagram"></i></a> <!-- Instagram -->
-        <a href="https://www.facebook.com/profile.php?id=100075994186402" target="_blank"><i
-            class="bi bi-facebook"></i></a> <!-- Facebook -->
-        <a href="https://www.tiktok.com/@irriverente.pizza" target="_blank"><i class="bi bi-tiktok"></i></a>
-        <!-- TikTok -->
-      </div>
+            <!-- REDES SOCIALES -->
+            <div class="footer-social">
+                <a href="https://www.instagram.com/irriverente_pp?utm_source=ig_web_button_share_sheet&igsh=MXd4N2hnM20zb2RnYg=="
+                    target="_blank"><i class="bi bi-instagram"></i></a> <!-- Instagram -->
+                <a href="https://www.facebook.com/profile.php?id=100075994186402" target="_blank"><i
+                        class="bi bi-facebook"></i></a> <!-- Facebook -->
+                <a href="https://www.tiktok.com/@irriverente.pizza" target="_blank"><i class="bi bi-tiktok"></i></a>
+                <!-- TikTok -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- ALERTA PERSONALIZADA -->
+    <div id="alertOverlay" class="alert-overlay">
+        <div class="alert-box">
+            <h3 id="alertTitle">Atención</h3>
+            <p id="alertMessage"></p>
+            <button onclick="cerrarAlerta()">Aceptar</button>
+        </div>
     </div>
-  </footer>
 
-  <!-- ALERTA PERSONALIZADA -->
-  <div id="alertOverlay" class="alert-overlay">
-    <div class="alert-box">
-      <h3 id="alertTitle">Atención</h3>
-      <p id="alertMessage"></p>
-      <button onclick="cerrarAlerta()">Aceptar</button>
+    <div id="modalPrivacidad" class="modal">
+        <div class="modal-content legal-modal">
+            <span class="close" onclick="closeModal('modalPrivacidad')">&times;</span>
+            <h2>Política de Privacidad</h2>
+
+            <p><strong>Última actualización: 2025</strong></p>
+
+            <p>En Irriverente Pizza & Pasta respetamos tu privacidad y protegemos tus datos personales conforme a la Ley
+                1581
+                de 2012 y demás normas aplicables en Colombia.</p>
+
+            <h3>1. Información que recopilamos</h3>
+            <p>Recopilamos datos personales como nombre, número de teléfono, dirección, correo electrónico y la
+                información
+                necesaria para procesar tus pedidos y brindarte un mejor servicio.</p>
+
+            <h3>2. Finalidad del tratamiento</h3>
+            <p>La información recopilada es utilizada para gestionar pedidos, coordinar entregas, mejorar nuestros
+                servicios y
+                comunicarnos contigo en relación con promociones o novedades.</p>
+
+            <h3>3. Protección de la información</h3>
+            <p>Implementamos medidas técnicas y administrativas para proteger tus datos contra pérdida, acceso no
+                autorizado o
+                uso indebido.</p>
+
+            <h3>4. Derechos del titular</h3>
+            <p>Como titular de los datos, puedes solicitar actualización, corrección o eliminación de tu información en
+                cualquier momento, enviando una solicitud a nuestros canales oficiales.</p>
+
+            <h3>5. Conservación de datos</h3>
+            <p>Los datos personales serán conservados únicamente durante el tiempo necesario para cumplir con las
+                finalidades
+                descritas o según lo exija la ley.</p>
+        </div>
     </div>
-  </div>
 
-  <div id="modalPrivacidad" class="modal">
-    <div class="modal-content legal-modal">
-      <span class="close" onclick="closeModal('modalPrivacidad')">&times;</span>
-      <h2>Política de Privacidad</h2>
+    <div id="modalTerminos" class="modal">
+        <div class="modal-content legal-modal">
+            <span class="close" onclick="closeModal('modalTerminos')">&times;</span>
+            <h2>Términos y Condiciones</h2>
 
-      <p><strong>Última actualización: 2025</strong></p>
+            <p><strong>Última actualización: 2025</strong></p>
 
-      <p>En Irriverente Pizza & Pasta respetamos tu privacidad y protegemos tus datos personales conforme a la Ley 1581
-        de 2012 y demás normas aplicables en Colombia.</p>
+            <h3>1. Uso del sitio</h3>
+            <p>El usuario se compromete a utilizar este sitio web de manera legal y responsable, evitando cualquier
+                acción que
+                pueda afectar el funcionamiento de la plataforma.</p>
 
-      <h3>1. Información que recopilamos</h3>
-      <p>Recopilamos datos personales como nombre, número de teléfono, dirección, correo electrónico y la información
-        necesaria para procesar tus pedidos y brindarte un mejor servicio.</p>
+            <h3>2. Registro y cuenta</h3>
+            <p>El usuario es responsable de mantener la confidencialidad de sus credenciales de acceso y de todas las
+                actividades realizadas desde su cuenta.</p>
 
-      <h3>2. Finalidad del tratamiento</h3>
-      <p>La información recopilada es utilizada para gestionar pedidos, coordinar entregas, mejorar nuestros servicios y
-        comunicarnos contigo en relación con promociones o novedades.</p>
+            <h3>3. Pedidos</h3>
+            <p>Todos los pedidos están sujetos a disponibilidad de productos y confirmación por parte de Irriverente
+                Pizza &
+                Pasta. Nos reservamos el derecho de cancelar pedidos en caso de inconsistencias.</p>
 
-      <h3>3. Protección de la información</h3>
-      <p>Implementamos medidas técnicas y administrativas para proteger tus datos contra pérdida, acceso no autorizado o
-        uso indebido.</p>
+            <h3>4. Pagos</h3>
+            <p>Aceptamos pagos en efectivo y pagos en línea mediante plataformas externas seguras. La empresa no
+                almacena
+                información financiera sensible.</p>
 
-      <h3>4. Derechos del titular</h3>
-      <p>Como titular de los datos, puedes solicitar actualización, corrección o eliminación de tu información en
-        cualquier momento, enviando una solicitud a nuestros canales oficiales.</p>
+            <h3>5. Entregas</h3>
+            <p>Los tiempos de entrega pueden variar según condiciones climáticas, tráfico u otros factores externos.
+                Hacemos
+                nuestro mejor esfuerzo para cumplir con los tiempos estimados.</p>
 
-      <h3>5. Conservación de datos</h3>
-      <p>Los datos personales serán conservados únicamente durante el tiempo necesario para cumplir con las finalidades
-        descritas o según lo exija la ley.</p>
+            <h3>6. Modificaciones</h3>
+            <p>Irriverente Pizza & Pasta podrá actualizar estos términos en cualquier momento. Las modificaciones
+                entrarán en
+                vigencia desde su publicación en el sitio web.</p>
+        </div>
     </div>
-  </div>
 
-  <div id="modalTerminos" class="modal">
-    <div class="modal-content legal-modal">
-      <span class="close" onclick="closeModal('modalTerminos')">&times;</span>
-      <h2>Términos y Condiciones</h2>
+    <!-- ============================= -->
+    <!-- BANNER TÉRMINOS OBLIGATORIOS -->
+    <!-- ============================= -->
+    <div id="termsBanner">
+        <div class="terms-content">
+            <p>
+                Para continuar debes aceptar nuestros
+                <a href="#" onclick="openModal('modalTerminos')">Términos y Condiciones</a>
+                y nuestra
+                <a href="#" onclick="openModal('modalPrivacidad')">Política de Privacidad</a>.
+            </p>
 
-      <p><strong>Última actualización: 2025</strong></p>
-
-      <h3>1. Uso del sitio</h3>
-      <p>El usuario se compromete a utilizar este sitio web de manera legal y responsable, evitando cualquier acción que
-        pueda afectar el funcionamiento de la plataforma.</p>
-
-      <h3>2. Registro y cuenta</h3>
-      <p>El usuario es responsable de mantener la confidencialidad de sus credenciales de acceso y de todas las
-        actividades realizadas desde su cuenta.</p>
-
-      <h3>3. Pedidos</h3>
-      <p>Todos los pedidos están sujetos a disponibilidad de productos y confirmación por parte de Irriverente Pizza &
-        Pasta. Nos reservamos el derecho de cancelar pedidos en caso de inconsistencias.</p>
-
-      <h3>4. Pagos</h3>
-      <p>Aceptamos pagos en efectivo y pagos en línea mediante plataformas externas seguras. La empresa no almacena
-        información financiera sensible.</p>
-
-      <h3>5. Entregas</h3>
-      <p>Los tiempos de entrega pueden variar según condiciones climáticas, tráfico u otros factores externos. Hacemos
-        nuestro mejor esfuerzo para cumplir con los tiempos estimados.</p>
-
-      <h3>6. Modificaciones</h3>
-      <p>Irriverente Pizza & Pasta podrá actualizar estos términos en cualquier momento. Las modificaciones entrarán en
-        vigencia desde su publicación en el sitio web.</p>
+            <div class="terms-buttons">
+                <button onclick="aceptarTerminos()" class="btn-aceptar">Aceptar</button>
+                <button onclick="rechazarTerminos()" class="btn-rechazar">Rechazar</button>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <!-- ============================= -->
-  <!-- BANNER TÉRMINOS OBLIGATORIOS -->
-  <!-- ============================= -->
-  <div id="termsBanner">
-    <div class="terms-content">
-      <p>
-        Para continuar debes aceptar nuestros
-        <a href="#" onclick="openModal('modalTerminos')">Términos y Condiciones</a>
-        y nuestra
-        <a href="#" onclick="openModal('modalPrivacidad')">Política de Privacidad</a>.
-      </p>
-
-      <div class="terms-buttons">
-        <button onclick="aceptarTerminos()" class="btn-aceptar">Aceptar</button>
-        <button onclick="rechazarTerminos()" class="btn-rechazar">Rechazar</button>
-      </div>
-    </div>
-  </div>
 
     <!-- MODAL DETALLE PEDIDO -->
     <div id="modalDetalle" class="modal-detalle">
@@ -356,7 +378,7 @@
     </div>
 
 
-    
+
 </body>
 
 </html>

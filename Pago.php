@@ -2,234 +2,248 @@
 <html lang="es"> <!-- Indica que el idioma principal del contenido es español -->
 
 <head>
-    <meta charset="UTF-8" />
-    <!-- Define la codificación de caracteres para que soporte acentos y caracteres especiales -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Permite que la página sea adaptable en dispositivos móviles -->
-    <title>Irriverente Pizza & Pasta</title> <!-- Título de la pestaña del navegador -->
+  <meta charset="UTF-8" />
+  <!-- Define la codificación de caracteres para que soporte acentos y caracteres especiales -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Permite que la página sea adaptable en dispositivos móviles -->
+  <title>Irriverente Pizza & Pasta</title> <!-- Título de la pestaña del navegador -->
 
-    <!-- Enlace a la hoja de estilos CSS personalizada -->
-    <link rel="stylesheet" href="Css/Pago.css" />
-    <link rel="stylesheet" href="Css/Encabezado.css" />
-    <link rel="stylesheet" href="Css/Carrito.css" />
-    <link rel="stylesheet" href="Css/Modales.css" />
-    <link rel="stylesheet" href="Css/PiePagina.css" />
-    <link rel="stylesheet" href="Css/Fondos.css" />
-    <link rel="stylesheet" href="Css/Menulateral.css">
+  <!-- Enlace a la hoja de estilos CSS personalizada -->
+  <link rel="stylesheet" href="Css/Pago.css" />
+  <link rel="stylesheet" href="Css/Encabezado.css" />
+  <link rel="stylesheet" href="Css/Carrito.css" />
+  <link rel="stylesheet" href="Css/Modales.css" />
+  <link rel="stylesheet" href="Css/PiePagina.css" />
+  <link rel="stylesheet" href="Css/Fondos.css" />
+  <link rel="stylesheet" href="Css/Menulateral.css">
 
-    <!-- Librería de íconos Bootstrap Icons (permite usar iconos con la clase "bi") -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- Librería de íconos Bootstrap Icons (permite usar iconos con la clase "bi") -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
-    <!-- Librería CSS de Swiper (estilos del carrusel) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Librería CSS de Swiper (estilos del carrusel) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- Librería JS de Swiper (funcionalidad del carrusel) -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- Librería JS de Swiper (funcionalidad del carrusel) -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <!-- Fuente "Roboto" desde Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Fuente "Roboto" desde Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body class="pagina-pago">
-    <!-- Comienza el contenido visible en el navegador -->
+  <!-- Comienza el contenido visible en el navegador -->
 
-    <!-- ENCABEZADO PRINCIPAL -->
-    <header class="main-header"> <!-- Contenedor del encabezado -->
+  <!-- ENCABEZADO PRINCIPAL -->
+  <header class="main-header"> <!-- Contenedor del encabezado -->
 
-        <!-- Contenedor del logo -->
-        <div class="header-center logo">
-            <a href="Inicio.php"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
-            <!-- Logo con enlace a la página de inicio -->
-        </div>
-
-        <!-- MENÚ DE NAVEGACIÓN -->
-        <nav class="header-center nav-menu"> <!-- Contenedor del menú -->
-            <a href="Inicio.php">INICIO</a> <!-- Enlace a la página de inicio -->
-            <a href="Menu.php">MENÚ</a> <!-- Enlace a la sección de menú -->
-            <a href="Promos.php">PROMOS</a> <!-- Enlace a la página de promociones -->
-            <a href="#" id="linkSiguePedido">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
-            <a href="Acercanosotros.php">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
-            <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
-            <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
-            <div id="carritoDropdown" class="carrito-dropdown">
-                <h3>Tu Carrito</h3>
-                <ul id="carritoLista" class="carrito-lista">
-                    <li class="carrito-item">
-                        <img src="Imagenes/Pizza 2.jpg" alt="">
-                        <div class="carrito-info">
-                            <p></p>
-                            <span></span>
-                        </div>
-                        <div class="acciones">
-                            <button class="menos"><i class="fa-solid fa-circle-minus"></i></button>
-                            <span class="cantidad">1</span>
-                            <button class="mas"><i class="fa-solid fa-circle-plus"></i></button>
-                            <button class="eliminar">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-                <div class="carrito-total">
-                    <p>Total: 0$</p>
-                </div>
-                <div class="carrito-acciones">
-                    <button class="seguir">Seguir comprando</button>
-                    <button class="checkout">Finalizar compra</button>
-                </div>
-            </div>
-
-            <!-- Botón menú solo icono -->
-            <button id="btnMenuLateral" onclick="abrirMenu()">
-                <i class="bi bi-justify"></i>
-            </button>
-
-            <!-- Overlay -->
-            <div id="menuOverlay"></div>
-
-            <!-- MENU LATERAL -->
-            <aside id="sideMenu">
-
-                <!-- PERFIL USUARIO -->
-                <div class="side-user">
-                    <img id="sideFoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
-                    <span id="sideNombre">Usuario</span>
-                </div>
-
-                <div class="side-divider"></div>
-
-
-                <a href="Historial.php">Historial de Pedidos</a>
-                <a href="Ajustes.php">Ajustes</a>
-
-                <!-- CERRAR SESIÓN -->
-                <a href="#" id="btnCerrarSesion" class="logout">
-                    Cerrar sesión
-                </a>
-                <div class="side-social">
-                    <a href="https://www.instagram.com/irriverente_pp" target="_blank" aria-label="Instagram">
-                        <i class="bi bi-instagram"></i>
-                    </a>
-                    <a href="https://www.facebook.com/profile.php?id=100075994186402" target="_blank"
-                        aria-label="Facebook">
-                        <i class="bi bi-facebook"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@irriverente.pizza" target="_blank" aria-label="TikTok">
-                        <i class="bi bi-tiktok"></i>
-                    </a>
-            </aside>
-        </nav>
-    </header>
-
-    <!-- Formulario -->
-    <div class="container formulario-pago" id="bloqueFormulario">
-        <h1>Método de pago</h1>
-
-        <form id="paymentForm">
-            <div>
-                <label for="customerName">Nombre del cliente</label>
-                <input id="customerName" name="customerName" type="text" placeholder="Ej. Juan Pérez" required>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <label for="phone">Teléfono</label>
-                    <input id="phone" name="phone" type="tel" placeholder="Ej. 3001234567" maxlength="10"
-                        inputmode="numeric" pattern="[0-9]{10}" required>
-
-                </div>
-                <div class="col">
-                    <label for="email">Correo electrónico</label>
-                    <input id="email" name="email" type="email" placeholder="ejemplo@correo.com" required>
-                </div>
-            </div>
-
-            <div>
-                <label>Método de pago</label>
-                <div class="radios">
-                    <label><input type="radio" name="paymentMethod" value="efectivo" checked> Efectivo</label>
-                    <label><input type="radio" name="paymentMethod" value="transferencia"> Pago en Linea</label>
-                </div>
-            </div>
-
-            <div id="transferFields" class="payment-details hidden">
-                <p class="note">Transferencia bancaria: realiza el pago y conserva el comprobante.</p>
-
-                <div>
-                    <label for="bankName">Medio / Banco</label>
-                    <select id="bankName" name="bankName">
-                        <option value="">-- Seleccione --</option>
-                        <option value="Nequi">Nequi</option>
-                        <option value="Bancolombia">Bancolombia</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div style="flex:1">
-                    <button id="submitBtn" class="btn" type="submit">ENVIAR PAGO</button>
-                    <button id="clearBtn" class="btn secondary" type="button">LIMPIAR</button>
-                </div>
-            </div>
-        </form>
+    <!-- Contenedor del logo -->
+    <div class="header-center logo">
+      <a href="Inicio.php"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
+      <!-- Logo con enlace a la página de inicio -->
     </div>
 
-    <div class="container resumen-entrega" id="bloqueEntrega">
-        <h3>Datos de entrega</h3>
-        <p><strong>Nombre:</strong> <span id="res-nombre"></span></p>
-        <p><strong>Teléfono:</strong> <span id="res-telefono"></span></p>
-        <p><strong>Correo:</strong> <span id="res-email"></span></p>
-        <p><strong>Dirección:</strong> <span id="res-direccion"></span></p>
-        <p><strong>Referencias:</strong> <span id="res-referencias"></span></p>
-        <p><strong>Medio de pago:</strong> <span id="res-metodo"></span></p>
-
-        <div id="bloquePagoDigital" class="container hidden">
-            <h3>Realiza tu pago</h3>
-
-            <p id="textoPago"></p>
-
-            <img id="qrPago" src="" alt="QR de pago" style="max-width:220px; margin:20px auto; display:block;">
-
-            <button id="btnYaPague" class="btn">YA PAGUÉ</button>
-        </div>
-
-        <div class="resumen-pedido" id="resumenPedido">
-            <h3>Resumen de tu pedido</h3>
-
-            <div class="resumen-seccion">
-                <strong>Productos:</strong>
-                <ul id="resumenProductos"></ul>
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav class="header-center nav-menu"> <!-- Contenedor del menú -->
+      <a href="Inicio.php">INICIO</a> <!-- Enlace a la página de inicio -->
+      <a href="Menu.php">MENÚ</a> <!-- Enlace a la sección de menú -->
+      <a href="Promos.php">PROMOS</a> <!-- Enlace a la página de promociones -->
+      <a href="#" id="linkSiguePedido">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
+      <a href="Acercanosotros.php">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
+      <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
+      <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
+      <div id="carritoDropdown" class="carrito-dropdown">
+        <h3>Tu Carrito</h3>
+        <ul id="carritoLista" class="carrito-lista">
+          <li class="carrito-item">
+            <img src="Imagenes/Pizza 2.jpg" alt="">
+            <div class="carrito-info">
+              <p></p>
+              <span></span>
             </div>
-
-            <div class="resumen-seccion">
-                <p><strong>Total:</strong> <span id="resumenTotal">0</span></p>
+            <div class="acciones">
+              <button class="menos"><i class="fa-solid fa-circle-minus"></i></button>
+              <span class="cantidad">1</span>
+              <button class="mas"><i class="fa-solid fa-circle-plus"></i></button>
+              <button class="eliminar">
+                <i class="fa-solid fa-trash"></i>
+              </button>
             </div>
+          </li>
+        </ul>
+        <div class="carrito-total">
+          <p>Total: 0$</p>
         </div>
-
-
-        <div class="acciones-pago">
-            <button id="btnPagar" class="btn" type="button">
-
-                PAGAR AHORA
-            </button>
-
-            <button id="btnEditar" class="btn secondary" type="button">
-
-                EDITAR DATOS
-            </button>
+        <div class="carrito-acciones">
+          <button class="seguir">Seguir comprando</button>
+          <button class="checkout">Finalizar compra</button>
         </div>
+      </div>
 
+    </nav>
+    <!-- Botón menú solo icono -->
+    <button id="btnMenuLateral" onclick="abrirMenu()">
+      <i class="bi bi-justify"></i>
+    </button>
 
+    <!-- Overlay -->
+    <div id="menuOverlay"></div>
 
+    <!-- MENU LATERAL -->
+    <aside id="sideMenu">
+
+      <!-- PERFIL USUARIO -->
+      <div class="side-user">
+        <img id="sideFoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
+        <span id="sideNombre">Usuario</span>
+      </div>
+
+      <div class="side-divider"></div>
+
+      <!-- LINKS SOLO PARA CELULAR -->
+      <div class="mobile-links">
+        <a href="Inicio.php">Inicio</a>
+        <a href="Menu.php">Menú</a>
+        <a href="Promos.php">Promos</a>
+        <a href="Siguepedido.php" id="linkSiguePedido">Sigue tu pedido</a>
+        <a href="Acercanosotros.php">Acerca de nosotros</a>
+      </div>
+
+      <div class="side-divider"></div>
+
+      <!-- OPCIONES DE USUARIO -->
+      <a href="Historial.php">Historial de Pedidos</a>
+      <a href="Ajustes.php">Ajustes</a>
+
+      <!-- CERRAR SESIÓN -->
+      <a href="#" id="btnCerrarSesion" class="logout">
+        Cerrar sesión
+      </a>
+
+      <!-- REDES SOCIALES -->
+      <div class="side-social">
+        <a href="https://www.instagram.com/irriverente_pp" target="_blank" aria-label="Instagram">
+          <i class="bi bi-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100075994186402" target="_blank" aria-label="Facebook">
+          <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://www.tiktok.com/@irriverente.pizza" target="_blank" aria-label="TikTok">
+          <i class="bi bi-tiktok"></i>
+        </a>
+      </div>
+
+    </aside>
+  </header>
+
+  <!-- Formulario -->
+  <div class="container formulario-pago" id="bloqueFormulario">
+    <h1>Método de pago</h1>
+
+    <form id="paymentForm">
+      <div>
+        <label for="customerName">Nombre del cliente</label>
+        <input id="customerName" name="customerName" type="text" placeholder="Ej. Juan Pérez" required>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label for="phone">Teléfono</label>
+          <input id="phone" name="phone" type="tel" placeholder="Ej. 3001234567" maxlength="10" inputmode="numeric"
+            pattern="[0-9]{10}" required>
+
+        </div>
+        <div class="col">
+          <label for="email">Correo electrónico</label>
+          <input id="email" name="email" type="email" placeholder="ejemplo@correo.com" required>
+        </div>
+      </div>
+
+      <div>
+        <label>Método de pago</label>
+        <div class="radios">
+          <label><input type="radio" name="paymentMethod" value="efectivo" checked> Efectivo</label>
+          <label><input type="radio" name="paymentMethod" value="transferencia"> Pago en Linea</label>
+        </div>
+      </div>
+
+      <div id="transferFields" class="payment-details hidden">
+        <p class="note">Transferencia bancaria: realiza el pago y conserva el comprobante.</p>
+
+        <div>
+          <label for="bankName">Medio / Banco</label>
+          <select id="bankName" name="bankName">
+            <option value="">-- Seleccione --</option>
+            <option value="Nequi">Nequi</option>
+            <option value="Bancolombia">Bancolombia</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div style="flex:1">
+          <button id="submitBtn" class="btn" type="submit">ENVIAR PAGO</button>
+          <button id="clearBtn" class="btn secondary" type="button">LIMPIAR</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="container resumen-entrega" id="bloqueEntrega">
+    <h3>Datos de entrega</h3>
+    <p><strong>Nombre:</strong> <span id="res-nombre"></span></p>
+    <p><strong>Teléfono:</strong> <span id="res-telefono"></span></p>
+    <p><strong>Correo:</strong> <span id="res-email"></span></p>
+    <p><strong>Dirección:</strong> <span id="res-direccion"></span></p>
+    <p><strong>Referencias:</strong> <span id="res-referencias"></span></p>
+    <p><strong>Medio de pago:</strong> <span id="res-metodo"></span></p>
+
+    <div id="bloquePagoDigital" class="container hidden">
+      <h3>Realiza tu pago</h3>
+
+      <p id="textoPago"></p>
+
+      <img id="qrPago" src="" alt="QR de pago" style="max-width:220px; margin:20px auto; display:block;">
+
+      <button id="btnYaPague" class="btn">YA PAGUÉ</button>
     </div>
-    <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank">
-        <img src="Imagenes/Whatsaap Logo.png" class="Logo-Whatsaap">
-    </a>
 
-    <div id="loginModal" class="modal">
+    <div class="resumen-pedido" id="resumenPedido">
+      <h3>Resumen de tu pedido</h3>
+
+      <div class="resumen-seccion">
+        <strong>Productos:</strong>
+        <ul id="resumenProductos"></ul>
+      </div>
+
+      <div class="resumen-seccion">
+        <p><strong>Total:</strong> <span id="resumenTotal">0</span></p>
+      </div>
+    </div>
+
+
+    <div class="acciones-pago">
+      <button id="btnPagar" class="btn" type="button">
+
+        PAGAR AHORA
+      </button>
+
+      <button id="btnEditar" class="btn secondary" type="button">
+
+        EDITAR DATOS
+      </button>
+    </div>
+
+
+
+  </div>
+  <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank">
+    <img src="Imagenes/Whatsaap Logo.png" class="Logo-Whatsaap">
+  </a>
+
+  <div id="loginModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('loginModal')">&times;</span>
       <h2>Iniciar Sesión</h2>
@@ -300,14 +314,14 @@
       <p>¿Ya tienes cuenta? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Inicia sesión</a></p>
     </div>
   </div>
-  
-    <script src="Js/Modales.js"></script>
-    <script src="Js/Pago.js"></script>
-    <script src="Js/Carrito.js"></script>
-    <script src="Js/Menulateral.js"></script>
-    <script src="Js/clickF.js"></script>
 
-<!-- ALERTA PERSONALIZADA -->
+  <script src="Js/Modales.js"></script>
+  <script src="Js/Pago.js"></script>
+  <script src="Js/Carrito.js"></script>
+  <script src="Js/Menulateral.js"></script>
+  <script src="Js/clickF.js"></script>
+
+  <!-- ALERTA PERSONALIZADA -->
   <div id="alertOverlay" class="alert-overlay">
     <div class="alert-box">
       <h3 id="alertTitle">Atención</h3>
@@ -400,9 +414,9 @@
     </div>
   </div>
 
-    <!-- Fin del contenido visible en el navegador -->
+  <!-- Fin del contenido visible en el navegador -->
 
-    <!-- PIE DE PÁGINA -->
+  <!-- PIE DE PÁGINA -->
   <footer class="main-footer"> <!-- Contenedor principal del footer -->
     <div class="footer-content"> <!-- Contenedor del contenido del pie de página -->
 
@@ -522,14 +536,14 @@
     </div>
   </div>
 
-    <!-- ALERTA PERSONALIZADA -->
-    <div id="alertOverlay" class="alert-overlay" style="display:none;">
-        <div class="alert-box">
-            <h3 id="alertTitle">Atención</h3>
-            <p id="alertMessage"></p>
-            <button onclick="cerrarAlerta()">Aceptar</button>
-        </div>
+  <!-- ALERTA PERSONALIZADA -->
+  <div id="alertOverlay" class="alert-overlay" style="display:none;">
+    <div class="alert-box">
+      <h3 id="alertTitle">Atención</h3>
+      <p id="alertMessage"></p>
+      <button onclick="cerrarAlerta()">Aceptar</button>
     </div>
+  </div>
 
 </body>
 

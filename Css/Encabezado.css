@@ -8,25 +8,22 @@
 
 .main-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #f16529;
+    justify-content: space-between;
+    background: #f16529;
+    padding: 0 20px;
+    min-height: 90px;
     position: relative;
 }
 
 /* LOGO */
 .header-center.logo img {
     width: 110px;
-    /* ← AQUI CAMBIAS EL TAMAÑO (FUNCIONA) */
     height: 142px;
     object-fit: contain;
     display: block;
     position: relative;
-    /* antes lo tenías absolute → causaba el error */
 }
-
-
 
 /* ========================================
    BOTÓN MENU LATERAL
@@ -102,16 +99,6 @@
     display: block;
 }
 
-
-/* ========================================
-   RESPONSIVE GLOBAL
-   (NO modifica el tamaño del logo)
-======================================= */
-
-.main-header {
-    flex-wrap: wrap;
-}
-
 /* Si el espacio es pequeño, los elementos no se rompen */
 @media (max-width: 480px) {
     #btnMenuLateral {
@@ -142,4 +129,19 @@
         padding: 6px 14px;
     }
 
+}
+
+#btnMenuLateral {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 27px 25px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+#btnMenuLateral:hover {
+    background: rgba(0, 0, 0, 0.15);
 }

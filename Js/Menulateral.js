@@ -43,7 +43,6 @@ function actualizarMenuLateral() {
     const sideNombre = document.getElementById("sideNombre");
     const sideFoto = document.getElementById("sideFoto");
 
-    // Si no hay sesión
     if (!userId) {
         if (sideNombre) sideNombre.textContent = "Invitado";
         if (sideFoto) {
@@ -52,12 +51,10 @@ function actualizarMenuLateral() {
         return;
     }
 
-    // Nombre (localStorage)
     if (sideNombre && userName) {
         sideNombre.textContent = userName;
     }
 
-    // Foto (BD)
     fetch(`api/obtener_info_cliente.php?id_usuario=${userId}`)
         .then(res => res.json())
         .then(data => {
@@ -66,7 +63,6 @@ function actualizarMenuLateral() {
             }
         });
 
-    // Botón cerrar sesión
     const btnCerrarSesion = document.getElementById("btnCerrarSesion");
     if (btnCerrarSesion) {
         btnCerrarSesion.onclick = (e) => {
@@ -85,22 +81,7 @@ function actualizarMenuLateral() {
 
 
 // ----------------------------------
-// INICIALIZACIÓN
-// ----------------------------------
-document.addEventListener("DOMContentLoaded", () => {
-    updateSessionState();
-    actualizarMenuLateral();
-});
-
-// Escuchar cambios entre pestañas
-window.addEventListener("storage", (e) => {
-    if (e.key === "userName" || e.key === "userId") {
-        updateSessionState();
-        actualizarMenuLateral();
-    }
-});
-// ----------------------------------
-// MOSTRAR / OCULTAR MENÚ SEGÚN SESIÓN
+// CONTROLAR MENÚ SEGÚN SESIÓN Y DISPOSITIVO
 // ----------------------------------
 function controlarMenuPorSesion() {
     const userId = localStorage.getItem("userId");
@@ -111,31 +92,23 @@ function controlarMenuPorSesion() {
 
     if (!btnMenu || !sideMenu || !overlay) return;
 
-    if (!userId) {
-        // ❌ SIN SESIÓN → OCULTAR
+    const esMovil = window.innerWidth <= 768;
+
+    if (!userId && !esMovil) {
+        // PC SIN SESIÓN → ocultar menú
         btnMenu.style.display = "none";
         sideMenu.classList.remove("active");
         sideMenu.style.display = "none";
         overlay.style.display = "none";
     } else {
-        // ✅ CON SESIÓN → MOSTRAR
-        btnMenu.style.display = "";   // vuelve al CSS original
-        sideMenu.style.display = "";  // NO cambia posición
-        overlay.style.display = "";   // NO cambia posición
+        // MÓVIL SIN SESIÓN o CUALQUIER CASO CON SESIÓN
+        btnMenu.style.display = "";
+        sideMenu.style.display = "";
+        overlay.style.display = "";
     }
 }
 
-// ----------------------------------
-// EJECUCIÓN AUTOMÁTICA
-// ----------------------------------
-document.addEventListener("DOMContentLoaded", controlarMenuPorSesion);
 
-// Detectar login / logout EN TIEMPO REAL
-window.addEventListener("storage", (e) => {
-    if (e.key === "userId") {
-        controlarMenuPorSesion();
-    }
-});
 // ----------------------------------
 // CORREGIR POSICIÓN DEL BOTÓN MENÚ
 // ----------------------------------
@@ -144,9 +117,35 @@ function ajustarBotonMenu() {
 
     if (!btnMenu) return;
 
-    btnMenu.style.position = "relative"; // evita que flote sobre todo
-    btnMenu.style.zIndex = "10"; // menor prioridad que overlays o modales
+    btnMenu.style.position = "relative";
+    btnMenu.style.zIndex = "10";
 }
 
-// Ejecutar cuando cargue la página
-document.addEventListener("DOMContentLoaded", ajustarBotonMenu);
+
+// ----------------------------------
+// INICIALIZACIÓN
+// ----------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    updateSessionState();
+    actualizarMenuLateral();
+    controlarMenuPorSesion();
+    ajustarBotonMenu();
+});
+
+
+// ----------------------------------
+// ESCUCHAR CAMBIOS ENTRE PESTAÑAS
+// ----------------------------------
+window.addEventListener("storage", (e) => {
+    if (e.key === "userName" || e.key === "userId") {
+        updateSessionState();
+        actualizarMenuLateral();
+        controlarMenuPorSesion();
+    }
+});
+
+
+// ----------------------------------
+// DETECTAR CAMBIO DE TAMAÑO DE PANTALLA
+// ----------------------------------
+window.addEventListener("resize", controlarMenuPorSesion);

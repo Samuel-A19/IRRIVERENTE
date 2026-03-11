@@ -2,170 +2,182 @@
 <html lang="es"> <!-- Indica que el idioma principal del contenido es español -->
 
 <head>
-    <meta charset="UTF-8" />
-    <!-- Define la codificación de caracteres para que soporte acentos y caracteres especiales -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Permite que la página sea adaptable en dispositivos móviles -->
-    <title>Irriverente Pizza & Pasta</title> <!-- Título de la pestaña del navegador -->
+  <meta charset="UTF-8" />
+  <!-- Define la codificación de caracteres para que soporte acentos y caracteres especiales -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Permite que la página sea adaptable en dispositivos móviles -->
+  <title>Irriverente Pizza & Pasta</title> <!-- Título de la pestaña del navegador -->
 
-    <!-- Enlace a la hoja de estilos CSS personalizada -->
-    <link rel="stylesheet" href="Css/Encabezado.css" />
-    <link rel="stylesheet" href="Css/Fondos.css" />
-    <link rel="stylesheet" href="Css/PiePagina.css" />
-    <link rel="stylesheet" href="Css/Menu.css" />
-    <link rel="stylesheet" href="Css/Carrito.css" />
-    <link rel="stylesheet" href="Css/Modales.css" />
-    <link rel="stylesheet" href="Css/Menulateral.css" />
+  <!-- Enlace a la hoja de estilos CSS personalizada -->
+  <link rel="stylesheet" href="Css/Encabezado.css" />
+  <link rel="stylesheet" href="Css/Fondos.css" />
+  <link rel="stylesheet" href="Css/PiePagina.css" />
+  <link rel="stylesheet" href="Css/Menu.css" />
+  <link rel="stylesheet" href="Css/Carrito.css" />
+  <link rel="stylesheet" href="Css/Modales.css" />
+  <link rel="stylesheet" href="Css/Menulateral.css" />
 
-    <link rel="icon" href="favicon.ico" sizes="any">
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="manifest" href="site.webmanifest">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
-    <!-- Librería de íconos Bootstrap Icons (permite usar iconos con la clase "bi") -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- Librería de íconos Bootstrap Icons (permite usar iconos con la clase "bi") -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
-    <!-- Librería CSS de Swiper (estilos del carrusel) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Librería CSS de Swiper (estilos del carrusel) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 
-    <!-- Librería JS de Swiper (funcionalidad del carrusel) -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- Librería JS de Swiper (funcionalidad del carrusel) -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <!-- Fuente "Roboto" desde Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Fuente "Roboto" desde Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body> <!-- Comienza el contenido visible en el navegador -->
 
-    <!-- ENCABEZADO PRINCIPAL -->
-    <header class="main-header"> <!-- Contenedor del encabezado -->
+  <!-- ENCABEZADO PRINCIPAL -->
+  <header class="main-header"> <!-- Contenedor del encabezado -->
 
-        <!-- Contenedor del logo -->
-        <div class="header-center logo">
-            <a href="Inicio.php"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
-            <!-- Logo con enlace a la página de inicio -->
-        </div>
+    <!-- Contenedor del logo -->
+    <div class="header-center logo">
+      <a href="Inicio.php"><img src="Imagenes/Logo.png" alt="Logo-empresa"></a>
+      <!-- Logo con enlace a la página de inicio -->
+    </div>
 
-        <!-- MENÚ DE NAVEGACIÓN -->
-        <nav class="header-center nav-menu"> <!-- Contenedor del menú -->
-            <a href="Inicio.php">INICIO</a> <!-- Enlace a la página de inicio -->
-            <a href="Menu.php">MENÚ</a> <!-- Enlace a la sección de menú -->
-            <a href="Promos.php">PROMOS</a> <!-- Enlace a la página de promociones -->
-            <a href="#" id="linkSiguePedido">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
-            <a href="Acercanosotros.php">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
-            <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
-            <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
-            <div id="carritoDropdown" class="carrito-dropdown">
-                <h3>Tu Carrito</h3>
-                <ul id="carritoLista" class="carrito-lista">
-                    <li class="carrito-item">
-                        <img src="Imagenes/Pizza 2.jpg " alt="">
-                        <div class="carrito-info">
-                            <p></p>
-                            <span></span>
-                        </div>
-                        <div class="acciones">
-                            <button class="menos"><i class="fa-solid fa-circle-minus"></i></button>
-                            <span class="cantidad">1</span>
-                            <button class="mas"><i class="fa-solid fa-circle-plus"></i></button>
-                            <button class="eliminar">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-                <div class="carrito-total">
-                    <p>Total: 0$</p>
-                </div>
-                <div class="carrito-acciones">
-                    <button class="seguir">Seguir comprando</button>
-                    <button class="checkout">Finalizar compra</button>
-                </div>
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav class="header-center nav-menu"> <!-- Contenedor del menú -->
+      <a href="Inicio.php">INICIO</a> <!-- Enlace a la página de inicio -->
+      <a href="Menu.php">MENÚ</a> <!-- Enlace a la sección de menú -->
+      <a href="Promos.php">PROMOS</a> <!-- Enlace a la página de promociones -->
+      <a href="#" id="linkSiguePedido">SIGUE TU PEDIDO</a> <!-- Enlace para seguimiento de pedido -->
+      <a href="Acercanosotros.php">ACERCA DE NOSOTROS</a> <!-- Enlace sobre la empresa -->
+      <a href="#" id="loginLink" onclick="openModal('loginModal')"><i class="bi bi-person"></i> INICIAR SESIÓN</a>
+      <a href="#" id="btnCarrito"><i class="bi bi-cart"></i> CARRITO</a> <!-- Enlace al carrito -->
+      <div id="carritoDropdown" class="carrito-dropdown">
+        <h3>Tu Carrito</h3>
+        <ul id="carritoLista" class="carrito-lista">
+          <li class="carrito-item">
+            <img src="Imagenes/Pizza 2.jpg" alt="">
+            <div class="carrito-info">
+              <p></p>
+              <span></span>
             </div>
-
-
-            <!-- Botón menú solo icono -->
-            <button id="btnMenuLateral" onclick="abrirMenu()">
-                <i class="bi bi-justify"></i>
-            </button>
-
-            <!-- Overlay -->
-            <div id="menuOverlay"></div>
-
-            <!-- MENU LATERAL -->
-            <aside id="sideMenu">
-
-                <!-- PERFIL USUARIO -->
-                <div class="side-user">
-                    <img id="sideFoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
-                    <span id="sideNombre">Usuario</span>
-                </div>
-
-                <div class="side-divider"></div>
-
-
-                <a href="Historial.php">Historial de Pedidos</a>
-                <a href="Ajustes.php">Ajustes</a>
-
-                <!-- CERRAR SESIÓN -->
-                <a href="#" id="btnCerrarSesion" class="logout">
-                    Cerrar sesión
-                </a>
-                <div class="side-social">
-                    <a href="https://www.instagram.com/irriverente_pp" target="_blank" aria-label="Instagram">
-                        <i class="bi bi-instagram"></i>
-                    </a>
-                    <a href="https://www.facebook.com/profile.php?id=100075994186402" target="_blank"
-                        aria-label="Facebook">
-                        <i class="bi bi-facebook"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@irriverente.pizza" target="_blank" aria-label="TikTok">
-                        <i class="bi bi-tiktok"></i>
-                    </a>
-            </aside>
-
-        </nav>
-    </header>
-
-    <!-- Contenido -->
-    <section class="catalogo"></section>
-    <main class="container">
-        <h1><u>NUESTROS PRODUCTOS</u></h1>
-        <p>Explora nuestra variedad. Pizza, Pasta, Lasaña, Hamburguesa, Limonadas y Gaseosas.</p>
-
-        <!-- Buscador -->
-        <input type="text" id="search" placeholder="Buscar (ej, hawaiana, carne, limón...)">
-
-        <!-- Filtros -->
-        <div class="filters">
-            <button class="filter active" data-category="all">Todas</button>
-            <button class="filter" data-category="pizza">Pizza</button>
-            <button class="filter" data-category="pasta">Pasta</button>
-            <button class="filter" data-category="lasagna">Lasaña</button>
-            <button class="filter" data-category="hamburguesa">Hamburguesa</button>
-            <button class="filter" data-category="limonadas">Limonadas</button>
-            <button class="filter" data-category="gaseosa">Gaseosas</button>
+            <div class="acciones">
+              <button class="menos"><i class="fa-solid fa-circle-minus"></i></button>
+              <span class="cantidad">1</span>
+              <button class="mas"><i class="fa-solid fa-circle-plus"></i></button>
+              <button class="eliminar">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </li>
+        </ul>
+        <div class="carrito-total">
+          <p>Total: 0$</p>
         </div>
-
-        <button class="btn-agregar solo-admin" onclick="abrirModalAdmin('producto')">
-            AGREGAR PRODUCTO
-        </button>
-
-
-        <!-- Productos -->
-        <div class="products" id="products">
-            <?php include("api/mostrar_productos.php"); ?>
+        <div class="carrito-acciones">
+          <button class="seguir">Seguir comprando</button>
+          <button class="checkout">Finalizar compra</button>
         </div>
-    </main>
+      </div>
 
-    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
-    <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank"> <!-- Enlace a WhatsApp -->
-        <img src="Imagenes/Whatsaap Logo.png" class="Logo-Whatsaap"> <!-- Icono de WhatsApp -->
-    </a>
+    </nav>
+    <!-- Botón menú solo icono -->
+    <button id="btnMenuLateral" onclick="abrirMenu()">
+      <i class="bi bi-justify"></i>
+    </button>
+
+    <!-- Overlay -->
+    <div id="menuOverlay"></div>
+
+    <!-- MENU LATERAL -->
+    <aside id="sideMenu">
+
+      <!-- PERFIL USUARIO -->
+      <div class="side-user">
+        <img id="sideFoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
+        <span id="sideNombre">Usuario</span>
+      </div>
+
+      <div class="side-divider"></div>
+
+      <!-- LINKS SOLO PARA CELULAR -->
+      <div class="mobile-links">
+        <a href="Inicio.php">Inicio</a>
+        <a href="Menu.php">Menú</a>
+        <a href="Promos.php">Promos</a>
+        <a href="Siguepedido.php" id="linkSiguePedido">Sigue tu pedido</a>
+        <a href="Acercanosotros.php">Acerca de nosotros</a>
+      </div>
+
+      <div class="side-divider"></div>
+
+      <!-- OPCIONES DE USUARIO -->
+      <a href="Historial.php">Historial de Pedidos</a>
+      <a href="Ajustes.php">Ajustes</a>
+
+      <!-- CERRAR SESIÓN -->
+      <a href="#" id="btnCerrarSesion" class="logout">
+        Cerrar sesión
+      </a>
+
+      <!-- REDES SOCIALES -->
+      <div class="side-social">
+        <a href="https://www.instagram.com/irriverente_pp" target="_blank" aria-label="Instagram">
+          <i class="bi bi-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100075994186402" target="_blank" aria-label="Facebook">
+          <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://www.tiktok.com/@irriverente.pizza" target="_blank" aria-label="TikTok">
+          <i class="bi bi-tiktok"></i>
+        </a>
+      </div>
+
+    </aside>
+  </header>
+
+  <!-- Contenido -->
+  <section class="catalogo"></section>
+  <main class="container">
+    <h1><u>NUESTROS PRODUCTOS</u></h1>
+    <p>Explora nuestra variedad. Pizza, Pasta, Lasaña, Hamburguesa, Limonadas y Gaseosas.</p>
+
+    <!-- Buscador -->
+    <input type="text" id="search" placeholder="Buscar (ej, hawaiana, carne, limón...)">
+
+    <!-- Filtros -->
+    <div class="filters">
+      <button class="filter active" data-category="all">Todas</button>
+      <button class="filter" data-category="pizza">Pizza</button>
+      <button class="filter" data-category="pasta">Pasta</button>
+      <button class="filter" data-category="lasagna">Lasaña</button>
+      <button class="filter" data-category="hamburguesa">Hamburguesa</button>
+      <button class="filter" data-category="limonadas">Limonadas</button>
+      <button class="filter" data-category="gaseosa">Gaseosas</button>
+    </div>
+
+    <button class="btn-agregar solo-admin" onclick="abrirModalAdmin('producto')">
+      AGREGAR PRODUCTO
+    </button>
+
+
+    <!-- Productos -->
+    <div class="products" id="products">
+      <?php include("api/mostrar_productos.php"); ?>
+    </div>
+  </main>
+
+  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+  <a href="https://wa.me/573228651543" class="btn-wsp" target="_blank"> <!-- Enlace a WhatsApp -->
+    <img src="Imagenes/Whatsaap Logo.png" class="Logo-Whatsaap"> <!-- Icono de WhatsApp -->
+  </a>
 
   <div id="loginModal" class="modal">
     <div class="modal-content">
@@ -238,70 +250,70 @@
       <p>¿Ya tienes cuenta? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Inicia sesión</a></p>
     </div>
   </div>
-    <!-- MODAL ADMIN (PRODUCTO / PROMO) -->
-    <div id="modalAdmin" class="modal-general">
-        <div class="modal-box">
+  <!-- MODAL ADMIN (PRODUCTO / PROMO) -->
+  <div id="modalAdmin" class="modal-general">
+    <div class="modal-box">
 
-            <form id="adminForm" onsubmit="guardarAdmin(event)">
+      <form id="adminForm" onsubmit="guardarAdmin(event)">
 
-                <button type="button" class="cerrar-modal" onclick="cerrarModalAdmin()">&times;</button>
+        <button type="button" class="cerrar-modal" onclick="cerrarModalAdmin()">&times;</button>
 
-                <h2 id="tituloAdmin">Crear Producto</h2>
+        <h2 id="tituloAdmin">Crear Producto</h2>
 
-                <input type="hidden" id="tipoAdmin">
-                <input type="hidden" id="idAdmin">
+        <input type="hidden" id="tipoAdmin">
+        <input type="hidden" id="idAdmin">
 
-                <!-- IMAGEN -->
-                <label class="upload-box">
-                    <input type="file" id="imagenAdmin" name="imagen" accept="image/*" hidden>
-                    <div class="upload-area">
-                        <i class="bi bi-cloud-upload"></i>
-                        <span>Haz clic para agregar imagen</span>
-                    </div>
-                    <img id="previewAdmin">
-                </label>
+        <!-- IMAGEN -->
+        <label class="upload-box">
+          <input type="file" id="imagenAdmin" name="imagen" accept="image/*" hidden>
+          <div class="upload-area">
+            <i class="bi bi-cloud-upload"></i>
+            <span>Haz clic para agregar imagen</span>
+          </div>
+          <img id="previewAdmin">
+        </label>
 
-                <label>Título</label>
-                <input type="text" id="tituloInput" placeholder="Nombre del producto" required>
+        <label>Título</label>
+        <input type="text" id="tituloInput" placeholder="Nombre del producto" required>
 
-                <label>Descripción</label>
-                <textarea id="descripcionInput" placeholder="Ingredientes o detalles del producto" required></textarea>
+        <label>Descripción</label>
+        <textarea id="descripcionInput" placeholder="Ingredientes o detalles del producto" required></textarea>
 
-                <label>Categoría</label>
-                <select id="categoriaInput" required>
-                    <option value="">Selecciona una categoría</option>
-                    <option value="pizza">Pizza</option>
-                    <option value="pasta">Pasta</option>
-                    <option value="lasagna">Lasaña</option>
-                    <option value="hamburguesa">Hamburguesa</option>
-                    <option value="limonadas">Limonadas</option>
-                    <option value="gaseosas">Gaseosas</option>
-                </select>
+        <label>Categoría</label>
+        <select id="categoriaInput" required>
+          <option value="">Selecciona una categoría</option>
+          <option value="pizza">Pizza</option>
+          <option value="pasta">Pasta</option>
+          <option value="lasagna">Lasaña</option>
+          <option value="hamburguesa">Hamburguesa</option>
+          <option value="limonadas">Limonadas</option>
+          <option value="gaseosas">Gaseosas</option>
+        </select>
 
-                <label>Precio</label>
-                <input type="number" id="precioInput" min="0" placeholder="0.00" required>
+        <label>Precio</label>
+        <input type="number" id="precioInput" min="0" placeholder="0.00" required>
 
-                <button type="submit" class="btn-modal-crear">
-                    Guardar Producto
-                </button>
+        <button type="submit" class="btn-modal-crear">
+          Guardar Producto
+        </button>
 
-            </form>
+      </form>
 
-        </div>
     </div>
-    <!-- ENLACE AL SCRIPT EXTERNO CON FUNCIONES Y ANIMACIONES -->
+  </div>
+  <!-- ENLACE AL SCRIPT EXTERNO CON FUNCIONES Y ANIMACIONES -->
 
-    <script src="Js/Alertas.js"></script>
-    <script src="Js/Auth.js"></script>
-    <script src="Js/Carrito.js"></script>
-    <script src="Js/Menu.js"></script>
-    <script src="Js/Promos.js"></script>
-    <script src="Js/Modales.js"></script>
-    <script src="Js/Menulateral.js"></script>
-    <script src="Js/clickF.js"></script>
+  <script src="Js/Alertas.js"></script>
+  <script src="Js/Auth.js"></script>
+  <script src="Js/Carrito.js"></script>
+  <script src="Js/Menu.js"></script>
+  <script src="Js/Promos.js"></script>
+  <script src="Js/Modales.js"></script>
+  <script src="Js/Menulateral.js"></script>
+  <script src="Js/clickF.js"></script>
 
 
-    <!-- PIE DE PÁGINA -->
+  <!-- PIE DE PÁGINA -->
   <footer class="main-footer"> <!-- Contenedor principal del footer -->
     <div class="footer-content"> <!-- Contenedor del contenido del pie de página -->
 
@@ -422,4 +434,3 @@
 </body>
 
 </html>
-

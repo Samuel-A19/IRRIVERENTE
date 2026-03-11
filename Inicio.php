@@ -31,7 +31,6 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <!-- Fuente "Roboto" desde Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body> <!-- Comienza el contenido visible en el navegador -->
@@ -82,46 +81,60 @@
         </div>
       </div>
 
-      <!-- Botón menú solo icono -->
-      <button id="btnMenuLateral" onclick="abrirMenu()">
-        <i class="bi bi-justify"></i>
-      </button>
-
-      <!-- Overlay -->
-      <div id="menuOverlay"></div>
-
-      <!-- MENU LATERAL -->
-      <aside id="sideMenu">
-
-        <!-- PERFIL USUARIO -->
-        <div class="side-user">
-          <img id="sideFoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
-          <span id="sideNombre">Usuario</span>
-        </div>
-
-        <div class="side-divider"></div>
-
-
-        <a href="Historial.php">Historial de Pedidos</a>
-        <a href="Ajustes.php">Ajustes</a>
-
-        <!-- CERRAR SESIÓN -->
-        <a href="#" id="btnCerrarSesion" class="logout">
-          Cerrar sesión
-        </a>
-        <div class="side-social">
-          <a href="https://www.instagram.com/irriverente_pp" target="_blank" aria-label="Instagram">
-            <i class="bi bi-instagram"></i>
-          </a>
-          <a href="https://www.facebook.com/profile.php?id=100075994186402" target="_blank" aria-label="Facebook">
-            <i class="bi bi-facebook"></i>
-          </a>
-          <a href="https://www.tiktok.com/@irriverente.pizza" target="_blank" aria-label="TikTok">
-            <i class="bi bi-tiktok"></i>
-          </a>
-      </aside>
-
     </nav>
+    <!-- Botón menú solo icono -->
+    <button id="btnMenuLateral" onclick="abrirMenu()">
+      <i class="bi bi-justify"></i>
+    </button>
+
+    <!-- Overlay -->
+    <div id="menuOverlay"></div>
+
+    <!-- MENU LATERAL -->
+    <aside id="sideMenu">
+
+      <!-- PERFIL USUARIO -->
+      <div class="side-user">
+        <img id="sideFoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
+        <span id="sideNombre">Usuario</span>
+      </div>
+
+      <div class="side-divider"></div>
+
+      <!-- LINKS SOLO PARA CELULAR -->
+      <div class="mobile-links">
+        <a href="Inicio.php">Inicio</a>
+        <a href="Menu.php">Menú</a>
+        <a href="Promos.php">Promos</a>
+        <a href="Siguepedido.php" id="linkSiguePedido">Sigue tu pedido</a>
+        <a href="Acercanosotros.php">Acerca de nosotros</a>
+      </div>
+
+      <div class="side-divider"></div>
+
+      <!-- OPCIONES DE USUARIO -->
+      <a href="Historial.php">Historial de Pedidos</a>
+      <a href="Ajustes.php">Ajustes</a>
+
+      <!-- CERRAR SESIÓN -->
+      <a href="#" id="btnCerrarSesion" class="logout">
+        Cerrar sesión
+      </a>
+
+      <!-- REDES SOCIALES -->
+      <div class="side-social">
+        <a href="https://www.instagram.com/irriverente_pp" target="_blank" aria-label="Instagram">
+          <i class="bi bi-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100075994186402" target="_blank" aria-label="Facebook">
+          <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://www.tiktok.com/@irriverente.pizza" target="_blank" aria-label="TikTok">
+          <i class="bi bi-tiktok"></i>
+        </a>
+      </div>
+
+    </aside>
   </header>
 
   <section class="orden">
