@@ -38,7 +38,7 @@ if ($resultado && $resultado->num_rows > 0) {
         <?php
     }
 } else {
-    echo "<p>No hay promociones registradas.</p>";
+    
 }
 
 $conexion->close();

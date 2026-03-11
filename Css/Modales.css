@@ -95,7 +95,7 @@
 
 #recoverModal #stepEmail input,
 #recoverModal #stepPassword input {
-    width: 100%;
+    width: 105%;
 }
 
 /* ========================================
@@ -204,7 +204,7 @@
 }
 
 #recoverModal #stepPassword input {
-    width: 100%;
+    width: 105%;
     margin-bottom: 12px;
     /* espacio entre input y botón */
 }

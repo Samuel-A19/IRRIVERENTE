@@ -40,7 +40,7 @@ if ($resultado->num_rows > 0) {
     }
 
 } else {
-    echo "<p>No hay productos registrados.</p>";
+
 }
 
 $conexion->close();

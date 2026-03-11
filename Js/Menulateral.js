@@ -136,3 +136,17 @@ window.addEventListener("storage", (e) => {
         controlarMenuPorSesion();
     }
 });
+// ----------------------------------
+// CORREGIR POSICIÓN DEL BOTÓN MENÚ
+// ----------------------------------
+function ajustarBotonMenu() {
+    const btnMenu = document.getElementById("btnMenuLateral");
+
+    if (!btnMenu) return;
+
+    btnMenu.style.position = "relative"; // evita que flote sobre todo
+    btnMenu.style.zIndex = "10"; // menor prioridad que overlays o modales
+}
+
+// Ejecutar cuando cargue la página
+document.addEventListener("DOMContentLoaded", ajustarBotonMenu);

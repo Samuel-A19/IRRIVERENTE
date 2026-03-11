@@ -167,50 +167,77 @@
         <img src="Imagenes/Whatsaap Logo.png" class="Logo-Whatsaap"> <!-- Icono de WhatsApp -->
     </a>
 
-    <!-- MODALES DE AUTENTICACIÓN -->
-
-    <!-- MODAL: INICIO DE SESIÓN -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeAuthModal('loginModal')">&times;</span>
-            <h2>Iniciar Sesión</h2>
-            <input type="email" id="loginEmail" placeholder="Correo o Usuario" />
-            <input type="password" id="loginPassword" placeholder="Contraseña" />
-            <button class="btn-modal">Ingresar</button>
-            <p>¿No tienes cuenta?
-                <a href="#" onclick="switchAuthModal('loginModal', 'registerModal')">Regístrate</a>
-            </p>
-            <a href="#" onclick="event.preventDefault(); switchAuthModal('loginModal', 'recoverModal')">¿Olvidaste tu
-                contraseña?</a>
-        </div>
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('loginModal')">&times;</span>
+      <h2>Iniciar Sesión</h2>
+      <input type="email" id="loginEmail" placeholder="Correo o Usuario" />
+      <input type="password" id="loginPassword" placeholder="Contraseña" />
+      <button class="btn-modal">Ingresar</button>
+      <p>¿No tienes cuenta?
+        <a href="#" onclick="switchModal('loginModal', 'registerModal')">Regístrate</a>
+      </p>
+      <a href="#" onclick="event.preventDefault();switchModal('loginModal', 'recoverModal')">¿Olvidaste tu
+        contraseña?</a>
     </div>
+  </div>
 
-    <!-- MODAL: RECUPERAR CONTRASEÑA -->
-    <div id="recoverModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeAuthModal('recoverModal')">&times;</span>
-            <h2>Recuperar Contraseña</h2>
-            <p>Introduce tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
-            <input type="email" placeholder="Correo o Usuario" />
-            <button class="btn-modal">Enviar enlace</button>
-            <p><a href="#" onclick="event.preventDefault(); switchAuthModal('recoverModal', 'loginModal')">Volver a
-                    iniciar sesión</a></p>
-        </div>
-    </div>
+  <div id="recoverModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('recoverModal')">&times;</span>
 
-    <!-- MODAL: REGISTRO -->
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeAuthModal('registerModal')">&times;</span>
-            <h2>Registro</h2>
-            <input type="text" placeholder="Nombre de usuario" />
-            <input type="email" placeholder="Correo electrónico" />
-            <input type="password" placeholder="Contraseña" />
-            <button class="btn-modal">Registrarse</button>
-            <p>¿Ya tienes cuenta? <a href="#" onclick="switchAuthModal('registerModal', 'loginModal')">Inicia sesión</a>
-            </p>
+      <h2>Recuperar Contraseña</h2>
+
+      <!-- PASO 1: CORREO -->
+      <div id="stepEmail">
+        <input type="email" id="recoverEmail" placeholder="Correo registrado">
+        <button class="btn-modal" id="btnSend">Enviar código</button>
+      </div>
+
+      <!-- PASO 2: CÓDIGO -->
+      <div id="stepCode" style="display:none">
+        <div class="code-inputs">
+          <input type="text" maxlength="1" class="code-box">
+          <input type="text" maxlength="1" class="code-box">
+          <input type="text" maxlength="1" class="code-box">
+          <input type="text" maxlength="1" class="code-box">
+          <input type="text" maxlength="1" class="code-box">
+          <input type="text" maxlength="1" class="code-box">
         </div>
+
+        <button class="btn-modal" id="btnVerify">Verificar código</button>
+        <button class="btn-modal btn-resend" id="btnResend">Reenviar correo</button>
+      </div>
+
+      <!-- PASO 3: NUEVA CONTRASEÑA -->
+      <div id="stepPassword" style="display:none">
+        <input type="password" id="recoverPassword" placeholder="Nueva contraseña">
+        <button class="btn-modal" id="btnReset">Cambiar contraseña</button>
+      </div>
+
+      <!-- MENSAJE -->
+      <p id="recoverMsg"></p>
+
+      <p>
+        <a href="#" onclick="event.preventDefault(); switchModal('recoverModal','loginModal')">
+          Volver a iniciar sesión
+        </a>
+      </p>
     </div>
+  </div>
+
+
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('registerModal')">&times;</span>
+      <h2>Registro</h2>
+      <input type="text" placeholder="Nombre de usuario" />
+      <input type="email" placeholder="Correo electrónico" />
+      <input type="password" placeholder="Contraseña" />
+      <button class="btn-modal">Registrarse</button>
+      <p>¿Ya tienes cuenta? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Inicia sesión</a></p>
+    </div>
+  </div>
     <!-- MODAL ADMIN (PRODUCTO / PROMO) -->
     <div id="modalAdmin" class="modal-general">
         <div class="modal-box">
@@ -284,19 +311,7 @@
 
       <div class="footer-links"> <!-- Enlaces legales -->
         <a href="#" onclick="openModal('modalPrivacidad')">Política de Privacidad</a>
-        <a href="#" onclick="openModal('modalTerminos')">Términos
-          }
-          
-          
-          
-          
-          
-          
-          
-          
-                      y Condiciones</a>
-
-
+        <a href="#" onclick="openModal('modalTerminos')">Términos y Condiciones</a>
       </div>
 
       <!-- REDES SOCIALES -->
