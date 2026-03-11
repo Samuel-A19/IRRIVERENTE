@@ -217,6 +217,7 @@
     <script src="Js/Auth.js"></script>
     <script src="Js/Encabezado.js"></script>
     <script src="Js/clickF.js"></script>
+    <script src="Js/Recover"></script>
 
     <!-- PIE DE PÁGINA -->
     <footer class="main-footer"> <!-- Contenedor principal del footer -->

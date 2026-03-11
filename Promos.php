@@ -292,6 +292,7 @@
   <script src="Js/Modales.js"></script>
   <script src="Js/Promos.js"></script>
   <script src="Js/clickF.js"></script>
+  <script src="Js/Recover"></script>
 
   <!-- ALERTA PERSONALIZADA -->
   <div id="alertOverlay" class="alert-overlay">

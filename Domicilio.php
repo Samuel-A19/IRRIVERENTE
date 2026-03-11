@@ -268,6 +268,7 @@
   <script src="Js/Encabezado.js"></script>
   <script src="Js/Auth.js"></script>
   <script src="Js/clickF.js"></script>
+  <script src="Js/Recover"></script>
   <!-- FIN CONTENIDO PÁGINA -->
 
   <!-- ALERTA PERSONALIZADA -->

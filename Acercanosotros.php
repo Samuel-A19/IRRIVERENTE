@@ -289,6 +289,7 @@
   <script src="Js/Menulateral.js"></script>
   <script src="Js/Encabezado.js"></script>
   <script src="Js/clickF.js"></script>
+  <script src="Js/Recover"></script>
 
 
   <!-- PIE DE PÁGINA -->

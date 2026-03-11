@@ -271,6 +271,7 @@
   <script src="Js/Rastreo.js"></script>
   <script src="Js/Encabezado.js"></script>
   <script src="Js/clickF.js"></script>
+  <script src="Js/Recover"></script>
 
   <!-- ALERTA PERSONALIZADA -->
   <div id="alertOverlay" class="alert-overlay">

@@ -246,6 +246,7 @@
   <script src="Js/MenuLateral.js"></script>
   <script src="Js/Tienda.js"></script>
   <script src="Js/clickF.js"></script>
+  <script src="Js/Recover"></script>
   <!-- FIN DEL CUERPO DE LA PÁGINA -->
 
 
